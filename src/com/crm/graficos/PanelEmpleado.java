@@ -2,10 +2,12 @@ package com.crm.graficos;
 
 import javax.swing.*;
 
+
 import javax.swing.table.DefaultTableModel;
 
 import com.crm.persistencia.ConfigDir;
 import com.crm.persistencia.MisConexiones;
+import com.crm.pojos.Cliente;
 import com.crm.pojos.Empleado;
 
 import java.awt.event.ActionEvent;
@@ -424,6 +426,31 @@ public class PanelEmpleado extends JPanel implements Servicios {
 
 	@Override
 	public void borrarLibro(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void addLibro(Cliente Cliente) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public Cliente getLibroById1(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Cliente> getAll1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void updateLibro(Cliente Cliente) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void borrarLibro1(int id) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -39,6 +39,7 @@ public class Lan {
 		//imprimir por consola la resolucion de la pantalla
 		System.out.println(dim.width+"px x "+dim.height+"px");
 		marco.setSize(anchoM,altoM);
+		marco.setSize(anchoM1,altoM1);
 		//Se pon visible al final
 		marco.setVisible(true);
 	}
