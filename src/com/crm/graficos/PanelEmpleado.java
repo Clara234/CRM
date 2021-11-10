@@ -1,5 +1,9 @@
 package com.crm.graficos;
 
+import javax.print.attribute.standard.Media;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 
 
@@ -12,6 +16,7 @@ import com.crm.pojos.Empleado;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +28,7 @@ import java.lang.NumberFormatException;
 import java.util.Vector;
 import java.awt.*;
 
-public class PanelEmpleado extends JPanel implements Servicios {
+public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 	
 	
 	Vector listaEmpleado;
@@ -142,11 +147,15 @@ public class PanelEmpleado extends JPanel implements Servicios {
 		JButton botonActualizar = new JButton("Actualizar");
 		botonActualizar.setForeground(Color.gray);
 		panelEsteControl.add(botonActualizar);
+		JButton botonMusica = new JButton("Activar Musica");
+		botonActualizar.setForeground(Color.gray);
+		panelEsteControl.add(botonMusica);
 		
 		botonConexion.addActionListener(new gestorVer());
 		botonInsertar.addActionListener(new gestorInsertar());
 		botonBorrar.addActionListener(new gestorBorrar());
 		botonActualizar.addActionListener(new gestorActualizar());
+		botonMusica.addActionListener(new gestorMusica());
 		JCheckBox chb_root = new JCheckBox("root");
 		chb_root.setForeground(Color.gray);
 		chb_root.addActionListener(new ActionListener() {
@@ -365,6 +374,33 @@ public class PanelEmpleado extends JPanel implements Servicios {
 		}
 	}
 	
+	public class gestorMusica implements ActionListener{
+		@Override
+	
+		public void actionPerformed(ActionEvent e) 
+		{ AudioInputStream audioInputStream;
+		 Clip clip;
+			try {
+		
+			
+			 audioInputStream = AudioSystem.getAudioInputStream(new File("musicnavidad.wav").getAbsoluteFile());
+		        clip = AudioSystem.getClip();
+		        clip.open(audioInputStream);
+		         
+		        
+		      
+			if(clip.isRunning()){
+				clip.close();
+			}else {
+				clip.start();
+			
+			}
+			
+		}catch(Exception e2) {
+			e2.printStackTrace();
+		}
+		}
+	}
 	
 	
 	public String fechaEsp(Timestamp fechahora) {

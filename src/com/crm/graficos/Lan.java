@@ -10,10 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class Lan {
-
+	
 	
 	public static void main(String[] args) {
 		setMarco();
+
 	}
 	public static void setMarco() {
 		JFrame marco = new JFrame("CRM");
@@ -22,7 +23,7 @@ public class Lan {
 		
 		//es abstracta, toolkit no puede crear new, no es instanciable
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image imagen = tk.getImage("Z:\\DAM 2\\Desarrollo de interfaces\\CRM\\candy_icon.png");
+		Image imagen = tk.getImage("candy_icon.png");
 		marco.setIconImage(imagen);
 		//almacenar las dimensiones de la pantalla del usuario
 		Dimension dim=tk.getScreenSize();
@@ -35,6 +36,11 @@ public class Lan {
 		pestanha.add("Directorio cliente", new PanelEmpleado(anchoM, altoM));
 		pestanha.add("Hipotecas", new PanelCliente(anchoM1, altoM1));
 		//Aqui es donde se visualiza, añadiendolo al marco
+		
+		
+		
+		
+		
 		marco.getContentPane().add(pestanha);
 		//imprimir por consola la resolucion de la pantalla
 		System.out.println(dim.width+"px x "+dim.height+"px");
