@@ -49,5 +49,9 @@ public class MisConexiones {
 			
 		}
 	}
+	public ResultSet dameResultSetSimple(String property) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

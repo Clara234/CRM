@@ -8,6 +8,7 @@ import javax.swing.*;
 
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.JTextComponent;
 
 import com.crm.persistencia.ConfigDir;
 import com.crm.persistencia.MisConexiones;
@@ -125,7 +126,7 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 		panelEsteDatos.add(Box.createRigidArea(new Dimension(0,10)));
 		panelEsteDatos.add(l_jefe);
 		panelEsteDatos.add(chb_jefe);
-		panelEsteDatos.setPreferredSize(new Dimension((int)(ancho*0.1), (int)(alto*0.6)));
+		panelEsteDatos.setPreferredSize(new Dimension((int)(ancho*0.1), (int)(alto*0.9)));
 		//panelEsteDatos.setBackground(Color.red);
 		return panelEsteDatos;
 	}
@@ -133,7 +134,7 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 	public JPanel setPanelEsteControl(int alto, int ancho) {
 		JPanel panelEsteControl = new JPanel();
 		panelEsteControl.setLayout( new BoxLayout (panelEsteControl, BoxLayout.Y_AXIS));
-		panelEsteControl.add(Box.createRigidArea(new Dimension(0,50)));
+		panelEsteControl.add(Box.createRigidArea(new Dimension(0,60)));
 		panelEsteControl.setPreferredSize(new Dimension((int)(alto*0.01), (int)(ancho*0.01)));
 		JButton botonConexion = new JButton("Ver");
 		botonConexion.setForeground(Color.gray);
@@ -150,6 +151,9 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 		JButton botonMusica = new JButton("Activar Musica");
 		botonActualizar.setForeground(Color.gray);
 		panelEsteControl.add(botonMusica);
+		JButton botonTMI = new JButton("Activar Musica");
+		botonTMI.setForeground(Color.gray);
+		panelEsteControl.add(botonTMI);
 		
 		botonConexion.addActionListener(new gestorVer());
 		botonInsertar.addActionListener(new gestorInsertar());
@@ -218,6 +222,8 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 		panelEsteControl.add(botonInsertar);
 		botonInsertar.addActionListener(new gestorInsertar());
 		botonConexion.addActionListener(new gestorVer());
+		botonMusica.addActionListener(new gestorMusica());
+		botonActualizar.addActionListener(new gestorActualizar());
 		botonBorrar.addActionListener(new gestorBorrar());
 		panelEsteControl.add(chb_root);
 		//devolvemos el panel de control
@@ -235,7 +241,7 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 	
 	public JMenuBar setMenuBar(int alto, int ancho) {
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setPreferredSize(new Dimension(ancho, (int)(alto*0.025)));
+		menuBar.setPreferredSize(new Dimension(ancho, (int)(alto*0.045)));
 		JMenu menu = new JMenu("Accesos Rápidos");
 		JMenuItem miCalculadora = new JMenuItem("Calculadora");
 		miCalculadora.setForeground(Color.gray);
@@ -368,9 +374,13 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 	
 	public class gestorActualizar implements ActionListener{
 		
+		JButton botonActualizar;
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
+			if((JButton)e.getSource()==botonActualizar);
+			if(e.getActionCommand().equals("actualizar"));
 		}
 	}
 	
@@ -402,7 +412,7 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 		}
 	}
 	
-	
+
 	public String fechaEsp(Timestamp fechahora) {
 		String fechaEsp ="", fecha="", tiempo="", anno="", mes="", dia="", hora="", minuto="", segundo="";
 		StringTokenizer st = new StringTokenizer(fechahora.toString()," ");
