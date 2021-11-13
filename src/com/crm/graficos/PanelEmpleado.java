@@ -5,8 +5,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
-
-
+import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 
@@ -17,26 +16,29 @@ import com.crm.pojos.Empleado;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.lang.NumberFormatException;
 import java.util.Vector;
 import java.awt.*;
 
-public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
+public class PanelEmpleado<Reproductor> extends JPanel{
 	
-	
-	Vector listaEmpleado;
+	Empleado seleccionado;
+	Vector v;
 	DefaultTableModel dtm;
+	JTable tabla;
 	JTextField tf_idDepartamento, tf_idPuesto, tf_nombre, tf_apellidos, tf_salario, tf_fecha_nacimiento;
 	JCheckBox chb_jefe;
-	//List<Empleado> listaEmpleado = new ArrayList<Empleado>();
+	List<Empleado> listaEmpleados;
 	public PanelEmpleado(int ancho, int alto) {
 		//disposiciones de los objetos
 		setLayout(new BorderLayout());
@@ -56,7 +58,8 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 		dtm.addColumn("Fecha nacimiento");
 		dtm.addColumn("Jefe");
 		//se crea una tabla con la configuracion dtm que hemos creado
-		JTable tabla = new JTable(dtm);
+		tabla = new JTable(dtm);
+		tabla.addMouseListener(new gestorTabla());
 		//creamos una panel con scroll al que añadirle la tabla que acabamos de crear
 		JScrollPane sp = new JScrollPane(tabla);
 		//damos valores al tamaño del JScrollPane
@@ -151,15 +154,10 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 		JButton botonMusica = new JButton("Activar Musica");
 		botonActualizar.setForeground(Color.gray);
 		panelEsteControl.add(botonMusica);
-		JButton botonTMI = new JButton("Activar Musica");
-		botonTMI.setForeground(Color.gray);
-		panelEsteControl.add(botonTMI);
 		
-		botonConexion.addActionListener(new gestorVer());
-		botonInsertar.addActionListener(new gestorInsertar());
-		botonBorrar.addActionListener(new gestorBorrar());
-		botonActualizar.addActionListener(new gestorActualizar());
-		botonMusica.addActionListener(new gestorMusica());
+		
+		
+
 		JCheckBox chb_root = new JCheckBox("root");
 		chb_root.setForeground(Color.gray);
 		chb_root.addActionListener(new ActionListener() {
@@ -302,29 +300,7 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//formateamos la tabla para evita que se vean llamadas anteriores a la tabla
-			dtm.setRowCount(0);
-			Empleado empleado;
-        	try {
-        		MisConexiones c;
-        		c = new MisConexiones();
-            	ResultSet rs = c.getRS(ConfigDir.getInstance().getProperty("query1"));
-				while(rs.next()) {
-					empleado = new Empleado(rs.getNString("nombre"),rs.getNString("apellido"),rs.getTimestamp("fecha_nacimiento"),rs.getDouble("salario"),rs.getBoolean("jefe"),rs.getInt("idDepartamento"),rs.getInt("idPuesto"));
-					listaEmpleado  = new Vector();
-					listaEmpleado.addElement(empleado.getId_departamento());
-					listaEmpleado.addElement(empleado.getId_puesto());
-					listaEmpleado.addElement(empleado.getNombre());
-					listaEmpleado.addElement(empleado.getApellido());
-					listaEmpleado.addElement(empleado.getSalario());
-					//listaEmpleado.addElement(fechaEsp(empleado.getFecha_nacimiento()));
-					listaEmpleado.addElement(empleado.getFecha_nacimiento());
-					listaEmpleado.addElement(formateoBoolean(empleado.isJefe()));
-					dtm.addRow(listaEmpleado);
-				}
-			} catch (Exception e1) {
-				e1.printStackTrace();
-				System.out.println(e1.getMessage());
-			}
+			refresh();
 		}
 	}
 	public class gestorInsertar implements ActionListener{
@@ -340,17 +316,55 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 					ps.setString(3, tf_nombre.getText());
 					ps.setString(4, tf_apellidos.getText());
 					ps.setDouble(5, Double.valueOf(tf_salario.getText()));
-					ps.setTimestamp(6,Timestamp.valueOf(tf_fecha_nacimiento.getText()));
+					ps.setTimestamp(6,Timestamp.valueOf(fechaIng(tf_fecha_nacimiento.getText())));
 					ps.setBoolean(7, chb_jefe.isSelected());
 					ps.executeUpdate();
-				
+					refresh();
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				} 
 			
 		}
 	}
-	
+	public class gestorTabla implements MouseInputListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			int j = tabla.getSelectedRow();
+			seleccionado = listaEmpleados.get(j);
+			tf_idDepartamento.setText(""+seleccionado.getId_departamento());
+			tf_idPuesto.setText(""+seleccionado.getId_puesto());
+			tf_nombre.setText(seleccionado.getNombre());
+			tf_apellidos.setText(seleccionado.getApellido());
+			tf_salario.setText(String.valueOf(seleccionado.getSalario()));
+			tf_fecha_nacimiento.setText(String.valueOf(fechaEsp(seleccionado.getFecha_nacimiento())));
+			chb_jefe.setSelected(seleccionado.isJefe());
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseDragged(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent e) {
+		}
+	}
 	public class gestorBorrar implements ActionListener{
 		
 		@Override
@@ -358,29 +372,39 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 			MisConexiones c1 = null;
 			try {
 				c1 = new MisConexiones();
-			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
+				PreparedStatement ps = c1.getPS(ConfigDir.getInstance().getProperty("query3"));
+				ps.setInt(1, seleccionado.getId());
+				ps.executeUpdate();
+				refresh();
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			try {
-				PreparedStatement ps = c1.getPS(ConfigDir.getInstance().getProperty("query2"));
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			
 	   }
     }
 	
 	
 	public class gestorActualizar implements ActionListener{
 		
-		JButton botonActualizar;
-		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			if((JButton)e.getSource()==botonActualizar);
-			if(e.getActionCommand().equals("actualizar"));
+			try {
+				PreparedStatement ps = new MisConexiones().getPS(ConfigDir.getInstance().getProperty("query4"));
+				ps.setInt(1, Integer.valueOf(tf_idDepartamento.getText()));
+				ps.setInt(2, Integer.valueOf(tf_idPuesto.getText()));
+				ps.setString(3, tf_nombre.getText());
+				ps.setString(4, tf_apellidos.getText());
+				ps.setDouble(5, Double.valueOf(tf_salario.getText()));
+				ps.setTimestamp(6, Timestamp.valueOf(fechaIng(tf_fecha_nacimiento.getText())));
+				ps.setBoolean(7, chb_jefe.isSelected());
+				ps.setInt(8, seleccionado.getId());
+				ps.executeUpdate();
+				refresh();
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -427,8 +451,25 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 		minuto=st.nextToken();
 		segundo=st.nextToken();
 		//no modifico el orden del tiempo pero lo almaceno por si fuese necesario en el futuro
-		fechaEsp=dia+"/"+mes+"/"+anno+" "+tiempo;
+		fechaEsp=dia+"-"+mes+"-"+anno+" "+tiempo;
 		return fechaEsp;
+	}
+	public String fechaIng(String fechahora) {
+		String fechaIng ="", fecha="", tiempo="", anno="", mes="", dia="", hora="", minuto="", segundo="";
+		StringTokenizer st = new StringTokenizer(fechahora.toString()," ");
+		fecha = st.nextToken();
+		tiempo = st.nextToken();
+		st = new StringTokenizer(fecha.toString(),"-");
+		dia=st.nextToken();
+		mes=st.nextToken();
+		anno=st.nextToken();
+		st = new StringTokenizer(tiempo.toString(),":");
+		hora=st.nextToken();
+		minuto=st.nextToken();
+		segundo=st.nextToken();
+		//no modifico el orden del tiempo pero lo almaceno por si fuese necesario en el futuro
+		fechaIng=anno+"-"+mes+"-"+dia+" "+tiempo;
+		return fechaIng;
 	}
 	public String formateoBoolean(boolean boo) {
 		String sino="";
@@ -436,7 +477,33 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 		else sino="No";
 		return sino;
 	}
-	
+	public void refresh() {
+		dtm.setRowCount(0);
+		Empleado empleado;
+    	try {
+    		MisConexiones c;
+    		c = new MisConexiones();
+    		listaEmpleados = new ArrayList<Empleado>();
+        	ResultSet rs = c.getRS(ConfigDir.getInstance().getProperty("query1"));
+			while(rs.next()) {
+				empleado = new Empleado(rs.getInt("id"),rs.getNString("nombre"),rs.getNString("apellido"),rs.getTimestamp("fecha_nacimiento"),rs.getDouble("salario"),rs.getBoolean("jefe"),rs.getInt("idDepartamento"),rs.getInt("idPuesto"));
+				v  = new Vector();
+				v.addElement(empleado.getId_departamento());
+				v.addElement(empleado.getId_puesto());
+				v.addElement(empleado.getNombre());
+				v.addElement(empleado.getApellido());
+				v.addElement(empleado.getSalario());
+				//listaEmpleado.addElement(fechaEsp(empleado.getFecha_nacimiento()));
+				v.addElement(empleado.getFecha_nacimiento());
+				v.addElement(formateoBoolean(empleado.isJefe()));
+				dtm.addRow(v);
+				listaEmpleados.add(empleado);
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			System.out.println(e1.getMessage());
+		}
+	}
 	public void ejecutarComando(String comando) throws IOException {
 		String[] comandito = new String[] {comando};
 		final Process proceso = Runtime.getRuntime().exec(comandito);
@@ -445,61 +512,5 @@ public class PanelEmpleado<Reproductor> extends JPanel implements Servicios {
 		String[] comandito = new String[] {comando1,comando2};
 		final Process proceso = Runtime.getRuntime().exec(comandito);
 	}
-
-	@Override
-	public void addLibro(Empleado empleado) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Empleado getLibroById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Empleado> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateLibro(Empleado Empleado) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void borrarLibro(int id) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void addLibro(Cliente Cliente) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public Cliente getLibroById1(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<Cliente> getAll1() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void updateLibro(Cliente Cliente) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void borrarLibro1(int id) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 
 }
