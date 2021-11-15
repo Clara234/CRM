@@ -1,9 +1,12 @@
 package com.crm.graficos;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
@@ -15,23 +18,31 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import com.crm.pojos.Cliente;
-import com.crm.pojos.Empleado;
 
-public class PanelCliente  extends JPanel implements Servicios{
+public class PanelCliente  extends JPanel{
 	DefaultTableModel dtm;
 	Vector listaCliente;
 	JTextField tf_id_cliente, tf_nombre, tf_apellidos, tf_dnie_nie, tf_telefono, tf_email, tf_direccion_vivienda, tf_ciudad, tf_cp, tf_fecha_alta;
-	public PanelCliente(int ancho, int alto){
+	public PanelCliente(int anchoM1, int altoM1){
 		
 		setLayout(new BorderLayout());
-	  add(setTabla(alto,ancho), BorderLayout.CENTER);
+	  add(setTabla(altoM1,anchoM1), BorderLayout.CENTER);
+	  add(setTablaSur(altoM1,anchoM1), BorderLayout.SOUTH);
 
 	
 		
 		
 	}
 	
+
+	public JTable setTablaSur(int alto, int ancho) {
+		
+             JTable b = new JTable();
+             b.getColumn("dx");
+	 
+		return b;
+	}
+
 
 	public JScrollPane setTabla(int ancho, int alto) {
 		dtm = new DefaultTableModel();
@@ -50,6 +61,7 @@ public class PanelCliente  extends JPanel implements Servicios{
 		JScrollPane sp = new JScrollPane(tabla2);
 		sp.setPreferredSize(new Dimension((int)(ancho*0.8),(int)(alto*0.8)));
 		return sp;
+	
 	}
 	
 	public JPanel setPanelEste(int alto, int ancho, JPanel p1, JPanel p2) {
@@ -166,77 +178,11 @@ public class PanelCliente  extends JPanel implements Servicios{
 		
 		
 		
-		return null;
+		return panelEsteDatos;
 		
 	}
 
 
-	@Override
-	public void addLibro(Empleado empleado) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
-	@Override
-	public Empleado getLibroById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public List<Empleado> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void updateLibro(Empleado Empleado) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void borrarLibro(int id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void addLibro(Cliente Cliente) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public Cliente getLibroById1(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public List<Cliente> getAll1() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void updateLibro(Cliente Cliente) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void borrarLibro1(int id) {
-		// TODO Auto-generated method stub
-		
-	}
 }

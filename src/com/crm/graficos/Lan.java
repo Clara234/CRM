@@ -1,6 +1,7 @@
 package com.crm.graficos;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -26,7 +27,7 @@ public class Lan {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image imagen = tk.getImage("candy_icon.png");
 		marco.setIconImage(imagen);
-		marco.setSize(new Dimension(800,650));
+		marco.setMinimumSize(new Dimension(800,700));
 		
 		//almacenar las dimensiones de la pantalla del usuario
 		Dimension dim=tk.getScreenSize();
@@ -49,7 +50,8 @@ public class Lan {
 		System.out.println(dim.width+"px x "+dim.height+"px");
 		//especificamos al programa que finalice cuando el marco se cierre
 		marco.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		marco.setMinimumSize(new Dimension(800,650));
+		marco.setMinimumSize(new Dimension(800,700));
+
 		//Se pon visible al final
 		marco.setVisible(true);
 	}

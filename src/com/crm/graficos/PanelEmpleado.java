@@ -1,6 +1,7 @@
 package com.crm.graficos;
 
 import javax.print.attribute.standard.Media;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -137,28 +138,28 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 	public JPanel setPanelEsteControl(int alto, int ancho) {
 		JPanel panelEsteControl = new JPanel();
 		panelEsteControl.setLayout( new BoxLayout (panelEsteControl, BoxLayout.Y_AXIS));
-		panelEsteControl.add(Box.createRigidArea(new Dimension(0,60)));
+		panelEsteControl.add(Box.createRigidArea(new Dimension(0,10)));
 		panelEsteControl.setPreferredSize(new Dimension((int)(alto*0.01), (int)(ancho*0.01)));
 		JButton botonConexion = new JButton("Ver");
-		botonConexion.setForeground(Color.gray);
+		botonConexion.setForeground(Color.BLUE);
 		panelEsteControl.add(botonConexion);
 		JButton botonInsertar = new JButton("Insertar");
-		botonInsertar.setForeground(Color.gray);
+		botonInsertar.setForeground(Color.BLUE);
 		panelEsteControl.add(botonInsertar);
 		JButton botonBorrar = new JButton("Borrar");
-		botonBorrar.setForeground(Color.gray);
+		botonBorrar.setForeground(Color.BLUE);
 		panelEsteControl.add(botonBorrar);
 		JButton botonActualizar = new JButton("Actualizar");
-		botonActualizar.setForeground(Color.gray);
+		botonActualizar.setForeground(Color.BLUE);
 		panelEsteControl.add(botonActualizar);
 		JButton botonMusica = new JButton("Activar Musica");
-		botonActualizar.setForeground(Color.gray);
+		botonMusica.setForeground(Color.BLUE);
 		panelEsteControl.add(botonMusica);
 		
 		
 		
 
-		JCheckBox chb_root = new JCheckBox("root");
+		/*JCheckBox chb_root = new JCheckBox("root");
 		chb_root.setForeground(Color.gray);
 		chb_root.addActionListener(new ActionListener() {
 
@@ -216,14 +217,14 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 				}
 			}
 			
-		});
+		});*/
 		panelEsteControl.add(botonInsertar);
 		botonInsertar.addActionListener(new gestorInsertar());
 		botonConexion.addActionListener(new gestorVer());
 		botonMusica.addActionListener(new gestorMusica());
 		botonActualizar.addActionListener(new gestorActualizar());
 		botonBorrar.addActionListener(new gestorBorrar());
-		panelEsteControl.add(chb_root);
+		//panelEsteControl.add(chb_root);
 		//devolvemos el panel de control
 		return panelEsteControl;
 		}
@@ -242,7 +243,7 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 		menuBar.setPreferredSize(new Dimension(ancho, (int)(alto*0.045)));
 		JMenu menu = new JMenu("Accesos Rápidos");
 		JMenuItem miCalculadora = new JMenuItem("Calculadora");
-		miCalculadora.setForeground(Color.gray);
+		miCalculadora.setForeground(Color.BLUE);
 		miCalculadora.addActionListener(new ActionListener() {
 
 			@Override
@@ -257,7 +258,7 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 			
 		});
 		JMenuItem miNavegador = new JMenuItem("Navegador");
-		miNavegador.setForeground(Color.gray);
+		miNavegador.setForeground(Color.BLUE);
 		miNavegador.addActionListener(new ActionListener() {
 
 			@Override
@@ -272,7 +273,7 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 		});
 		
 		JMenuItem copiaBase = new JMenuItem("Base de datos");
-		copiaBase.setForeground(Color.gray);
+		copiaBase.setForeground(Color.BLUE);
 		copiaBase.addActionListener(new ActionListener() {
 			
 			@Override
