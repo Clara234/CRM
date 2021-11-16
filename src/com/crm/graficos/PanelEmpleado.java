@@ -37,7 +37,7 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 	Vector v;
 	DefaultTableModel dtm;
 	JTable tabla;
-	JTextField tf_idDepartamento, tf_idPuesto, tf_nombre, tf_apellidos, tf_salario, tf_fecha_nacimiento;
+	JTextField tf_idDepartamento, tf_idPuesto,tf_nombre, tf_apellido, tf_salario, tf_fecha_nacimiento;
 	JCheckBox chb_jefe;
 	List<Empleado> listaEmpleados;
 	public PanelEmpleado(int ancho, int alto) {
@@ -51,13 +51,17 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 		//objeto previo configurador
 		dtm = new DefaultTableModel();
 		//todos los datos que tendra
-		dtm.addColumn("ID Departamento");
-		dtm.addColumn("ID Puesto");
+		dtm.addColumn("Id_Dep");
+		dtm.addColumn("Id_Puesto");
 		dtm.addColumn("Nombre");
-		dtm.addColumn("Apellidos");
+		dtm.addColumn("Apellido");
 		dtm.addColumn("Salario");
-		dtm.addColumn("Fecha nacimiento");
+		dtm.addColumn("Fecha_nacimiento");
 		dtm.addColumn("Jefe");
+
+		
+		
+		
 		//se crea una tabla con la configuracion dtm que hemos creado
 		tabla = new JTable(dtm);
 		tabla.addMouseListener(new gestorTabla());
@@ -71,13 +75,13 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 	public JPanel setPanelEsteDatos(int alto, int ancho) {
 		JPanel panelEsteDatos = new JPanel();
 		panelEsteDatos.setLayout(new BoxLayout(panelEsteDatos, BoxLayout.Y_AXIS));
-		JLabel l_idDepartamento = new JLabel("idDepartamento");
-		tf_idDepartamento = new JTextField();
-		tf_idDepartamento.setForeground(Color.gray);
+		JLabel l_idDepartamento = new JLabel("Id departamento");
+		 tf_idDepartamento = new JTextField();
+		 tf_idDepartamento.setForeground(Color.gray);
 		Font f = new Font("Italic", Font.ITALIC, 12);
-		tf_idDepartamento.setFont(f);
-		tf_idDepartamento.setMaximumSize(new Dimension(250,20));
-		JLabel l_idPuesto = new JLabel("idPuesto");
+		 tf_idDepartamento.setFont(f);
+		 tf_idDepartamento.setMaximumSize(new Dimension(250,20));
+		JLabel l_idPuesto = new JLabel("Idpuesto");
 		tf_idPuesto = new JTextField();
 		tf_idPuesto.setForeground(Color.gray);
 		Font f2 = new Font("Italic", Font.ITALIC, 12);
@@ -89,24 +93,25 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 		Font f3 = new Font("Italic", Font.ITALIC, 12);
 		tf_nombre.setFont(f3);
 		tf_nombre.setMaximumSize(new Dimension(250,20));
-		JLabel l_apellidos = new JLabel("Apellidos");
-		tf_apellidos = new JTextField();
-		tf_apellidos .setForeground(Color.gray);
+		JLabel l_apellido = new JLabel("Apellido");
+		tf_apellido = new JTextField();
+		tf_apellido.setForeground(Color.gray);
 		Font f4 = new Font("Italic", Font.ITALIC, 12);
-		tf_apellidos .setFont(f4);
-		tf_apellidos.setMaximumSize(new Dimension(250,20));
+		tf_apellido .setFont(f4);
+		tf_apellido.setMaximumSize(new Dimension(250,20));
 		JLabel l_salario = new JLabel("Salario");
 		tf_salario = new JTextField();
 		tf_salario.setForeground(Color.gray);
 		Font f5 = new Font("Italic", Font.ITALIC, 12);
 		tf_salario.setFont(f5);
 		tf_salario.setMaximumSize(new Dimension(250,20));
-		JLabel l_fecha_nacimiento = new JLabel("Fecha de nacimiento");
+		JLabel l_fecha_nacimiento = new JLabel("Fecha_nacimiento");
 		tf_fecha_nacimiento = new JTextField();
 		tf_fecha_nacimiento.setForeground(Color.gray);
 		Font f6 = new Font("Italic", Font.ITALIC, 12);
 		tf_fecha_nacimiento.setFont(f6);
 		tf_fecha_nacimiento.setMaximumSize(new Dimension(250,20));
+		
 		JLabel l_jefe = new JLabel("Jefe");
 		l_jefe.setForeground(Color.black);
 		chb_jefe = new JCheckBox();
@@ -119,8 +124,8 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 		panelEsteDatos.add(l_nombre);
 		panelEsteDatos.add(tf_nombre);
 		panelEsteDatos.add(Box.createRigidArea(new Dimension(0,10)));
-		panelEsteDatos.add(l_apellidos);
-		panelEsteDatos.add(tf_apellidos);
+		panelEsteDatos.add(l_apellido);
+		panelEsteDatos.add(tf_apellido);
 		panelEsteDatos.add(Box.createRigidArea(new Dimension(0,10)));
 		panelEsteDatos.add(l_salario);
 		panelEsteDatos.add(tf_salario);
@@ -152,77 +157,19 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 		JButton botonActualizar = new JButton("Actualizar");
 		botonActualizar.setForeground(Color.BLUE);
 		panelEsteControl.add(botonActualizar);
-		JButton botonMusica = new JButton("Activar Musica");
+		/*JButton botonMusica = new JButton("Activar Musica");
 		botonMusica.setForeground(Color.BLUE);
-		panelEsteControl.add(botonMusica);
+		panelEsteControl.add(botonMusica);*/
 		
 		
 		
 
-		/*JCheckBox chb_root = new JCheckBox("root");
-		chb_root.setForeground(Color.gray);
-		chb_root.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(chb_root.isSelected()) {
-					Dialog dialogo = new JDialog(new JFrame(), true);
-					dialogo.setSize(new Dimension(350, 250));
-					dialogo.setLocation((int)(ancho/2),(int)(alto/4));
-					dialogo.setResizable(false);
-					JPanel panelDialogo = new JPanel();
-					
-					panelDialogo.setLayout( new BoxLayout (panelDialogo, BoxLayout.Y_AXIS));
-					JLabel l_alias = new JLabel("Alias:");
-					JTextField tf_alias = new JTextField();
-					Font f1 = new Font("Garamond", Font.ITALIC, 12);
-					tf_alias.setFont(f1);
-					tf_alias.setMaximumSize(new Dimension(250,20));
-					JLabel l_contrasenna = new JLabel("Contraseña:");
-					JPasswordField tf_contrasenna = new JPasswordField();
-					Font f = new Font("Italic", Font.ITALIC, 12);
-					tf_contrasenna.setFont(f);
-					tf_contrasenna.setMaximumSize(new Dimension(250,20));
-				
-					JButton b_registro = new JButton("Registrarse");
-					Font f2 = new Font("Italic", Font.ITALIC, 12);
-					b_registro.setFont(f2);
-					b_registro.setMaximumSize(new Dimension(100,0));
-					
-					JButton b_inicio   = new JButton("Iniciar Sesion");
-					Font f3 = new Font("Italic", Font.ITALIC, 12);
-					b_inicio.setFont(f3);
-					b_inicio.setMaximumSize(new Dimension(100,0));
-					setVisible(true);
-					
-					
-					JComboBox cb_grupos = new JComboBox();
-					cb_grupos.addItem("--Seleccione un grupo--");
-					cb_grupos.addItem("1");
-					cb_grupos.addItem("2");
-					cb_grupos.addItem("3");
-					cb_grupos.setMaximumSize(new Dimension(250,20));
-					cb_grupos.setLocation(-100,20);
-					panelDialogo.add(l_alias);
-					panelDialogo.add(tf_alias);
-					panelDialogo.add(l_contrasenna);
-					panelDialogo.add(b_inicio);
-					panelDialogo.add(b_registro);
-					panelDialogo.add(tf_contrasenna);
-					panelDialogo.add(Box.createRigidArea(new Dimension(0,10)));
-					panelDialogo.add(cb_grupos);
-					dialogo.add(panelDialogo);
-					
-					dialogo.setVisible(true);
-				}
-			}
-			
-		});*/
+	
 		panelEsteControl.add(botonInsertar);
 		botonInsertar.addActionListener(new gestorInsertar());
 		botonConexion.addActionListener(new gestorVer());
-		botonMusica.addActionListener(new gestorMusica());
-		botonActualizar.addActionListener(new gestorActualizar());
+		//botonMusica.addActionListener(new gestorMusica());
+		//botonActualizar.addActionListener(new gestorActualizar());
 		botonBorrar.addActionListener(new gestorBorrar());
 		//panelEsteControl.add(chb_root);
 		//devolvemos el panel de control
@@ -248,11 +195,7 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					ejecutarComando("calc.exe");
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				ejecutarComando("calc.exe");
 				
 			}
 			
@@ -263,11 +206,7 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					ejecutarComando("MicrosoftEdge.exe","www.google.com");
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				ejecutarComando("MicrosoftEdge.exe");
 			}
 			
 		});
@@ -296,12 +235,22 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 		return menuBar;
 	}
 	
+	protected void ejecutarComando(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public class gestorVer implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//formateamos la tabla para evita que se vean llamadas anteriores a la tabla
 			refresh();
+		}
+
+		private void refresh() {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 	public class gestorInsertar implements ActionListener{
@@ -315,7 +264,7 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 					ps.setInt(1, Integer.valueOf(tf_idDepartamento.getText()));
 					ps.setInt(2, Integer.valueOf(tf_idPuesto.getText()));
 					ps.setString(3, tf_nombre.getText());
-					ps.setString(4, tf_apellidos.getText());
+					ps.setString(4, tf_apellido.getText());
 					ps.setDouble(5, Double.valueOf(tf_salario.getText()));
 					ps.setTimestamp(6,Timestamp.valueOf(fechaIng(tf_fecha_nacimiento.getText())));
 					ps.setBoolean(7, chb_jefe.isSelected());
@@ -324,6 +273,16 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				} 
+			
+		}
+
+		private String fechaIng(String text) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		private void refresh() {
+			// TODO Auto-generated method stub
 			
 		}
 	}
@@ -336,9 +295,9 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 			tf_idDepartamento.setText(""+seleccionado.getId_departamento());
 			tf_idPuesto.setText(""+seleccionado.getId_puesto());
 			tf_nombre.setText(seleccionado.getNombre());
-			tf_apellidos.setText(seleccionado.getApellido());
+			tf_apellido.setText(seleccionado.getApellido());
 			tf_salario.setText(String.valueOf(seleccionado.getSalario()));
-			tf_fecha_nacimiento.setText(String.valueOf(fechaEsp(seleccionado.getFecha_nacimiento())));
+			tf_fecha_nacimiento.setText(String.valueOf(fechaIng(seleccionado.getFecha_nacimiento())));
 			chb_jefe.setSelected(seleccionado.isJefe());
 		}
 
@@ -370,19 +329,53 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			MisConexiones c1 = null;
-			try {
-				c1 = new MisConexiones();
-				PreparedStatement ps = c1.getPS(ConfigDir.getInstance().getProperty("query3"));
-				ps.setInt(1, seleccionado.getId());
-				ps.executeUpdate();
-				refresh();
-			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-	   }
+	        MisConexiones c1 = null;
+	        String box2;
+	           
+	        	 int resp = JOptionPane.showConfirmDialog(null, "Usted eliminará a este usuario"+"¿Esta seguro?",//<- EL MENSAJE
+	        	            "Alerta!"/*<- El título de la ventana*/, JOptionPane.YES_NO_OPTION/*Las opciones (si o no)*/, JOptionPane.WARNING_MESSAGE/*El tipo de ventana, en este caso WARNING*/);
+	        	    //Si la respuesta es sí(YES_OPTION)   
+	        	    if(resp == JOptionPane.YES_OPTION)
+	        	       {
+	        	    	
+	        	    	try {
+							c1 = new MisConexiones();
+						} catch (InstantiationException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IllegalAccessException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (ClassNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+	        			PreparedStatement ps = null;
+						try {
+							ps = c1.getPS(ConfigDir.getInstance().getProperty("query3"));
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+	        			try {
+							ps.setInt(1, seleccionado.getId());
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+	        			try {
+							ps.executeUpdate();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+	        			refresh();
+	        		
+	        	    	
+	        	    	}//El valor de box2 sera 1
+	        	    //Si la respuesta es no (NO_OPTION)
+	        	    if(resp == JOptionPane.NO_OPTION)
+	        	    {box2="0";}//El valor de box2 sera o
     }
 	
 	
@@ -395,7 +388,7 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 				ps.setInt(1, Integer.valueOf(tf_idDepartamento.getText()));
 				ps.setInt(2, Integer.valueOf(tf_idPuesto.getText()));
 				ps.setString(3, tf_nombre.getText());
-				ps.setString(4, tf_apellidos.getText());
+				ps.setString(4, tf_apellido.getText());
 				ps.setDouble(5, Double.valueOf(tf_salario.getText()));
 				ps.setTimestamp(6, Timestamp.valueOf(fechaIng(tf_fecha_nacimiento.getText())));
 				ps.setBoolean(7, chb_jefe.isSelected());
@@ -513,5 +506,10 @@ public class PanelEmpleado<Reproductor> extends JPanel{
 		String[] comandito = new String[] {comando1,comando2};
 		final Process proceso = Runtime.getRuntime().exec(comandito);
 	}
-
+	}
+	public char[] fechaIng(Timestamp fecha_nacimiento) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
+
