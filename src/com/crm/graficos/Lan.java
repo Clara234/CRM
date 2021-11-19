@@ -38,7 +38,7 @@ public class Lan {
 		JTabbedPane pestanha = new JTabbedPane();
 		pestanha.setForeground(Color.gray);
 		pestanha.add("Directorio cliente", new PanelEmpleado(anchoM, altoM));//poner tabla cliente
-		pestanha.add("Hipotecas", new PanelHipoteca());
+		pestanha.add("Hipotecas", new PanelHipoteca(anchoM1, altoM1));
 		//Aqui es donde se visualiza, añadiendolo al marco
 		
 		
