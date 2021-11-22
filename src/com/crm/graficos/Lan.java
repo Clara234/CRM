@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
@@ -28,7 +29,10 @@ public class Lan {
 		Image imagen = tk.getImage("candy_icon.png");
 		marco.setIconImage(imagen);
 		marco.setMinimumSize(new Dimension(800,700));
-		
+	    JOptionPane.showInputDialog("Bienvenido");
+	    
+	    //Toolkit.getDefaultToolkit().beep();
+	    Toolkit.getDefaultToolkit().beep();
 		//almacenar las dimensiones de la pantalla del usuario
 		Dimension dim=tk.getScreenSize();
 		int anchoM=(int)(dim.width/2), altoM=(int)(dim.height/2);
@@ -37,8 +41,8 @@ public class Lan {
 		//crear pestañas dentro del panel:
 		JTabbedPane pestanha = new JTabbedPane();
 		pestanha.setForeground(Color.gray);
-		pestanha.add("Directorio cliente", new PanelEmpleado(anchoM, altoM));//poner tabla cliente
-		pestanha.add("Hipotecas", new PanelHipoteca(anchoM1, altoM1));
+		pestanha.add("Directorio cliente", new PanelCliente(anchoM, altoM));//poner tabla cliente
+		pestanha.add("Hipotecas", new PanelHipoteca());
 		//Aqui es donde se visualiza, añadiendolo al marco
 		
 		
