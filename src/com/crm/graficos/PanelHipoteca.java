@@ -23,19 +23,20 @@ import javax.swing.table.DefaultTableModel;
 public class PanelHipoteca extends JPanel {
 	DefaultTableModel dtm;
 	JTable tabla;
-	JTextField finalidad, valorAdquisicion, valorImporte, plazo, direccion, cargas, titular, dninie, apellido1, apellido2,
-			nombre, fechaNacimiento, profesion, domicilio, poblacion, codigoPostal, nombreEmpresa, actividad,
+	JTextField finalidad, valorAdquisicion, valorImporte, plazo, direccion, cargas, titular, dninie, apellido1,
+			apellido2, nombre, fechaNacimiento, profesion, domicilio, poblacion, codigoPostal, nombreEmpresa, actividad,
 			antiguedad, puesto, direccionEmpresa, contactoEmpresa, ingresosFijos, ingresosVariables, gastosAlquiler,
 			gastosHipoteca, otros, valor, cargasVivienda;
 	JButton imprimir, insertar, limpiar;
-	JCheckBox chb_editar, chb_propiedad, chb_escritura, chb_contratoPrivado, chb_otrosGastos, chb_padres, chb_alquiler, chb_fijo,chb_temporal,chb_autonomo, chb_otros;
+	JCheckBox chb_editar, chb_propiedad, chb_escritura, chb_contratoPrivado, chb_otrosGastos, chb_padres, chb_alquiler,
+			chb_fijo, chb_temporal, chb_autonomo, chb_otros;
 	JTextArea comentarios, otrosBienes;
 	public JComboBox tipo, nueva, estadoCivil, regimenBienes, ocupacion;
 
 	public PanelHipoteca(int alto, int ancho) {
 		setLayout(new BorderLayout());
 
-		add(setPanelControl(alto, ancho), BorderLayout.NORTH);
+		add(setPanelControl(alto, ancho), BorderLayout.CENTER);
 		add(setPanelNorte(alto, ancho, setPanelNorteDatos(alto, ancho)), BorderLayout.WEST);
 		add(setPanelEste(alto, ancho, setPanelEsteDatos(alto, ancho), setPanelEsteDatos2(ancho, alto)),
 				BorderLayout.EAST);
@@ -58,13 +59,16 @@ public class PanelHipoteca extends JPanel {
 	public JPanel setPanelEsteDatos(int alto, int ancho) {
 
 		JPanel panelEsteDatos = new JPanel();
-		panelEsteDatos.setBorder(BorderFactory.createLoweredBevelBorder());  //borde para diferenciar paneles
+		// panelEsteDatos.setBorder(BorderFactory.createLoweredBevelBorder()); //borde
+		// para diferenciar paneles
 
 		panelEsteDatos.setLayout(new BoxLayout(panelEsteDatos, BoxLayout.Y_AXIS));
 		JLabel l_datoseconomicos = new JLabel("DATOS ECONOMICOS: ");
 		l_datoseconomicos.setSize(new Dimension(250, 20));
+		l_datoseconomicos.setForeground(Color.BLACK);
 
 		JLabel l_ingresosFijos = new JLabel("Ingresos Fijos(mes):");
+
 		ingresosFijos = new JTextField();
 		ingresosFijos.setForeground(Color.gray);
 		Font f = new Font("Italic", Font.ITALIC, 12);
@@ -189,106 +193,80 @@ public class PanelHipoteca extends JPanel {
 	public JPanel setPanelControl(int alto, int ancho) {
 
 		JPanel panelControl = new JPanel();
-		panelControl.setLayout(new BoxLayout(panelControl, BoxLayout.X_AXIS));
-		//panelControl.setBorder(BorderFactory.createLoweredBevelBorder());  
+		panelControl.setLayout(new BoxLayout(panelControl, BoxLayout.Y_AXIS));
+		panelControl.setBorder(BorderFactory.createLoweredBevelBorder());
 
-		/*
-		 * imprimir = new JButton("IMPRIMIR PETICION");
-		 * imprimir.setForeground(Color.RED); insertar = new
-		 * JButton("INSERTAR EN BBDD"); insertar.setForeground(Color.RED); limpiar = new
-		 * JButton("LIMPIAR"); limpiar.setForeground(Color.RED);
-		 * 
-		 * 
-		 * 
-		 * panelControl.add(imprimir); panelControl.add(insertar);
-		 * panelControl.add(limpiar); limpiar.setVisible(true);
-		 */
-
-		JTable tabla1 = new JTable();
-		tabla1.setLocation(100, 50);
-
-		JLabel l_finalidad = new JLabel("Finalidad: ");
-		finalidad = new JTextField();
-		finalidad.setForeground(Color.gray);
+		JLabel l_datosProfesionales = new JLabel("Datos Profesionales");
+		l_datosProfesionales.setForeground(Color.BLACK);
+		Font f1 = new Font("Algerian", Font.BOLD, 15);
+		l_datosProfesionales.setFont(f1);
+		
+		JLabel l_nombreEmpresa = new JLabel("Nombre de la Empresa:  ");
+		nombreEmpresa = new JTextField();
+		nombreEmpresa.setForeground(Color.gray);
 		Font f = new Font("Italic", Font.ITALIC, 12);
-		finalidad.setFont(f);
-		finalidad.setMaximumSize(new Dimension(70, 15));
+		nombreEmpresa.setFont(f);
+		nombreEmpresa.setMaximumSize(new Dimension(250, 20));
 
-		JLabel l_valorAdquisicion = new JLabel(" Valor Adquisicion: ");
-		valorAdquisicion = new JTextField();
-		valorAdquisicion.setForeground(Color.gray);
-		valorAdquisicion.setFont(f);
-		valorAdquisicion.setMaximumSize(new Dimension(70, 15));
+		JLabel l_actividad = new JLabel("Actividad de la Empresa:  ");
+		actividad = new JTextField();
+		actividad.setForeground(Color.gray);
+		actividad.setFont(f);
+		actividad.setMaximumSize(new Dimension(250, 20));
 
-		JLabel l_valorImporte = new JLabel(" Valor Importe: ");
-		valorImporte = new JTextField();
-		valorImporte.setForeground(Color.gray);
-		valorImporte.setFont(f);
-		valorImporte.setMaximumSize(new Dimension(70, 15));
+		JLabel l_antiguedad = new JLabel("Antiguedad:  ");
+		antiguedad = new JTextField();
+		antiguedad.setForeground(Color.gray);
+		antiguedad.setFont(f);
+		antiguedad.setMaximumSize(new Dimension(250, 20));
 
-		JLabel l_plazo = new JLabel(" PLazo: ");
-		plazo = new JTextField();
-		plazo.setForeground(Color.gray);
-		plazo.setFont(f);
-		plazo.setMaximumSize(new Dimension(70, 15));
-		JTable tabla2 = new JTable();
-		tabla2.setPreferredSize(new Dimension(200, 100));
+		JLabel l_puesto = new JLabel("Puesto de la empresa:  ");
+		puesto = new JTextField();
+		puesto.setForeground(Color.gray);
+		puesto.setFont(f);
+		puesto.setMaximumSize(new Dimension(250, 20));
 
-		JLabel l_direccion = new JLabel(" Direccion vivienda: ");
-		direccion = new JTextField();
-		direccion.setForeground(Color.gray);
-		direccion.setFont(f);
-		direccion.setMaximumSize(new Dimension(70, 15));
+		JLabel l_direccionEmpresa = new JLabel("Direccion de la empresa:  ");
+		direccionEmpresa = new JTextField();
+		direccionEmpresa.setForeground(Color.gray);
+		direccionEmpresa.setFont(f);
+		direccionEmpresa.setMaximumSize(new Dimension(250, 20));
 
-		JLabel l_tipo = new JLabel(" Tipo: ");
-		tipo = new JComboBox();
-		tipo.addItem("Libre");
-		tipo.addItem("Con cargas");
+		JLabel l_contactoEmpresa = new JLabel("Telefono/fax/correo-e de la empresa:  ");
+		contactoEmpresa = new JTextField();
+		contactoEmpresa.setForeground(Color.gray);
+		contactoEmpresa.setFont(f);
+		contactoEmpresa.setMaximumSize(new Dimension(250, 20));
 
-		tipo.setMaximumSize(new Dimension(70, 15));
+		imprimir = new JButton("IMPRIMIR PETICION");
+		imprimir.setForeground(Color.RED);
+		insertar = new JButton("INSERTAR EN BBDD");
+		insertar.setForeground(Color.RED);
+		limpiar = new JButton("LIMPIAR");
+		limpiar.setForeground(Color.RED);
 
-		JLabel l_nueva = new JLabel(" Nueva: ");
-		nueva = new JComboBox();
-		nueva.addItem("SI");
-		nueva.addItem("NO");
-		nueva.setMaximumSize(new Dimension(70, 15));
+		JLabel l_editar = new JLabel("Editar campos");
+		l_editar.setForeground(Color.black);
+		chb_editar = new JCheckBox();
 
-		JLabel l_estadoCivil = new JLabel(" Estado Civil: ");
-		estadoCivil = new JComboBox();
-		estadoCivil.addItem("Solter@");
-		estadoCivil.addItem("Casad@");
-		estadoCivil.addItem("Viud@");
-		estadoCivil.setMaximumSize(new Dimension(70, 15));
-
-		JLabel l_regimenBienes = new JLabel(" Regimen Bienes: ");
-		regimenBienes = new JComboBox();
-		regimenBienes.addItem("Comunidad");
-		regimenBienes.addItem("Separacion");
-		regimenBienes.addItem("Mixtos");
-		regimenBienes.setMaximumSize(new Dimension(70, 15));
-
-		tabla1.setVisible(true);
-		tabla2.setVisible(true);
-		tabla1.add(l_finalidad);
-		tabla1.add(finalidad);
-		tabla1.add(l_valorAdquisicion);
-		tabla1.add(valorAdquisicion);
-		tabla1.add(l_valorImporte);
-		tabla1.add(valorImporte);
-		tabla1.add(l_plazo);
-		tabla1.add(plazo);
-		tabla2.add(l_direccion);
-		tabla2.add(direccion);
-		tabla2.add(l_tipo);
-		tabla2.add(tipo);
-		tabla2.add(l_nueva);
-		tabla2.add(nueva);
-		tabla2.add(l_estadoCivil);
-		tabla2.add(estadoCivil);
-		tabla2.add(l_regimenBienes);
-		tabla2.add(regimenBienes);
-		panelControl.add(tabla1);
-		panelControl.add(tabla2);
+		panelControl.add(l_datosProfesionales);
+		panelControl.add(l_nombreEmpresa);
+		panelControl.add(nombreEmpresa);
+		panelControl.add(l_actividad);
+		panelControl.add(actividad);
+		panelControl.add(l_antiguedad);
+		panelControl.add(antiguedad);
+		panelControl.add(l_puesto);
+		panelControl.add(puesto);
+		panelControl.add(l_direccionEmpresa);
+		panelControl.add(direccionEmpresa);
+		panelControl.add(l_contactoEmpresa);
+		panelControl.add(contactoEmpresa);
+		panelControl.add(imprimir);
+		panelControl.add(insertar);
+		panelControl.add(limpiar);
+		panelControl.add(l_editar);
+		panelControl.add(chb_editar);
 
 		panelControl.add(Box.createRigidArea(new Dimension(0, 1)));
 		panelControl.setPreferredSize(new Dimension((int) (alto * 0.3), (int) (ancho * 0.5)));
@@ -307,21 +285,19 @@ public class PanelHipoteca extends JPanel {
 
 	public JPanel setPanelNorteDatos(int alto, int ancho) {
 		JPanel panelNorteDatos = new JPanel();
-		panelNorteDatos.setBorder(BorderFactory.createLoweredBevelBorder());  
+		// panelNorteDatos.setBorder(BorderFactory.createLoweredBevelBorder());
 		panelNorteDatos.setLayout(new BoxLayout(panelNorteDatos, BoxLayout.Y_AXIS));
 		panelNorteDatos.setSize(250, 250);
 		panelNorteDatos.add(Box.createRigidArea(new Dimension(0, 1)));
 		panelNorteDatos.setPreferredSize(new Dimension((int) (ancho * 0.5), (int) (alto * 0.3)));
-		
-		
+
 		JLabel l_datosPersonales = new JLabel("Datos Personales");
 		l_datosPersonales.setForeground(Color.BLACK);
-		
+
 		JLabel l_titular = new JLabel("Titular");
 		l_titular.setForeground(Color.BLACK);
 		JLabel l_ocupacion = new JLabel("Ocupacion");
 		l_ocupacion.setForeground(Color.BLACK);
-		
 
 		JLabel l_dninie = new JLabel("Dni|nie");
 		dninie = new JTextField();
@@ -329,36 +305,35 @@ public class PanelHipoteca extends JPanel {
 		Font f = new Font("Italic", Font.ITALIC, 12);
 		dninie.setFont(f);
 		dninie.setMaximumSize(new Dimension(250, 20));
-		
+
 		JLabel l_apellido1 = new JLabel("Primer Apellido: ");
 		apellido1 = new JTextField();
 		apellido1.setForeground(Color.gray);
 		apellido1.setFont(f);
 		apellido1.setMaximumSize(new Dimension(250, 20));
-		
+
 		JLabel l_apellido2 = new JLabel("Segundo Apellido: ");
-		apellido2  = new JTextField();
-		apellido2 .setForeground(Color.gray);
-		apellido2 .setFont(f);
-		apellido2 .setMaximumSize(new Dimension(250, 20));
-		
+		apellido2 = new JTextField();
+		apellido2.setForeground(Color.gray);
+		apellido2.setFont(f);
+		apellido2.setMaximumSize(new Dimension(250, 20));
+
 		JLabel l_nombre = new JLabel("Nombre: ");
-		nombre  = new JTextField();
-		nombre .setForeground(Color.gray);
-		nombre .setFont(f);
-		nombre .setMaximumSize(new Dimension(250, 20));
-		
+		nombre = new JTextField();
+		nombre.setForeground(Color.gray);
+		nombre.setFont(f);
+		nombre.setMaximumSize(new Dimension(250, 20));
+
 		JLabel l_fechanacimiento = new JLabel("Fecha de Nacimiento: ");
-		fechaNacimiento  = new JTextField();
-		fechaNacimiento .setForeground(Color.gray);
-		fechaNacimiento .setFont(f);
-		fechaNacimiento .setMaximumSize(new Dimension(250, 20));
-		
-		
+		fechaNacimiento = new JTextField();
+		fechaNacimiento.setForeground(Color.gray);
+		fechaNacimiento.setFont(f);
+		fechaNacimiento.setMaximumSize(new Dimension(250, 20));
+
 		JLabel l_fijo = new JLabel("Fijo");
 		l_fijo.setForeground(Color.black);
 		chb_fijo = new JCheckBox();
-		
+
 		JLabel l_temporal = new JLabel("Temporal");
 		l_temporal.setForeground(Color.black);
 		chb_temporal = new JCheckBox();
@@ -370,33 +345,29 @@ public class PanelHipoteca extends JPanel {
 		chb_otros = new JCheckBox();
 
 		JLabel l_profesion = new JLabel("Profesion: ");
-		profesion  = new JTextField();
-		profesion .setForeground(Color.gray);
-		profesion .setFont(f);
-		profesion .setMaximumSize(new Dimension(250, 20));
-		
-		JLabel l_domicilio= new JLabel("Domicilio: ");
-		domicilio  = new JTextField();
-		domicilio .setForeground(Color.gray);
-		domicilio .setFont(f);
-		domicilio .setMaximumSize(new Dimension(250, 20));
-		
-		JLabel l_poblacion= new JLabel("Poblacion: ");
-		poblacion  = new JTextField();
-		poblacion .setForeground(Color.gray);
-		poblacion .setFont(f);
-		poblacion .setMaximumSize(new Dimension(250, 20));
-		
-		JLabel l_codigopostal= new JLabel("Codigo Postal: ");
-		codigoPostal  = new JTextField();
-		codigoPostal .setForeground(Color.gray);
-		codigoPostal .setFont(f);
-		codigoPostal .setMaximumSize(new Dimension(250, 20));
-		
-		
-		
-		
-        
+		profesion = new JTextField();
+		profesion.setForeground(Color.gray);
+		profesion.setFont(f);
+		profesion.setMaximumSize(new Dimension(250, 20));
+
+		JLabel l_domicilio = new JLabel("Domicilio: ");
+		domicilio = new JTextField();
+		domicilio.setForeground(Color.gray);
+		domicilio.setFont(f);
+		domicilio.setMaximumSize(new Dimension(250, 20));
+
+		JLabel l_poblacion = new JLabel("Poblacion: ");
+		poblacion = new JTextField();
+		poblacion.setForeground(Color.gray);
+		poblacion.setFont(f);
+		poblacion.setMaximumSize(new Dimension(250, 20));
+
+		JLabel l_codigopostal = new JLabel("Codigo Postal: ");
+		codigoPostal = new JTextField();
+		codigoPostal.setForeground(Color.gray);
+		codigoPostal.setFont(f);
+		codigoPostal.setMaximumSize(new Dimension(250, 20));
+
 		panelNorteDatos.add(l_datosPersonales);
 		panelNorteDatos.add(l_titular);
 		panelNorteDatos.add(l_dninie);
@@ -426,9 +397,7 @@ public class PanelHipoteca extends JPanel {
 		panelNorteDatos.add(poblacion);
 		panelNorteDatos.add(l_codigopostal);
 		panelNorteDatos.add(codigoPostal);
-		
-		
-		
+
 		return panelNorteDatos;
 
 	}

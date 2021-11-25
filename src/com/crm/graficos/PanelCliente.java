@@ -653,6 +653,9 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				combo.addItem(dameObjeto("1"));
 				combo.addItem(dameObjeto("2"));
 				combo.addItem(dameObjeto("3"));
+				JLabel l_copyrigth = new JLabel(" copyright by Clara");
+				Font f = new Font("Algerian", Font.BOLD, 12);
+				l_copyrigth.setFont(f);
 				botonAcceder = new JButton("Acceder");
 
 				botonAcceder.addActionListener(new ActionListener() {
@@ -687,6 +690,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				dialogoinicial.add(mialias);
 				dialogoinicial.add(clave);
 				dialogoinicial.add(combo);
+				dialogoinicial.add(l_copyrigth);
 
 				JPanel panelentrada = new JPanel();
 				panelentrada.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 10));
@@ -697,9 +701,10 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				panelentrada.add(clave);
 				panelentrada.add(new JLabel("    GRUPOS"));
 				panelentrada.add(combo);
-				panelentrada.add(new JLabel("  copyright by Clara"));
+				//panelentrada.add(new JLabel("  copyright by Clara"));
 
 				panelentrada.add(botonAcceder);
+				panelentrada.add(l_copyrigth);
 
 				panelentrada.setSize(250, 250);
 				panelentrada.setBackground(new Color(209, 222, 244));
