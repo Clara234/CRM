@@ -30,7 +30,7 @@ public class Lan {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image imagen = tk.getImage("candy_icon.png");
 		marco.setIconImage(imagen);
-		marco.setMinimumSize(new Dimension(800, 700));
+		marco.setMinimumSize(new Dimension(1200, 700));
 		// JOptionPane.showInputDialog("Bienvenido");
 
 		// Toolkit.getDefaultToolkit().beep();

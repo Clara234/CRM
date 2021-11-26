@@ -352,6 +352,14 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			}
 
 		}
+		
+		/*public class GestorAdd implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				Cliente cli = new Cliente();
+				cli.setId();
+			}
+		}
+		*/
 
 	}
 
@@ -416,27 +424,61 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			try {
-				PreparedStatement ps = new MisConexiones().getPS(ConfigDir.getInstance().getProperty("query4"));
+			
+			MisConexiones c2 = null;
+			String box2;
+			int resp = JOptionPane.showConfirmDialog(null, "Usted eliminará a este usuario" + "¿Esta seguro?", // <- EL
+					// MENSAJE
+                 "Alerta!"/* <- El título de la ventana */, JOptionPane.YES_NO_OPTION/* Las opciones (si o no) */,
+                 JOptionPane.WARNING_MESSAGE/* El tipo de ventana, en este caso WARNING */);
+			if (resp == JOptionPane.YES_OPTION) {
+				try {
+					c2 = new MisConexiones();
+				}catch(InstantiationException e1) {
+					
+				} catch (IllegalAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				PreparedStatement ps = null;
+              
+		      try {
+				ps= c2.getPS(ConfigDir.getInstance().getProperty("query4"));
 
-				ps.setString(1, tf_dninie.getText());
-				ps.setString(2, tf_correoe.getText());
-				ps.setString(3, tf_ciudad.getText());
-				ps.setString(4, tf_ubicacion.getText());
-				ps.setTimestamp(5, Timestamp.valueOf(fechaIng(tf_fecha_alta.getText())));
-				ps.setInt(6, Integer.valueOf(tf_telefono.getText()));
-				ps.setBoolean(7, chb_autorizado.isSelected());
-				ps.setBoolean(7, chb_cliente.isSelected());
-				ps.setBoolean(7, chb_adjunto.isSelected());
-				ps.setString(8, tf_notas.getText());
-				ps.executeUpdate();
-				refresh();
+			
+				
+				
 
-			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e1) {
+			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		      try {
+		    		ps.setString(1, tf_dninie.getText());
+					ps.setString(2, tf_correoe.getText());
+					ps.setString(3, tf_ciudad.getText());
+					ps.setString(4, tf_ubicacion.getText());
+					ps.setTimestamp(5, Timestamp.valueOf(fechaIng(tf_fecha_alta.getText())));
+					ps.setInt(6, Integer.valueOf(tf_telefono.getText()));
+					ps.setBoolean(7, chb_autorizado.isSelected());
+					ps.setBoolean(7, chb_cliente.isSelected());
+					ps.setBoolean(7, chb_adjunto.isSelected());
+					ps.setString(8, tf_notas.getText());
+		      }catch(SQLException e1) {
+		    	  e1.printStackTrace();
+		      }
+		      try {
+		    	  ps.executeUpdate();
+		      }catch(SQLException e1) {
+		    	  e1.printStackTrace();
+		      }
+		      refresh();
+		      
 		}
+	}
 	}
 
 	public class gestorMusica implements ActionListener {
@@ -807,7 +849,10 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	@Override
 	public void addCliente(Cliente cliente) throws SQLException {
 		// TODO Auto-generated method stub
-
+         /* PreparedStatement ps  = new MisConexiones().damePS("");
+          ps.setInt(1, cliente.getId());
+          //resto de datos
+          ps.execute();*/
 	}
 
 	@Override
