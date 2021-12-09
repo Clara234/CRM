@@ -1,6 +1,7 @@
 package com.crm.persistencia;
 
 import java.io.InputStream;
+
 import java.util.Properties;
 
 public class ConfigDir {

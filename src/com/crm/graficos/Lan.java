@@ -6,11 +6,14 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
+
 
 public class Lan {
 	// CRM DE SERVICIOS FINANCIEROS CON DIRECTORIO DE CLIENTES AL QUE LES DAS
@@ -18,7 +21,14 @@ public class Lan {
 
 	public static void main(String[] args) {
 		setMarco();
-
+		// insertar lookandfeel para el estilo del crm
+		try {
+			JFrame.setDefaultLookAndFeelDecorated(true);
+			JDialog.setDefaultLookAndFeelDecorated(true);
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.metal");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void setMarco() {
@@ -30,7 +40,7 @@ public class Lan {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image imagen = tk.getImage("candy_icon.png");
 		marco.setIconImage(imagen);
-		marco.setMinimumSize(new Dimension(1200, 700));
+		marco.setMinimumSize(new Dimension(1000, 950));
 		// JOptionPane.showInputDialog("Bienvenido");
 
 		// Toolkit.getDefaultToolkit().beep();
@@ -45,6 +55,7 @@ public class Lan {
 		pestanha.setForeground(Color.gray);
 		pestanha.add("Directorio cliente", new PanelCliente(anchoM, altoM));// poner tabla cliente
 		pestanha.add("Hipotecas", new PanelHipoteca(anchoM1, altoM1));
+
 		// Aqui es donde se visualiza, añadiendolo al marco
 
 		marco.getContentPane().add(pestanha);
@@ -56,5 +67,6 @@ public class Lan {
 
 		// Se pon visible al final
 		marco.setVisible(true);
+
 	}
 }

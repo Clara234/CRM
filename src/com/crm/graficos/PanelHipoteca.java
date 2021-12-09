@@ -36,11 +36,9 @@ public class PanelHipoteca extends JPanel {
 	public PanelHipoteca(int alto, int ancho) {
 		setLayout(new BorderLayout());
         add(setPanelNorte(alto,ancho, setPanelNorteDatos1(alto,ancho), setPanelNorteDatos2(alto,ancho), setPanelNorteDatos3(alto,ancho)), BorderLayout.NORTH);
-	   add(setPanelControl(alto, ancho), BorderLayout.CENTER);
 		add(setPanelOeste(alto, ancho, setPanelOesteDatos(alto, ancho)), BorderLayout.WEST);
-		add(setPanelEste(alto, ancho,setPanelEsteDatos2(alto,ancho)));
-		// add(setTabla(), BorderLayout.NORTH);
-
+		add(setPanelEste(alto, ancho,setPanelEsteDatos2(alto,ancho), setPanelControl(alto,ancho)));
+		
 	}
 	 public JPanel setPanelNorte(int alto,int ancho, JPanel jp1, JPanel jp2, JPanel jp3) {
 		 
@@ -60,20 +58,20 @@ public class PanelHipoteca extends JPanel {
 	public JPanel setPanelNorteDatos1(int alto, int ancho) {
 		JPanel panelPrimero = new JPanel();
 		panelPrimero.setLayout(new BoxLayout(panelPrimero, BoxLayout.X_AXIS));
-		//panelPrimero.setBorder(BorderFactory.createLoweredBevelBorder());
+		panelPrimero.setBorder(BorderFactory.createLoweredBevelBorder());
 		
 		
 		
 		JLabel l_finalidad = new JLabel("Finalidad: ");
 		finalidad = new JTextField();
 		finalidad.setForeground(Color.gray);
-		Font f = new Font("Italic", Font.ITALIC, 12);
+		Font f = new Font("Serif", Font.BOLD, 12);
 		finalidad.setFont(f);
 		finalidad.setMaximumSize(new Dimension(250, 15));
 		
 		JLabel l_creditoSolicitado= new JLabel("CREDITO SOLICITADO : ");
 		l_creditoSolicitado.setForeground(Color.BLACK);
-		Font f1 = new Font("Garamond", Font.BOLD, 10);
+		Font f1 = new Font("Serif", Font.BOLD, 12);
 		l_creditoSolicitado.setFont(f1);
 		
 		JLabel l_valorAdquisicion = new JLabel("Valor de  adquisicion: ");
@@ -123,21 +121,21 @@ public class PanelHipoteca extends JPanel {
 		
 		JPanel panelNorteDatos2 = new JPanel();
 		panelNorteDatos2.setLayout(new BoxLayout(panelNorteDatos2, BoxLayout.X_AXIS));
-		//panelNorteDatos2.setBorder(BorderFactory.createLoweredBevelBorder());
+		panelNorteDatos2.setBorder(BorderFactory.createLoweredBevelBorder());
 		
 		
 		JLabel l_direccionVivienda = new JLabel("Direccion de Vivienda:");
 		direccion = new JTextField();
 		direccion.setForeground(Color.BLACK);
-		Font f = new Font("Italic", Font.ITALIC, 12);
+		Font f = new Font("Serif", Font.BOLD, 12);
 		direccion.setFont(f);
 		direccion.setMaximumSize(new Dimension(250, 20));
 		
 
 		JLabel l_tipo = new JLabel("Tipo:  ");
 		tipo = new JComboBox();
-		tipo.addItem("LIBRE");
-		tipo.addItem("CON CARGAS");
+		tipo.addItem("Libre");
+		tipo.addItem("Con cargas");
 		tipo.setForeground(Color.BLACK);
 		tipo.setFont(f);
 		tipo.setMaximumSize(new Dimension(250, 20));
@@ -152,8 +150,8 @@ public class PanelHipoteca extends JPanel {
 		
 		JLabel l_nueva= new JLabel("Nueva:  ");
 		nueva = new JComboBox();
-		nueva.addItem("SI");
-		nueva.addItem("NO");
+		nueva.addItem("Si");
+		nueva.addItem("No");
 		nueva.setForeground(Color.BLACK);
 		nueva.setFont(f);
 		nueva.setMaximumSize(new Dimension(250, 20));
@@ -167,6 +165,7 @@ public class PanelHipoteca extends JPanel {
 		estadoCivil.addItem("Separacion en proceso");
 		estadoCivil.addItem("Viud@");
 		estadoCivil.addItem("Concubinato");
+		
 		estadoCivil.setForeground(Color.BLACK);
 		estadoCivil.setFont(f);
 		estadoCivil.setMaximumSize(new Dimension(250, 20));
@@ -212,13 +211,13 @@ public class PanelHipoteca extends JPanel {
 		
 		JPanel panelNorteDatos3 = new JPanel();
 		panelNorteDatos3.setLayout(new BoxLayout(panelNorteDatos3, BoxLayout.X_AXIS));
-		//panelNorteDatos3.setBorder(BorderFactory.createLoweredBevelBorder());
+		panelNorteDatos3.setBorder(BorderFactory.createLoweredBevelBorder());
 		
 		
 		JLabel l_vinculacion = new JLabel("Vinculado a :");
 		vinculacion = new JTextField();
 		vinculacion.setForeground(Color.BLACK);
-		Font f = new Font("Italic", Font.ITALIC, 12);
+		Font f = new Font("Serif", Font.BOLD, 12);
 		vinculacion.setFont(f);
 		vinculacion.setMaximumSize(new Dimension(250, 20));
 		JLabel l_busquedacliente = new JLabel("Busqueda cliente:");
@@ -238,11 +237,12 @@ public class PanelHipoteca extends JPanel {
 		return panelNorteDatos3;
 		
 	}
-	public JPanel setPanelEste(int alto, int ancho, JPanel jp1) {
+	public JPanel setPanelEste(int alto, int ancho, JPanel jp1, JPanel jp2) {
 		JPanel panelEste = new JPanel();
 		panelEste.setLayout(new BorderLayout());
 		panelEste.setPreferredSize(new Dimension((int) (ancho * 0.30), (int) (alto * 0.9)));
 		panelEste.add(jp1, BorderLayout.EAST);
+		panelEste.add(jp2, BorderLayout.CENTER);
 	
 
 		return panelEste;
@@ -255,20 +255,20 @@ public class PanelHipoteca extends JPanel {
 	public JPanel setPanelEsteDatos2(int alto, int ancho) {
 
 		JPanel panelEsteDatos2 = new JPanel();
-		// panelEsteDatos.setBorder(BorderFactory.createLoweredBevelBorder()); //borde
+		panelEsteDatos2.setBorder(BorderFactory.createLoweredBevelBorder()); //borde
 		// para diferenciar paneles
 
 		panelEsteDatos2.setLayout(new BoxLayout(panelEsteDatos2, BoxLayout.Y_AXIS));
-		JLabel l_datoseconomicos = new JLabel("DATOS ECONOMICOS: ");
+		JLabel l_datoseconomicos = new JLabel("Datos Economicos:");
 		l_datoseconomicos.setSize(new Dimension(250, 20));
 		l_datoseconomicos.setForeground(Color.BLACK);
-		Font f1 = new Font("Garamond", Font.BOLD, 13);
+		Font f1 = new Font("Arial", Font.BOLD, 15);
 		l_datoseconomicos.setFont(f1);
 
 		JLabel l_ingresosFijos = new JLabel("Ingresos Fijos(mes):");
 		ingresosFijos = new JTextField();
 		ingresosFijos.setForeground(Color.gray);
-		Font f = new Font("Italic", Font.ITALIC, 12);
+		Font f = new Font("Serif", Font.BOLD, 12);
 		ingresosFijos.setFont(f);
 		ingresosFijos.setMaximumSize(new Dimension(250, 20));
 
@@ -377,25 +377,22 @@ public class PanelHipoteca extends JPanel {
 		return panelEsteDatos2;
 
 	}
-
 	
 	public JPanel setPanelControl(int alto, int ancho) {
-
+		
 		JPanel panelControl = new JPanel();
 		panelControl.setLayout(new BoxLayout(panelControl, BoxLayout.Y_AXIS));
-		
-		
 	    panelControl.setBorder(BorderFactory.createLoweredBevelBorder());
 
 		JLabel l_datosProfesionales = new JLabel("Datos Profesionales");
 		l_datosProfesionales.setForeground(Color.BLACK);
-		Font f1 = new Font("Garamond", Font.BOLD, 15);
+		Font f1 = new Font("Arial", Font.BOLD, 15);
 		l_datosProfesionales.setFont(f1);
 		
 		JLabel l_nombreEmpresa = new JLabel("Nombre de la Empresa:  ");
 		nombreEmpresa = new JTextField();
 		nombreEmpresa.setForeground(Color.gray);
-		Font f = new Font("Italic", Font.ITALIC, 12);
+		Font f = new Font("Serif", Font.BOLD, 12);
 		nombreEmpresa.setFont(f);
 		nombreEmpresa.setMaximumSize(new Dimension(250, 20));
 
@@ -430,11 +427,11 @@ public class PanelHipoteca extends JPanel {
 		contactoEmpresa.setMaximumSize(new Dimension(250, 20));
 
 		imprimir = new JButton("IMPRIMIR PETICION");
-		imprimir.setForeground(Color.RED);
+		imprimir.setForeground(Color.BLUE);
 		insertar = new JButton("INSERTAR EN BBDD");
-		insertar.setForeground(Color.RED);
+		insertar.setForeground(Color.BLUE);
 		limpiar = new JButton("LIMPIAR");
-		limpiar.setForeground(Color.RED);
+		limpiar.setForeground(Color.BLUE);
 
 		JLabel l_editar = new JLabel("Editar campos");
 		l_editar.setForeground(Color.black);
@@ -472,10 +469,14 @@ public class PanelHipoteca extends JPanel {
 		panelControl.add(Box.createRigidArea(new Dimension(0, 1)));
 		panelControl.setPreferredSize(new Dimension((int) (alto * 0.5), (int) (ancho * 1.2)));
 		panelControl.setVisible(true);
-		panelControl.setBackground(Color.red);
 		return panelControl;
 
+	
+		
 	}
+
+	
+	
 
 	public JPanel setPanelOeste(int alto, int ancho, JPanel j1) {
 		JPanel panelOeste = new JPanel();
@@ -493,10 +494,10 @@ public class PanelHipoteca extends JPanel {
 		panelOesteDatos.setSize(250, 250);
 		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 1)));
 		panelOesteDatos.setPreferredSize(new Dimension((int) (ancho * 0.5), (int) (alto * 0.3)));
-
+        panelOesteDatos.setBorder(BorderFactory.createLoweredBevelBorder());
 		JLabel l_datosPersonales = new JLabel("Datos Personales");
 		l_datosPersonales.setForeground(Color.BLACK);
-		Font f1 = new Font("Garamond", Font.BOLD, 15);
+		Font f1 = new Font("Arial", Font.BOLD, 15);
 		l_datosPersonales.setFont(f1);
 
 		JLabel l_titular = new JLabel("Titular");
@@ -507,7 +508,7 @@ public class PanelHipoteca extends JPanel {
 		JLabel l_dninie = new JLabel("Dni|nie");
 		dninie = new JTextField();
 		dninie.setForeground(Color.gray);
-		Font f = new Font("Italic", Font.ITALIC, 12);
+		Font f = new Font("Serif", Font.BOLD, 12);
 		dninie.setFont(f);
 		dninie.setMaximumSize(new Dimension(250, 20));
 

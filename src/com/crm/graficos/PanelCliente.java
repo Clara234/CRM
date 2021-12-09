@@ -2,6 +2,7 @@ package com.crm.graficos;
 
 import javax.print.attribute.standard.Media;
 
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -684,9 +685,9 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				dialogoinicial.setResizable(false);
 				dialogoinicial.setBackground(new Color(206, 238, 244));
 				dialogoinicial.setForeground(new Color(206, 237, 244));
-				dialogoinicial.setSize(250, 250);
-				dialogoinicial.setMinimumSize(new Dimension(250, 250));
-				dialogoinicial.setLocation(250, 250);
+				dialogoinicial.setSize(150, 150);
+				dialogoinicial.setMinimumSize(new Dimension(220, 220));
+				dialogoinicial.setLocation(220, 220);
 				dialogoinicial.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				mialias = new JTextField(16);
 				clave = new JPasswordField(16);
@@ -695,8 +696,8 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				combo.addItem(dameObjeto("1"));
 				combo.addItem(dameObjeto("2"));
 				combo.addItem(dameObjeto("3"));
-				JLabel l_copyrigth = new JLabel(" copyright by Clara");
-				Font f = new Font("Algerian", Font.BOLD, 12);
+				JLabel l_copyrigth = new JLabel("Copyright by Clara");
+				Font f = new Font("Arial", Font.BOLD, 12);
 				l_copyrigth.setFont(f);
 				botonAcceder = new JButton("Acceder");
 
@@ -715,7 +716,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 								editHabCosas(rs.getInt("grupo"));
 								dialogoinicial.dispose();
 							} else {
-								JOptionPane.showMessageDialog(null, "Ese usuario no existe, puto");
+								JOptionPane.showMessageDialog(null, "Ese usuario no existe");
 							}
 
 						} catch (Exception e1) {
@@ -728,10 +729,11 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 				botonAcceder.setForeground(Color.pink);
 
-				dialogoinicial.add(botonAcceder);
+				
 				dialogoinicial.add(mialias);
 				dialogoinicial.add(clave);
 				dialogoinicial.add(combo);
+				dialogoinicial.add(botonAcceder);
 				dialogoinicial.add(l_copyrigth);
 
 				JPanel panelentrada = new JPanel();
@@ -741,14 +743,14 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				panelentrada.add(mialias);
 				panelentrada.add(new JLabel("Introduzca su contraseña"));
 				panelentrada.add(clave);
-				panelentrada.add(new JLabel("    GRUPOS"));
+				panelentrada.add(new JLabel("GRUPOS"));
 				panelentrada.add(combo);
 				//panelentrada.add(new JLabel("  copyright by Clara"));
 
 				panelentrada.add(botonAcceder);
 				panelentrada.add(l_copyrigth);
 
-				panelentrada.setSize(250, 250);
+				panelentrada.setSize(220, 220);
 				panelentrada.setBackground(new Color(209, 222, 244));
 				panelentrada.setForeground(new Color(209, 222, 224));
 				dialogoinicial.add(panelentrada);
