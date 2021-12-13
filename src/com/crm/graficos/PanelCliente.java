@@ -2,7 +2,6 @@ package com.crm.graficos;
 
 import javax.print.attribute.standard.Media;
 
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -288,19 +287,25 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		botonVer = new JButton("   Ver");
 		botonVer.setForeground(Color.BLUE);
 		panelEsteControl.add(botonVer);
+		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonInsertar = new JButton("Insertar");
 		botonInsertar.setForeground(Color.BLUE);
 		panelEsteControl.add(botonInsertar);
+		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonBorrar = new JButton(" Borrar");
 		botonBorrar.setForeground(Color.BLUE);
 		panelEsteControl.add(botonBorrar);
+		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonActualizar = new JButton("Actualizar");
 		botonActualizar.setForeground(Color.BLUE);
 		panelEsteControl.add(botonActualizar);
+		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonMusica = new JButton("Musica");
 		botonMusica.setForeground(Color.BLUE);
 		panelEsteControl.add(botonMusica);
+		panelEsteControl.add(Box.createRigidArea(new Dimension(0,6)));
 		panelEsteControl.add(chb_root);
+		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 
 		botonVer.addActionListener(new gestorVer());
 		botonInsertar.addActionListener(new gestorInsertar());
@@ -353,14 +358,12 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			}
 
 		}
-		
-		/*public class GestorAdd implements ActionListener{
-			public void actionPerformed(ActionEvent e) {
-				Cliente cli = new Cliente();
-				cli.setId();
-			}
-		}
-		*/
+
+		/*
+		 * public class GestorAdd implements ActionListener{ public void
+		 * actionPerformed(ActionEvent e) { Cliente cli = new Cliente(); cli.setId(); }
+		 * }
+		 */
 
 	}
 
@@ -425,18 +428,18 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+
 			MisConexiones c2 = null;
 			String box2;
 			int resp = JOptionPane.showConfirmDialog(null, "Usted eliminará a este usuario" + "¿Esta seguro?", // <- EL
 					// MENSAJE
-                 "Alerta!"/* <- El título de la ventana */, JOptionPane.YES_NO_OPTION/* Las opciones (si o no) */,
-                 JOptionPane.WARNING_MESSAGE/* El tipo de ventana, en este caso WARNING */);
+					"Alerta!"/* <- El título de la ventana */, JOptionPane.YES_NO_OPTION/* Las opciones (si o no) */,
+					JOptionPane.WARNING_MESSAGE/* El tipo de ventana, en este caso WARNING */);
 			if (resp == JOptionPane.YES_OPTION) {
 				try {
 					c2 = new MisConexiones();
-				}catch(InstantiationException e1) {
-					
+				} catch (InstantiationException e1) {
+
 				} catch (IllegalAccessException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -445,20 +448,16 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 					e1.printStackTrace();
 				}
 				PreparedStatement ps = null;
-              
-		      try {
-				ps= c2.getPS(ConfigDir.getInstance().getProperty("query4"));
 
-			
-				
-				
+				try {
+					ps = c2.getPS(ConfigDir.getInstance().getProperty("query4"));
 
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		      try {
-		    		ps.setString(1, tf_dninie.getText());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					ps.setString(1, tf_dninie.getText());
 					ps.setString(2, tf_correoe.getText());
 					ps.setString(3, tf_ciudad.getText());
 					ps.setString(4, tf_ubicacion.getText());
@@ -468,18 +467,18 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 					ps.setBoolean(7, chb_cliente.isSelected());
 					ps.setBoolean(7, chb_adjunto.isSelected());
 					ps.setString(8, tf_notas.getText());
-		      }catch(SQLException e1) {
-		    	  e1.printStackTrace();
-		      }
-		      try {
-		    	  ps.executeUpdate();
-		      }catch(SQLException e1) {
-		    	  e1.printStackTrace();
-		      }
-		      refresh();
-		      
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				try {
+					ps.executeUpdate();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				refresh();
+
+			}
 		}
-	}
 	}
 
 	public class gestorMusica implements ActionListener {
@@ -729,7 +728,6 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 				botonAcceder.setForeground(Color.pink);
 
-				
 				dialogoinicial.add(mialias);
 				dialogoinicial.add(clave);
 				dialogoinicial.add(combo);
@@ -745,7 +743,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				panelentrada.add(clave);
 				panelentrada.add(new JLabel("GRUPOS"));
 				panelentrada.add(combo);
-				//panelentrada.add(new JLabel("  copyright by Clara"));
+				// panelentrada.add(new JLabel(" copyright by Clara"));
 
 				panelentrada.add(botonAcceder);
 				panelentrada.add(l_copyrigth);
@@ -851,10 +849,10 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	@Override
 	public void addCliente(Cliente cliente) throws SQLException {
 		// TODO Auto-generated method stub
-         /* PreparedStatement ps  = new MisConexiones().damePS("");
-          ps.setInt(1, cliente.getId());
-          //resto de datos
-          ps.execute();*/
+		/*
+		 * PreparedStatement ps = new MisConexiones().damePS(""); ps.setInt(1,
+		 * cliente.getId()); //resto de datos ps.execute();
+		 */
 	}
 
 	@Override

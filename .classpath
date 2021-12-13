@@ -7,5 +7,7 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="mysql-connector-java-8.0.14.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dam/Downloads/Guapa/flatlaf-1.6.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dam/Downloads/Guapa/flatlaf-intellij-themes-1.6.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -14,7 +14,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
-
 public class Lan {
 	// CRM DE SERVICIOS FINANCIEROS CON DIRECTORIO DE CLIENTES AL QUE LES DAS
 	// SERVICIOS
@@ -22,13 +21,13 @@ public class Lan {
 	public static void main(String[] args) {
 		setMarco();
 		// insertar lookandfeel para el estilo del crm
-		try {
+	/*	try {
 			JFrame.setDefaultLookAndFeelDecorated(true);
 			JDialog.setDefaultLookAndFeelDecorated(true);
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.metal");
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	public static void setMarco() {
