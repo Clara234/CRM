@@ -37,7 +37,7 @@ public class Lan {
 		marco.setLocation(0, 0);
 		// es abstracta, toolkit no puede crear new, no es instanciable
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image imagen = tk.getImage("candy_icon.png");
+		Image imagen = tk.getImage("icon.png");
 		marco.setIconImage(imagen);
 		marco.setMinimumSize(new Dimension(1000, 950));
 		// JOptionPane.showInputDialog("Bienvenido");

@@ -132,6 +132,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					creaBackupTablas();
+					//if((proceso!=null)&&((Calendar.DAY_OF_MONTH==7)||(Calendar.DAY_OF_MONTH%7==0)))
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -144,7 +145,6 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		JMenuItem salario = new JMenuItem("por salarios");
 		salario.setForeground(Color.ORANGE);
 		salario.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -159,9 +159,12 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+			      
 			}
+		
 
 		});
+		
 
 		busquedas.add(salario);
 		busquedas.add(jefes);
@@ -332,8 +335,15 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
 			try {
+				addCliente(cliente);
+				refresh();
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+         
+			/*try {
 				MisConexiones c = new MisConexiones();
 				PreparedStatement ps = c.getPS(ConfigDir.getInstance().getProperty("query2"));
 
@@ -355,11 +365,26 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				refresh();
 			} catch (Exception e1) {
 				e1.printStackTrace();
-			}
+			}*/
 
 		}
 
-		/*
+		/*public void addCliente(Cliente cli) throws SQLException, ClassNotFoundException
+		 * try{
+		 * PreparedStatement ps = new MisConexiones().dameConexion().prepareStatement(ConfigDir.getInstance().getProperty("query2")
+		 * ps.setString(1,cli.getDninie());
+		 * ps.setString(2,cli.getCorreoe());
+		 * ps.setString(3, cli.getCiudad());
+		 * ps.setString(4, cli.getUbicacion());
+		 * ps.setTimestamp(5,new java.sql.Timestamp(new java.util.Date().getTime()));
+		 * ps.setInt(6, cli.getTelefono());
+		 * ps.setBoolean(7, cli.isAutorizado));
+		 * ps.setBoolean(8,cli.isACliente));
+		 * ps.setBoolean(9, cli.isAdjunto));
+		 * ps.setString(10, cli.getNotas());
+		 * 
+		 * 
+		 * }
 		 * public class GestorAdd implements ActionListener{ public void
 		 * actionPerformed(ActionEvent e) { Cliente cli = new Cliente(); cli.setId(); }
 		 * }
@@ -847,12 +872,28 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	}
 
 	@Override
-	public void addCliente(Cliente cliente) throws SQLException {
-		// TODO Auto-generated method stub
-		/*
-		 * PreparedStatement ps = new MisConexiones().damePS(""); ps.setInt(1,
-		 * cliente.getId()); //resto de datos ps.execute();
-		 */
+	public void addCliente(Cliente cli) throws SQLException, ClassNotFoundException{
+		try {
+		PreparedStatement ps = new MisConexiones().getConexion().prepareStatement(ConfigDir.getInstance().getProperty("query2"));
+		 ps.setString(1,cli.getDni_nie());
+		 ps.setString(2,cli.getCorreoe());
+		 ps.setString(3, cli.getCiudad());
+		 ps.setString(4, cli.getUbicacion());
+		// ps.setTimestamp(5, new java.sql.Timestamp(new java.util.Date().getTime()));
+		 ps.setTimestamp(5,  new java.sql.Timestamp(new java.util.Date().getTime()));
+		 ps.setInt(6, cli.getTelefono());
+		 ps.setBoolean(7, cli.isAutorizado());
+		 ps.setBoolean(8,cli.isCliente());
+		 ps.setBoolean(9, cli.isAdjunto());
+		 ps.setString(10, cli.getNotas());
+		
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

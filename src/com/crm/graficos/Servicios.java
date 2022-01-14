@@ -10,7 +10,7 @@ import com.crm.pojos.Cliente;
 public interface Servicios {
 	  
 
-	    public void addCliente(Cliente cliente)throws SQLException;//Post 
+	    public void addCliente(Cliente cliente)throws SQLException, ClassNotFoundException;//Post 
 		public List<Cliente> getAllClientes()throws SQLException;//GetAll
 	    public Cliente getbyDni_nie(String dni_nie)throws SQLException;//get uno
 	    public Cliente updateCliente(Cliente cliente)throws SQLException;//PUT(actualizado)

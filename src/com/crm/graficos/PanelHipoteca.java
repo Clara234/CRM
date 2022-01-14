@@ -1,14 +1,22 @@
 package com.crm.graficos;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.print.Printable;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import javax.print.PrintException;
 import javax.swing.BorderFactory;
@@ -17,6 +25,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,17 +35,23 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+
+import com.crm.persistencia.ConfigDir;
+import com.crm.persistencia.MisConexiones;
+import com.crm.pojos.HipotecaDatos;
+
 public class PanelHipoteca extends JPanel {
 	DefaultTableModel dtm;
+	HipotecaDatos h;
 	JTable tabla;
 	JTextField finalidad, valorAdquisicion, valorImporte, plazo, direccion, cargas, vinculacion, busquedacliente,
-		 dninie, apellido1, apellido2, nombre, fechaNacimiento, profesion, domicilio, poblacion,
-			codigoPostal, nombreEmpresa, actividad, antiguedad, puesto, direccionEmpresa, contactoEmpresa,
-			ingresosFijos, ingresosVariables, gastosAlquiler, gastosHipoteca, otros, valor, cargasVivienda;
+			dninie, apellido1, apellido2, nombre, fechaNacimiento, profesion, domicilio, poblacion, codigoPostal,
+			nombreEmpresa, actividad, antiguedad, puesto, direccionEmpresa, contactoEmpresa, ingresosFijos,
+			ingresosVariables, gastosAlquiler, gastosHipoteca, otros, valor, cargasVivienda;
 	JButton imprimir, insertar, limpiar;
 	JCheckBox chb_editar, chb_propiedad, chb_escritura, chb_contratoPrivado, chb_otrosGastos, chb_padres, chb_alquiler,
-			chb_fijo, chb_temporal, chb_autonomo, chb_otros;
-	JTextArea otrosBienes;
+			chb_fijo, chb_temporal, chb_autonomo, chb_otrosCosas;
+	JTextArea otrosBienes, comentarios;
 	public JComboBox tipo, nueva, estadoCivil, regimenBienes;
 
 	public PanelHipoteca(int alto, int ancho) {
@@ -52,7 +67,7 @@ public class PanelHipoteca extends JPanel {
 
 		JPanel panelNorte = new JPanel();
 		panelNorte.setLayout(new BorderLayout());
-		panelNorte.setPreferredSize(new Dimension((int) (ancho * 0.4), (int) (alto * 0.2))); // no cambiarr porfavor
+		panelNorte.setPreferredSize(new Dimension((int) (ancho * 0.2), (int) (alto * 0.2))); // no cambiarr porfavor
 		panelNorte.add(jp1, BorderLayout.NORTH);
 		panelNorte.add(jp2, BorderLayout.CENTER);
 		panelNorte.add(jp3, BorderLayout.SOUTH);
@@ -98,7 +113,7 @@ public class PanelHipoteca extends JPanel {
 
 		panelPrimero.add(l_finalidad);
 		panelPrimero.add(finalidad);
-		panelPrimero.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelPrimero.add(Box.createRigidArea(new Dimension(0, 1)));
 		panelPrimero.add(l_creditoSolicitado);
 		panelPrimero.add(l_valorAdquisicion);
 		panelPrimero.add(valorAdquisicion);
@@ -136,13 +151,13 @@ public class PanelHipoteca extends JPanel {
 		tipo.addItem("Con cargas");
 		tipo.setForeground(Color.BLACK);
 		tipo.setFont(f);
-		tipo.setMaximumSize(new Dimension(250, 20));
+		tipo.setMaximumSize(new Dimension(70, 20));
 
 		JLabel l_cargas = new JLabel("Cargas:  ");
 		cargas = new JTextField();
 		cargas.setForeground(Color.BLACK);
 		cargas.setFont(f);
-		cargas.setMaximumSize(new Dimension(250, 20));
+		cargas.setMaximumSize(new Dimension(70, 20));
 
 		JLabel l_nueva = new JLabel("Nueva:  ");
 		nueva = new JComboBox();
@@ -150,20 +165,19 @@ public class PanelHipoteca extends JPanel {
 		nueva.addItem("No");
 		nueva.setForeground(Color.BLACK);
 		nueva.setFont(f);
-		nueva.setMaximumSize(new Dimension(250, 20));
+		nueva.setMaximumSize(new Dimension(40, 20));
 
 		JLabel l_estadoCivil = new JLabel("Estado Civil:  ");
 		estadoCivil = new JComboBox();
 		estadoCivil.addItem("Solter@");
 		estadoCivil.addItem("Casad@");
 		estadoCivil.addItem("Divorciad@");
-		estadoCivil.addItem("Separacion en proceso");
 		estadoCivil.addItem("Viud@");
 		estadoCivil.addItem("Concubinato");
 
 		estadoCivil.setForeground(Color.BLACK);
 		estadoCivil.setFont(f);
-		estadoCivil.setMaximumSize(new Dimension(250, 20));
+		estadoCivil.setMaximumSize(new Dimension(65, 20));
 
 		JLabel l_regimenBienes = new JLabel("Regimen de bienes:  ");
 		regimenBienes = new JComboBox();
@@ -172,7 +186,7 @@ public class PanelHipoteca extends JPanel {
 		regimenBienes.addItem("Participacion");
 		regimenBienes.setForeground(Color.BLACK);
 		regimenBienes.setFont(f);
-		regimenBienes.setMaximumSize(new Dimension(250, 20));
+		regimenBienes.setMaximumSize(new Dimension(100, 20));
 
 		panelNorteDatos2.add(l_direccionVivienda);
 		panelNorteDatos2.add(direccion);
@@ -220,10 +234,8 @@ public class PanelHipoteca extends JPanel {
 
 		panelNorteDatos3.add(l_vinculacion);
 		panelNorteDatos3.add(vinculacion);
-		panelNorteDatos3.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelNorteDatos3.add(l_busquedacliente);
 		panelNorteDatos3.add(busquedacliente);
-		panelNorteDatos3.add(Box.createRigidArea(new Dimension(0, 10)));
 
 		return panelNorteDatos3;
 
@@ -232,7 +244,7 @@ public class PanelHipoteca extends JPanel {
 	public JPanel setPanelEste(int alto, int ancho, JPanel jp1, JPanel jp2) {
 		JPanel panelEste = new JPanel();
 		panelEste.setLayout(new BorderLayout());
-		panelEste.setPreferredSize(new Dimension((int) (ancho * 0.2), (int) (alto * 1.2)));
+		panelEste.setPreferredSize(new Dimension((int) (ancho * 0.5), (int) (alto * 1.0)));
 		panelEste.add(jp1, BorderLayout.CENTER);
 		panelEste.add(jp2, BorderLayout.WEST);
 		return panelEste;
@@ -245,6 +257,7 @@ public class PanelHipoteca extends JPanel {
 		JPanel panelEsteDatos2 = new JPanel();
 		panelEsteDatos2.setBorder(BorderFactory.createLoweredBevelBorder()); // borde
 		// para diferenciar paneles
+		panelEsteDatos2.setPreferredSize(new Dimension((int) (ancho * 0.9), (int) (alto * 1.2)));
 
 		panelEsteDatos2.setLayout(new BoxLayout(panelEsteDatos2, BoxLayout.Y_AXIS));
 		JLabel l_datoseconomicos = new JLabel("Datos Economicos:");
@@ -338,15 +351,22 @@ public class PanelHipoteca extends JPanel {
 		panelEsteDatos2.add(cargasVivienda);
 		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelEsteDatos2.add(chb_propiedad);
+		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
 		panelEsteDatos2.add(chb_escritura);
+		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0,2)));
 		panelEsteDatos2.add(chb_contratoPrivado);
+		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
 		panelEsteDatos2.add(chb_otrosGastos);
+		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
 		panelEsteDatos2.add(chb_padres);
+		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
 		panelEsteDatos2.add(chb_alquiler);
+		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
 		panelEsteDatos2.add(l_otrosBienes);
 		panelEsteDatos2.add(otrosBienes);
+		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 1)));
 
-		panelEsteDatos2.setPreferredSize(new Dimension((int) (ancho * 1.2), (int) (alto * 0.5)));
+		
 
 		return panelEsteDatos2;
 
@@ -357,6 +377,7 @@ public class PanelHipoteca extends JPanel {
 		JPanel panelControl = new JPanel();
 		panelControl.setLayout(new BoxLayout(panelControl, BoxLayout.Y_AXIS));
 		panelControl.setBorder(BorderFactory.createLoweredBevelBorder());
+		panelControl.setPreferredSize(new Dimension((int) (ancho * 0.8), (int) (alto * 1.2)));
 
 		JLabel l_datosProfesionales = new JLabel("Datos Profesionales");
 		l_datosProfesionales.setForeground(Color.BLACK);
@@ -394,29 +415,52 @@ public class PanelHipoteca extends JPanel {
 		direccionEmpresa.setFont(f);
 		direccionEmpresa.setMaximumSize(new Dimension(250, 20));
 
-		JLabel l_contactoEmpresa = new JLabel("Telefono/fax/correo-e de la empresa:  ");
+		JLabel l_contactoEmpresa = new JLabel("Correo-e de la empresa:  ");
 		contactoEmpresa = new JTextField();
 		contactoEmpresa.setForeground(Color.gray);
 		contactoEmpresa.setFont(f);
 		contactoEmpresa.setMaximumSize(new Dimension(250, 20));
+
 		JTable b = new JTable();
+		b.setMaximumSize(new Dimension(400, 200));
+		b.setLayout(new BoxLayout(b, BoxLayout.Y_AXIS));
+		b.setBorder(BorderFactory.createLoweredBevelBorder());
+		JTextField control = new JTextField("Panel Control");
+		Font f2 = new Font("Arial", Font.BOLD, 20);
+		control.setFont(f2);
+		control.setMaximumSize(new Dimension(300, 20));
 		imprimir = new JButton("IMPRIMIR PETICION");
 		imprimir.setForeground(Color.BLUE);
-		b.add(imprimir);
 		insertar = new JButton("INSERTAR EN BBDD");
 		insertar.setForeground(Color.BLUE);
-		b.add(insertar);
 		limpiar = new JButton("LIMPIAR");
 		limpiar.setForeground(Color.BLUE);
-		b.add(limpiar);
 		chb_editar = new JCheckBox("Editar Campos");
 		chb_editar.setForeground(Color.BLACK);
-		b.add(chb_editar);
-		imprimir.addActionListener(new gestorImprimir());
-		insertar.addActionListener(new gestorInsertar());
-		limpiar.addActionListener(new gestorLimpiar());
 
+		b.add(control);
+		b.add(insertar);
+		b.add(Box.createRigidArea(new Dimension(0, 10)));
+		b.add(imprimir);
+		b.add(limpiar);
+		b.add(Box.createRigidArea(new Dimension(0, 10)));
+		b.add(Box.createRigidArea(new Dimension(0, 10)));
+		b.add(chb_editar);
+		
+
+		imprimir.addActionListener(new gestorImprimir());
+		//insertar.addActionListener(new gestorInsertar());
+		//limpiar.addActionListener(new gestorLimpiar());
 		b.setVisible(true);
+
+	
+		JLabel l_comentarios = new JLabel("Comentarios: ");
+		comentarios = new JTextArea();
+		comentarios.setForeground(Color.gray);
+		Font f7 = new Font("Italic", Font.ITALIC, 12);
+		comentarios.setFont(f7);
+		comentarios.setMaximumSize(new Dimension(250,20));
+                                                                                                                                           
 
 		panelControl.add(l_datosProfesionales);
 		panelControl.add(l_nombreEmpresa);
@@ -436,19 +480,13 @@ public class PanelHipoteca extends JPanel {
 		panelControl.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelControl.add(l_contactoEmpresa);
 		panelControl.add(contactoEmpresa);
-		panelControl.add(Box.createRigidArea(new Dimension(0, 6)));
-		panelControl.add(imprimir);
-		panelControl.add(Box.createRigidArea(new Dimension(0, 6)));
-		panelControl.add(insertar);
-		panelControl.add(Box.createRigidArea(new Dimension(0, 6)));
-		panelControl.add(limpiar);
-		panelControl.add(Box.createRigidArea(new Dimension(0, 6)));
-		panelControl.add(chb_editar);
 		panelControl.add(Box.createRigidArea(new Dimension(0, 10)));
-
-		panelControl.add(Box.createRigidArea(new Dimension(0, 1)));
 		panelControl.add(b);
-		panelControl.setPreferredSize(new Dimension((int) (alto * 0.5), (int) (ancho * 0.5)));
+		panelControl.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelControl.add(l_comentarios);
+		panelControl.add(comentarios);
+		panelControl.add(Box.createRigidArea(new Dimension(0, 1)));
+
 		panelControl.setVisible(true);
 		return panelControl;
 
@@ -458,30 +496,43 @@ public class PanelHipoteca extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+			/*PrinterJob pj = PrinterJob.getPrinterJob();
+			pj.setPrintable(new Printable() {
+				public int print(Graphics pg, PageFormat pf, int pageNum){
+					   if (pageNum > 0){
+					   return Printable.NO_SUCH_PAGE;
+					   } 
+					   Graphics2D g2 = (Graphics2D) pg;
+					   g2.translate(pf.getImageableX(), pf.getImageableY());
+					  
+					//component_name.paint(g2);
+					   return Printable.PAGE_EXISTS;
+					return pageNum;                                                                                                                                                     
+				}
+			});
+			
+			if (pj.printDialog() == false) 
+				return;
+			
 			try {
-			PrinterJob pj =  PrinterJob.getPrinterJob();
-         pj.setPrintable(null);
-			boolean top = pj.printDialog();
-			if(top) {
 				pj.print();
-			}
-
-		}catch(PrinterException pex) {
-			JOptionPane.showMessageDialog(null,"Eerrr de mesaej","error/a" +pex, JOptionPane.INFORMATION_MESSAGE);
-		}
-
-	
-		
+			}catch (PrinterException pex) {
+			JOptionPane.showMessageDialog(null, "Error de mensaje", "error/a" + pex,
+					JOptionPane.INFORMATION_MESSAGE);
+}*/
 	}
 	}
 
 	public class gestorInsertar implements ActionListener {
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+		public void actionPerformed(ActionEvent e)  {
+			insertarBBDD();
 
 		}
+
+		
 	}
 
 	public class gestorLimpiar implements ActionListener {
@@ -531,16 +582,15 @@ public class PanelHipoteca extends JPanel {
 			chb_fijo.setSelected(false);
 			chb_temporal.setSelected(false);
 			chb_autonomo.setSelected(false);
-			chb_otros.setSelected(false);
+			chb_otrosCosas.setSelected(false);
 			// limpiar el jcombobox
 			tipo.setSelectedIndex(0);
 			nueva.setSelectedIndex(0);
 			estadoCivil.setSelectedIndex(0);
 			regimenBienes.setSelectedIndex(0);
-		
 
 			// limpiar el jtextAREA
-	
+
 			clearotrosBienes();
 		}
 
@@ -549,6 +599,8 @@ public class PanelHipoteca extends JPanel {
 	public void clearfinalidad() {
 		finalidad.setText("");
 	}
+
+	
 
 	public void clearvalorAdquisicion() {
 		valorAdquisicion.setText("");
@@ -577,7 +629,6 @@ public class PanelHipoteca extends JPanel {
 	public void clearbusquedacliente() {
 		busquedacliente.setText("");
 	}
-
 
 	public void cleardninie() {
 		dninie.setText("");
@@ -667,7 +718,6 @@ public class PanelHipoteca extends JPanel {
 		cargasVivienda.setText("");
 	}
 
-
 	public void clearotrosBienes() {
 		otrosBienes.setText("");
 	}
@@ -675,7 +725,7 @@ public class PanelHipoteca extends JPanel {
 	public JPanel setPanelOeste(int alto, int ancho, JPanel j1) {
 		JPanel panelOeste = new JPanel();
 		panelOeste.setLayout(new BorderLayout());
-		panelOeste.setPreferredSize(new Dimension((int) (ancho * 0.30), (int) (alto * 0.9)));
+		panelOeste.setPreferredSize(new Dimension((int) (ancho * 0.7), (int) (alto * 1.2)));
 		panelOeste.add(j1, BorderLayout.WEST);
 		return panelOeste;
 
@@ -687,7 +737,7 @@ public class PanelHipoteca extends JPanel {
 		panelOesteDatos.setLayout(new BoxLayout(panelOesteDatos, BoxLayout.Y_AXIS));
 		panelOesteDatos.setSize(250, 250);
 		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 1)));
-		panelOesteDatos.setPreferredSize(new Dimension((int) (ancho * 0.5), (int) (alto * 0.3)));
+		panelOesteDatos.setPreferredSize(new Dimension((int) (ancho * 1.5), (int) (alto * 0.8)));
 		panelOesteDatos.setBorder(BorderFactory.createLoweredBevelBorder());
 		JLabel l_datosPersonales = new JLabel("Datos Personales");
 		l_datosPersonales.setForeground(Color.BLACK);
@@ -736,8 +786,8 @@ public class PanelHipoteca extends JPanel {
 		chb_temporal.setForeground(Color.BLACK);
 		chb_autonomo = new JCheckBox("Autonomo");
 		chb_autonomo.setForeground(Color.BLACK);
-		chb_otros = new JCheckBox("Otros");
-		chb_otros.setForeground(Color.BLACK);
+		chb_otrosCosas = new JCheckBox("Otros");
+		chb_otrosCosas.setForeground(Color.BLACK);
 
 		JLabel l_profesion = new JLabel("Profesion: ");
 		profesion = new JTextField();
@@ -787,7 +837,7 @@ public class PanelHipoteca extends JPanel {
 		panelOesteDatos.add(chb_fijo);
 		panelOesteDatos.add(chb_temporal);
 		panelOesteDatos.add(chb_autonomo);
-		panelOesteDatos.add(chb_otros);
+		panelOesteDatos.add(chb_otrosCosas);
 		panelOesteDatos.add(l_profesion);
 		panelOesteDatos.add(profesion);
 		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -804,5 +854,53 @@ public class PanelHipoteca extends JPanel {
 		return panelOesteDatos;
 
 	}
+	
+	public void insertarBBDD() {
+		MisConexiones c = null;
+		String b;
+	
+		int resp = JOptionPane.showConfirmDialog(null, "Usted insertara", "¿Esdta seguro?", JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE);
+
+		if (resp == JOptionPane.YES_OPTION) {
+			try {
+				
+				c = new MisConexiones();
+				
+			}catch(InstantiationException e1) {
+				
+			} catch (IllegalAccessException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			PreparedStatement ps = null;
+			
+			try {
+				ps = c.getPS(ConfigDir.getInstance().getProperty("query5"));
+			}catch(SQLException e1) {
+				e1.printStackTrace();
+			}
+			try {
+			
+				ps.setString(1, h.getFinalidad());
+	            ps.setString(2, h.getValorAdquisicion());
+			}catch(SQLException e1) {
+				e1.printStackTrace();
+			}
+
+			
+			
+			
+          
+		}
+		if(resp == JOptionPane.NO_OPTION) {
+			b ="0";
+		}
+	}
 
 }
+
+
