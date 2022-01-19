@@ -2,7 +2,9 @@ package com.crm.graficos;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -15,8 +17,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import javax.print.PrintException;
 import javax.swing.BorderFactory;
@@ -35,15 +45,21 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import com.crm.persistencia.ConfigDir;
 import com.crm.persistencia.MisConexiones;
-import com.crm.pojos.HipotecaDatos;
+
 
 public class PanelHipoteca extends JPanel {
 	DefaultTableModel dtm;
-	HipotecaDatos h;
 	JTable tabla;
+	MisConexiones c;
+	PreparedStatement ps;
+
 	JTextField finalidad, valorAdquisicion, valorImporte, plazo, direccion, cargas, vinculacion, busquedacliente,
 			dninie, apellido1, apellido2, nombre, fechaNacimiento, profesion, domicilio, poblacion, codigoPostal,
 			nombreEmpresa, actividad, antiguedad, puesto, direccionEmpresa, contactoEmpresa, ingresosFijos,
@@ -353,7 +369,7 @@ public class PanelHipoteca extends JPanel {
 		panelEsteDatos2.add(chb_propiedad);
 		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
 		panelEsteDatos2.add(chb_escritura);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0,2)));
+		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
 		panelEsteDatos2.add(chb_contratoPrivado);
 		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
 		panelEsteDatos2.add(chb_otrosGastos);
@@ -365,8 +381,6 @@ public class PanelHipoteca extends JPanel {
 		panelEsteDatos2.add(l_otrosBienes);
 		panelEsteDatos2.add(otrosBienes);
 		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 1)));
-
-		
 
 		return panelEsteDatos2;
 
@@ -442,25 +456,23 @@ public class PanelHipoteca extends JPanel {
 		b.add(insertar);
 		b.add(Box.createRigidArea(new Dimension(0, 10)));
 		b.add(imprimir);
-		b.add(limpiar);
 		b.add(Box.createRigidArea(new Dimension(0, 10)));
+		b.add(limpiar);
+
 		b.add(Box.createRigidArea(new Dimension(0, 10)));
 		b.add(chb_editar);
-		
 
 		imprimir.addActionListener(new gestorImprimir());
-		//insertar.addActionListener(new gestorInsertar());
-		//limpiar.addActionListener(new gestorLimpiar());
+		insertar.addActionListener(new gestorInsertar());
+		limpiar.addActionListener(new gestorLimpiar());
 		b.setVisible(true);
 
-	
 		JLabel l_comentarios = new JLabel("Comentarios: ");
 		comentarios = new JTextArea();
 		comentarios.setForeground(Color.gray);
 		Font f7 = new Font("Italic", Font.ITALIC, 12);
 		comentarios.setFont(f7);
-		comentarios.setMaximumSize(new Dimension(250,20));
-                                                                                                                                           
+		comentarios.setMaximumSize(new Dimension(250, 20));
 
 		panelControl.add(l_datosProfesionales);
 		panelControl.add(l_nombreEmpresa);
@@ -496,8 +508,92 @@ public class PanelHipoteca extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			String b;
+			/*
+			 * File fileToPrint = new File("C:\\Users\\dam\\Desktop\\hipoteca.dotm"); try {
+			 * Desktop.getDesktop().print(fileToPrint); } catch (IOException e1) { // TODO
+			 * Auto-generated catch block e1.printStackTrace(); }
+			 */
+			 /*PrinterJob pj = PrinterJob.getPrinterJob();       
+                pj.setPrintable(this);
+                /* locate a print service that can handle the request */
+                /*PrintService[] services =
+                        PrinterJob.lookupPrintServices();
+
+                if (services.length &gt; 0) {
+                        System.out.println("selected printer " + services[0].getName());
+                        try {
+                                pj.setPrintService(services[0]);
+                                pj.pageDialog(aset);
+                                if(pj.printDialog(aset)) {
+                                        pj.print(aset);
+                                }
+                        } catch (PrinterException pe) { 
+                                System.err.println(pe);
+                        }
+			   */
+		/*int resp = JOptionPane.showConfirmDialog(null, "Se generara informe de los datos aplicados"+ "¿Esta seguro?",
+					"Alerta!", JOptionPane.YES_NO_OPTION,
+					JOptionPane.WARNING_MESSAGE);
+		
+			if(resp == JOptionPane.YES_OPTION) {
+				Document documento  = new Document();
 			
-			/*PrinterJob pj = PrinterJob.getPrinterJob();
+				
+					String ruta = System.getProperty("Users.dam");
+					try {
+						PdfWriter.getInstance(documento, new FileOutputStream(ruta + "C:\\Users\\dam\\Desktop\\hola.pdf"));
+					} catch (FileNotFoundException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					} catch (DocumentException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					documento.open();
+					
+				   PdfPTable tabla = new PdfPTable(2);
+				   tabla.addCell("Finalidad");
+				   tabla.addCell("Valor de Adquisicion");
+				 
+				   
+				   try {
+					  c = new MisConexiones();
+					   
+					   Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/ejercicioregiones?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC","root","root");
+					   PreparedStatement ps = c.prepareStatement("select * from hipoteca");
+					   
+					   ResultSet rs = ps.executeQuery();
+					   if(rs.next()) {
+						   do {
+							   tabla.addCell(rs.getString(1));
+							   tabla.addCell(rs.getString(2));
+							   
+						   }while(rs.next());
+						   documento.add(tabla);
+						   
+					   }
+					   
+				   }catch(DocumentException |SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
+					  
+				   }
+				   documento.close();
+				   JOptionPane.showMessageDialog(null, "Reporte creado :)");
+					
+				
+
+			
+			}
+			
+			if(resp == JOptionPane.NO_OPTION) {
+				b="0";
+			}*/
+			int resp = JOptionPane.showConfirmDialog(null, "Se generara informe de los datos aplicados"+ "¿Esta seguro?",
+					"Alerta!", JOptionPane.YES_NO_OPTION,
+					JOptionPane.WARNING_MESSAGE);
+			if(resp == JOptionPane.YES_OPTION) {
+			
+			PrinterJob pj = PrinterJob.getPrinterJob();
 			pj.setPrintable(new Printable() {
 				public int print(Graphics pg, PageFormat pf, int pageNum){
 					   if (pageNum > 0){
@@ -507,10 +603,10 @@ public class PanelHipoteca extends JPanel {
 					   g2.translate(pf.getImageableX(), pf.getImageableY());
 					  
 					//component_name.paint(g2);
-					   return Printable.PAGE_EXISTS;
-					return pageNum;                                                                                                                                                     
+					   return Printable.PAGE_EXISTS;                                                                                                                                                     
 				}
 			});
+			
 			
 			if (pj.printDialog() == false) 
 				return;
@@ -520,19 +616,24 @@ public class PanelHipoteca extends JPanel {
 			}catch (PrinterException pex) {
 			JOptionPane.showMessageDialog(null, "Error de mensaje", "error/a" + pex,
 					JOptionPane.INFORMATION_MESSAGE);
-}*/
-	}
+}
+			}
+			if(resp == JOptionPane.NO_OPTION) {
+				JOptionPane.showConfirmDialog(null, "Vaya, no se ha podido imprimir" + "",
+						"Sorry", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+		}
 	}
 
 	public class gestorInsertar implements ActionListener {
 
 		@Override
-		public void actionPerformed(ActionEvent e)  {
-			insertarBBDD();
+		public void actionPerformed(ActionEvent e) {
 
+			insertarBBDD();
 		}
 
-		
 	}
 
 	public class gestorLimpiar implements ActionListener {
@@ -599,8 +700,6 @@ public class PanelHipoteca extends JPanel {
 	public void clearfinalidad() {
 		finalidad.setText("");
 	}
-
-	
 
 	public void clearvalorAdquisicion() {
 		valorAdquisicion.setText("");
@@ -854,21 +953,19 @@ public class PanelHipoteca extends JPanel {
 		return panelOesteDatos;
 
 	}
-	
+
 	public void insertarBBDD() {
-		MisConexiones c = null;
-		String b;
-	
-		int resp = JOptionPane.showConfirmDialog(null, "Usted insertara", "¿Esdta seguro?", JOptionPane.YES_NO_OPTION,
-				JOptionPane.WARNING_MESSAGE);
+
+		int resp = JOptionPane.showConfirmDialog(null, "Usted insertara estos datos en la bbdd", "¿Esta seguro?",
+				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
 		if (resp == JOptionPane.YES_OPTION) {
 			try {
-				
+
 				c = new MisConexiones();
-				
-			}catch(InstantiationException e1) {
-				
+
+			} catch (InstantiationException e1) {
+
 			} catch (IllegalAccessException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -876,31 +973,79 @@ public class PanelHipoteca extends JPanel {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			PreparedStatement ps = null;
-			
+
 			try {
 				ps = c.getPS(ConfigDir.getInstance().getProperty("query5"));
-			}catch(SQLException e1) {
+				
+			    ps.setString(1, finalidad.getText());
+				ps.setInt(2, Integer.valueOf(valorAdquisicion.getText()));
+				ps.setInt(3, Integer.valueOf(valorImporte.getText()));
+				ps.setInt(4, Integer.valueOf(plazo.getText()));
+				ps.setString(5, direccion.getText());
+				ps.setInt(6, Integer.valueOf(cargas.getText()));
+				ps.setString(7, vinculacion.getText());
+				ps.setString(8, dninie.getText());
+				ps.setString(9, apellido1.getText());
+				ps.setString(10, apellido2.getText());
+				ps.setString(11, nombre.getText());
+				ps.setTimestamp(12, Timestamp.valueOf(fechaNacimiento.getText()));
+				ps.setBoolean(13, chb_fijo.isSelected());
+				ps.setBoolean(14, chb_temporal.isSelected());
+				ps.setBoolean(15, chb_autonomo.isSelected());
+				ps.setBoolean(16, chb_otrosCosas.isSelected());
+				ps.setString(17, profesion.getText());
+				ps.setString(18, domicilio.getText());
+				ps.setString(19, poblacion.getText());
+				ps.setString(20, codigoPostal.getText());
+				ps.setString(21, nombreEmpresa.getText());
+				ps.setString(22, actividad.getText());
+				ps.setString(23, antiguedad.getText());
+				ps.setInt(24, Integer.valueOf(puesto.getText()));
+				ps.setString(25, direccionEmpresa.getText());
+				ps.setString(26, contactoEmpresa.getText());
+				ps.setBoolean(27, chb_editar.isSelected());
+				ps.setString(28, comentarios.getText());
+				ps.setInt(29, Integer.valueOf(ingresosFijos.getText()));
+				ps.setInt(30, Integer.valueOf(ingresosVariables.getText()));
+				ps.setInt(31, Integer.valueOf(gastosAlquiler.getText()));
+				ps.setInt(32, Integer.valueOf(gastosHipoteca.getText()));
+				ps.setString(33, otros.getText());
+				ps.setInt(34, Integer.valueOf(valor.getText()));
+				ps.setInt(35, Integer.valueOf(cargasVivienda.getText()));
+				ps.setBoolean(36, chb_propiedad.isSelected());
+				ps.setBoolean(37, chb_escritura.isSelected());
+				ps.setBoolean(38, chb_contratoPrivado.isSelected());
+				ps.setBoolean(39, chb_otrosGastos.isSelected());
+				ps.setBoolean(40, chb_padres.isSelected());
+				ps.setBoolean(41, chb_alquiler.isSelected());
+				ps.setString(42, otrosBienes.getText());
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			
+				
+			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			try {
 			
-				ps.setString(1, h.getFinalidad());
-	            ps.setString(2, h.getValorAdquisicion());
-			}catch(SQLException e1) {
+			try {
+				ps.executeUpdate();
+			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 
-			
-			
-			
-          
 		}
-		if(resp == JOptionPane.NO_OPTION) {
-			b ="0";
+		if (resp == JOptionPane.NO_OPTION) {
+			String box = "0";
 		}
+
 	}
 
 }
-
-

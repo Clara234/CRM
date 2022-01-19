@@ -316,7 +316,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		botonActualizar.addActionListener(new gestorActualizar());
 		botonMusica.addActionListener(new gestorMusica());
 
-		// panelEsteControl.add(chb_root);
+	
 		// devolvemos el panel de control
 		return panelEsteControl;
 	}
@@ -456,7 +456,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 			MisConexiones c2 = null;
 			String box2;
-			int resp = JOptionPane.showConfirmDialog(null, "Usted eliminará a este usuario" + "¿Esta seguro?", // <- EL
+			int resp = JOptionPane.showConfirmDialog(null, "" + "¿Esta seguro?", // <- EL
 					// MENSAJE
 					"Alerta!"/* <- El título de la ventana */, JOptionPane.YES_NO_OPTION/* Las opciones (si o no) */,
 					JOptionPane.WARNING_MESSAGE/* El tipo de ventana, en este caso WARNING */);
@@ -803,7 +803,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		case 1:
 			editHabCosas(0);
 			refresh();
-			int n = JOptionPane.showConfirmDialog(new JDialog(), "Dese dar de alta alguno?", "Usuarios",
+			int n = JOptionPane.showConfirmDialog(new JDialog(), "Desee dar de alta alguno?", "Usuarios",
 					JOptionPane.YES_NO_OPTION);
 			if (n == JOptionPane.YES_OPTION) {
 				// veamos = new MiPractica();
@@ -835,13 +835,13 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			System.out.println("Avanzado");
 			botonVer.setEnabled(true);
 			botonInsertar.setEnabled(true);
-			tf_dninie.setEditable(false);
+			/*tf_dninie.setEditable(false);
 			tf_correoe.setEditable(false);
 			tf_ciudad.setEditable(false);
 			tf_ubicacion.setEditable(false);
 			tf_telefono.setEditable(false);
 			tf_fecha_alta.setEditable(false);
-			tf_notas.setEditable(false);
+			tf_notas.setEditable(false);*/
 
 			break;
 		case 3:

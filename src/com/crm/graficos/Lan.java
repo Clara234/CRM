@@ -21,13 +21,16 @@ public class Lan {
 	public static void main(String[] args) {
 		setMarco();
 		// insertar lookandfeel para el estilo del crm
-	/*	try {
+
+		
+		try {
 			JFrame.setDefaultLookAndFeelDecorated(true);
 			JDialog.setDefaultLookAndFeelDecorated(true);
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.metal");
-		} catch (Exception e) {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+			
+		}catch(Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 
 	public static void setMarco() {
@@ -35,14 +38,20 @@ public class Lan {
 		// top,left
 		// marco.setLocation(320,320);
 		marco.setLocation(0, 0);
+		
+		marco.getToolkit().getScreenSize();
+		marco.setForeground(Color.BLUE);
+		JOptionPane.showConfirmDialog(marco, "Bienvenido", null, JOptionPane.CLOSED_OPTION);
+		Toolkit.getDefaultToolkit().beep();
+		
+		
 		// es abstracta, toolkit no puede crear new, no es instanciable
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image imagen = tk.getImage("icon.png");
 		marco.setIconImage(imagen);
 		marco.setMinimumSize(new Dimension(1000, 950));
-		// JOptionPane.showInputDialog("Bienvenido");
-
-		// Toolkit.getDefaultToolkit().beep();
+		
+		
 		Toolkit.getDefaultToolkit().beep();
 		// almacenar las dimensiones de la pantalla del usuario
 		Dimension dim = tk.getScreenSize();
@@ -61,7 +70,7 @@ public class Lan {
 		// imprimir por consola la resolucion de la pantalla
 		System.out.println(dim.width + "px x " + dim.height + "px");
 		// especificamos al programa que finalice cuando el marco se cierre
-		marco.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		marco.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		marco.setMinimumSize(new Dimension(800, 700));
 
 		// Se pon visible al final
