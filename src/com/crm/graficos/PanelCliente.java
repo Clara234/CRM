@@ -6,6 +6,9 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
@@ -96,7 +99,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		JMenu menu = new JMenu("Accesos Rápidos");
 
 		JMenuItem miCalculadora = new JMenuItem("Calculadora");
-		miCalculadora.setForeground(Color.ORANGE);
+		miCalculadora.setForeground(Color.darkGray);
 		miCalculadora.addActionListener(new ActionListener() {
 
 			@Override
@@ -110,7 +113,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 		});
 		JMenuItem miNavegador = new JMenuItem("Navegador");
-		miNavegador.setForeground(Color.ORANGE);
+		miNavegador.setForeground(Color.darkGray);
 		miNavegador.addActionListener(new ActionListener() {
 
 			@Override
@@ -125,7 +128,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		});
 
 		JMenuItem copiaBase = new JMenuItem("Backup");
-		copiaBase.setForeground(Color.ORANGE);
+		copiaBase.setForeground(Color.darkGray);
 		copiaBase.addActionListener(new ActionListener() {
 
 			@Override
@@ -704,13 +707,13 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			if (chb_root.isSelected()) {
-
+                   
 				dialogoinicial = new JDialog(new JFrame(), true);
 				dialogoinicial.setResizable(false);
 				dialogoinicial.setBackground(new Color(206, 238, 244));
 				dialogoinicial.setForeground(new Color(206, 237, 244));
 				dialogoinicial.setSize(150, 150);
-				dialogoinicial.setMinimumSize(new Dimension(220, 220));
+				dialogoinicial.setMinimumSize(new Dimension(200, 300));
 				dialogoinicial.setLocation(220, 220);
 				dialogoinicial.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				mialias = new JTextField(16);
@@ -758,10 +761,9 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				dialogoinicial.add(combo);
 				dialogoinicial.add(botonAcceder);
 				dialogoinicial.add(l_copyrigth);
-
+                
 				JPanel panelentrada = new JPanel();
 				panelentrada.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 10));
-
 				panelentrada.add(new JLabel("Introduzca su  alias"));
 				panelentrada.add(mialias);
 				panelentrada.add(new JLabel("Introduzca su contraseña"));
@@ -769,11 +771,11 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				panelentrada.add(new JLabel("GRUPOS"));
 				panelentrada.add(combo);
 				// panelentrada.add(new JLabel(" copyright by Clara"));
-
+				panelentrada.add(new JLabel(""));
 				panelentrada.add(botonAcceder);
 				panelentrada.add(l_copyrigth);
 
-				panelentrada.setSize(220, 220);
+				panelentrada.setSize(230, 230);
 				panelentrada.setBackground(new Color(209, 222, 244));
 				panelentrada.setForeground(new Color(209, 222, 224));
 				dialogoinicial.add(panelentrada);
@@ -803,7 +805,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		case 1:
 			editHabCosas(0);
 			refresh();
-			int n = JOptionPane.showConfirmDialog(new JDialog(), "Desee dar de alta alguno?", "Usuarios",
+			int n = JOptionPane.showConfirmDialog(new JDialog(), "Desea dar de alta alguno?", "Usuarios",
 					JOptionPane.YES_NO_OPTION);
 			if (n == JOptionPane.YES_OPTION) {
 				// veamos = new MiPractica();
@@ -835,13 +837,13 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			System.out.println("Avanzado");
 			botonVer.setEnabled(true);
 			botonInsertar.setEnabled(true);
-			/*tf_dninie.setEditable(false);
+			tf_dninie.setEditable(false);
 			tf_correoe.setEditable(false);
 			tf_ciudad.setEditable(false);
 			tf_ubicacion.setEditable(false);
 			tf_telefono.setEditable(false);
 			tf_fecha_alta.setEditable(false);
-			tf_notas.setEditable(false);*/
+			tf_notas.setEditable(false);
 
 			break;
 		case 3:

@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
+import javax.swing.border.LineBorder;
 
 public class Lan {
 	// CRM DE SERVICIOS FINANCIEROS CON DIRECTORIO DE CLIENTES AL QUE LES DAS
@@ -40,8 +41,10 @@ public class Lan {
 		marco.setLocation(0, 0);
 		
 		marco.getToolkit().getScreenSize();
-		marco.setForeground(Color.BLUE);
+		marco.setForeground(Color.RED);
+	
 		JOptionPane.showConfirmDialog(marco, "Bienvenido", null, JOptionPane.CLOSED_OPTION);
+		
 		Toolkit.getDefaultToolkit().beep();
 		
 		

@@ -105,7 +105,7 @@ public class PanelHipoteca extends JPanel {
 		finalidad.setMaximumSize(new Dimension(250, 15));
 
 		JLabel l_creditoSolicitado = new JLabel("CREDITO SOLICITADO : ");
-		l_creditoSolicitado.setForeground(Color.BLACK);
+		l_creditoSolicitado.setForeground(Color.gray);
 		Font f1 = new Font("Serif", Font.BOLD, 12);
 		l_creditoSolicitado.setFont(f1);
 
@@ -117,13 +117,13 @@ public class PanelHipoteca extends JPanel {
 
 		JLabel l_importe = new JLabel("Importe Credito");
 		valorImporte = new JTextField();
-		valorImporte.setForeground(Color.BLACK);
+		valorImporte.setForeground(Color.gray);
 		valorImporte.setFont(f);
 		valorImporte.setMaximumSize(new Dimension(250, 15));
 
 		JLabel l_plazo = new JLabel("Plazo Total(meses): ");
 		plazo = new JTextField();
-		plazo.setForeground(Color.BLACK);
+		plazo.setForeground(Color.gray);
 		plazo.setFont(f);
 		plazo.setMaximumSize(new Dimension(250, 15));
 
@@ -156,7 +156,7 @@ public class PanelHipoteca extends JPanel {
 
 		JLabel l_direccionVivienda = new JLabel("Direccion de Vivienda:");
 		direccion = new JTextField();
-		direccion.setForeground(Color.BLACK);
+		direccion.setForeground(Color.gray);
 		Font f = new Font("Serif", Font.BOLD, 12);
 		direccion.setFont(f);
 		direccion.setMaximumSize(new Dimension(250, 20));
@@ -238,13 +238,13 @@ public class PanelHipoteca extends JPanel {
 
 		JLabel l_vinculacion = new JLabel("Vinculado a :");
 		vinculacion = new JTextField();
-		vinculacion.setForeground(Color.BLACK);
+		vinculacion.setForeground(Color.gray);
 		Font f = new Font("Serif", Font.BOLD, 12);
 		vinculacion.setFont(f);
 		vinculacion.setMaximumSize(new Dimension(250, 20));
 		JLabel l_busquedacliente = new JLabel("Busqueda cliente:");
 		busquedacliente = new JTextField();
-		busquedacliente.setForeground(Color.BLACK);
+		busquedacliente.setForeground(Color.gray);
 		busquedacliente.setFont(f);
 		busquedacliente.setMaximumSize(new Dimension(250, 20));
 
@@ -532,7 +532,7 @@ public class PanelHipoteca extends JPanel {
                                 System.err.println(pe);
                         }
 			   */
-		/*int resp = JOptionPane.showConfirmDialog(null, "Se generara informe de los datos aplicados"+ "�Esta seguro?",
+		/*int resp = JOptionPane.showConfirmDialog(null, "Se generara informe de los datos aplicados"+ "¿Esta seguro?",
 					"Alerta!", JOptionPane.YES_NO_OPTION,
 					JOptionPane.WARNING_MESSAGE);
 		
@@ -576,8 +576,7 @@ public class PanelHipoteca extends JPanel {
 					   
 				   }catch(DocumentException |SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
 					  
-				   }
-				   documento.close();
+				   }				   documento.close();
 				   JOptionPane.showMessageDialog(null, "Reporte creado :)");
 					
 				
@@ -588,7 +587,7 @@ public class PanelHipoteca extends JPanel {
 			if(resp == JOptionPane.NO_OPTION) {
 				b="0";
 			}*/
-			int resp = JOptionPane.showConfirmDialog(null, "Se generara informe de los datos aplicados"+ "�Esta seguro?",
+			int resp = JOptionPane.showConfirmDialog(null, "Se generara informe de los datos aplicados"+ "¿Esta seguro?",
 					"Alerta!", JOptionPane.YES_NO_OPTION,
 					JOptionPane.WARNING_MESSAGE);
 			if(resp == JOptionPane.YES_OPTION) {
@@ -613,13 +612,14 @@ public class PanelHipoteca extends JPanel {
 			
 			try {
 				pj.print();
+				
 			}catch (PrinterException pex) {
 			JOptionPane.showMessageDialog(null, "Error de mensaje", "error/a" + pex,
 					JOptionPane.INFORMATION_MESSAGE);
 }
 			}
 			if(resp == JOptionPane.NO_OPTION) {
-				JOptionPane.showConfirmDialog(null, "Vaya, no se ha podido imprimir" + "",
+				JOptionPane.showConfirmDialog(null, "󠁧󠁢󠁥󠁮󠁧󠁿" + "",
 						"Sorry", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
 			}
 			
@@ -641,58 +641,72 @@ public class PanelHipoteca extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			// limpiar el jtextfield
-			clearfinalidad();
-			clearvalorAdquisicion();
-			clearvalorImporte();
-			clearplazo();
-			cleardireccion();
-			clearcargas();
-			clearvinculacion();
-			clearbusquedacliente();
-			cleardninie();
-			clearapellido1();
-			clearapellido2();
-			clearnombre();
-			clearfechaNacimiento();
-			clearprofesion();
-			cleardomicilio();
-			clearpoblacion();
-			clearcodigoPostal();
-			clearnombreEmpresa();
-			clearactividad();
-			clearantiguedad();
-			clearpuesto();
-			cleardireccionEmpresa();
-			clearcontactoEmpresa();
-			clearingresosFijos();
-			clearingresosVariables();
-			cleargastosAlquiler();
-			cleargastosHipoteca();
-			clearotros();
-			clearvalor();
-			clearcargasVivienda();
-			// limpiar el checkbbox
-			chb_editar.setSelected(false);
-			chb_propiedad.setSelected(false);
-			chb_escritura.setSelected(false);
-			chb_contratoPrivado.setSelected(false);
-			chb_otrosGastos.setSelected(false);
-			chb_padres.setSelected(false);
-			chb_alquiler.setSelected(false);
-			chb_fijo.setSelected(false);
-			chb_temporal.setSelected(false);
-			chb_autonomo.setSelected(false);
-			chb_otrosCosas.setSelected(false);
-			// limpiar el jcombobox
-			tipo.setSelectedIndex(0);
-			nueva.setSelectedIndex(0);
-			estadoCivil.setSelectedIndex(0);
-			regimenBienes.setSelectedIndex(0);
+			
+			String [] botones = {"A LIMPIAR", "DENEGAR"};
+			
 
-			// limpiar el jtextAREA
+			
+			int resp = JOptionPane.showOptionDialog (null, " Usted eliminara los datos del nuevo hipotecado", "¿Esta seguro?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null/*icono*/, botones, botones[0]);
+			if(resp == JOptionPane.YES_OPTION) {
+				// limpiar el jtextfield
+				clearfinalidad();
+				clearvalorAdquisicion();
+				clearvalorImporte();
+				clearplazo();
+				cleardireccion();
+				clearcargas();
+				clearvinculacion();
+				clearbusquedacliente();
+				cleardninie();
+				clearapellido1();
+				clearapellido2();
+				clearnombre();
+				clearfechaNacimiento();
+				clearprofesion();
+				cleardomicilio();
+				clearpoblacion();
+				clearcodigoPostal();
+				clearnombreEmpresa();
+				clearactividad();
+				clearantiguedad();
+				clearpuesto();
+				cleardireccionEmpresa();
+				clearcontactoEmpresa();
+				clearingresosFijos();
+				clearingresosVariables();
+				cleargastosAlquiler();
+				cleargastosHipoteca();
+				clearotros();
+				clearvalor();
+				clearcargasVivienda();
+				// limpiar el checkbbox
+				chb_editar.setSelected(false);
+				chb_propiedad.setSelected(false);
+				chb_escritura.setSelected(false);
+				chb_contratoPrivado.setSelected(false);
+				chb_otrosGastos.setSelected(false);
+				chb_padres.setSelected(false);
+				chb_alquiler.setSelected(false);
+				chb_fijo.setSelected(false);
+				chb_temporal.setSelected(false);
+				chb_autonomo.setSelected(false);
+				chb_otrosCosas.setSelected(false);
+				// limpiar el jcombobox
+				tipo.setSelectedIndex(0);
+				nueva.setSelectedIndex(0);
+				estadoCivil.setSelectedIndex(0);
+				regimenBienes.setSelectedIndex(0);
 
-			clearotrosBienes();
+				// limpiar el jtextAREA
+
+				clearotrosBienes();
+			}
+			if(resp == JOptionPane.NO_OPTION) {
+				String box="0";
+			}
+			
+			
+			
 		}
 
 	}
@@ -956,9 +970,13 @@ public class PanelHipoteca extends JPanel {
 
 	public void insertarBBDD() {
 
-		int resp = JOptionPane.showConfirmDialog(null, "Usted insertara estos datos en la bbdd", "�Esta seguro?",
-				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+		String [] botones = {"INSERTAR", "NO INSERTAR"};
+		Object [] botones1= {"INSERTAR","NO INSERTAR"};
 
+		
+		int resp = JOptionPane.showOptionDialog (null, " Usted insertara estos datos en la bbdd", "¿Esta seguro?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null/*icono*/, botones, botones[0]);
+		
+		
 		if (resp == JOptionPane.YES_OPTION) {
 			try {
 
@@ -1043,7 +1061,7 @@ public class PanelHipoteca extends JPanel {
 
 		}
 		if (resp == JOptionPane.NO_OPTION) {
-			String box = "0";
+			String box= "0";
 		}
 
 	}
