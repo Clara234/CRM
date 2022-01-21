@@ -223,9 +223,7 @@ public class PanelHipoteca extends JPanel {
 		panelNorteDatos2.add(regimenBienes);
 		panelNorteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
 
-		// panelNorteDatos2.add(Box.createRigidArea(new Dimension(0, 1)));
-		// panelNorteDatos2.setPreferredSize(new Dimension((int) (alto * 0.9), (int)
-		// (ancho*0.2)));
+		
 
 		return panelNorteDatos2;
 	}
@@ -236,7 +234,7 @@ public class PanelHipoteca extends JPanel {
 		panelNorteDatos3.setLayout(new BoxLayout(panelNorteDatos3, BoxLayout.X_AXIS));
 		panelNorteDatos3.setBorder(BorderFactory.createLoweredBevelBorder());
 
-		JLabel l_vinculacion = new JLabel("Vinculado a :");
+		JLabel l_vinculacion = new JLabel("Vinculado a: ");
 		vinculacion = new JTextField();
 		vinculacion.setForeground(Color.gray);
 		Font f = new Font("Serif", Font.BOLD, 12);
@@ -508,121 +506,8 @@ public class PanelHipoteca extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String b;
-			/*
-			 * File fileToPrint = new File("C:\\Users\\dam\\Desktop\\hipoteca.dotm"); try {
-			 * Desktop.getDesktop().print(fileToPrint); } catch (IOException e1) { // TODO
-			 * Auto-generated catch block e1.printStackTrace(); }
-			 */
-			 /*PrinterJob pj = PrinterJob.getPrinterJob();       
-                pj.setPrintable(this);
-                /* locate a print service that can handle the request */
-                /*PrintService[] services =
-                        PrinterJob.lookupPrintServices();
+			imprimir();
 
-                if (services.length &gt; 0) {
-                        System.out.println("selected printer " + services[0].getName());
-                        try {
-                                pj.setPrintService(services[0]);
-                                pj.pageDialog(aset);
-                                if(pj.printDialog(aset)) {
-                                        pj.print(aset);
-                                }
-                        } catch (PrinterException pe) { 
-                                System.err.println(pe);
-                        }
-			   */
-		/*int resp = JOptionPane.showConfirmDialog(null, "Se generara informe de los datos aplicados"+ "¿Esta seguro?",
-					"Alerta!", JOptionPane.YES_NO_OPTION,
-					JOptionPane.WARNING_MESSAGE);
-		
-			if(resp == JOptionPane.YES_OPTION) {
-				Document documento  = new Document();
-			
-				
-					String ruta = System.getProperty("Users.dam");
-					try {
-						PdfWriter.getInstance(documento, new FileOutputStream(ruta + "C:\\Users\\dam\\Desktop\\hola.pdf"));
-					} catch (FileNotFoundException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					} catch (DocumentException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
-					documento.open();
-					
-				   PdfPTable tabla = new PdfPTable(2);
-				   tabla.addCell("Finalidad");
-				   tabla.addCell("Valor de Adquisicion");
-				 
-				   
-				   try {
-					  c = new MisConexiones();
-					   
-					   Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/ejercicioregiones?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC","root","root");
-					   PreparedStatement ps = c.prepareStatement("select * from hipoteca");
-					   
-					   ResultSet rs = ps.executeQuery();
-					   if(rs.next()) {
-						   do {
-							   tabla.addCell(rs.getString(1));
-							   tabla.addCell(rs.getString(2));
-							   
-						   }while(rs.next());
-						   documento.add(tabla);
-						   
-					   }
-					   
-				   }catch(DocumentException |SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
-					  
-				   }				   documento.close();
-				   JOptionPane.showMessageDialog(null, "Reporte creado :)");
-					
-				
-
-			
-			}
-			
-			if(resp == JOptionPane.NO_OPTION) {
-				b="0";
-			}*/
-			int resp = JOptionPane.showConfirmDialog(null, "Se generara informe de los datos aplicados"+ "¿Esta seguro?",
-					"Alerta!", JOptionPane.YES_NO_OPTION,
-					JOptionPane.WARNING_MESSAGE);
-			if(resp == JOptionPane.YES_OPTION) {
-			
-			PrinterJob pj = PrinterJob.getPrinterJob();
-			pj.setPrintable(new Printable() {
-				public int print(Graphics pg, PageFormat pf, int pageNum){
-					   if (pageNum > 0){
-					   return Printable.NO_SUCH_PAGE;
-					   } 
-					   Graphics2D g2 = (Graphics2D) pg;
-					   g2.translate(pf.getImageableX(), pf.getImageableY());
-					  
-					//component_name.paint(g2);
-					   return Printable.PAGE_EXISTS;                                                                                                                                                     
-				}
-			});
-			
-			
-			if (pj.printDialog() == false) 
-				return;
-			
-			try {
-				pj.print();
-				
-			}catch (PrinterException pex) {
-			JOptionPane.showMessageDialog(null, "Error de mensaje", "error/a" + pex,
-					JOptionPane.INFORMATION_MESSAGE);
-}
-			}
-			if(resp == JOptionPane.NO_OPTION) {
-				JOptionPane.showConfirmDialog(null, "󠁧󠁢󠁥󠁮󠁧󠁿" + "",
-						"Sorry", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
-			}
-			
 		}
 	}
 
@@ -714,6 +599,8 @@ public class PanelHipoteca extends JPanel {
 	public void clearfinalidad() {
 		finalidad.setText("");
 	}
+
+	
 
 	public void clearvalorAdquisicion() {
 		valorAdquisicion.setText("");
@@ -970,9 +857,8 @@ public class PanelHipoteca extends JPanel {
 
 	public void insertarBBDD() {
 
-		String [] botones = {"INSERTAR", "NO INSERTAR"};
-		Object [] botones1= {"INSERTAR","NO INSERTAR"};
-
+		String [] botones = {"LLEVAR DATOS A LA BBDD", "NO INSERTAR"};
+		
 		
 		int resp = JOptionPane.showOptionDialog (null, " Usted insertara estos datos en la bbdd", "¿Esta seguro?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null/*icono*/, botones, botones[0]);
 		
@@ -1064,6 +950,253 @@ public class PanelHipoteca extends JPanel {
 			String box= "0";
 		}
 
+	}
+	
+	public void imprimir() {
+		String b;
+		int resp = JOptionPane.showConfirmDialog(null, "Se generara informe de los datos aplicados"+ "¿Esta seguro?",
+				"Alerta!", JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE);
+	
+		if(resp == JOptionPane.YES_OPTION) {
+			Document documento  = new Document();
+		
+			
+				String ruta = System.getProperty("Users.dam");
+				try {
+					PdfWriter.getInstance(documento, new FileOutputStream(ruta + "C:\\Users\\dam\\Desktop\\hola.pdf"));
+				} catch (FileNotFoundException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				} catch (DocumentException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				documento.open();
+				
+			   PdfPTable tabla = new PdfPTable(2);
+			   tabla.addCell("Finalidad");
+			   tabla.addCell("Valor de Adquisicion");
+			 
+			   
+			   try {
+				  c = new MisConexiones();
+				   
+				   Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/ejercicioregiones?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC","root","root");
+				   PreparedStatement ps = c.prepareStatement("select * from hipoteca");
+				   
+				   ResultSet rs = ps.executeQuery();
+				   if(rs.next()) {
+					   do {
+						   tabla.addCell(rs.getString(1));
+						   tabla.addCell(rs.getString(2));
+						   
+					   }while(rs.next());
+					   documento.add(tabla);
+					   
+				   }
+				   
+			   }catch(DocumentException |SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
+				  
+			   }				   documento.close();
+			   JOptionPane.showMessageDialog(null, "Reporte creado :)");
+				
+			
+
+		
+		}
+		
+		if(resp == JOptionPane.NO_OPTION) {
+			b="0";
+		}
+		
+		/*int resp = JOptionPane.showConfirmDialog(null, "Se generará informe de los datos aplicados"+ "¿Esta seguro?",
+				"Alerta!", JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE);
+	
+		if(resp == JOptionPane.YES_OPTION) {
+			Document documento  = new Document();
+		
+			
+				String ruta = System.getProperty("Users.dam");
+				try {
+					PdfWriter.getInstance(documento, new FileOutputStream(ruta + "C:\\Users\\dam\\Desktop\\inform1"));
+				} catch (FileNotFoundException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				} catch (DocumentException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				documento.open();
+				
+			   PdfPTable tabla = new PdfPTable(2);
+			   tabla.addCell("Finalidad");
+			   tabla.addCell("Valor de Adquisicion");
+			   tabla.addCell("Importe Credito");
+			   tabla.addCell("Plazo total(meses)");
+			  tabla.addCell("Direccion Vivienda");
+			  tabla.addCell("Cargas");
+			  tabla.addCell("Vinculado a");
+			  tabla.addCell("Dni|nie");
+			  tabla.addCell("Primer Apellido");
+			  tabla.addCell("Segundo Apellido");
+			  tabla.addCell("Nombre");
+			  tabla.addCell("Fecha de Nacimiento");
+			  tabla.addCell("Fijo");
+			  tabla.addCell("Temporal");
+			  tabla.addCell("Autonomo");
+			  tabla.addCell("Otros");
+			  tabla.addCell("Profesion");
+			  tabla.addCell("Domicilio");
+			  tabla.addCell("Poblacion");
+			  tabla.addCell("CodigoPostal");
+			  tabla.addCell("NombreEmpresa");
+			  tabla.addCell("ActividadEmpresa");
+			  tabla.addCell("Antiguedad");
+			  tabla.addCell("Puesto");
+			  tabla.addCell("DireccionEmpresa");
+			  tabla.addCell("Correeo");
+			  tabla.addCell("EditarCampos");
+			  tabla.addCell("Comentarios");
+			  tabla.addCell("Ingresos fijos");
+			  tabla.addCell("Ingresos variables");
+			  tabla.addCell("GastosAlquiler");
+			  tabla.addCell("GastosHipoteca");
+			  tabla.addCell("Otros");
+			  tabla.addCell("Valor");
+			  tabla.addCell("Cargas Vivienda");
+			  tabla.addCell("Propiedad");
+			  tabla.addCell("Escritura");
+			  tabla.addCell("ContratoPrivado");
+			  tabla.addCell("Otros");
+			  tabla.addCell("Padres");
+			  tabla.addCell("Alquiler");
+			  tabla.addCell("OtrosBienes");
+			  
+			   
+			 
+			   
+			   try {
+				  c = new MisConexiones();
+				   ps = c.getPS(ConfigDir.getInstance().getProperty("query6"));
+				   
+				   ResultSet rs = ps.executeQuery();
+				   if(rs.next()) {
+					   do {
+						   tabla.addCell(rs.getString(1));
+						   tabla.addCell(rs.getString(2));
+						   tabla.addCell(rs.getString(3));
+						   tabla.addCell(rs.getString(4));
+						   tabla.addCell(rs.getString(5));
+						   tabla.addCell(rs.getString(6));
+						   tabla.addCell(rs.getString(7));
+						   tabla.addCell(rs.getString(8));
+						   tabla.addCell(rs.getString(9));
+						   tabla.addCell(rs.getString(10));
+						   tabla.addCell(rs.getString(11));
+						   tabla.addCell(rs.getString(12));
+						   tabla.addCell(rs.getString(13));
+						   tabla.addCell(rs.getString(14));
+						   tabla.addCell(rs.getString(15));
+						   tabla.addCell(rs.getString(16));
+						   tabla.addCell(rs.getString(17));
+						   tabla.addCell(rs.getString(18));
+						   tabla.addCell(rs.getString(19));
+						   tabla.addCell(rs.getString(20));
+						   tabla.addCell(rs.getString(21));
+						   tabla.addCell(rs.getString(22));
+						   tabla.addCell(rs.getString(23));
+						   tabla.addCell(rs.getString(24));
+						   tabla.addCell(rs.getString(25));
+						   tabla.addCell(rs.getString(26));
+						   tabla.addCell(rs.getString(27)); 
+						   tabla.addCell(rs.getString(28));
+						   tabla.addCell(rs.getString(29));
+						   tabla.addCell(rs.getString(30));
+						   tabla.addCell(rs.getString(31));
+						   tabla.addCell(rs.getString(32));
+						   tabla.addCell(rs.getString(33));
+						   tabla.addCell(rs.getString(34));
+						   tabla.addCell(rs.getString(35));
+						   tabla.addCell(rs.getString(36));
+						   tabla.addCell(rs.getString(37));
+						   tabla.addCell(rs.getString(38));
+						   tabla.addCell(rs.getString(39));
+						   tabla.addCell(rs.getString(40));
+						   tabla.addCell(rs.getString(41));
+						   tabla.addCell(rs.getString(42));
+						   
+						   
+						   
+						   
+						   
+					   }while(rs.next());
+					   documento.add(tabla);
+					   
+				   }
+				   
+			   }catch(DocumentException |SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
+				  
+			   }				   documento.close();
+			   JOptionPane.showMessageDialog(null, "Reporte creado :)");
+				
+			
+
+		
+		}
+		
+		if(resp == JOptionPane.NO_OPTION) {
+			
+		}*/
+		// TODO Auto-generated method stub
+		/*int resp = JOptionPane.showConfirmDialog(null, "Se generara informe de los datos aplicados"+ "¿Esta seguro?",
+				"Alerta!", JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE);
+		if(resp == JOptionPane.YES_OPTION) {
+		
+			
+			File  f = new File("E:\\Informe_hipotecado");
+		PrinterJob pj = PrinterJob.getPrinterJob();
+		
+		pj.setPrintable(new Printable() {
+			public int print(Graphics pg, PageFormat pf, int pageNum){
+				   if (pageNum > 0){
+				   return Printable.NO_SUCH_PAGE;
+				   } 
+				   Graphics2D g2 = (Graphics2D) pg;
+				   g2.translate(pf.getImageableX(), pf.getImageableY());
+				  
+				//component_name.paint(g2);
+				   return Printable.PAGE_EXISTS;       
+				 
+			}
+		});
+		
+		
+		if (pj.printDialog() == false) 
+			return;
+		
+		try {
+			pj.print();
+		
+		
+			
+		}catch (PrinterException pex) {
+		JOptionPane.showMessageDialog(null, "Error de mensaje", "error/a" + pex,
+				JOptionPane.INFORMATION_MESSAGE);
+}
+		}
+		if(resp == JOptionPane.NO_OPTION) {
+			JOptionPane.showConfirmDialog(null, "󠁧󠁢󠁥󠁮󠁧󠁿" + "",
+					"Sorry", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		String b;*/
+
+		
+		
+	
 	}
 
 }

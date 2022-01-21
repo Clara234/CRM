@@ -50,7 +50,7 @@ public class Lan {
 		
 		// es abstracta, toolkit no puede crear new, no es instanciable
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image imagen = tk.getImage("icon.png");
+		Image imagen = tk.getImage("hipoteca.png");
 		marco.setIconImage(imagen);
 		marco.setMinimumSize(new Dimension(1000, 950));
 		

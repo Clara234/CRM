@@ -135,7 +135,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					creaBackupTablas();
-					//if((proceso!=null)&&((Calendar.DAY_OF_MONTH==7)||(Calendar.DAY_OF_MONTH%7==0)))
+					// if((proceso!=null)&&((Calendar.DAY_OF_MONTH==7)||(Calendar.DAY_OF_MONTH%7==0)))
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -162,12 +162,10 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-			      
+
 			}
-		
 
 		});
-		
 
 		busquedas.add(salario);
 		busquedas.add(jefes);
@@ -309,7 +307,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		botonMusica = new JButton("Musica");
 		botonMusica.setForeground(Color.BLUE);
 		panelEsteControl.add(botonMusica);
-		panelEsteControl.add(Box.createRigidArea(new Dimension(0,6)));
+		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		panelEsteControl.add(chb_root);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 
@@ -319,7 +317,6 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		botonActualizar.addActionListener(new gestorActualizar());
 		botonMusica.addActionListener(new gestorMusica());
 
-	
 		// devolvemos el panel de control
 		return panelEsteControl;
 	}
@@ -345,50 +342,42 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-         
-			/*try {
-				MisConexiones c = new MisConexiones();
-				PreparedStatement ps = c.getPS(ConfigDir.getInstance().getProperty("query2"));
 
-				ps.setString(1, tf_dninie.getText());
-				ps.setString(2, tf_correoe.getText());
-				ps.setString(3, tf_ciudad.getText());
-				ps.setString(4, tf_ubicacion.getText());
-				// System.out.println(tf_fecha_alta.getText());
-				// System.out.println(fechaIng(tf_fecha
-				ps.setTimestamp(5, Timestamp.valueOf(tf_fecha_alta.getText()));
-
-				ps.setInt(6, Integer.valueOf(tf_telefono.getText()));
-				ps.setBoolean(7, chb_autorizado.isSelected());
-				ps.setBoolean(8, chb_cliente.isSelected());
-				ps.setBoolean(9, chb_adjunto.isSelected());
-				ps.setString(10, tf_notas.getText());
-
-				ps.executeUpdate();
-				refresh();
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}*/
+			/*
+			 * try { MisConexiones c = new MisConexiones(); PreparedStatement ps =
+			 * c.getPS(ConfigDir.getInstance().getProperty("query2"));
+			 * 
+			 * ps.setString(1, tf_dninie.getText()); ps.setString(2, tf_correoe.getText());
+			 * ps.setString(3, tf_ciudad.getText()); ps.setString(4,
+			 * tf_ubicacion.getText()); // System.out.println(tf_fecha_alta.getText()); //
+			 * System.out.println(fechaIng(tf_fecha ps.setTimestamp(5,
+			 * Timestamp.valueOf(tf_fecha_alta.getText()));
+			 * 
+			 * ps.setInt(6, Integer.valueOf(tf_telefono.getText())); ps.setBoolean(7,
+			 * chb_autorizado.isSelected()); ps.setBoolean(8, chb_cliente.isSelected());
+			 * ps.setBoolean(9, chb_adjunto.isSelected()); ps.setString(10,
+			 * tf_notas.getText());
+			 * 
+			 * ps.executeUpdate(); refresh(); } catch (Exception e1) { e1.printStackTrace();
+			 * }
+			 */
 
 		}
 
-		/*public void addCliente(Cliente cli) throws SQLException, ClassNotFoundException
-		 * try{
-		 * PreparedStatement ps = new MisConexiones().dameConexion().prepareStatement(ConfigDir.getInstance().getProperty("query2")
-		 * ps.setString(1,cli.getDninie());
-		 * ps.setString(2,cli.getCorreoe());
-		 * ps.setString(3, cli.getCiudad());
-		 * ps.setString(4, cli.getUbicacion());
-		 * ps.setTimestamp(5,new java.sql.Timestamp(new java.util.Date().getTime()));
-		 * ps.setInt(6, cli.getTelefono());
-		 * ps.setBoolean(7, cli.isAutorizado));
-		 * ps.setBoolean(8,cli.isACliente));
-		 * ps.setBoolean(9, cli.isAdjunto));
+		/*
+		 * public void addCliente(Cliente cli) throws SQLException,
+		 * ClassNotFoundException try{ PreparedStatement ps = new
+		 * MisConexiones().dameConexion().prepareStatement(ConfigDir.getInstance().
+		 * getProperty("query2") ps.setString(1,cli.getDninie());
+		 * ps.setString(2,cli.getCorreoe()); ps.setString(3, cli.getCiudad());
+		 * ps.setString(4, cli.getUbicacion()); ps.setTimestamp(5,new
+		 * java.sql.Timestamp(new java.util.Date().getTime())); ps.setInt(6,
+		 * cli.getTelefono()); ps.setBoolean(7, cli.isAutorizado));
+		 * ps.setBoolean(8,cli.isACliente)); ps.setBoolean(9, cli.isAdjunto));
 		 * ps.setString(10, cli.getNotas());
 		 * 
 		 * 
-		 * }
-		 * public class GestorAdd implements ActionListener{ public void
+		 * } public class GestorAdd implements ActionListener{ public void
 		 * actionPerformed(ActionEvent e) { Cliente cli = new Cliente(); cli.setId(); }
 		 * }
 		 */
@@ -707,7 +696,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			if (chb_root.isSelected()) {
-                   
+
 				dialogoinicial = new JDialog(new JFrame(), true);
 				dialogoinicial.setResizable(false);
 				dialogoinicial.setBackground(new Color(206, 238, 244));
@@ -761,7 +750,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				dialogoinicial.add(combo);
 				dialogoinicial.add(botonAcceder);
 				dialogoinicial.add(l_copyrigth);
-                
+
 				JPanel panelentrada = new JPanel();
 				panelentrada.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 10));
 				panelentrada.add(new JLabel("Introduzca su  alias"));
@@ -789,16 +778,18 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 		}
 
-		private Object dameObjeto(String item) {
-			// TODO Auto-generated method stub
-			return new Object() {
-				public String toString() {
-					return item;
-				}
-			};
-		}
+		
 
 	}
+	private Object dameObjeto(String item) {
+		// TODO Auto-generated method stub
+		return new Object() {
+			public String toString() {
+				return item;
+			}
+		};
+	}
+	
 
 	public void editHabCosas(int grado) {
 		switch (grado) {
@@ -837,13 +828,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			System.out.println("Avanzado");
 			botonVer.setEnabled(true);
 			botonInsertar.setEnabled(true);
-			tf_dninie.setEditable(false);
-			tf_correoe.setEditable(false);
-			tf_ciudad.setEditable(false);
-			tf_ubicacion.setEditable(false);
-			tf_telefono.setEditable(false);
-			tf_fecha_alta.setEditable(false);
-			tf_notas.setEditable(false);
+			
 
 			break;
 		case 3:
@@ -874,21 +859,22 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	}
 
 	@Override
-	public void addCliente(Cliente cli) throws SQLException, ClassNotFoundException{
+	public void addCliente(Cliente cli) throws SQLException, ClassNotFoundException {
 		try {
-		PreparedStatement ps = new MisConexiones().getConexion().prepareStatement(ConfigDir.getInstance().getProperty("query2"));
-		 ps.setString(1,cli.getDni_nie());
-		 ps.setString(2,cli.getCorreoe());
-		 ps.setString(3, cli.getCiudad());
-		 ps.setString(4, cli.getUbicacion());
-		// ps.setTimestamp(5, new java.sql.Timestamp(new java.util.Date().getTime()));
-		 ps.setTimestamp(5,  new java.sql.Timestamp(new java.util.Date().getTime()));
-		 ps.setInt(6, cli.getTelefono());
-		 ps.setBoolean(7, cli.isAutorizado());
-		 ps.setBoolean(8,cli.isCliente());
-		 ps.setBoolean(9, cli.isAdjunto());
-		 ps.setString(10, cli.getNotas());
-		
+			PreparedStatement ps = new MisConexiones().getConexion()
+					.prepareStatement(ConfigDir.getInstance().getProperty("query2"));
+			ps.setString(1, cli.getDni_nie());
+			ps.setString(2, cli.getCorreoe());
+			ps.setString(3, cli.getCiudad());
+			ps.setString(4, cli.getUbicacion());
+			// ps.setTimestamp(5, new java.sql.Timestamp(new java.util.Date().getTime()));
+			ps.setTimestamp(5, new java.sql.Timestamp(new java.util.Date().getTime()));
+			ps.setInt(6, cli.getTelefono());
+			ps.setBoolean(7, cli.isAutorizado());
+			ps.setBoolean(8, cli.isCliente());
+			ps.setBoolean(9, cli.isAdjunto());
+			ps.setString(10, cli.getNotas());
+
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
