@@ -74,7 +74,7 @@ public class Lan {
 		System.out.println(dim.width + "px x " + dim.height + "px");
 		// especificamos al programa que finalice cuando el marco se cierre
 		marco.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		marco.setMinimumSize(new Dimension(800, 700));
+		marco.setMinimumSize(new Dimension(700,600));
 
 		// Se pon visible al final
 		marco.setVisible(true);

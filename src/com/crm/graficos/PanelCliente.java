@@ -1,3 +1,4 @@
+
 package com.crm.graficos;
 
 import javax.print.attribute.standard.Media;
@@ -51,10 +52,14 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	public JTextField mialias;
 	public JLabel etiqueta;
 	DefaultTableModel dtm;
+	MisConexiones c;
+	PreparedStatement ps;
 	JTable tabla;
 	JButton botonVer, botonInsertar, botonBorrar, botonActualizar, botonMusica, botonAcceder;
 	JTextField tf_dninie, tf_correoe, tf_ciudad, tf_ubicacion, tf_telefono, tf_fecha_alta, tf_notas;
 	JCheckBox chb_autorizado, chb_cliente, chb_adjunto, chb_root;
+	JMenuItem miCalculadora, copiaBase,miNavegador;
+	
 
 	List<Cliente> listaClientes;
 
@@ -98,7 +103,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Accesos Rápidos");
 
-		JMenuItem miCalculadora = new JMenuItem("Calculadora");
+		 miCalculadora = new JMenuItem("Calculadora");
 		miCalculadora.setForeground(Color.darkGray);
 		miCalculadora.addActionListener(new ActionListener() {
 
@@ -112,7 +117,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			}
 
 		});
-		JMenuItem miNavegador = new JMenuItem("Navegador");
+		 miNavegador = new JMenuItem("Navegador");
 		miNavegador.setForeground(Color.darkGray);
 		miNavegador.addActionListener(new ActionListener() {
 
@@ -127,7 +132,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			}
 		});
 
-		JMenuItem copiaBase = new JMenuItem("Backup");
+		 copiaBase = new JMenuItem("Backup");
 		copiaBase.setForeground(Color.darkGray);
 		copiaBase.addActionListener(new ActionListener() {
 
@@ -144,41 +149,19 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			}
 		});
 
-		JMenu busquedas = new JMenu("Busquedas");
-		JMenuItem salario = new JMenuItem("por salarios");
-		salario.setForeground(Color.ORANGE);
-		salario.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-		});
-		JMenuItem jefes = new JMenuItem("por jefes");
-		jefes.setForeground(Color.ORANGE);
-		jefes.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-		});
-
-		busquedas.add(salario);
-		busquedas.add(jefes);
+		
 		menu.add(miCalculadora);
 		menu.add(miNavegador);
 		menu.add(copiaBase);
-		menuBar.add(busquedas);
 		menuBar.add(menu);
 
 		setVisible(true);
 		return menuBar;
 	}
 
+	
+
+	
 	public JPanel setPanelEste(int alto, int ancho, JPanel p1, JPanel p2) {
 		JPanel panelEste = new JPanel();
 		panelEste.setLayout(new BorderLayout());
@@ -819,6 +802,14 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			tf_telefono.setEditable(true);
 			tf_fecha_alta.setEditable(true);
 			tf_notas.setEditable(true);
+			miCalculadora.setEnabled(true);
+			copiaBase.setEnabled(true);
+			miNavegador.setEnabled(true);
+			chb_autorizado.setEnabled(true);
+			chb_cliente.setEnabled(true);
+			chb_adjunto.setEnabled(true);
+			chb_root.setEnabled(true);
+			
 
 			break;
 		case 2:
@@ -851,13 +842,27 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			tf_telefono.setEditable(false);
 			tf_fecha_alta.setEditable(false);
 			tf_notas.setEditable(false);
-
+			miCalculadora.setEnabled(false);
+			copiaBase.setEnabled(false);
+			miNavegador.setEnabled(false);
+			chb_autorizado.setEnabled(false);
+			chb_cliente.setEnabled(false);
+			chb_adjunto.setEnabled(false);
+			chb_root.setEnabled(false);
+			
+			
 			break;
 
 		}
 
 	}
 
+
+	
+
+
+	
+	
 	@Override
 	public void addCliente(Cliente cli) throws SQLException, ClassNotFoundException {
 		try {

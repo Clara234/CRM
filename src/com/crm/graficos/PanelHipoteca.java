@@ -59,6 +59,7 @@ public class PanelHipoteca extends JPanel {
 	JTable tabla;
 	MisConexiones c;
 	PreparedStatement ps;
+	ResultSet rs;
 
 	JTextField finalidad, valorAdquisicion, valorImporte, plazo, direccion, cargas, vinculacion, busquedacliente,
 			dninie, apellido1, apellido2, nombre, fechaNacimiento, profesion, domicilio, poblacion, codigoPostal,
@@ -983,9 +984,9 @@ public class PanelHipoteca extends JPanel {
 				  c = new MisConexiones();
 				   
 				   Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/ejercicioregiones?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC","root","root");
-				   PreparedStatement ps = c.prepareStatement("select * from hipoteca");
+				   ps = c.prepareStatement("select * from hipoteca");
 				   
-				   ResultSet rs = ps.executeQuery();
+				    rs = ps.executeQuery();
 				   if(rs.next()) {
 					   do {
 						   tabla.addCell(rs.getString(1));
