@@ -32,6 +32,7 @@ import javax.print.PrintException;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -49,7 +50,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-
+import com.crm.auxiliares.WordProcessing;
 import com.crm.persistencia.ConfigDir;
 import com.crm.persistencia.MisConexiones;
 
@@ -62,9 +63,10 @@ public class PanelHipoteca extends JPanel {
 	ResultSet rs;
 
 	JTextField finalidad, valorAdquisicion, valorImporte, plazo, direccion, cargas, vinculacion, busquedacliente,
-			dninie, apellido1, apellido2, nombre, fechaNacimiento, profesion, domicilio, poblacion, codigoPostal,
+			dninie,apellido1, apellido2, nombre, fechaNacimiento, profesion, domicilio, poblacion, codigoPostal,
 			nombreEmpresa, actividad, antiguedad, puesto, direccionEmpresa, contactoEmpresa, ingresosFijos,
 			ingresosVariables, gastosAlquiler, gastosHipoteca, otros, valor, cargasVivienda;
+
 	JButton imprimir, insertar, limpiar;
 	JCheckBox chb_editar, chb_propiedad, chb_escritura, chb_contratoPrivado, chb_otrosGastos, chb_padres, chb_alquiler,
 			chb_fijo, chb_temporal, chb_autonomo, chb_otrosCosas;
@@ -954,61 +956,20 @@ public class PanelHipoteca extends JPanel {
 	}
 	
 	public void imprimir() {
-		String b;
-		int resp = JOptionPane.showConfirmDialog(null, "Se generara informe de los datos aplicados"+ "¿Esta seguro?",
+		
+		int resp = JOptionPane.showConfirmDialog(null, "Se generará informe de los datos aplicados"+ "¿Esta seguro?",
 				"Alerta!", JOptionPane.YES_NO_OPTION,
-				JOptionPane.WARNING_MESSAGE);
+				JOptionPane.WARNING_MESSAGE, new ImageIcon("C:\\Users\\dam\\eclipse-workspace\\RRHH\\src\\img\\impresora"));
+		
+		if( resp == JOptionPane.YES_OPTION) {
+			
 	
-		if(resp == JOptionPane.YES_OPTION) {
-			Document documento  = new Document();
-		
-			
-				String ruta = System.getProperty("Users.dam");
-				try {
-					PdfWriter.getInstance(documento, new FileOutputStream(ruta + "C:\\Users\\dam\\Desktop\\hola.pdf"));
-				} catch (FileNotFoundException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				} catch (DocumentException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-				documento.open();
-				
-			   PdfPTable tabla = new PdfPTable(2);
-			   tabla.addCell("Finalidad");
-			   tabla.addCell("Valor de Adquisicion");
-			 
-			   
-			   try {
-				  c = new MisConexiones();
-				   
-				   Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/ejercicioregiones?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC","root","root");
-				   ps = c.prepareStatement("select * from hipoteca");
-				   
-				    rs = ps.executeQuery();
-				   if(rs.next()) {
-					   do {
-						   tabla.addCell(rs.getString(1));
-						   tabla.addCell(rs.getString(2));
-						   
-					   }while(rs.next());
-					   documento.add(tabla);
-					   
-				   }
-				   
-			   }catch(DocumentException |SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
-				  
-			   }				   documento.close();
-			   JOptionPane.showMessageDialog(null, "Reporte creado :)");
-				
-			
-
-		
+		WordProcessing.createNewDocumentFromTemplate("hipoteca.doc");
+		WordProcessing.typeTextAtBookMark("ape1", apellido1);
+		WordProcessing.exec();
 		}
-		
 		if(resp == JOptionPane.NO_OPTION) {
-			b="0";
+			System.out.println("Paso.");
 		}
 		
 		/*int resp = JOptionPane.showConfirmDialog(null, "Se generará informe de los datos aplicados"+ "¿Esta seguro?",

@@ -15,7 +15,7 @@ public class Cliente {
      private boolean adjunto;
      
      
-	
+	public void Cliente(Cliente cli) {}
 
 
 	public Cliente(String dni_nie, String correoe, String ciudad, String ubicacion, String notas, int telefono,

@@ -1,24 +1,26 @@
 
 package com.crm.graficos;
 
-import javax.print.attribute.standard.Media;
+
+
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
+
+
+
 import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.JTextComponent;
+
 
 import com.crm.persistencia.ConfigDir;
 import com.crm.persistencia.MisConexiones;
 import com.crm.pojos.Cliente;
 import com.crm.auxiliares.Auxiliar;
-import com.crm.graficos.PanelCliente.gestorEdicion;
+import com.crm.auxiliares.DameFecha;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +39,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.lang.NumberFormatException;
+
 import java.util.Vector;
 import java.awt.*;
 
@@ -45,6 +47,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 	Cliente seleccionado;
 	Cliente cliente;
+	Cliente cli;
 	Vector v;
 	public JDialog dialogoinicial;
 	public JComboBox<Object> combo;
@@ -318,52 +321,52 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			try {
-				addCliente(cliente);
-				refresh();
-			} catch (ClassNotFoundException | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-			/*
-			 * try { MisConexiones c = new MisConexiones(); PreparedStatement ps =
-			 * c.getPS(ConfigDir.getInstance().getProperty("query2"));
-			 * 
-			 * ps.setString(1, tf_dninie.getText()); ps.setString(2, tf_correoe.getText());
-			 * ps.setString(3, tf_ciudad.getText()); ps.setString(4,
-			 * tf_ubicacion.getText()); // System.out.println(tf_fecha_alta.getText()); //
-			 * System.out.println(fechaIng(tf_fecha ps.setTimestamp(5,
-			 * Timestamp.valueOf(tf_fecha_alta.getText()));
-			 * 
-			 * ps.setInt(6, Integer.valueOf(tf_telefono.getText())); ps.setBoolean(7,
-			 * chb_autorizado.isSelected()); ps.setBoolean(8, chb_cliente.isSelected());
-			 * ps.setBoolean(9, chb_adjunto.isSelected()); ps.setString(10,
-			 * tf_notas.getText());
-			 * 
-			 * ps.executeUpdate(); refresh(); } catch (Exception e1) { e1.printStackTrace();
-			 * }
-			 */
+			
+		try {
+			c = new MisConexiones();
+		} catch (InstantiationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IllegalAccessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			ps = c.getPS(ConfigDir.getInstance().getProperty("query2"));
+			
+			 ps.setString(1, tf_dninie.getText());
+			 ps.setString(2, tf_correoe.getText());
+			 ps.setString(3, tf_ciudad.getText());
+			 ps.setString(4, tf_ubicacion.getText());
+			 ps.setTimestamp(5, Timestamp.valueOf(tf_fecha_alta.getText()));
+			 ps.setInt(6, Integer.valueOf(tf_telefono.getText()));
+			 ps.setBoolean(7,chb_autorizado.isSelected());
+			 ps.setBoolean(8,chb_cliente.isSelected());
+			 ps.setBoolean(9,chb_adjunto.isSelected());
+			 ps.setString(10,tf_notas.getText());
+			 
+			 ps.executeUpdate();
+			 
+					
+			 refresh();
+			 
+			 
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		
+				
+			 
 
 		}
 
-		/*
-		 * public void addCliente(Cliente cli) throws SQLException,
-		 * ClassNotFoundException try{ PreparedStatement ps = new
-		 * MisConexiones().dameConexion().prepareStatement(ConfigDir.getInstance().
-		 * getProperty("query2") ps.setString(1,cli.getDninie());
-		 * ps.setString(2,cli.getCorreoe()); ps.setString(3, cli.getCiudad());
-		 * ps.setString(4, cli.getUbicacion()); ps.setTimestamp(5,new
-		 * java.sql.Timestamp(new java.util.Date().getTime())); ps.setInt(6,
-		 * cli.getTelefono()); ps.setBoolean(7, cli.isAutorizado));
-		 * ps.setBoolean(8,cli.isACliente)); ps.setBoolean(9, cli.isAdjunto));
-		 * ps.setString(10, cli.getNotas());
-		 * 
-		 * 
-		 * } public class GestorAdd implements ActionListener{ public void
-		 * actionPerformed(ActionEvent e) { Cliente cli = new Cliente(); cli.setId(); }
-		 * }
-		 */
+	
 
 	}
 
@@ -461,7 +464,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 					ps.setString(2, tf_correoe.getText());
 					ps.setString(3, tf_ciudad.getText());
 					ps.setString(4, tf_ubicacion.getText());
-					ps.setTimestamp(5, Timestamp.valueOf(fechaIng(tf_fecha_alta.getText())));
+					ps.setTimestamp(5, Timestamp.valueOf(fechaEsp(tf_fecha_alta.getText())));
 					ps.setInt(6, Integer.valueOf(tf_telefono.getText()));
 					ps.setBoolean(7, chb_autorizado.isSelected());
 					ps.setBoolean(7, chb_cliente.isSelected());
@@ -591,7 +594,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		}
 	}
 
-	public String fechaIng(String fecha) {
+	/*public String fechaIng(String fecha) {
 		// TODO Auto-generated method stub
 		String fechaIng = "", anno = "", mes = "", dia = "", tiempo = "00:00:00";
 		StringTokenizer st = new StringTokenizer(fecha.toString(), "-");
@@ -604,10 +607,10 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 		return fechaIng;
 
-	}
+	}*/
 
 	public String fechaEsp(String fechahora) {
-		String fechaEsp = "", fecha = "", tiempo = "", anno = "", mes = "", dia = "", hora = "", minuto = "",
+		String fechaEsp = "", fecha = "", tiempo = "", dia = "", mes = "",anno = "", hora = "", minuto = "",
 				segundo = "";
 		StringTokenizer st = new StringTokenizer(fechahora.toString(), " ");
 		fecha = st.nextToken();
@@ -888,6 +891,23 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			e.printStackTrace();
 		}
 	}
+	
+	/*
+	 * public void addCliente(Cliente cli) throws SQLException,
+	 * ClassNotFoundException try{ PreparedStatement ps = new
+	 * MisConexiones().dameConexion().prepareStatement(ConfigDir.getInstance().
+	 * getProperty("query2") ps.setString(1,cli.getDninie());
+	 * ps.setString(2,cli.getCorreoe()); ps.setString(3, cli.getCiudad());
+	 * ps.setString(4, cli.getUbicacion()); ps.setTimestamp(5,new
+	 * java.sql.Timestamp(new java.util.Date().getTime())); ps.setInt(6,
+	 * cli.getTelefono()); ps.setBoolean(7, cli.isAutorizado));
+	 * ps.setBoolean(8,cli.isACliente)); ps.setBoolean(9, cli.isAdjunto));
+	 * ps.setString(10, cli.getNotas());
+	 * 
+	 * 
+	 * } public class GestorAdd implements ActionListener{ public void
+	 * actionPerformed(ActionEvent e) { Cliente cli = new Cliente(); cli.setId(); }
+	 * }*/
 
 	@Override
 	public List<Cliente> getAllClientes() throws SQLException {

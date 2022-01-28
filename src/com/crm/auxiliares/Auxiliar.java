@@ -8,4 +8,7 @@ public class Auxiliar {
 		}
 		return contrasenna;
 	}
+	
+	
+
 }
