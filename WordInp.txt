@@ -1,31 +1,41 @@
 @noteNotMatchingBookmarks               TRUE
-@createNewDocumentFromTemplate          C:\Users\hp\eclipse-workspace\CRM\src\com\crm\auxiliares\templates\informe_hipoteca.dotm
+@createNewDocumentFromTemplate          C:\Users\dam\eclipse-workspace\CRM\src\com\crm\auxiliares\templates\informe_hipoteca.dotm
 fin                                     
-valad                                   
-credito                                 
-plazotot                                
+valad                                   56
+credito                                 54
+plazotot                                5
 dom                                     
 cargas                                  
-dni_nie                                 
-ape1                                    
-ape2                                    
-nombrecli                               
+dni_nie                                 45678g
+ape1                                    jg
+ape2                                    gj
+nombrecli                               gh
 fechan                                  
-prof                                    
-dom                                     
-pob                                     
-cp                                      
-nomemp                                  
-activemp                                
-antiguo                                 
-posicion                                
-diremp                                  
-telemp                                  
-fijosmen                                
-varmen                                  
-gastosalq                               
-gastoshipo                              
+prof                                    hg
+dom                                     g
+pob                                     g
+cp                                      45678
+nomemp                                  Linux
+activemp                                err
+antiguo                                 gt
+posicion                                56
+diremp                                  57
+telemp                                  56
+fijosmen                                35
+varmen                                  76
+gastosalq                               45
+gastoshipo                              45
 otrospres                               
 valorvivi                               
-cargasvivi                              
+cargasvivi                              45
+propiedad                               true
+escritura                               false
+contratpriv                             true
+otros                                   false
+padres                                  false
+alquiler                                false
+fijo                                    false
+temp                                    true
+aut                                     true
+otrosmas                                false
 @saveDocumentAsAndClose                 hipotecado

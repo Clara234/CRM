@@ -2,6 +2,7 @@ package com.crm.graficos;
 
 import java.awt.Color;
 
+
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -12,26 +13,28 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkOrangeIJTheme;
 
 public class Lan {
 	// CRM DE SERVICIOS FINANCIEROS CON DIRECTORIO DE CLIENTES AL QUE LES DAS
 	// SERVICIOS
 
 	public static void main(String[] args) {
-		setMarco();
-		// insertar lookandfeel para el estilo del crm
-
 		
 		try {
-			JFrame.setDefaultLookAndFeelDecorated(true);
-			JDialog.setDefaultLookAndFeelDecorated(true);
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-			
-		}catch(Exception e) {
+			UIManager.setLookAndFeel(new FlatArcDarkOrangeIJTheme() );
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		setMarco();
+	
+
+		
+		
 	}
 
 	public static void setMarco() {

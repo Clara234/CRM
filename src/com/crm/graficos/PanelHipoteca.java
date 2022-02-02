@@ -935,35 +935,7 @@ public class PanelHipoteca extends JPanel {
 
 	public void imprimir() {
 
-		finalidad = new JTextField();
-		valorAdquisicion = new JTextField();
-		valorImporte = new JTextField();
-		plazo = new JTextField();
-		direccion = new JTextField();
-		cargas = new JTextField();
 		
-		dninie = new JTextField();
-		apellido1 = new JTextField();
-		apellido2 = new JTextField();
-		nombre = new JTextField();
-		fechaNacimiento = new JTextField();
-		profesion = new JTextField();
-		domicilio = new JTextField();
-		poblacion = new JTextField();
-		codigoPostal = new JTextField();
-		nombreEmpresa = new JTextField();
-		actividad = new JTextField();
-		antiguedad = new JTextField();
-		puesto = new JTextField();
-		direccionEmpresa = new JTextField();
-		contactoEmpresa = new JTextField();
-		ingresosFijos = new JTextField();
-		ingresosVariables = new JTextField();
-		gastosAlquiler = new JTextField();
-		gastosHipoteca = new JTextField();
-		otros = new JTextField();
-		valor = new JTextField();
-		cargasVivienda = new JTextField();
 
 		
 	/*	chb_propiedad.setSelected(seleccionado.isPropiedad());
@@ -985,9 +957,10 @@ public class PanelHipoteca extends JPanel {
 		
 		
 
-			File miTemplate = new File("C:\\Users\\hp\\eclipse-workspace\\CRM\\src\\com\\crm\\auxiliares\\templates\\informe_hipoteca.dotm");
+			File miTemplate = new File("src\\com\\crm\\auxiliares\\templates\\informe_hipoteca.dotm");
 			WordProcessing.createNewDocumentFromTemplate(miTemplate.getAbsolutePath());
 			WordProcessing.typeTextAtBookmark("fin", finalidad.getText());
+			System.out.println(":"+finalidad.getText());
 			WordProcessing.typeTextAtBookmark("valad", valorAdquisicion.getText());
 			WordProcessing.typeTextAtBookmark("credito", valorImporte.getText());
 			WordProcessing.typeTextAtBookmark("plazotot", plazo.getText());
@@ -1018,7 +991,7 @@ public class PanelHipoteca extends JPanel {
 			WordProcessing.typeTextAtBookmark("cargasvivi", cargasVivienda.getText());
 			
 			
-		/*	WordProcessing.typeTextAtBookmark("propiedad", ""+chb_propiedad.isSelected());
+			WordProcessing.typeTextAtBookmark("propiedad", ""+chb_propiedad.isSelected());
 			WordProcessing.typeTextAtBookmark("escritura", ""+chb_escritura.isSelected());
 			WordProcessing.typeTextAtBookmark("contratpriv", ""+chb_contratoPrivado.isSelected());
 			WordProcessing.typeTextAtBookmark("otros", ""+chb_otrosGastos.isSelected());
@@ -1027,7 +1000,10 @@ public class PanelHipoteca extends JPanel {
 			WordProcessing.typeTextAtBookmark("fijo", ""+chb_fijo.isSelected());
 			WordProcessing.typeTextAtBookmark("temp", ""+chb_temporal.isSelected());
 			WordProcessing.typeTextAtBookmark("aut", ""+chb_autonomo.isSelected());
-			WordProcessing.typeTextAtBookmark("otrosmas", ""+chb_otrosCosas.isSelected());*/
+			WordProcessing.typeTextAtBookmark("otrosmas", ""+chb_otrosCosas.isSelected());
+			
+
+			
 			
 			
 			WordProcessing.saveDocumentAsAndClose("hipotecado");
