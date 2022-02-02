@@ -1,0 +1,31 @@
+@noteNotMatchingBookmarks               TRUE
+@createNewDocumentFromTemplate          C:\Users\hp\eclipse-workspace\CRM\src\com\crm\auxiliares\templates\informe_hipoteca.dotm
+fin                                     
+valad                                   
+credito                                 
+plazotot                                
+dom                                     
+cargas                                  
+dni_nie                                 
+ape1                                    
+ape2                                    
+nombrecli                               
+fechan                                  
+prof                                    
+dom                                     
+pob                                     
+cp                                      
+nomemp                                  
+activemp                                
+antiguo                                 
+posicion                                
+diremp                                  
+telemp                                  
+fijosmen                                
+varmen                                  
+gastosalq                               
+gastoshipo                              
+otrospres                               
+valorvivi                               
+cargasvivi                              
+@saveDocumentAsAndClose                 hipotecado

@@ -2,7 +2,6 @@ package com.crm.graficos;
 
 import java.awt.BorderLayout;
 
-
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -46,24 +45,21 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
 import com.crm.auxiliares.WordProcessing;
 import com.crm.persistencia.ConfigDir;
 import com.crm.persistencia.MisConexiones;
-
+import com.crm.pojos.Hipotecado;
 
 public class PanelHipoteca extends JPanel {
 	DefaultTableModel dtm;
 	JTable tabla;
 	MisConexiones c;
 	PreparedStatement ps;
+	Hipotecado seleccionado;
 	ResultSet rs;
 
 	JTextField finalidad, valorAdquisicion, valorImporte, plazo, direccion, cargas, vinculacion, busquedacliente,
-			dninie,apellido1, apellido2, nombre, fechaNacimiento, profesion, domicilio, poblacion, codigoPostal,
+			dninie, apellido1, apellido2, nombre, fechaNacimiento, profesion, domicilio, poblacion, codigoPostal,
 			nombreEmpresa, actividad, antiguedad, puesto, direccionEmpresa, contactoEmpresa, ingresosFijos,
 			ingresosVariables, gastosAlquiler, gastosHipoteca, otros, valor, cargasVivienda;
 
@@ -71,7 +67,7 @@ public class PanelHipoteca extends JPanel {
 	JCheckBox chb_editar, chb_propiedad, chb_escritura, chb_contratoPrivado, chb_otrosGastos, chb_padres, chb_alquiler,
 			chb_fijo, chb_temporal, chb_autonomo, chb_otrosCosas;
 	JTextArea otrosBienes, comentarios;
-	public JComboBox tipo, nueva, estadoCivil, regimenBienes;
+	public JComboBox<String> tipo, nueva, estadoCivil, regimenBienes;
 
 	public PanelHipoteca(int alto, int ancho) {
 		setLayout(new BorderLayout());
@@ -225,8 +221,6 @@ public class PanelHipoteca extends JPanel {
 		panelNorteDatos2.add(l_regimenBienes);
 		panelNorteDatos2.add(regimenBienes);
 		panelNorteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
-
-		
 
 		return panelNorteDatos2;
 	}
@@ -529,13 +523,13 @@ public class PanelHipoteca extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
-			String [] botones = {"A LIMPIAR", "DENEGAR"};
-			
 
-			
-			int resp = JOptionPane.showOptionDialog (null, " Usted eliminara los datos del nuevo hipotecado", "¿Esta seguro?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null/*icono*/, botones, botones[0]);
-			if(resp == JOptionPane.YES_OPTION) {
+			String[] botones = { "A LIMPIAR", "DENEGAR" };
+
+			int resp = JOptionPane.showOptionDialog(null, " Usted eliminara los datos del nuevo hipotecado",
+					"¿Esta seguro?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null/* icono */, botones,
+					botones[0]);
+			if (resp == JOptionPane.YES_OPTION) {
 				// limpiar el jtextfield
 				clearfinalidad();
 				clearvalorAdquisicion();
@@ -589,12 +583,10 @@ public class PanelHipoteca extends JPanel {
 
 				clearotrosBienes();
 			}
-			if(resp == JOptionPane.NO_OPTION) {
-				String box="0";
+			if (resp == JOptionPane.NO_OPTION) {
+				String box = "0";
 			}
-			
-			
-			
+
 		}
 
 	}
@@ -602,8 +594,6 @@ public class PanelHipoteca extends JPanel {
 	public void clearfinalidad() {
 		finalidad.setText("");
 	}
-
-	
 
 	public void clearvalorAdquisicion() {
 		valorAdquisicion.setText("");
@@ -860,12 +850,11 @@ public class PanelHipoteca extends JPanel {
 
 	public void insertarBBDD() {
 
-		String [] botones = {"LLEVAR DATOS A LA BBDD", "NO INSERTAR"};
-		
-		
-		int resp = JOptionPane.showOptionDialog (null, " Usted insertara estos datos en la bbdd", "¿Esta seguro?", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null/*icono*/, botones, botones[0]);
-		
-		
+		String[] botones = { "LLEVAR DATOS A LA BBDD", "NO INSERTAR" };
+
+		int resp = JOptionPane.showOptionDialog(null, " Usted insertara estos datos en la bbdd", "¿Esta seguro?",
+				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null/* icono */, botones, botones[0]);
+
 		if (resp == JOptionPane.YES_OPTION) {
 			try {
 
@@ -883,8 +872,8 @@ public class PanelHipoteca extends JPanel {
 
 			try {
 				ps = c.getPS(ConfigDir.getInstance().getProperty("query5"));
-				
-			    ps.setString(1, finalidad.getText());
+
+				ps.setString(1, finalidad.getText());
 				ps.setInt(2, Integer.valueOf(valorAdquisicion.getText()));
 				ps.setInt(3, Integer.valueOf(valorImporte.getText()));
 				ps.setInt(4, Integer.valueOf(plazo.getText()));
@@ -926,22 +915,11 @@ public class PanelHipoteca extends JPanel {
 				ps.setBoolean(40, chb_padres.isSelected());
 				ps.setBoolean(41, chb_alquiler.isSelected());
 				ps.setString(42, otrosBienes.getText());
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-			
-				
+
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			
+
 			try {
 				ps.executeUpdate();
 			} catch (SQLException e1) {
@@ -950,215 +928,111 @@ public class PanelHipoteca extends JPanel {
 
 		}
 		if (resp == JOptionPane.NO_OPTION) {
-			String box= "0";
+			String box = "0";
 		}
 
 	}
-	
+
 	public void imprimir() {
+
+		finalidad = new JTextField();
+		valorAdquisicion = new JTextField();
+		valorImporte = new JTextField();
+		plazo = new JTextField();
+		direccion = new JTextField();
+		cargas = new JTextField();
 		
-		int resp = JOptionPane.showConfirmDialog(null, "Se generará informe de los datos aplicados"+ "¿Esta seguro?",
-				"Alerta!", JOptionPane.YES_NO_OPTION,
-				JOptionPane.WARNING_MESSAGE, new ImageIcon("C:\\Users\\dam\\eclipse-workspace\\RRHH\\src\\img\\impresora"));
-		
-		if( resp == JOptionPane.YES_OPTION) {
-			
-	
-		WordProcessing.createNewDocumentFromTemplate("hipoteca.doc");
-		WordProcessing.typeTextAtBookMark("ape1", apellido1);
-		WordProcessing.exec();
-		}
-		if(resp == JOptionPane.NO_OPTION) {
-			System.out.println("Paso.");
-		}
-		
-		/*int resp = JOptionPane.showConfirmDialog(null, "Se generará informe de los datos aplicados"+ "¿Esta seguro?",
-				"Alerta!", JOptionPane.YES_NO_OPTION,
-				JOptionPane.WARNING_MESSAGE);
-	
-		if(resp == JOptionPane.YES_OPTION) {
-			Document documento  = new Document();
-		
-			
-				String ruta = System.getProperty("Users.dam");
-				try {
-					PdfWriter.getInstance(documento, new FileOutputStream(ruta + "C:\\Users\\dam\\Desktop\\inform1"));
-				} catch (FileNotFoundException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				} catch (DocumentException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-				documento.open();
-				
-			   PdfPTable tabla = new PdfPTable(2);
-			   tabla.addCell("Finalidad");
-			   tabla.addCell("Valor de Adquisicion");
-			   tabla.addCell("Importe Credito");
-			   tabla.addCell("Plazo total(meses)");
-			  tabla.addCell("Direccion Vivienda");
-			  tabla.addCell("Cargas");
-			  tabla.addCell("Vinculado a");
-			  tabla.addCell("Dni|nie");
-			  tabla.addCell("Primer Apellido");
-			  tabla.addCell("Segundo Apellido");
-			  tabla.addCell("Nombre");
-			  tabla.addCell("Fecha de Nacimiento");
-			  tabla.addCell("Fijo");
-			  tabla.addCell("Temporal");
-			  tabla.addCell("Autonomo");
-			  tabla.addCell("Otros");
-			  tabla.addCell("Profesion");
-			  tabla.addCell("Domicilio");
-			  tabla.addCell("Poblacion");
-			  tabla.addCell("CodigoPostal");
-			  tabla.addCell("NombreEmpresa");
-			  tabla.addCell("ActividadEmpresa");
-			  tabla.addCell("Antiguedad");
-			  tabla.addCell("Puesto");
-			  tabla.addCell("DireccionEmpresa");
-			  tabla.addCell("Correeo");
-			  tabla.addCell("EditarCampos");
-			  tabla.addCell("Comentarios");
-			  tabla.addCell("Ingresos fijos");
-			  tabla.addCell("Ingresos variables");
-			  tabla.addCell("GastosAlquiler");
-			  tabla.addCell("GastosHipoteca");
-			  tabla.addCell("Otros");
-			  tabla.addCell("Valor");
-			  tabla.addCell("Cargas Vivienda");
-			  tabla.addCell("Propiedad");
-			  tabla.addCell("Escritura");
-			  tabla.addCell("ContratoPrivado");
-			  tabla.addCell("Otros");
-			  tabla.addCell("Padres");
-			  tabla.addCell("Alquiler");
-			  tabla.addCell("OtrosBienes");
-			  
-			   
-			 
-			   
-			   try {
-				  c = new MisConexiones();
-				   ps = c.getPS(ConfigDir.getInstance().getProperty("query6"));
-				   
-				   ResultSet rs = ps.executeQuery();
-				   if(rs.next()) {
-					   do {
-						   tabla.addCell(rs.getString(1));
-						   tabla.addCell(rs.getString(2));
-						   tabla.addCell(rs.getString(3));
-						   tabla.addCell(rs.getString(4));
-						   tabla.addCell(rs.getString(5));
-						   tabla.addCell(rs.getString(6));
-						   tabla.addCell(rs.getString(7));
-						   tabla.addCell(rs.getString(8));
-						   tabla.addCell(rs.getString(9));
-						   tabla.addCell(rs.getString(10));
-						   tabla.addCell(rs.getString(11));
-						   tabla.addCell(rs.getString(12));
-						   tabla.addCell(rs.getString(13));
-						   tabla.addCell(rs.getString(14));
-						   tabla.addCell(rs.getString(15));
-						   tabla.addCell(rs.getString(16));
-						   tabla.addCell(rs.getString(17));
-						   tabla.addCell(rs.getString(18));
-						   tabla.addCell(rs.getString(19));
-						   tabla.addCell(rs.getString(20));
-						   tabla.addCell(rs.getString(21));
-						   tabla.addCell(rs.getString(22));
-						   tabla.addCell(rs.getString(23));
-						   tabla.addCell(rs.getString(24));
-						   tabla.addCell(rs.getString(25));
-						   tabla.addCell(rs.getString(26));
-						   tabla.addCell(rs.getString(27)); 
-						   tabla.addCell(rs.getString(28));
-						   tabla.addCell(rs.getString(29));
-						   tabla.addCell(rs.getString(30));
-						   tabla.addCell(rs.getString(31));
-						   tabla.addCell(rs.getString(32));
-						   tabla.addCell(rs.getString(33));
-						   tabla.addCell(rs.getString(34));
-						   tabla.addCell(rs.getString(35));
-						   tabla.addCell(rs.getString(36));
-						   tabla.addCell(rs.getString(37));
-						   tabla.addCell(rs.getString(38));
-						   tabla.addCell(rs.getString(39));
-						   tabla.addCell(rs.getString(40));
-						   tabla.addCell(rs.getString(41));
-						   tabla.addCell(rs.getString(42));
-						   
-						   
-						   
-						   
-						   
-					   }while(rs.next());
-					   documento.add(tabla);
-					   
-				   }
-				   
-			   }catch(DocumentException |SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
-				  
-			   }				   documento.close();
-			   JOptionPane.showMessageDialog(null, "Reporte creado :)");
-				
-			
+		dninie = new JTextField();
+		apellido1 = new JTextField();
+		apellido2 = new JTextField();
+		nombre = new JTextField();
+		fechaNacimiento = new JTextField();
+		profesion = new JTextField();
+		domicilio = new JTextField();
+		poblacion = new JTextField();
+		codigoPostal = new JTextField();
+		nombreEmpresa = new JTextField();
+		actividad = new JTextField();
+		antiguedad = new JTextField();
+		puesto = new JTextField();
+		direccionEmpresa = new JTextField();
+		contactoEmpresa = new JTextField();
+		ingresosFijos = new JTextField();
+		ingresosVariables = new JTextField();
+		gastosAlquiler = new JTextField();
+		gastosHipoteca = new JTextField();
+		otros = new JTextField();
+		valor = new JTextField();
+		cargasVivienda = new JTextField();
 
 		
-		}
-		
-		if(resp == JOptionPane.NO_OPTION) {
-			
-		}*/
-		// TODO Auto-generated method stub
-		/*int resp = JOptionPane.showConfirmDialog(null, "Se generara informe de los datos aplicados"+ "¿Esta seguro?",
-				"Alerta!", JOptionPane.YES_NO_OPTION,
-				JOptionPane.WARNING_MESSAGE);
-		if(resp == JOptionPane.YES_OPTION) {
-		
-			
-			File  f = new File("E:\\Informe_hipotecado");
-		PrinterJob pj = PrinterJob.getPrinterJob();
-		
-		pj.setPrintable(new Printable() {
-			public int print(Graphics pg, PageFormat pf, int pageNum){
-				   if (pageNum > 0){
-				   return Printable.NO_SUCH_PAGE;
-				   } 
-				   Graphics2D g2 = (Graphics2D) pg;
-				   g2.translate(pf.getImageableX(), pf.getImageableY());
-				  
-				//component_name.paint(g2);
-				   return Printable.PAGE_EXISTS;       
-				 
-			}
-		});
-		
-		
-		if (pj.printDialog() == false) 
-			return;
-		
-		try {
-			pj.print();
-		
-		
-			
-		}catch (PrinterException pex) {
-		JOptionPane.showMessageDialog(null, "Error de mensaje", "error/a" + pex,
-				JOptionPane.INFORMATION_MESSAGE);
-}
-		}
-		if(resp == JOptionPane.NO_OPTION) {
-			JOptionPane.showConfirmDialog(null, "󠁧󠁢󠁥󠁮󠁧󠁿" + "",
-					"Sorry", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
-		}
-		
-		String b;*/
+	/*	chb_propiedad.setSelected(seleccionado.isPropiedad());
+		chb_escritura.setSelected(seleccionado.isEscritura());
+		chb_contratoPrivado.setSelected(seleccionado.isContratoPrivado());
+		chb_otrosGastos.setSelected(seleccionado.isOtrosGastos());
+		chb_padres.setSelected(seleccionado.isPadres());
+		chb_alquiler.setSelected(seleccionado.isAlquiler());
+		chb_fijo.setSelected(seleccionado.isFijo());
+		chb_temporal.setSelected(seleccionado.isTemporal());
+		chb_autonomo.setSelected(seleccionado.isAutonomo());
+		chb_otrosCosas.setSelected(seleccionado.isOtrasCosas());
+		*/
 
+		//tipo = new JComboBox<String>();
+		//nueva = new JComboBox<String>();
+		//estadoCivil = new JComboBox<String>();
+		//regimenBienes = new JComboBox<String>();
 		
 		
-	
+
+			File miTemplate = new File("C:\\Users\\hp\\eclipse-workspace\\CRM\\src\\com\\crm\\auxiliares\\templates\\informe_hipoteca.dotm");
+			WordProcessing.createNewDocumentFromTemplate(miTemplate.getAbsolutePath());
+			WordProcessing.typeTextAtBookmark("fin", finalidad.getText());
+			WordProcessing.typeTextAtBookmark("valad", valorAdquisicion.getText());
+			WordProcessing.typeTextAtBookmark("credito", valorImporte.getText());
+			WordProcessing.typeTextAtBookmark("plazotot", plazo.getText());
+			WordProcessing.typeTextAtBookmark("dom", direccion.getText());
+			WordProcessing.typeTextAtBookmark("cargas", cargas.getText());
+			WordProcessing.typeTextAtBookmark("dni_nie", dninie.getText());
+			WordProcessing.typeTextAtBookmark("ape1", apellido1.getText());
+			WordProcessing.typeTextAtBookmark("ape2", apellido2.getText());
+			WordProcessing.typeTextAtBookmark("nombrecli", nombre.getText());
+			WordProcessing.typeTextAtBookmark("fechan", fechaNacimiento.getText());
+			WordProcessing.typeTextAtBookmark("prof", profesion.getText());
+			WordProcessing.typeTextAtBookmark("dom", domicilio.getText());
+			WordProcessing.typeTextAtBookmark("pob", poblacion.getText());
+			
+			WordProcessing.typeTextAtBookmark("cp", codigoPostal.getText());
+			WordProcessing.typeTextAtBookmark("nomemp", nombreEmpresa.getText());
+			WordProcessing.typeTextAtBookmark("activemp", actividad.getText());
+			WordProcessing.typeTextAtBookmark("antiguo", antiguedad.getText());
+			WordProcessing.typeTextAtBookmark("posicion", puesto.getText());
+			WordProcessing.typeTextAtBookmark("diremp", direccionEmpresa.getText());
+			WordProcessing.typeTextAtBookmark("telemp", contactoEmpresa.getText());
+			WordProcessing.typeTextAtBookmark("fijosmen", ingresosFijos.getText());
+			WordProcessing.typeTextAtBookmark("varmen", ingresosVariables.getText());
+			WordProcessing.typeTextAtBookmark("gastosalq", gastosAlquiler.getText());
+			WordProcessing.typeTextAtBookmark("gastoshipo", gastosHipoteca.getText());
+			WordProcessing.typeTextAtBookmark("otrospres", otros.getText());
+			WordProcessing.typeTextAtBookmark("valorvivi", valor.getText());
+			WordProcessing.typeTextAtBookmark("cargasvivi", cargasVivienda.getText());
+			
+			
+		/*	WordProcessing.typeTextAtBookmark("propiedad", ""+chb_propiedad.isSelected());
+			WordProcessing.typeTextAtBookmark("escritura", ""+chb_escritura.isSelected());
+			WordProcessing.typeTextAtBookmark("contratpriv", ""+chb_contratoPrivado.isSelected());
+			WordProcessing.typeTextAtBookmark("otros", ""+chb_otrosGastos.isSelected());
+			WordProcessing.typeTextAtBookmark("padres", ""+chb_padres.isSelected());
+			WordProcessing.typeTextAtBookmark("alquiler", ""+chb_alquiler.isSelected());
+			WordProcessing.typeTextAtBookmark("fijo", ""+chb_fijo.isSelected());
+			WordProcessing.typeTextAtBookmark("temp", ""+chb_temporal.isSelected());
+			WordProcessing.typeTextAtBookmark("aut", ""+chb_autonomo.isSelected());
+			WordProcessing.typeTextAtBookmark("otrosmas", ""+chb_otrosCosas.isSelected());*/
+			
+			
+			WordProcessing.saveDocumentAsAndClose("hipotecado");
+			WordProcessing.exec();
+		}
+
 	}
 
-}
