@@ -437,7 +437,7 @@ public class PanelHipoteca extends JPanel {
 		JTextField control = new JTextField("Panel Control");
 		Font f2 = new Font("Arial", Font.BOLD, 20);
 		control.setFont(f2);
-		control.setMaximumSize(new Dimension(300, 20));
+		control.setMaximumSize(new Dimension(300, 40));
 		imprimir = new JButton("IMPRIMIR PETICION");
 		imprimir.setForeground(Color.BLUE);
 		insertar = new JButton("INSERTAR EN BBDD");
@@ -448,6 +448,7 @@ public class PanelHipoteca extends JPanel {
 		chb_editar.setForeground(Color.BLACK);
 
 		b.add(control);
+		b.add(Box.createRigidArea(new Dimension(0, 10)));
 		b.add(insertar);
 		b.add(Box.createRigidArea(new Dimension(0, 10)));
 		b.add(imprimir);

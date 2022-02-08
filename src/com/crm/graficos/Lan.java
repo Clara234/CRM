@@ -3,6 +3,7 @@ package com.crm.graficos;
 import java.awt.Color;
 
 
+
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -16,7 +17,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
-import com.formdev.flatlaf.intellijthemes.FlatArcDarkOrangeIJTheme;
+//import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatDraculaIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatSolarizedLightContrastIJTheme;
 
 public class Lan {
 	// CRM DE SERVICIOS FINANCIEROS CON DIRECTORIO DE CLIENTES AL QUE LES DAS
@@ -25,7 +27,7 @@ public class Lan {
 	public static void main(String[] args) {
 		
 		try {
-			UIManager.setLookAndFeel(new FlatArcDarkOrangeIJTheme() );
+			UIManager.setLookAndFeel(new FlatSolarizedLightContrastIJTheme() );
 		} catch (UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,12 +65,14 @@ public class Lan {
 		Dimension dim = tk.getScreenSize();
 		int anchoM = (int) (dim.width / 2), altoM = (int) (dim.height / 2);
 		int anchoM1 = (int) (dim.width / 2), altoM1 = (int) (dim.height / 2);
+		int anchoM2 = (int) (dim.width / 2), altoM2 = (int) (dim.height / 2);
 
 		// crear pestañas dentro del panel:
 		JTabbedPane pestanha = new JTabbedPane();
 		pestanha.setForeground(Color.gray);
 		pestanha.add("Directorio cliente", new PanelCliente(anchoM, altoM));// poner tabla cliente
 		pestanha.add("Hipotecas", new PanelHipoteca(anchoM1, altoM1));
+		pestanha.add("Requisitos", new PanelRequisitos(anchoM2, altoM2));
 
 		// Aqui es donde se visualiza, añadiendolo al marco
 
