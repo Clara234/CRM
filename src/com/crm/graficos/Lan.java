@@ -25,7 +25,7 @@ public class Lan {
 	// SERVICIOS
 
 	public static void main(String[] args) {
-		
+
 		try {
 			UIManager.setLookAndFeel(new FlatSolarizedLightContrastIJTheme() );
 		} catch (UnsupportedLookAndFeelException e) {

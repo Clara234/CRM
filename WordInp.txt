@@ -1,41 +1,42 @@
 @noteNotMatchingBookmarks               TRUE
 @createNewDocumentFromTemplate          C:\Users\dam\eclipse-workspace\CRM\src\com\crm\auxiliares\templates\informe_hipoteca.dotm
 fin                                     
-valad                                   56
-credito                                 54
-plazotot                                5
+valad                                   
+credito                                 
+plazotot                                
 dom                                     
 cargas                                  
-dni_nie                                 45678g
-ape1                                    jg
-ape2                                    gj
-nombrecli                               gh
+dni_nie                                 dada
+ape1                                    asdasd
+ape2                                    
+nombrecli                               Clara
 fechan                                  
-prof                                    hg
-dom                                     g
-pob                                     g
-cp                                      45678
-nomemp                                  Linux
-activemp                                err
-antiguo                                 gt
-posicion                                56
-diremp                                  57
-telemp                                  56
-fijosmen                                35
-varmen                                  76
-gastosalq                               45
-gastoshipo                              45
+prof                                    
+dom                                     
+pob                                     
+cp                                      
+nomemp                                  
+activemp                                
+antiguo                                 
+posicion                                
+diremp                                  
+telemp                                  
+fijosmen                                
+varmen                                  
+gastosalq                               
+gastoshipo                              
 otrospres                               
 valorvivi                               
-cargasvivi                              45
-propiedad                               true
+cargasvivi                              
+propiedad                               false
 escritura                               false
-contratpriv                             true
+contratpriv                             false
 otros                                   false
 padres                                  false
 alquiler                                false
 fijo                                    false
-temp                                    true
-aut                                     true
+temp                                    false
+aut                                     false
 otrosmas                                false
+@changeDocumentDirectory                C:\Users\dam\documents\Informes_hipotecario\javax.swing.JTextField[,40,211,250x20,layout=javax.swing.plaf.basic.BasicTextUI$UpdateHandler,alignmentX=0.0,alignmentY=0.0,border=com.formdev.flatlaf.ui.FlatTextBorder@14b5da6b,flags=288,maximumSize=java.awt.Dimension[width=250,height=20],minimumSize=,preferredSize=,caretColor=javax.swing.plaf.ColorUIResource[r=211,g=54,b=130],disabledTextColor=javax.swing.plaf.ColorUIResource[r=201,g=204,b=195],editable=true,margin=javax.swing.plaf.InsetsUIResource[top=2,left=6,bottom=2,right=6],selectedTextColor=javax.swing.plaf.ColorUIResource[r=0,g=43,b=54],selectionColor=javax.swing.plaf.ColorUIResource[r=209,g=203,b=184],columns=0,columnWidth=0,command=,horizontalAlignment=LEADING]
 @saveDocumentAsAndClose                 hipotecado

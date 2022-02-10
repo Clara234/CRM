@@ -20,6 +20,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -956,7 +959,7 @@ public class PanelHipoteca extends JPanel {
 		//estadoCivil = new JComboBox<String>();
 		//regimenBienes = new JComboBox<String>();
 		
-		
+		  
 
 			File miTemplate = new File("src\\com\\crm\\auxiliares\\templates\\informe_hipoteca.dotm");
 			WordProcessing.createNewDocumentFromTemplate(miTemplate.getAbsolutePath());
@@ -1004,12 +1007,36 @@ public class PanelHipoteca extends JPanel {
 			WordProcessing.typeTextAtBookmark("otrosmas", ""+chb_otrosCosas.isSelected());
 			
 
+			String nombreHipotecado = nombre.getText();
 			
+			CreaCarpetaInformes(nombreHipotecado);
 			
-			
+			WordProcessing.changeDocumentDirectory(System.getProperty("user.home")+"\\documents\\Informes_hipotecario\\"+nombre);
 			WordProcessing.saveDocumentAsAndClose("hipotecado");
 			WordProcessing.exec();
+			
+			
 		}
+
+	private void CreaCarpetaInformes(String nombreHipotecado) {
+		 String fileName = "C:\\Users\\dam\\documents\\Informes_hipotecario\\"+nombreHipotecado;
+
+		  Path path = Paths.get(fileName);
+
+		    if (!Files.exists(path)) {
+		try {
+			Files.createDirectory(path);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("New Directory created !   "+fileName);
+		 } else {
+		    
+		 System.out.println("Directory already exists");
+		    }
+		 }
+	
 
 	}
 
