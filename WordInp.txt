@@ -6,10 +6,10 @@ credito
 plazotot                                
 dom                                     
 cargas                                  
-dni_nie                                 dada
-ape1                                    asdasd
+dni_nie                                 
+ape1                                    
 ape2                                    
-nombrecli                               Clara
+nombrecli                               Raulñ
 fechan                                  
 prof                                    
 dom                                     
@@ -38,5 +38,5 @@ fijo                                    false
 temp                                    false
 aut                                     false
 otrosmas                                false
-@changeDocumentDirectory                C:\Users\dam\documents\Informes_hipotecario\javax.swing.JTextField[,40,211,250x20,layout=javax.swing.plaf.basic.BasicTextUI$UpdateHandler,alignmentX=0.0,alignmentY=0.0,border=com.formdev.flatlaf.ui.FlatTextBorder@14b5da6b,flags=288,maximumSize=java.awt.Dimension[width=250,height=20],minimumSize=,preferredSize=,caretColor=javax.swing.plaf.ColorUIResource[r=211,g=54,b=130],disabledTextColor=javax.swing.plaf.ColorUIResource[r=201,g=204,b=195],editable=true,margin=javax.swing.plaf.InsetsUIResource[top=2,left=6,bottom=2,right=6],selectedTextColor=javax.swing.plaf.ColorUIResource[r=0,g=43,b=54],selectionColor=javax.swing.plaf.ColorUIResource[r=209,g=203,b=184],columns=0,columnWidth=0,command=,horizontalAlignment=LEADING]
-@saveDocumentAsAndClose                 hipotecado
+@changeDocumentDirectory                C:\Users\dam\documents\Informes_hipotecario\javax.swing.JTextField[,40,211,250x20,layout=javax.swing.plaf.basic.BasicTextUI$UpdateHandler,alignmentX=0.0,alignmentY=0.0,border=com.formdev.flatlaf.ui.FlatTextBorder@71142371,flags=288,maximumSize=java.awt.Dimension[width=250,height=20],minimumSize=,preferredSize=,caretColor=javax.swing.plaf.ColorUIResource[r=211,g=54,b=130],disabledTextColor=javax.swing.plaf.ColorUIResource[r=201,g=204,b=195],editable=true,margin=javax.swing.plaf.InsetsUIResource[top=2,left=6,bottom=2,right=6],selectedTextColor=javax.swing.plaf.ColorUIResource[r=0,g=43,b=54],selectionColor=javax.swing.plaf.ColorUIResource[r=209,g=203,b=184],columns=0,columnWidth=0,command=,horizontalAlignment=LEADING]
+@saveDocumentAs                         Raulñ

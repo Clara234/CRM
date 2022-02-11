@@ -978,7 +978,6 @@ public class PanelHipoteca extends JPanel {
 			WordProcessing.typeTextAtBookmark("prof", profesion.getText());
 			WordProcessing.typeTextAtBookmark("dom", domicilio.getText());
 			WordProcessing.typeTextAtBookmark("pob", poblacion.getText());
-			
 			WordProcessing.typeTextAtBookmark("cp", codigoPostal.getText());
 			WordProcessing.typeTextAtBookmark("nomemp", nombreEmpresa.getText());
 			WordProcessing.typeTextAtBookmark("activemp", actividad.getText());
@@ -993,8 +992,6 @@ public class PanelHipoteca extends JPanel {
 			WordProcessing.typeTextAtBookmark("otrospres", otros.getText());
 			WordProcessing.typeTextAtBookmark("valorvivi", valor.getText());
 			WordProcessing.typeTextAtBookmark("cargasvivi", cargasVivienda.getText());
-			
-			
 			WordProcessing.typeTextAtBookmark("propiedad", ""+chb_propiedad.isSelected());
 			WordProcessing.typeTextAtBookmark("escritura", ""+chb_escritura.isSelected());
 			WordProcessing.typeTextAtBookmark("contratpriv", ""+chb_contratoPrivado.isSelected());
@@ -1006,13 +1003,14 @@ public class PanelHipoteca extends JPanel {
 			WordProcessing.typeTextAtBookmark("aut", ""+chb_autonomo.isSelected());
 			WordProcessing.typeTextAtBookmark("otrosmas", ""+chb_otrosCosas.isSelected());
 			
+			
 
 			String nombreHipotecado = nombre.getText();
-			
 			CreaCarpetaInformes(nombreHipotecado);
 			
 			WordProcessing.changeDocumentDirectory(System.getProperty("user.home")+"\\documents\\Informes_hipotecario\\"+nombre);
-			WordProcessing.saveDocumentAsAndClose("hipotecado");
+			//WordProcessing.saveDocumentAsAndClose("hipotecado");
+			WordProcessing.saveDocumentAs(nombreHipotecado);
 			WordProcessing.exec();
 			
 			

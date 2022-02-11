@@ -34,7 +34,7 @@ public class Lan {
 		}
 		setMarco();
 	
-
+System.out.println("Bienvenido");
 		
 		
 	}
