@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class PanelRequisitos extends JPanel {
@@ -227,17 +228,22 @@ public class PanelRequisitos extends JPanel {
 		panelSur.setLayout(new BorderLayout());
 		panelSur.setLayout(new BoxLayout(panelSur, BoxLayout.LINE_AXIS));
 
-		JTextArea hoka = new JTextArea("");
-		hoka.setForeground(Color.BLACK);
-		hoka.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-		hoka.setMaximumSize(new Dimension(250, 40));
+		JTextArea dx = new JTextArea("Comentarios");
+		Font f = new Font("Times New Roman",Font.ITALIC,12);
+		dx.setFont(f);
+		dx.setMaximumSize(new Dimension (250,20));
+		JScrollPane hoka = new JScrollPane(dx);
+		hoka.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+          hoka.setMaximumSize(new Dimension(250,40));
+   
 
 		JButton ihj = new JButton("Registrar");
 		ihj.setForeground(Color.CYAN);
-
+        ihj.setMaximumSize(new Dimension(100,30));
 		JLabel busca = new JLabel("DNI NIE");
 		busca.setSize(250, 20);
 		JButton busqueda = new JButton("BUSCAR");
+		busqueda.setMaximumSize(new Dimension(100,30));
 		busqueda.setForeground(Color.CYAN);
 
 		
