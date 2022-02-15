@@ -325,6 +325,7 @@ public class PanelHipoteca extends JPanel {
 
 		JLabel l_otrosBienes = new JLabel("Otro Bienes: ");
 		otrosBienes = new JTextArea();
+		otrosBienes.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		otrosBienes.setForeground(Color.gray);
 		otrosBienes.setMaximumSize(new Dimension(375, 70));
 
@@ -468,6 +469,7 @@ public class PanelHipoteca extends JPanel {
 
 		JLabel l_comentarios = new JLabel("Comentarios: ");
 		comentarios = new JTextArea();
+		comentarios.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		comentarios.setForeground(Color.gray);
 		Font f7 = new Font("Italic", Font.ITALIC, 12);
 		comentarios.setFont(f7);
@@ -939,102 +941,94 @@ public class PanelHipoteca extends JPanel {
 
 	public void imprimir() {
 
-		
+		/*
+		 * chb_propiedad.setSelected(seleccionado.isPropiedad());
+		 * chb_escritura.setSelected(seleccionado.isEscritura());
+		 * chb_contratoPrivado.setSelected(seleccionado.isContratoPrivado());
+		 * chb_otrosGastos.setSelected(seleccionado.isOtrosGastos());
+		 * chb_padres.setSelected(seleccionado.isPadres());
+		 * chb_alquiler.setSelected(seleccionado.isAlquiler());
+		 * chb_fijo.setSelected(seleccionado.isFijo());
+		 * chb_temporal.setSelected(seleccionado.isTemporal());
+		 * chb_autonomo.setSelected(seleccionado.isAutonomo());
+		 * chb_otrosCosas.setSelected(seleccionado.isOtrasCosas());
+		 */
 
-		
-	/*	chb_propiedad.setSelected(seleccionado.isPropiedad());
-		chb_escritura.setSelected(seleccionado.isEscritura());
-		chb_contratoPrivado.setSelected(seleccionado.isContratoPrivado());
-		chb_otrosGastos.setSelected(seleccionado.isOtrosGastos());
-		chb_padres.setSelected(seleccionado.isPadres());
-		chb_alquiler.setSelected(seleccionado.isAlquiler());
-		chb_fijo.setSelected(seleccionado.isFijo());
-		chb_temporal.setSelected(seleccionado.isTemporal());
-		chb_autonomo.setSelected(seleccionado.isAutonomo());
-		chb_otrosCosas.setSelected(seleccionado.isOtrasCosas());
-		*/
+		// tipo = new JComboBox<String>();
+		// nueva = new JComboBox<String>();
+		// estadoCivil = new JComboBox<String>();
+		// regimenBienes = new JComboBox<String>();
 
-		//tipo = new JComboBox<String>();
-		//nueva = new JComboBox<String>();
-		//estadoCivil = new JComboBox<String>();
-		//regimenBienes = new JComboBox<String>();
-		
-		  
+		File miTemplate = new File("src\\com\\crm\\auxiliares\\templates\\informe_hipoteca.dotm");
+		WordProcessing.createNewDocumentFromTemplate(miTemplate.getAbsolutePath());
+		WordProcessing.typeTextAtBookmark("fin", finalidad.getText());
+		// System.out.println(":"+finalidad.getText());
+		WordProcessing.typeTextAtBookmark("valad", valorAdquisicion.getText());
+		WordProcessing.typeTextAtBookmark("credito", valorImporte.getText());
+		WordProcessing.typeTextAtBookmark("plazotot", plazo.getText());
+		WordProcessing.typeTextAtBookmark("dom", direccion.getText());
+		WordProcessing.typeTextAtBookmark("cargas", cargas.getText());
+		WordProcessing.typeTextAtBookmark("dni_nie", dninie.getText());
+		WordProcessing.typeTextAtBookmark("ape1", apellido1.getText());
+		WordProcessing.typeTextAtBookmark("ape2", apellido2.getText());
+		WordProcessing.typeTextAtBookmark("nombrecli", nombre.getText());
+		WordProcessing.typeTextAtBookmark("fechan", fechaNacimiento.getText());
+		WordProcessing.typeTextAtBookmark("prof", profesion.getText());
+		WordProcessing.typeTextAtBookmark("dom", domicilio.getText());
+		WordProcessing.typeTextAtBookmark("pob", poblacion.getText());
+		WordProcessing.typeTextAtBookmark("cp", codigoPostal.getText());
+		WordProcessing.typeTextAtBookmark("nomemp", nombreEmpresa.getText());
+		WordProcessing.typeTextAtBookmark("activemp", actividad.getText());
+		WordProcessing.typeTextAtBookmark("antiguo", antiguedad.getText());
+		WordProcessing.typeTextAtBookmark("posicion", puesto.getText());
+		WordProcessing.typeTextAtBookmark("diremp", direccionEmpresa.getText());
+		WordProcessing.typeTextAtBookmark("telemp", contactoEmpresa.getText());
+		WordProcessing.typeTextAtBookmark("fijosmen", ingresosFijos.getText());
+		WordProcessing.typeTextAtBookmark("varmen", ingresosVariables.getText());
+		WordProcessing.typeTextAtBookmark("gastosalq", gastosAlquiler.getText());
+		WordProcessing.typeTextAtBookmark("gastoshipo", gastosHipoteca.getText());
+		WordProcessing.typeTextAtBookmark("otrospres", otros.getText());
+		WordProcessing.typeTextAtBookmark("valorvivi", valor.getText());
+		WordProcessing.typeTextAtBookmark("cargasvivi", cargasVivienda.getText());
+		WordProcessing.typeTextAtBookmark("propiedad", "" + chb_propiedad.isSelected());
+		WordProcessing.typeTextAtBookmark("escritura", "" + chb_escritura.isSelected());
+		WordProcessing.typeTextAtBookmark("contratpriv", "" + chb_contratoPrivado.isSelected());
+		WordProcessing.typeTextAtBookmark("otros", "" + chb_otrosGastos.isSelected());
+		WordProcessing.typeTextAtBookmark("padres", "" + chb_padres.isSelected());
+		WordProcessing.typeTextAtBookmark("alquiler", "" + chb_alquiler.isSelected());
+		WordProcessing.typeTextAtBookmark("fijo", "" + chb_fijo.isSelected());
+		WordProcessing.typeTextAtBookmark("temp", "" + chb_temporal.isSelected());
+		WordProcessing.typeTextAtBookmark("aut", "" + chb_autonomo.isSelected());
+		WordProcessing.typeTextAtBookmark("otrosmas", "" + chb_otrosCosas.isSelected());
 
-			File miTemplate = new File("src\\com\\crm\\auxiliares\\templates\\informe_hipoteca.dotm");
-			WordProcessing.createNewDocumentFromTemplate(miTemplate.getAbsolutePath());
-			WordProcessing.typeTextAtBookmark("fin", finalidad.getText());
-			System.out.println(":"+finalidad.getText());
-			WordProcessing.typeTextAtBookmark("valad", valorAdquisicion.getText());
-			WordProcessing.typeTextAtBookmark("credito", valorImporte.getText());
-			WordProcessing.typeTextAtBookmark("plazotot", plazo.getText());
-			WordProcessing.typeTextAtBookmark("dom", direccion.getText());
-			WordProcessing.typeTextAtBookmark("cargas", cargas.getText());
-			WordProcessing.typeTextAtBookmark("dni_nie", dninie.getText());
-			WordProcessing.typeTextAtBookmark("ape1", apellido1.getText());
-			WordProcessing.typeTextAtBookmark("ape2", apellido2.getText());
-			WordProcessing.typeTextAtBookmark("nombrecli", nombre.getText());
-			WordProcessing.typeTextAtBookmark("fechan", fechaNacimiento.getText());
-			WordProcessing.typeTextAtBookmark("prof", profesion.getText());
-			WordProcessing.typeTextAtBookmark("dom", domicilio.getText());
-			WordProcessing.typeTextAtBookmark("pob", poblacion.getText());
-			WordProcessing.typeTextAtBookmark("cp", codigoPostal.getText());
-			WordProcessing.typeTextAtBookmark("nomemp", nombreEmpresa.getText());
-			WordProcessing.typeTextAtBookmark("activemp", actividad.getText());
-			WordProcessing.typeTextAtBookmark("antiguo", antiguedad.getText());
-			WordProcessing.typeTextAtBookmark("posicion", puesto.getText());
-			WordProcessing.typeTextAtBookmark("diremp", direccionEmpresa.getText());
-			WordProcessing.typeTextAtBookmark("telemp", contactoEmpresa.getText());
-			WordProcessing.typeTextAtBookmark("fijosmen", ingresosFijos.getText());
-			WordProcessing.typeTextAtBookmark("varmen", ingresosVariables.getText());
-			WordProcessing.typeTextAtBookmark("gastosalq", gastosAlquiler.getText());
-			WordProcessing.typeTextAtBookmark("gastoshipo", gastosHipoteca.getText());
-			WordProcessing.typeTextAtBookmark("otrospres", otros.getText());
-			WordProcessing.typeTextAtBookmark("valorvivi", valor.getText());
-			WordProcessing.typeTextAtBookmark("cargasvivi", cargasVivienda.getText());
-			WordProcessing.typeTextAtBookmark("propiedad", ""+chb_propiedad.isSelected());
-			WordProcessing.typeTextAtBookmark("escritura", ""+chb_escritura.isSelected());
-			WordProcessing.typeTextAtBookmark("contratpriv", ""+chb_contratoPrivado.isSelected());
-			WordProcessing.typeTextAtBookmark("otros", ""+chb_otrosGastos.isSelected());
-			WordProcessing.typeTextAtBookmark("padres", ""+chb_padres.isSelected());
-			WordProcessing.typeTextAtBookmark("alquiler", ""+chb_alquiler.isSelected());
-			WordProcessing.typeTextAtBookmark("fijo", ""+chb_fijo.isSelected());
-			WordProcessing.typeTextAtBookmark("temp", ""+chb_temporal.isSelected());
-			WordProcessing.typeTextAtBookmark("aut", ""+chb_autonomo.isSelected());
-			WordProcessing.typeTextAtBookmark("otrosmas", ""+chb_otrosCosas.isSelected());
-			
-			
+		String nombreHipotecado = nombre.getText();
+		CreaCarpetaInformes(nombreHipotecado);
 
-			String nombreHipotecado = nombre.getText();
-			CreaCarpetaInformes(nombreHipotecado);
-			
-			WordProcessing.changeDocumentDirectory(System.getProperty("user.home")+"\\documents\\Informes_hipotecario\\"+nombre);
-			//WordProcessing.saveDocumentAsAndClose("hipotecado");
-			WordProcessing.saveDocumentAs(nombreHipotecado);
-			WordProcessing.exec();
-			
-			
-		}
-
-	private void CreaCarpetaInformes(String nombreHipotecado) {
-		 String fileName = "C:\\Users\\dam\\documents\\Informes_hipotecario\\"+nombreHipotecado;
-
-		  Path path = Paths.get(fileName);
-
-		    if (!Files.exists(path)) {
-		try {
-			Files.createDirectory(path);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("New Directory created !   "+fileName);
-		 } else {
-		    
-		 System.out.println("Directory already exists");
-		    }
-		 }
-	
+		WordProcessing.changeDocumentDirectory(
+				System.getProperty("user.home") + "\\documents\\Informes_hipotecario\\" + nombreHipotecado);
+		// WordProcessing.saveDocumentAsAndClose("hipotecado");
+		WordProcessing.saveDocumentAs(nombreHipotecado);
+		WordProcessing.exec();
 
 	}
 
+	private void CreaCarpetaInformes(String nombreHipotecado) {
+		String fileName = System.getProperty("user.home") + "\\documents\\Informes_hipotecario\\" + nombreHipotecado;
+
+		Path path = Paths.get(fileName);
+
+		if (!Files.exists(path)) {
+			try {
+				Files.createDirectory(path);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("New Directory created !   " + fileName);
+		} else {
+
+			System.out.println("Directory already exists");
+		}
+	}
+
+}

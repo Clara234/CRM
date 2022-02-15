@@ -8,9 +8,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
-
-
-
+import javax.swing.border.Border;
 import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +17,7 @@ import com.crm.persistencia.ConfigDir;
 import com.crm.persistencia.MisConexiones;
 import com.crm.pojos.Cliente;
 import com.crm.auxiliares.Auxiliar;
+import com.crm.auxiliares.BotonRedondeado;
 import com.crm.auxiliares.DameFecha;
 
 
@@ -274,8 +273,9 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		chb_root = new JCheckBox("InicioSesion");
 		chb_root.setForeground(Color.BLUE);
 		chb_root.addActionListener(new gestorEdicion());
-		botonVer = new JButton("   Ver");
+		botonVer = new JButton("Ver");
 		botonVer.setForeground(Color.BLUE);
+		
 		botonVer.setMaximumSize(new Dimension(250,30));
 		panelEsteControl.add(botonVer);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));

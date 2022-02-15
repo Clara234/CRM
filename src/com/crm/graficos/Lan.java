@@ -4,6 +4,7 @@ import java.awt.Color;
 
 
 
+
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -18,7 +19,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 //import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatDraculaIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatSolarizedLightContrastIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 
 public class Lan {
 	// CRM DE SERVICIOS FINANCIEROS CON DIRECTORIO DE CLIENTES AL QUE LES DAS
@@ -27,7 +28,7 @@ public class Lan {
 	public static void main(String[] args) {
 
 		try {
-			UIManager.setLookAndFeel(new FlatSolarizedLightContrastIJTheme() );
+			UIManager.setLookAndFeel(new FlatCyanLightIJTheme() );
 		} catch (UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
