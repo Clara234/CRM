@@ -86,8 +86,8 @@ public class PanelHipoteca extends JPanel {
 		setLayout(new BorderLayout());
 		add(setPanelNorte(alto, ancho, setPanelNorteDatos1(alto, ancho), setPanelNorteDatos2(alto, ancho),
 				setPanelNorteDatos3(alto, ancho)), BorderLayout.NORTH);
-		//add(setPanelOeste(alto, ancho, setPanelOesteDatos(alto, ancho)), BorderLayout.WEST);
-		add(cositas(), BorderLayout.WEST);
+		add(setPanelOeste(alto, ancho, setPanelOesteDatos(alto, ancho)), BorderLayout.WEST);
+		//add(cositas(), BorderLayout.WEST);
 		add(setPanelEste(alto, ancho, setPanelEsteDatos2(alto, ancho), setPanelControl(alto, ancho)));
 	}
 	
@@ -1037,18 +1037,20 @@ public void imprimir() {
 	}
 
 	private void CreaCarpetaInformes(String nombreHipotecado) {
-		String fileName = System.getProperty("user.home") + "\\documents\\Informes_hipotecario\\" + nombreHipotecado;
+		String fileName = System.getProperty("user.home") + "\\documents\\Informes_hipotecario\\"+nombreHipotecado;
 
 		Path path = Paths.get(fileName);
 
 		if (!Files.exists(path)) {
 			try {
 				Files.createDirectory(path);
+				System.out.println("New Directory created !   " + fileName);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
+				System.out.println("no se ha creado");
 				e.printStackTrace();
 			}
-			System.out.println("New Directory created !   " + fileName);
+			
 		} else {
 
 			System.out.println("Directory already exists");

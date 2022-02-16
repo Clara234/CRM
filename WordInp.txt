@@ -1,33 +1,33 @@
 @noteNotMatchingBookmarks               TRUE
-@createNewDocumentFromTemplate          C:\Users\dam\eclipse-workspace\CRM\src\com\crm\auxiliares\templates\informe_hipoteca.dotm
-fin                                     ghjhgh
-valad                                   67
-credito                                 6
-plazotot                                6
-dom                                     rfh
+@createNewDocumentFromTemplate          C:\Users\hp\eclipse-workspace\CRM\src\com\crm\auxiliares\templates\informe_hipoteca.dotm
+fin                                     
+valad                                   
+credito                                 
+plazotot                                
+dom                                     
 cargas                                  
-dni_nie                                 2345657
+dni_nie                                 
 ape1                                    
 ape2                                    
-nombrecli                               Soy el nombre
+nombrecli                               kcjkaklatree
 fechan                                  
-prof                                    hj
-dom                                     hg
-pob                                     hg
-cp                                      46546
+prof                                    
+dom                                     
+pob                                     
+cp                                      
 nomemp                                  
 activemp                                
 antiguo                                 
 posicion                                
 diremp                                  
 telemp                                  
-fijosmen                                546
-varmen                                  768
-gastosalq                               768
+fijosmen                                
+varmen                                  
+gastosalq                               
 gastoshipo                              
-otrospres                               78
-valorvivi                               78
-cargasvivi                              78
+otrospres                               
+valorvivi                               
+cargasvivi                              
 propiedad                               false
 escritura                               false
 contratpriv                             false
@@ -38,5 +38,5 @@ fijo                                    false
 temp                                    false
 aut                                     false
 otrosmas                                false
-@changeDocumentDirectory                C:\Users\dam\documents\Informes_hipotecario\Soy el nombre
-@saveDocumentAs                         Soy el nombre
+@changeDocumentDirectory                C:\Users\hp\documents\Informes_hipotecario\kcjkaklatree
+@saveDocumentAs                         kcjkaklatree
