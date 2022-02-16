@@ -2,9 +2,6 @@ package com.crm.graficos;
 
 import java.awt.Color;
 
-
-
-
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -28,16 +25,15 @@ public class Lan {
 	public static void main(String[] args) {
 
 		try {
-			UIManager.setLookAndFeel(new FlatCyanLightIJTheme() );
+			UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
 		} catch (UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		setMarco();
-	
-System.out.println("Bienvenido");
-		
-		
+
+		System.out.println("Bienvenido");
+
 	}
 
 	public static void setMarco() {
@@ -45,22 +41,20 @@ System.out.println("Bienvenido");
 		// top,left
 		// marco.setLocation(320,320);
 		marco.setLocation(0, 0);
-		
+
 		marco.getToolkit().getScreenSize();
 		marco.setForeground(Color.RED);
-	
+
 		JOptionPane.showConfirmDialog(marco, "Bienvenido", null, JOptionPane.CLOSED_OPTION);
-		
+
 		Toolkit.getDefaultToolkit().beep();
-		
-		
+
 		// es abstracta, toolkit no puede crear new, no es instanciable
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image imagen = tk.getImage("hipoteca.png");
 		marco.setIconImage(imagen);
 		marco.setMinimumSize(new Dimension(1000, 950));
-		
-		
+
 		Toolkit.getDefaultToolkit().beep();
 		// almacenar las dimensiones de la pantalla del usuario
 		Dimension dim = tk.getScreenSize();
@@ -71,7 +65,7 @@ System.out.println("Bienvenido");
 		// crear pestañas dentro del panel:
 		JTabbedPane pestanha = new JTabbedPane();
 		pestanha.setForeground(Color.gray);
-		pestanha.add("Directorio cliente", new PanelCliente(anchoM, altoM));// poner tabla cliente
+		pestanha.add("Directorio cliente", new PanelCliente(anchoM, altoM));
 		pestanha.add("Hipotecas", new PanelHipoteca(anchoM1, altoM1));
 		pestanha.add("Requisitos", new PanelRequisitos(anchoM2, altoM2));
 
@@ -82,7 +76,7 @@ System.out.println("Bienvenido");
 		System.out.println(dim.width + "px x " + dim.height + "px");
 		// especificamos al programa que finalice cuando el marco se cierre
 		marco.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		marco.setMinimumSize(new Dimension(700,600));
+		marco.setMinimumSize(new Dimension(700, 600));
 
 		// Se pon visible al final
 		marco.setVisible(true);

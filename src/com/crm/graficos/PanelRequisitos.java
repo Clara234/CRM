@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.Border;
 
 public class PanelRequisitos extends JPanel {
 
@@ -33,7 +34,7 @@ public class PanelRequisitos extends JPanel {
 	public PanelRequisitos(int ancho, int alto) {
 		setLayout(new BorderLayout());
 		add(setPanelMayor(alto, ancho, setPanel1(alto, ancho), setPanel2(alto, ancho)), BorderLayout.NORTH);
-		add(setPanelSur(alto, ancho), BorderLayout.CENTER);
+		add(setPanelSur(alto, ancho, setPanelEspacio1(alto, ancho), setPanelDatos(alto, ancho), setPanelEspacio2(alto, ancho)),BorderLayout.SOUTH);
 
 	}
 
@@ -41,7 +42,7 @@ public class PanelRequisitos extends JPanel {
 		JPanel panelMayor = new JPanel();
 		panelMayor.getBorder();
 		panelMayor.setLayout(new BorderLayout());
-		panelMayor.setPreferredSize(new Dimension((int) (ancho * 0.6), (int) (alto * 1.5)));
+		panelMayor.setPreferredSize(new Dimension((int) (ancho * 0.6), (int) (alto * 1.2)));
 		panelMayor.add(p1, BorderLayout.WEST);
 		panelMayor.add(p2, BorderLayout.EAST);
 		return panelMayor;
@@ -53,7 +54,7 @@ public class PanelRequisitos extends JPanel {
 		panel1.setLayout(new BorderLayout());
 		panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
 
-		// panel1.setBorder(BorderFactory.createLoweredBevelBorder());
+		 //panel1.setBorder(BorderFactory.createLoweredBevelBorder());
 		JLabel titulo = new JLabel("TRABAJADORES POR CUENTA AJENA(para nosotros)");
 		Font f = new Font("Italic", Font.ITALIC, 12);
 		titulo.setFont(f);
@@ -133,7 +134,7 @@ public class PanelRequisitos extends JPanel {
 		panel1.add(Box.createRigidArea(new Dimension(0, 10)));
 		panel1.add(ultimosrecibos2);
 
-		panel1.setPreferredSize(new Dimension((int) (ancho * 0.8), (int) (alto * 2.2)));
+		panel1.setPreferredSize(new Dimension((int) (ancho * 0.7), (int) (alto * 2.2)));
 
 		return panel1;
 	}
@@ -142,7 +143,7 @@ public class PanelRequisitos extends JPanel {
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new BorderLayout());
 		panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
-
+       //panel2.setBorder(BorderFactory.createLoweredBevelBorder());
 		JLabel titulo3 = new JLabel("TRABAJADORES AUTONOMOS(para nosotros)");
 		Font f = new Font("Italic", Font.ITALIC, 12);
 		titulo3.setFont(f);
@@ -219,14 +220,35 @@ public class PanelRequisitos extends JPanel {
 		panel2.add(ultimos_recibos_auto2);
 		panel2.add(Box.createRigidArea(new Dimension(0, 10)));
 		panel2.add(ultimo_recibo_auto2);
-
+		panel2.setPreferredSize(new Dimension((int) (ancho * 0.7), (int) (alto * 2.2)));
 		return panel2;
 	}
 
-	public JPanel setPanelSur(int alto, int ancho) {
+	public JPanel setPanelSur(int alto, int ancho, JPanel p1, JPanel p2,JPanel p3) {
 		JPanel panelSur = new JPanel();
+		panelSur.getBorder();
 		panelSur.setLayout(new BorderLayout());
-		panelSur.setLayout(new BoxLayout(panelSur, BoxLayout.LINE_AXIS));
+		panelSur.setPreferredSize(new Dimension((int) (ancho * 0.6), (int) (alto * 0.2)));
+		panelSur.add(p1, BorderLayout.EAST);
+		panelSur.add(p2, BorderLayout.CENTER);
+		panelSur.add(p3, BorderLayout.WEST);
+		return panelSur;
+		
+		
+	}
+	
+	public JPanel setPanelEspacio1(int ancho, int alto) {
+		JPanel espacio1 = new JPanel();
+	
+		espacio1.setPreferredSize(new Dimension((int) (ancho * 0.6), (int) (alto * 0.8)));
+		return espacio1;
+	}
+	
+	public JPanel setPanelDatos(int ancho, int alto) {
+		JPanel panelDatos = new JPanel();
+		panelDatos.setBorder(BorderFactory.createLoweredBevelBorder());
+		panelDatos.setLayout(new BorderLayout());
+		panelDatos.setLayout(new BoxLayout(panelDatos, BoxLayout.X_AXIS));
 
 		JTextArea dx = new JTextArea("Comentarios");
 		Font f = new Font("Times New Roman",Font.ITALIC,12);
@@ -243,21 +265,31 @@ public class PanelRequisitos extends JPanel {
 		JLabel busca = new JLabel("DNI NIE");
 		busca.setSize(250, 20);
 		JButton busqueda = new JButton("BUSCAR");
+		
 		busqueda.setMaximumSize(new Dimension(100,30));
 		busqueda.setForeground(Color.CYAN);
 
 		
 		
-		panelSur.add(ihj);
-		panelSur.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelSur.add(hoka);
-		panelSur.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelSur.add(busca);
-		panelSur.add(busqueda);
-		panelSur.setPreferredSize(new Dimension((int) (ancho * 2.5), (int) (alto * 0.2)));
+		panelDatos.add(ihj);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDatos.add(hoka);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDatos.add(busca);
+		panelDatos.add(busqueda);
+		panelDatos.setLocation(700, 400);
+		panelDatos.setPreferredSize(new Dimension((int) (ancho * 0.7), (int) (alto * 0.4)));
 
-		return panelSur;
-
+		return panelDatos;
+	}
+	
+	
+	public JPanel setPanelEspacio2(int ancho, int alto) {
+		JPanel espacio2 = new JPanel();
+		
+		espacio2.setPreferredSize(new Dimension((int) (ancho * 0.4), (int) (alto * 0.5)));
+	
+		return espacio2;
 	}
 
 }

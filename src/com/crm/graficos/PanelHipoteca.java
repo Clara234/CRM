@@ -3,10 +3,14 @@ package com.crm.graficos;
 import java.awt.BorderLayout;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Menu;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
 import java.awt.print.PageFormat;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -40,9 +44,11 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -71,15 +77,33 @@ public class PanelHipoteca extends JPanel {
 			chb_fijo, chb_temporal, chb_autonomo, chb_otrosCosas;
 	JTextArea otrosBienes, comentarios;
 	public JComboBox<String> tipo, nueva, estadoCivil, regimenBienes;
+	
+	
+	
 
 	public PanelHipoteca(int alto, int ancho) {
+		
 		setLayout(new BorderLayout());
 		add(setPanelNorte(alto, ancho, setPanelNorteDatos1(alto, ancho), setPanelNorteDatos2(alto, ancho),
 				setPanelNorteDatos3(alto, ancho)), BorderLayout.NORTH);
-		add(setPanelOeste(alto, ancho, setPanelOesteDatos(alto, ancho)), BorderLayout.WEST);
+		//add(setPanelOeste(alto, ancho, setPanelOesteDatos(alto, ancho)), BorderLayout.WEST);
+		add(cositas(), BorderLayout.WEST);
 		add(setPanelEste(alto, ancho, setPanelEsteDatos2(alto, ancho), setPanelControl(alto, ancho)));
-
 	}
+	
+	
+
+	public JTabbedPane cositas() {
+		JTabbedPane dx = new JTabbedPane();
+		dx.add( setPanelNorteDatos1(500,500), "Datos Hiupotecado" );
+		dx.add( setPanelNorteDatos1(500,500), "Datos 2" );
+		dx.add( setPanelNorteDatos1(500,500), "Datos aedwad" );
+		dx.add( setPanelNorteDatos1(500,500), "Que guapa eres" );
+		//dx.add("Datos Coyunge", new PanelConyuge());
+		return dx;
+		
+	}
+
 
 	public JPanel setPanelNorte(int alto, int ancho, JPanel jp1, JPanel jp2, JPanel jp3) {
 
@@ -939,7 +963,7 @@ public class PanelHipoteca extends JPanel {
 
 	}
 
-	public void imprimir() {
+public void imprimir() {
 
 		/*
 		 * chb_propiedad.setSelected(seleccionado.isPropiedad());
@@ -1030,5 +1054,7 @@ public class PanelHipoteca extends JPanel {
 			System.out.println("Directory already exists");
 		}
 	}
+
+	
 
 }
