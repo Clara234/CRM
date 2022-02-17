@@ -1,5 +1,5 @@
 @noteNotMatchingBookmarks               TRUE
-@createNewDocumentFromTemplate          C:\Users\hp\eclipse-workspace\CRM\src\com\crm\auxiliares\templates\informe_hipoteca.dotm
+@createNewDocumentFromTemplate          C:\Users\dam\eclipse-workspace\CRM\src\com\crm\auxiliares\templates\informe_hipoteca.dotm
 fin                                     
 valad                                   
 credito                                 
@@ -9,7 +9,7 @@ cargas
 dni_nie                                 
 ape1                                    
 ape2                                    
-nombrecli                               kcjkaklatree
+nombrecli                               ostiaaaa
 fechan                                  
 prof                                    
 dom                                     
@@ -29,14 +29,14 @@ otrospres
 valorvivi                               
 cargasvivi                              
 propiedad                               false
-escritura                               false
+escritura                               true
 contratpriv                             false
-otros                                   false
+otros                                   true
 padres                                  false
 alquiler                                false
 fijo                                    false
-temp                                    false
+temp                                    true
 aut                                     false
 otrosmas                                false
-@changeDocumentDirectory                C:\Users\hp\documents\Informes_hipotecario\kcjkaklatree
-@saveDocumentAs                         kcjkaklatree
+@changeDocumentDirectory                C:\Users\dam\documents\Informes_hipotecario\ostiaaaa
+@saveDocumentAs                         ostiaaaa

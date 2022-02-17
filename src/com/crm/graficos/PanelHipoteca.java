@@ -71,9 +71,14 @@ public class PanelHipoteca extends JPanel {
 	//datos hipotecado
 			dninie, apellido1, apellido2, nombre, fechaNacimiento, profesion, domicilio, poblacion, codigoPostal,
 			nombreEmpresa, actividad, antiguedad, puesto, direccionEmpresa, contactoEmpresa, ingresosFijos,
-			ingresosVariables, gastosAlquiler, gastosHipoteca, otros, valor, cargasVivienda;
-	//datos conyuge
 
+			ingresosVariables, gastosAlquiler, gastosHipoteca, otros, valor, cargasVivienda,
+	//datos conyuge
+	dninie_conyuge, apellido1_conyuge, apellido2_conyuge, nombre_conyuge, fechaNacimiento_conyuge, profesion_conyuge, domicilio_conyuge, poblacion_conyuge, codigoPostal_conyuge,
+	nombreEmpresa_conyuge, actividad_conyuge, antiguedad_conyuge, puesto_conyuge, direccionEmpresa_conyuge, contactoEmpresa_conyuge, ingresosFijos_conyuge,
+
+	ingresosVariables_conyuge, gastosAlquiler_conyuge, gastosHipoteca_conyuge, otros_conyuge, valor_conyuge, cargasVivienda_conyuge;
+	
 	JButton imprimir, insertar, limpiar;
 	JCheckBox //datos hipotecado
 	chb_editar, chb_propiedad, chb_escritura, chb_contratoPrivado, chb_otrosGastos, chb_padres, chb_alquiler,
@@ -105,7 +110,7 @@ public class PanelHipoteca extends JPanel {
 	public JTabbedPane cositas() {
 		JTabbedPane ventanitas = new JTabbedPane();
 		ventanitas.add( setPanelEste(1200,1000, setPanelEsteDatos(500,500), setPanelControl(500,500), setPanelEsteDatos2(500,500)),"Datos Hipotecado");
-		ventanitas.add( setPanelNorteDatos1(500,500),"Datos Conyuge" );
+		ventanitas.add(setPanelConyuge(1200,1000, setPanelPersonal(500,500), setPanelProfesional(1000,1000), setPanelEconomico(500,500)), "Datos Conyuge");
 		
 
 		return ventanitas;
@@ -304,7 +309,7 @@ public class PanelHipoteca extends JPanel {
 		JPanel panelEsteDatos2 = new JPanel();
 		panelEsteDatos2.setBorder(BorderFactory.createLoweredBevelBorder()); // borde
 		// para diferenciar paneles
-		panelEsteDatos2.setPreferredSize(new Dimension((int) (ancho * 0.9), (int) (alto * 1.2)));
+		panelEsteDatos2.setPreferredSize(new Dimension((int) (ancho * 0.6), (int) (alto * 1.2)));
 
 		panelEsteDatos2.setLayout(new BoxLayout(panelEsteDatos2, BoxLayout.Y_AXIS));
 		JLabel l_datoseconomicos = new JLabel("Datos Economicos:");
@@ -773,7 +778,7 @@ public JPanel setPanelEsteDatos2(int alto, int ancho){
 	l_ocupacion.setForeground(Color.BLACK);
 
 	JLabel l_dninie = new JLabel("Dni|nie");
-	dninie = new JTextField();
+	dninie= new JTextField();
 	dninie.setForeground(Color.gray);
 	Font f = new Font("Serif", Font.BOLD, 12);
 	dninie.setFont(f);
@@ -792,7 +797,7 @@ public JPanel setPanelEsteDatos2(int alto, int ancho){
 	apellido2.setMaximumSize(new Dimension(250, 20));
 
 	JLabel l_nombre = new JLabel("Nombre: ");
-	nombre = new JTextField();
+	nombre= new JTextField();
 	nombre.setForeground(Color.gray);
 	nombre.setFont(f);
 	nombre.setMaximumSize(new Dimension(250, 20));
@@ -803,7 +808,7 @@ public JPanel setPanelEsteDatos2(int alto, int ancho){
 	fechaNacimiento.setFont(f);
 	fechaNacimiento.setMaximumSize(new Dimension(250, 20));
 
-	chb_fijo = new JCheckBox("Fijo");
+	chb_fijo= new JCheckBox("Fijo");
 	chb_fijo.setForeground(Color.BLACK);
 	chb_temporal = new JCheckBox("Temporal");
 	chb_temporal.setForeground(Color.BLACK);
@@ -902,7 +907,195 @@ public JPanel setPanelConyuge(int alto, int ancho, JPanel jp1, JPanel jp2, JPane
 public JPanel setPanelPersonal(int alto, int ancho) {
 	JPanel panelPersonal = new JPanel();
 	
+	panelPersonal.setLayout(new BoxLayout(panelPersonal, BoxLayout.Y_AXIS));
+	panelPersonal.setBorder(BorderFactory.createLoweredBevelBorder());
+	panelPersonal.setPreferredSize(new Dimension((int) (ancho * 0.8), (int) (alto * 1.2)));
+
+	JLabel l_datosPersonales = new JLabel("Datos Personales");
+	l_datosPersonales.setForeground(Color.BLACK);
+	Font f1 = new Font("Arial", Font.BOLD, 15);
+	l_datosPersonales.setFont(f1);
+
+	JLabel l_titular = new JLabel("Titular");
+	l_titular.setForeground(Color.BLACK);
+	JLabel l_ocupacion = new JLabel("Ocupacion");
+	l_ocupacion.setForeground(Color.BLACK);
+
+	JLabel l_dninie = new JLabel("Dni|nie");
+	dninie_conyuge= new JTextField();
+	dninie_conyuge.setForeground(Color.gray);
+	Font f = new Font("Serif", Font.BOLD, 12);
+	dninie_conyuge.setFont(f);
+	dninie_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_apellido1 = new JLabel("Primer Apellido: ");
+	apellido1_conyuge = new JTextField();
+	apellido1_conyuge.setForeground(Color.gray);
+	apellido1_conyuge.setFont(f);
+	apellido1_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_apellido2 = new JLabel("Segundo Apellido: ");
+	apellido2_conyuge = new JTextField();
+	apellido2_conyuge.setForeground(Color.gray);
+	apellido2_conyuge.setFont(f);
+	apellido2_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_nombre = new JLabel("Nombre: ");
+	nombre_conyuge= new JTextField();
+	nombre_conyuge.setForeground(Color.gray);
+	nombre_conyuge.setFont(f);
+	nombre_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_fechanacimiento = new JLabel("Fecha de Nacimiento: ");
+	fechaNacimiento_conyuge = new JTextField();
+	fechaNacimiento_conyuge.setForeground(Color.gray);
+	fechaNacimiento_conyuge.setFont(f);
+	fechaNacimiento_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	chb_fijo_conyuge= new JCheckBox("Fijo");
+	chb_fijo_conyuge.setForeground(Color.BLACK);
+	chb_temporal_conyuge = new JCheckBox("Temporal");
+	chb_temporal_conyuge.setForeground(Color.BLACK);
+	chb_autonomo_conyuge = new JCheckBox("Autonomo");
+	chb_autonomo_conyuge.setForeground(Color.BLACK);
+	chb_otrosCosas_conyuge = new JCheckBox("Otros");
+	chb_otrosCosas_conyuge.setForeground(Color.BLACK);
+
+	JLabel l_profesion = new JLabel("Profesion: ");
+	profesion_conyuge = new JTextField();
+	profesion_conyuge.setForeground(Color.gray);
+	profesion_conyuge.setFont(f);
+	profesion_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_domicilio = new JLabel("Domicilio: ");
+	domicilio_conyuge = new JTextField();
+	domicilio_conyuge.setForeground(Color.gray);
+	domicilio_conyuge.setFont(f);
+	domicilio_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_poblacion = new JLabel("Poblacion: ");
+	poblacion_conyuge = new JTextField();
+	poblacion_conyuge.setForeground(Color.gray);
+	poblacion_conyuge.setFont(f);
+	poblacion_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_codigopostal = new JLabel("Codigo Postal: ");
+	codigoPostal_conyuge = new JTextField();
+	codigoPostal_conyuge.setForeground(Color.gray);
+	codigoPostal_conyuge.setFont(f);
+	codigoPostal_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	panelPersonal.add(l_datosPersonales);
+	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelPersonal.add(l_titular);
+	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelPersonal.add(l_dninie);
+	panelPersonal.add(dninie_conyuge);
+	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelPersonal.add(l_apellido1);
+	panelPersonal.add(apellido1_conyuge);
+	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelPersonal.add(l_apellido2);
+	panelPersonal.add(apellido2_conyuge);
+	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelPersonal.add(l_nombre);
+	panelPersonal.add(nombre_conyuge);
+	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelPersonal.add(l_fechanacimiento);
+	panelPersonal.add(fechaNacimiento_conyuge);
+	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelPersonal.add(l_ocupacion);
+	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelPersonal.add(chb_fijo_conyuge);
+	panelPersonal.add(chb_temporal_conyuge);
+	panelPersonal.add(chb_autonomo_conyuge);
+	panelPersonal.add(chb_otrosCosas_conyuge);
+	panelPersonal.add(l_profesion);
+	panelPersonal.add(profesion_conyuge);
+	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelPersonal.add(l_domicilio);
+	panelPersonal.add(domicilio_conyuge);
+	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelPersonal.add(l_poblacion);
+	panelPersonal.add(poblacion_conyuge);
+	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelPersonal.add(l_codigopostal);
+	panelPersonal.add(codigoPostal_conyuge);
+	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
+
+	
 	return panelPersonal;
+}
+public JPanel setPanelProfesional(int alto, int ancho) {
+	JPanel panelProfesional = new JPanel();
+	
+	JLabel l_datosProfesionales = new JLabel("Datos Profesionales");
+	l_datosProfesionales.setForeground(Color.BLACK);
+	Font f1 = new Font("Arial", Font.BOLD, 15);
+	l_datosProfesionales.setFont(f1);
+
+	JLabel l_nombreEmpresa = new JLabel("Nombre de la Empresa:  ");
+	nombreEmpresa_conyuge = new JTextField();
+	nombreEmpresa_conyuge.setForeground(Color.gray);
+	Font f = new Font("Serif", Font.BOLD, 12);
+	nombreEmpresa_conyuge.setFont(f);
+	nombreEmpresa_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_actividad = new JLabel("Actividad de la Empresa:  ");
+	actividad_conyuge = new JTextField();
+	actividad_conyuge.setForeground(Color.gray);
+	actividad_conyuge.setFont(f);
+	actividad_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_antiguedad = new JLabel("Antiguedad:  ");
+	antiguedad_conyuge = new JTextField();
+	antiguedad_conyuge.setForeground(Color.gray);
+	antiguedad_conyuge.setFont(f);
+	antiguedad_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_puesto = new JLabel("Puesto de la empresa:  ");
+	puesto_conyuge = new JTextField();
+	puesto_conyuge.setForeground(Color.gray);
+	puesto_conyuge.setFont(f);
+	puesto_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_direccionEmpresa = new JLabel("Direccion de la empresa:  ");
+	direccionEmpresa_conyuge = new JTextField();
+	direccionEmpresa_conyuge.setForeground(Color.gray);
+	direccionEmpresa_conyuge.setFont(f);
+	direccionEmpresa_conyuge.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_contactoEmpresa = new JLabel("Correo-e de la empresa:  ");
+	contactoEmpresa_conyuge = new JTextField();
+	contactoEmpresa_conyuge.setForeground(Color.gray);
+	contactoEmpresa_conyuge.setFont(f);
+	contactoEmpresa_conyuge.setMaximumSize(new Dimension(250, 20));
+	
+	
+	panelProfesional.add(l_datosProfesionales);
+	panelProfesional.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelProfesional.add(l_nombreEmpresa);
+	panelProfesional.add(nombreEmpresa_conyuge);
+	panelProfesional.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelProfesional.add(l_actividad);
+	panelProfesional.add(actividad_conyuge);
+	panelProfesional.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelProfesional.add(l_antiguedad);
+	panelProfesional.add(antiguedad_conyuge);
+	panelProfesional.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelProfesional.add(l_puesto);
+	panelProfesional.add(puesto_conyuge);
+	panelProfesional.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelProfesional.add(l_direccionEmpresa);
+	panelProfesional.add(direccionEmpresa_conyuge);
+	panelProfesional.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelProfesional.add(l_contactoEmpresa);
+	panelProfesional.add(contactoEmpresa_conyuge);
+	panelProfesional.add(Box.createRigidArea(new Dimension(0, 10)));
+	
+	
+
+	return panelProfesional;
 }
 
 public JPanel setPanelEconomico(int alto, int ancho) {
@@ -920,107 +1113,108 @@ public JPanel setPanelEconomico(int alto, int ancho) {
 	l_datoseconomicos.setFont(f1);
 
 	JLabel l_ingresosFijos = new JLabel("Ingresos Fijos(mes):");
-	ingresosFijos = new JTextField();
-	ingresosFijos.setForeground(Color.gray);
+	ingresosFijos_conyuge = new JTextField();
+	ingresosFijos_conyuge.setForeground(Color.gray);
 	Font f = new Font("Serif", Font.BOLD, 12);
-	ingresosFijos.setFont(f);
-	ingresosFijos.setMaximumSize(new Dimension(250, 20));
+	ingresosFijos_conyuge.setFont(f);
+	ingresosFijos_conyuge.setMaximumSize(new Dimension(250, 20));
 
 	JLabel l_ingresosVariables = new JLabel("Ingresos Variables(mes):");
-	ingresosVariables = new JTextField();
-	ingresosVariables.setForeground(Color.gray);
-	ingresosVariables.setFont(f);
-	ingresosVariables.setMaximumSize(new Dimension(250, 20));
+	ingresosVariables_conyuge = new JTextField();
+	ingresosVariables_conyuge.setForeground(Color.gray);
+	ingresosVariables_conyuge.setFont(f);
+	ingresosVariables_conyuge.setMaximumSize(new Dimension(250, 20));
 
 	JLabel l_gastosAlquiler = new JLabel("Gastos Alquiler:");
-	gastosAlquiler = new JTextField();
-	gastosAlquiler.setForeground(Color.gray);
-	gastosAlquiler.setFont(f);
-	gastosAlquiler.setMaximumSize(new Dimension(250, 20));
+	gastosAlquiler_conyuge = new JTextField();
+	gastosAlquiler_conyuge.setForeground(Color.gray);
+	gastosAlquiler_conyuge.setFont(f);
+	gastosAlquiler_conyuge.setMaximumSize(new Dimension(250, 20));
 
 	JLabel l_gastosHipoteca = new JLabel("Gastos Hipoteca:");
-	gastosHipoteca = new JTextField();
-	gastosHipoteca.setForeground(Color.gray);
-	gastosHipoteca.setFont(f);
-	gastosHipoteca.setMaximumSize(new Dimension(250, 20));
+	gastosHipoteca_conyuge = new JTextField();
+	gastosHipoteca_conyuge.setForeground(Color.gray);
+	gastosHipoteca_conyuge.setFont(f);
+	gastosHipoteca_conyuge.setMaximumSize(new Dimension(250, 20));
 
 	JLabel l_otros = new JLabel("Otros:");
-	otros = new JTextField();
-	otros.setForeground(Color.gray);
-	otros.setFont(f);
-	otros.setMaximumSize(new Dimension(250, 20));
+	otros_conyuge = new JTextField();
+	otros_conyuge.setForeground(Color.gray);
+	otros_conyuge.setFont(f);
+	otros_conyuge.setMaximumSize(new Dimension(250, 20));
 
 	JLabel l_valor = new JLabel("Valor:");
-	valor = new JTextField();
-	valor.setForeground(Color.gray);
-	valor.setFont(f);
-	valor.setMaximumSize(new Dimension(250, 20));
+	valor_conyuge = new JTextField();
+	valor_conyuge.setForeground(Color.gray);
+	valor_conyuge.setFont(f);
+	valor_conyuge.setMaximumSize(new Dimension(250, 20));
 
 	JLabel l_cargasVivienda = new JLabel("Cargas vivienda: ");
-	cargasVivienda = new JTextField();
-	cargasVivienda.setForeground(Color.gray);
-	cargasVivienda.setFont(f);
-	cargasVivienda.setMaximumSize(new Dimension(250, 20));
+	cargasVivienda_conyuge = new JTextField();
+	cargasVivienda_conyuge.setForeground(Color.gray);
+	cargasVivienda_conyuge.setFont(f);
+	cargasVivienda_conyuge.setMaximumSize(new Dimension(250, 20));
 
 	JLabel l_otrosBienes = new JLabel("Otro Bienes: ");
-	otrosBienes = new JTextArea();
-	otrosBienes.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-	otrosBienes.setForeground(Color.gray);
-	otrosBienes.setMaximumSize(new Dimension(375, 70));
+	otrosBienes_conyuge = new JTextArea();
+	otrosBienes_conyuge.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+	otrosBienes_conyuge.setForeground(Color.gray);
+	otrosBienes_conyuge.setMaximumSize(new Dimension(375, 70));
 
-	chb_propiedad = new JCheckBox("Propiedad");
-	chb_propiedad.setForeground(Color.BLACK);
-	chb_escritura = new JCheckBox("Escritura");
-	chb_escritura.setForeground(Color.BLACK);
-	chb_contratoPrivado = new JCheckBox("Contrato Privado");
-	chb_contratoPrivado.setForeground(Color.BLACK);
-	chb_otrosGastos = new JCheckBox("Otros");
-	chb_otrosGastos.setForeground(Color.BLACK);
-	chb_padres = new JCheckBox("Padres");
-	chb_padres.setForeground(Color.BLACK);
-	chb_alquiler = new JCheckBox("Alquiler");
-	chb_alquiler.setForeground(Color.BLACK);
+	chb_propiedad_conyuge= new JCheckBox("Propiedad");
+	chb_propiedad_conyuge.setForeground(Color.BLACK);
+	chb_escritura_conyuge = new JCheckBox("Escritura");
+	chb_escritura_conyuge.setForeground(Color.BLACK);
+	chb_contratoPrivado_conyuge = new JCheckBox("Contrato Privado");
+	chb_contratoPrivado_conyuge.setForeground(Color.BLACK);
+	chb_otrosGastos_conyuge = new JCheckBox("Otros");
+	chb_otrosGastos_conyuge.setForeground(Color.BLACK);
+	chb_padres_conyuge = new JCheckBox("Padres");
+	chb_padres_conyuge.setForeground(Color.BLACK);
+	chb_alquiler_conyuge = new JCheckBox("Alquiler");
+	chb_alquiler_conyuge.setForeground(Color.BLACK);
 
 	panelEconomico.add(l_datoseconomicos);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
 	panelEconomico.add(l_ingresosFijos);
-	panelEconomico.add(ingresosFijos);
+	panelEconomico.add(ingresosFijos_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
 	panelEconomico.add(l_ingresosVariables);
-	panelEconomico.add(ingresosVariables);
+	panelEconomico.add(ingresosVariables_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
 	panelEconomico.add(l_gastosAlquiler);
-	panelEconomico.add(gastosAlquiler);
+	panelEconomico.add(gastosAlquiler_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
 	panelEconomico.add(l_gastosHipoteca);
-	panelEconomico.add(gastosHipoteca);
+	panelEconomico.add(gastosHipoteca_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
 	panelEconomico.add(l_otros);
-	panelEconomico.add(otros);
+	panelEconomico.add(otros_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
 	panelEconomico.add(l_valor);
-	panelEconomico.add(valor);
+	panelEconomico.add(valor_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
 	panelEconomico.add(l_cargasVivienda);
-	panelEconomico.add(cargasVivienda);
+	panelEconomico.add(cargasVivienda_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
-	panelEconomico.add(chb_propiedad);
+	panelEconomico.add(chb_propiedad_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 2)));
-	panelEconomico.add(chb_escritura);
+	panelEconomico.add(chb_escritura_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 2)));
-	panelEconomico.add(chb_contratoPrivado);
+	panelEconomico.add(chb_contratoPrivado_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 2)));
-	panelEconomico.add(chb_otrosGastos);
+	panelEconomico.add(chb_otrosGastos_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 2)));
-	panelEconomico.add(chb_padres);
+	panelEconomico.add(chb_padres_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 2)));
-	panelEconomico.add(chb_alquiler);
+	panelEconomico.add(chb_alquiler_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 2)));
 	panelEconomico.add(l_otrosBienes);
-	panelEconomico.add(otrosBienes);
+	panelEconomico.add(otrosBienes_conyuge);
 	panelEconomico.add(Box.createRigidArea(new Dimension(0, 1))); 
 	return panelEconomico;
 }
+
 
 	public void insertarBBDD() {
 
@@ -1169,6 +1363,39 @@ public void imprimir() {
 		WordProcessing.typeTextAtBookmark("aut", "" + chb_autonomo.isSelected());
 		WordProcessing.typeTextAtBookmark("otrosmas", "" + chb_otrosCosas.isSelected());
 
+		
+		WordProcessing.typeTextAtBookmark("dni_nie", dninie_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("ape1", apellido1_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("ape2", apellido2_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("nombrecli", nombre_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("fechan", fechaNacimiento_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("prof", profesion_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("dom", domicilio_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("pob", poblacion_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("cp", codigoPostal_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("nomemp", nombreEmpresa_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("activemp", actividad_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("antiguo", antiguedad_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("posicion", puesto_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("diremp", direccionEmpresa_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("telemp", contactoEmpresa_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("fijosmen", ingresosFijos_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("varmen", ingresosVariables_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("gastosalq", gastosAlquiler_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("gastoshipo", gastosHipoteca_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("otrospres", otros_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("valorvivi", valor_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("cargasvivi", cargasVivienda_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("propiedad", "" + chb_propiedad_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("escritura", "" + chb_escritura_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("contratpriv", "" + chb_contratoPrivado_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("otros", "" + chb_otrosGastos_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("padres", "" + chb_padres_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("alquiler", "" + chb_alquiler_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("fijo", "" + chb_fijo_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("temp", "" + chb_temporal_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("aut", "" + chb_autonomo_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("otrosmas", "" + chb_otrosCosas_conyuge.isSelected());
 		String nombreHipotecado = nombre.getText();
 		CreaCarpetaInformes(nombreHipotecado);
 
