@@ -66,16 +66,25 @@ public class PanelHipoteca extends JPanel {
 	PreparedStatement ps;
 	Hipotecado seleccionado;
 	ResultSet rs;
-
+             
 	JTextField finalidad, valorAdquisicion, valorImporte, plazo, direccion, cargas, vinculacion, busquedacliente,
+	//datos hipotecado
 			dninie, apellido1, apellido2, nombre, fechaNacimiento, profesion, domicilio, poblacion, codigoPostal,
 			nombreEmpresa, actividad, antiguedad, puesto, direccionEmpresa, contactoEmpresa, ingresosFijos,
 			ingresosVariables, gastosAlquiler, gastosHipoteca, otros, valor, cargasVivienda;
+	//datos conyuge
 
 	JButton imprimir, insertar, limpiar;
-	JCheckBox chb_editar, chb_propiedad, chb_escritura, chb_contratoPrivado, chb_otrosGastos, chb_padres, chb_alquiler,
-			chb_fijo, chb_temporal, chb_autonomo, chb_otrosCosas;
-	JTextArea otrosBienes, comentarios;
+	JCheckBox //datos hipotecado
+	chb_editar, chb_propiedad, chb_escritura, chb_contratoPrivado, chb_otrosGastos, chb_padres, chb_alquiler,
+			chb_fijo, chb_temporal, chb_autonomo, chb_otrosCosas,
+	//datos conyuge
+	chb_propiedad_conyuge, chb_escritura_conyuge, chb_contratoPrivado_conyuge, chb_otrosGastos_conyuge, chb_padres_conyuge, chb_alquiler_conyuge,
+	chb_fijo_conyuge, chb_temporal_conyuge, chb_autonomo_conyuge, chb_otrosCosas_conyuge;
+	JTextArea //datos hipotecado
+	otrosBienes, comentarios,
+	//datos conyuge
+	otrosBienes_conyuge;
 	public JComboBox<String> tipo, nueva, estadoCivil, regimenBienes;
 	
 	
@@ -86,21 +95,20 @@ public class PanelHipoteca extends JPanel {
 		setLayout(new BorderLayout());
 		add(setPanelNorte(alto, ancho, setPanelNorteDatos1(alto, ancho), setPanelNorteDatos2(alto, ancho),
 				setPanelNorteDatos3(alto, ancho)), BorderLayout.NORTH);
-		add(setPanelOeste(alto, ancho, setPanelOesteDatos(alto, ancho)), BorderLayout.WEST);
-		//add(cositas(), BorderLayout.WEST);
-		add(setPanelEste(alto, ancho, setPanelEsteDatos2(alto, ancho), setPanelControl(alto, ancho)));
+		//add(setPanelOeste(alto, ancho, setPanelOesteDatos(alto, ancho)), BorderLayout.WEST);
+		add(cositas(), BorderLayout.CENTER);
+		//add(setPanelEste(alto, ancho, setPanelEsteDatos(alto, ancho), setPanelControl(alto, ancho), setPanelEsteDatos2(alto,ancho)));
 	}
 	
 	
 
 	public JTabbedPane cositas() {
-		JTabbedPane dx = new JTabbedPane();
-		dx.add( setPanelNorteDatos1(500,500), "Datos Hiupotecado" );
-		dx.add( setPanelNorteDatos1(500,500), "Datos 2" );
-		dx.add( setPanelNorteDatos1(500,500), "Datos aedwad" );
-		dx.add( setPanelNorteDatos1(500,500), "Que guapa eres" );
-		//dx.add("Datos Coyunge", new PanelConyuge());
-		return dx;
+		JTabbedPane ventanitas = new JTabbedPane();
+		ventanitas.add( setPanelEste(1200,1000, setPanelEsteDatos(500,500), setPanelControl(500,500), setPanelEsteDatos2(500,500)),"Datos Hipotecado");
+		ventanitas.add( setPanelNorteDatos1(500,500),"Datos Conyuge" );
+		
+
+		return ventanitas;
 		
 	}
 
@@ -279,18 +287,19 @@ public class PanelHipoteca extends JPanel {
 
 	}
 
-	public JPanel setPanelEste(int alto, int ancho, JPanel jp1, JPanel jp2) {
+	public JPanel setPanelEste(int alto, int ancho, JPanel jp1, JPanel jp2, JPanel jp3) {
 		JPanel panelEste = new JPanel();
 		panelEste.setLayout(new BorderLayout());
 		panelEste.setPreferredSize(new Dimension((int) (ancho * 0.5), (int) (alto * 1.0)));
-		panelEste.add(jp1, BorderLayout.CENTER);
-		panelEste.add(jp2, BorderLayout.WEST);
+		panelEste.add(jp1, BorderLayout.WEST);
+		panelEste.add(jp2, BorderLayout.CENTER);
+		panelEste.add(jp3, BorderLayout.EAST);
 		return panelEste;
 
 	}
 
 //correcto
-	public JPanel setPanelEsteDatos2(int alto, int ancho) {
+	public JPanel setPanelEsteDatos(int alto, int ancho) {
 
 		JPanel panelEsteDatos2 = new JPanel();
 		panelEsteDatos2.setBorder(BorderFactory.createLoweredBevelBorder()); // borde
@@ -528,6 +537,7 @@ public class PanelHipoteca extends JPanel {
 		return panelControl;
 
 	}
+	
 
 	public class gestorImprimir implements ActionListener {
 
@@ -744,139 +754,273 @@ public class PanelHipoteca extends JPanel {
 	public void clearotrosBienes() {
 		otrosBienes.setText("");
 	}
+public JPanel setPanelEsteDatos2(int alto, int ancho){
+	JPanel panelEsteDatos2 = new JPanel();
+	panelEsteDatos2.setBorder(BorderFactory.createLoweredBevelBorder());
+	panelEsteDatos2.setLayout(new BoxLayout(panelEsteDatos2, BoxLayout.Y_AXIS));
+	panelEsteDatos2.setSize(250, 250);
+	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 1)));
+	panelEsteDatos2.setPreferredSize(new Dimension((int) (ancho * 1.5), (int) (alto * 0.8)));
+	panelEsteDatos2.setBorder(BorderFactory.createLoweredBevelBorder());
+	JLabel l_datosPersonales = new JLabel("Datos Personales");
+	l_datosPersonales.setForeground(Color.BLACK);
+	Font f1 = new Font("Arial", Font.BOLD, 15);
+	l_datosPersonales.setFont(f1);
 
-	public JPanel setPanelOeste(int alto, int ancho, JPanel j1) {
+	JLabel l_titular = new JLabel("Titular");
+	l_titular.setForeground(Color.BLACK);
+	JLabel l_ocupacion = new JLabel("Ocupacion");
+	l_ocupacion.setForeground(Color.BLACK);
+
+	JLabel l_dninie = new JLabel("Dni|nie");
+	dninie = new JTextField();
+	dninie.setForeground(Color.gray);
+	Font f = new Font("Serif", Font.BOLD, 12);
+	dninie.setFont(f);
+	dninie.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_apellido1 = new JLabel("Primer Apellido: ");
+	apellido1 = new JTextField();
+	apellido1.setForeground(Color.gray);
+	apellido1.setFont(f);
+	apellido1.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_apellido2 = new JLabel("Segundo Apellido: ");
+	apellido2 = new JTextField();
+	apellido2.setForeground(Color.gray);
+	apellido2.setFont(f);
+	apellido2.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_nombre = new JLabel("Nombre: ");
+	nombre = new JTextField();
+	nombre.setForeground(Color.gray);
+	nombre.setFont(f);
+	nombre.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_fechanacimiento = new JLabel("Fecha de Nacimiento: ");
+	fechaNacimiento = new JTextField();
+	fechaNacimiento.setForeground(Color.gray);
+	fechaNacimiento.setFont(f);
+	fechaNacimiento.setMaximumSize(new Dimension(250, 20));
+
+	chb_fijo = new JCheckBox("Fijo");
+	chb_fijo.setForeground(Color.BLACK);
+	chb_temporal = new JCheckBox("Temporal");
+	chb_temporal.setForeground(Color.BLACK);
+	chb_autonomo = new JCheckBox("Autonomo");
+	chb_autonomo.setForeground(Color.BLACK);
+	chb_otrosCosas = new JCheckBox("Otros");
+	chb_otrosCosas.setForeground(Color.BLACK);
+
+	JLabel l_profesion = new JLabel("Profesion: ");
+	profesion = new JTextField();
+	profesion.setForeground(Color.gray);
+	profesion.setFont(f);
+	profesion.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_domicilio = new JLabel("Domicilio: ");
+	domicilio = new JTextField();
+	domicilio.setForeground(Color.gray);
+	domicilio.setFont(f);
+	domicilio.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_poblacion = new JLabel("Poblacion: ");
+	poblacion = new JTextField();
+	poblacion.setForeground(Color.gray);
+	poblacion.setFont(f);
+	poblacion.setMaximumSize(new Dimension(250, 20));
+
+	JLabel l_codigopostal = new JLabel("Codigo Postal: ");
+	codigoPostal = new JTextField();
+	codigoPostal.setForeground(Color.gray);
+	codigoPostal.setFont(f);
+	codigoPostal.setMaximumSize(new Dimension(250, 20));
+
+	panelEsteDatos2.add(l_datosPersonales);
+	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEsteDatos2.add(l_titular);
+	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEsteDatos2.add(l_dninie);
+	panelEsteDatos2.add(dninie);
+	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEsteDatos2.add(l_apellido1);
+	panelEsteDatos2.add(apellido1);
+	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEsteDatos2.add(l_apellido2);
+	panelEsteDatos2.add(apellido2);
+	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEsteDatos2.add(l_nombre);
+	panelEsteDatos2.add(nombre);
+	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEsteDatos2.add(l_fechanacimiento);
+	panelEsteDatos2.add(fechaNacimiento);
+	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEsteDatos2.add(l_ocupacion);
+	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEsteDatos2.add(chb_fijo);
+	panelEsteDatos2.add(chb_temporal);
+	panelEsteDatos2.add(chb_autonomo);
+	panelEsteDatos2.add(chb_otrosCosas);
+	panelEsteDatos2.add(l_profesion);
+	panelEsteDatos2.add(profesion);
+	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEsteDatos2.add(l_domicilio);
+	panelEsteDatos2.add(domicilio);
+	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEsteDatos2.add(l_poblacion);
+	panelEsteDatos2.add(poblacion);
+	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEsteDatos2.add(l_codigopostal);
+	panelEsteDatos2.add(codigoPostal);
+	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
+
+	return panelEsteDatos2;
+
+}
+	/*public JPanel setPanelOeste(int alto, int ancho, JPanel j1) {
 		JPanel panelOeste = new JPanel();
 		panelOeste.setLayout(new BorderLayout());
 		panelOeste.setPreferredSize(new Dimension((int) (ancho * 0.7), (int) (alto * 1.2)));
 		panelOeste.add(j1, BorderLayout.WEST);
 		return panelOeste;
 
-	}
+	}*/
 
-	public JPanel setPanelOesteDatos(int alto, int ancho) {
-		JPanel panelOesteDatos = new JPanel();
-		panelOesteDatos.setBorder(BorderFactory.createLoweredBevelBorder());
-		panelOesteDatos.setLayout(new BoxLayout(panelOesteDatos, BoxLayout.Y_AXIS));
-		panelOesteDatos.setSize(250, 250);
-		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 1)));
-		panelOesteDatos.setPreferredSize(new Dimension((int) (ancho * 1.5), (int) (alto * 0.8)));
-		panelOesteDatos.setBorder(BorderFactory.createLoweredBevelBorder());
-		JLabel l_datosPersonales = new JLabel("Datos Personales");
-		l_datosPersonales.setForeground(Color.BLACK);
-		Font f1 = new Font("Arial", Font.BOLD, 15);
-		l_datosPersonales.setFont(f1);
+	/*public JPanel setPanelOesteDatos(int alto, int ancho) {
+		
+*/
+public JPanel setPanelConyuge(int alto, int ancho, JPanel jp1, JPanel jp2, JPanel jp3) {
+	JPanel panelConyuge = new JPanel();
+	panelConyuge.setLayout(new BorderLayout());
+	panelConyuge.setPreferredSize(new Dimension((int)(ancho *0.7), (int) (alto *1.2)));
+	panelConyuge.add(jp1,BorderLayout.WEST);
+	panelConyuge.add(jp2, BorderLayout.CENTER);
+	panelConyuge.add(jp3, BorderLayout.EAST);
+	return panelConyuge;
+}
 
-		JLabel l_titular = new JLabel("Titular");
-		l_titular.setForeground(Color.BLACK);
-		JLabel l_ocupacion = new JLabel("Ocupacion");
-		l_ocupacion.setForeground(Color.BLACK);
+public JPanel setPanelPersonal(int alto, int ancho) {
+	JPanel panelPersonal = new JPanel();
+	
+	return panelPersonal;
+}
 
-		JLabel l_dninie = new JLabel("Dni|nie");
-		dninie = new JTextField();
-		dninie.setForeground(Color.gray);
-		Font f = new Font("Serif", Font.BOLD, 12);
-		dninie.setFont(f);
-		dninie.setMaximumSize(new Dimension(250, 20));
+public JPanel setPanelEconomico(int alto, int ancho) {
+	
+	JPanel panelEconomico = new JPanel();
+	panelEconomico.setBorder(BorderFactory.createLoweredBevelBorder()); // borde
+	// para diferenciar paneles
+	panelEconomico.setPreferredSize(new Dimension((int) (ancho * 0.9), (int) (alto * 1.2)));
 
-		JLabel l_apellido1 = new JLabel("Primer Apellido: ");
-		apellido1 = new JTextField();
-		apellido1.setForeground(Color.gray);
-		apellido1.setFont(f);
-		apellido1.setMaximumSize(new Dimension(250, 20));
+	panelEconomico.setLayout(new BoxLayout(panelEconomico, BoxLayout.Y_AXIS));
+	JLabel l_datoseconomicos = new JLabel("Datos Economicos:");
+	l_datoseconomicos.setSize(new Dimension(250, 20));
+	l_datoseconomicos.setForeground(Color.BLACK);
+	Font f1 = new Font("Arial", Font.BOLD, 15);
+	l_datoseconomicos.setFont(f1);
 
-		JLabel l_apellido2 = new JLabel("Segundo Apellido: ");
-		apellido2 = new JTextField();
-		apellido2.setForeground(Color.gray);
-		apellido2.setFont(f);
-		apellido2.setMaximumSize(new Dimension(250, 20));
+	JLabel l_ingresosFijos = new JLabel("Ingresos Fijos(mes):");
+	ingresosFijos = new JTextField();
+	ingresosFijos.setForeground(Color.gray);
+	Font f = new Font("Serif", Font.BOLD, 12);
+	ingresosFijos.setFont(f);
+	ingresosFijos.setMaximumSize(new Dimension(250, 20));
 
-		JLabel l_nombre = new JLabel("Nombre: ");
-		nombre = new JTextField();
-		nombre.setForeground(Color.gray);
-		nombre.setFont(f);
-		nombre.setMaximumSize(new Dimension(250, 20));
+	JLabel l_ingresosVariables = new JLabel("Ingresos Variables(mes):");
+	ingresosVariables = new JTextField();
+	ingresosVariables.setForeground(Color.gray);
+	ingresosVariables.setFont(f);
+	ingresosVariables.setMaximumSize(new Dimension(250, 20));
 
-		JLabel l_fechanacimiento = new JLabel("Fecha de Nacimiento: ");
-		fechaNacimiento = new JTextField();
-		fechaNacimiento.setForeground(Color.gray);
-		fechaNacimiento.setFont(f);
-		fechaNacimiento.setMaximumSize(new Dimension(250, 20));
+	JLabel l_gastosAlquiler = new JLabel("Gastos Alquiler:");
+	gastosAlquiler = new JTextField();
+	gastosAlquiler.setForeground(Color.gray);
+	gastosAlquiler.setFont(f);
+	gastosAlquiler.setMaximumSize(new Dimension(250, 20));
 
-		chb_fijo = new JCheckBox("Fijo");
-		chb_fijo.setForeground(Color.BLACK);
-		chb_temporal = new JCheckBox("Temporal");
-		chb_temporal.setForeground(Color.BLACK);
-		chb_autonomo = new JCheckBox("Autonomo");
-		chb_autonomo.setForeground(Color.BLACK);
-		chb_otrosCosas = new JCheckBox("Otros");
-		chb_otrosCosas.setForeground(Color.BLACK);
+	JLabel l_gastosHipoteca = new JLabel("Gastos Hipoteca:");
+	gastosHipoteca = new JTextField();
+	gastosHipoteca.setForeground(Color.gray);
+	gastosHipoteca.setFont(f);
+	gastosHipoteca.setMaximumSize(new Dimension(250, 20));
 
-		JLabel l_profesion = new JLabel("Profesion: ");
-		profesion = new JTextField();
-		profesion.setForeground(Color.gray);
-		profesion.setFont(f);
-		profesion.setMaximumSize(new Dimension(250, 20));
+	JLabel l_otros = new JLabel("Otros:");
+	otros = new JTextField();
+	otros.setForeground(Color.gray);
+	otros.setFont(f);
+	otros.setMaximumSize(new Dimension(250, 20));
 
-		JLabel l_domicilio = new JLabel("Domicilio: ");
-		domicilio = new JTextField();
-		domicilio.setForeground(Color.gray);
-		domicilio.setFont(f);
-		domicilio.setMaximumSize(new Dimension(250, 20));
+	JLabel l_valor = new JLabel("Valor:");
+	valor = new JTextField();
+	valor.setForeground(Color.gray);
+	valor.setFont(f);
+	valor.setMaximumSize(new Dimension(250, 20));
 
-		JLabel l_poblacion = new JLabel("Poblacion: ");
-		poblacion = new JTextField();
-		poblacion.setForeground(Color.gray);
-		poblacion.setFont(f);
-		poblacion.setMaximumSize(new Dimension(250, 20));
+	JLabel l_cargasVivienda = new JLabel("Cargas vivienda: ");
+	cargasVivienda = new JTextField();
+	cargasVivienda.setForeground(Color.gray);
+	cargasVivienda.setFont(f);
+	cargasVivienda.setMaximumSize(new Dimension(250, 20));
 
-		JLabel l_codigopostal = new JLabel("Codigo Postal: ");
-		codigoPostal = new JTextField();
-		codigoPostal.setForeground(Color.gray);
-		codigoPostal.setFont(f);
-		codigoPostal.setMaximumSize(new Dimension(250, 20));
+	JLabel l_otrosBienes = new JLabel("Otro Bienes: ");
+	otrosBienes = new JTextArea();
+	otrosBienes.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+	otrosBienes.setForeground(Color.gray);
+	otrosBienes.setMaximumSize(new Dimension(375, 70));
 
-		panelOesteDatos.add(l_datosPersonales);
-		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelOesteDatos.add(l_titular);
-		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelOesteDatos.add(l_dninie);
-		panelOesteDatos.add(dninie);
-		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelOesteDatos.add(l_apellido1);
-		panelOesteDatos.add(apellido1);
-		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelOesteDatos.add(l_apellido2);
-		panelOesteDatos.add(apellido2);
-		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelOesteDatos.add(l_nombre);
-		panelOesteDatos.add(nombre);
-		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelOesteDatos.add(l_fechanacimiento);
-		panelOesteDatos.add(fechaNacimiento);
-		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelOesteDatos.add(l_ocupacion);
-		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelOesteDatos.add(chb_fijo);
-		panelOesteDatos.add(chb_temporal);
-		panelOesteDatos.add(chb_autonomo);
-		panelOesteDatos.add(chb_otrosCosas);
-		panelOesteDatos.add(l_profesion);
-		panelOesteDatos.add(profesion);
-		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelOesteDatos.add(l_domicilio);
-		panelOesteDatos.add(domicilio);
-		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelOesteDatos.add(l_poblacion);
-		panelOesteDatos.add(poblacion);
-		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelOesteDatos.add(l_codigopostal);
-		panelOesteDatos.add(codigoPostal);
-		panelOesteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+	chb_propiedad = new JCheckBox("Propiedad");
+	chb_propiedad.setForeground(Color.BLACK);
+	chb_escritura = new JCheckBox("Escritura");
+	chb_escritura.setForeground(Color.BLACK);
+	chb_contratoPrivado = new JCheckBox("Contrato Privado");
+	chb_contratoPrivado.setForeground(Color.BLACK);
+	chb_otrosGastos = new JCheckBox("Otros");
+	chb_otrosGastos.setForeground(Color.BLACK);
+	chb_padres = new JCheckBox("Padres");
+	chb_padres.setForeground(Color.BLACK);
+	chb_alquiler = new JCheckBox("Alquiler");
+	chb_alquiler.setForeground(Color.BLACK);
 
-		return panelOesteDatos;
-
-	}
+	panelEconomico.add(l_datoseconomicos);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEconomico.add(l_ingresosFijos);
+	panelEconomico.add(ingresosFijos);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEconomico.add(l_ingresosVariables);
+	panelEconomico.add(ingresosVariables);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEconomico.add(l_gastosAlquiler);
+	panelEconomico.add(gastosAlquiler);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEconomico.add(l_gastosHipoteca);
+	panelEconomico.add(gastosHipoteca);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEconomico.add(l_otros);
+	panelEconomico.add(otros);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEconomico.add(l_valor);
+	panelEconomico.add(valor);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEconomico.add(l_cargasVivienda);
+	panelEconomico.add(cargasVivienda);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 10)));
+	panelEconomico.add(chb_propiedad);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 2)));
+	panelEconomico.add(chb_escritura);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 2)));
+	panelEconomico.add(chb_contratoPrivado);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 2)));
+	panelEconomico.add(chb_otrosGastos);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 2)));
+	panelEconomico.add(chb_padres);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 2)));
+	panelEconomico.add(chb_alquiler);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 2)));
+	panelEconomico.add(l_otrosBienes);
+	panelEconomico.add(otrosBienes);
+	panelEconomico.add(Box.createRigidArea(new Dimension(0, 1))); 
+	return panelEconomico;
+}
 
 	public void insertarBBDD() {
 
