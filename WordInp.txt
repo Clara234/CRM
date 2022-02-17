@@ -1,42 +1,74 @@
 @noteNotMatchingBookmarks               TRUE
-@createNewDocumentFromTemplate          C:\Users\dam\eclipse-workspace\CRM\src\com\crm\auxiliares\templates\informe_hipoteca.dotm
-fin                                     
-valad                                   
-credito                                 
-plazotot                                
-dom                                     
-cargas                                  
-dni_nie                                 
-ape1                                    
-ape2                                    
-nombrecli                               ostiaaaa
+@createNewDocumentFromTemplate          C:\Users\hp\eclipse-workspace\CRM\src\com\crm\auxiliares\templates\informe_hipoteca.dotm
+fin                                     wdrgtfhy
+valad                                   gf
+credito                                 46
+plazotot                                5
+dom                                     ghf
+cargas                                  3
+dni_nie                                 345678g
+ape1                                    Rodero
+ape2                                    Castro
+nombrecli                               Clara
 fechan                                  
 prof                                    
 dom                                     
 pob                                     
 cp                                      
-nomemp                                  
-activemp                                
-antiguo                                 
-posicion                                
+nomemp                                  DogWuaw
+activemp                                34
+antiguo                                 3
+posicion                                34
 diremp                                  
 telemp                                  
-fijosmen                                
-varmen                                  
-gastosalq                               
-gastoshipo                              
+fijosmen                                43
+varmen                                  4
+gastosalq                               43
+gastoshipo                              45
 otrospres                               
 valorvivi                               
 cargasvivi                              
-propiedad                               false
+propiedad                               true
 escritura                               true
 contratpriv                             false
-otros                                   true
+otros                                   false
 padres                                  false
 alquiler                                false
-fijo                                    false
+fijo                                    true
 temp                                    true
 aut                                     false
 otrosmas                                false
-@changeDocumentDirectory                C:\Users\dam\documents\Informes_hipotecario\ostiaaaa
-@saveDocumentAs                         ostiaaaa
+dni_nie_conyu                           234567h
+ape1_conyu                              
+ape2_conyu                              
+nombrecli_conyu                         Pepe
+fechan_conyu                            
+prof_conyu                              
+dom_conyu                               
+pob_conyu                               
+cp_conyu                                
+nomemp_conyu                            wterty
+activemp_conyu                          5
+antiguo_conyu                           5
+posicion_conyu                          
+diremp_conyu                            
+telemp_conyu                            
+fijosmen_conyu                          
+varmen_conyu                            
+gastosalq_conyu                         
+gastoshipo_conyu                        
+otrospres_conyu                         
+valorvivi_conyu                         
+cargasvivi_conyu                        
+propiedad_conyu                         true
+escritura_conyu                         true
+contratpriv_conyu                       false
+otros_conyu                             false
+padres_conyu                            false
+alquiler_conyu                          false
+fijo_conyu                              false
+temp_conyu                              true
+aut_conyu                               false
+otrosmas_conyu                          true
+@changeDocumentDirectory                C:\Users\hp\documents\Informes_hipotecario\Clara
+@saveDocumentAs                         Clara

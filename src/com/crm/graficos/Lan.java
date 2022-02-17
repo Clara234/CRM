@@ -22,6 +22,7 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatSolarizedLight
 public class Lan {
 	// CRM DE SERVICIOS FINANCIEROS CON DIRECTORIO DE CLIENTES AL QUE LES DAS
 	// SERVICIOS
+	//private static Dimension dim;
 
 	public static void main(String[] args) {
 
@@ -43,8 +44,11 @@ public class Lan {
 		// marco.setLocation(320,320);
 		marco.setLocation(0, 0);
 
-		marco.getToolkit().getScreenSize();
-		marco.setForeground(Color.RED);
+	/*	dim =marco.getToolkit().getScreenSize();
+		marco.setSize(dim);
+		marco.setUndecorated(true);
+		marco.setVisible(true);*/
+	
 
 		JOptionPane.showConfirmDialog(marco, "Bienvenido", null, JOptionPane.CLOSED_OPTION);
 
@@ -58,10 +62,10 @@ public class Lan {
 
 		Toolkit.getDefaultToolkit().beep();
 		// almacenar las dimensiones de la pantalla del usuario
-		Dimension dim = tk.getScreenSize();
-		int anchoM = (int) (dim.width / 2), altoM = (int) (dim.height / 2);
-		int anchoM1 = (int) (dim.width / 2), altoM1 = (int) (dim.height / 2);
-		int anchoM2 = (int) (dim.width / 2), altoM2 = (int) (dim.height / 2);
+		Dimension dim = tk.getDefaultToolkit().getScreenSize();
+		int anchoM = (int) (dim.width /2), altoM = (int) (dim.height /2);
+		int anchoM1 = (int) (dim.width /2), altoM1 = (int) (dim.height /2);
+		int anchoM2 = (int) (dim.width /2), altoM2 = (int) (dim.height /2);
 
 		// crear pestañas dentro del panel:
 		JTabbedPane pestanha = new JTabbedPane();
@@ -74,7 +78,7 @@ public class Lan {
 
 		marco.getContentPane().add(pestanha);
 		// imprimir por consola la resolucion de la pantalla
-		System.out.println(dim.width + "px x " + dim.height + "px");
+		System.out.println(dim.width + "px x " + dim.height + "px ");
 		// especificamos al programa que finalice cuando el marco se cierre
 		marco.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		marco.setMinimumSize(new Dimension(700, 600));

@@ -428,7 +428,7 @@ public class PanelHipoteca extends JPanel {
 		JPanel panelControl = new JPanel();
 		panelControl.setLayout(new BoxLayout(panelControl, BoxLayout.Y_AXIS));
 		panelControl.setBorder(BorderFactory.createLoweredBevelBorder());
-		panelControl.setPreferredSize(new Dimension((int) (ancho * 0.8), (int) (alto * 1.2)));
+		panelControl.setPreferredSize(new Dimension((int) (ancho * 0.6), (int) (alto * 1.2)));
 
 		JLabel l_datosProfesionales = new JLabel("Datos Profesionales");
 		l_datosProfesionales.setForeground(Color.BLACK);
@@ -765,7 +765,7 @@ public JPanel setPanelEsteDatos2(int alto, int ancho){
 	panelEsteDatos2.setLayout(new BoxLayout(panelEsteDatos2, BoxLayout.Y_AXIS));
 	panelEsteDatos2.setSize(250, 250);
 	panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 1)));
-	panelEsteDatos2.setPreferredSize(new Dimension((int) (ancho * 1.5), (int) (alto * 0.8)));
+	panelEsteDatos2.setPreferredSize(new Dimension((int) (ancho * 0.8), (int) (alto * 0.8)));
 	panelEsteDatos2.setBorder(BorderFactory.createLoweredBevelBorder());
 	JLabel l_datosPersonales = new JLabel("Datos Personales");
 	l_datosPersonales.setForeground(Color.BLACK);
@@ -897,7 +897,7 @@ public JPanel setPanelEsteDatos2(int alto, int ancho){
 public JPanel setPanelConyuge(int alto, int ancho, JPanel jp1, JPanel jp2, JPanel jp3) {
 	JPanel panelConyuge = new JPanel();
 	panelConyuge.setLayout(new BorderLayout());
-	panelConyuge.setPreferredSize(new Dimension((int)(ancho *0.7), (int) (alto *1.2)));
+	panelConyuge.setPreferredSize(new Dimension((int)(ancho *1.2), (int) (alto *1.2)));
 	panelConyuge.add(jp1,BorderLayout.WEST);
 	panelConyuge.add(jp2, BorderLayout.CENTER);
 	panelConyuge.add(jp3, BorderLayout.EAST);
@@ -909,7 +909,7 @@ public JPanel setPanelPersonal(int alto, int ancho) {
 	
 	panelPersonal.setLayout(new BoxLayout(panelPersonal, BoxLayout.Y_AXIS));
 	panelPersonal.setBorder(BorderFactory.createLoweredBevelBorder());
-	panelPersonal.setPreferredSize(new Dimension((int) (ancho * 0.8), (int) (alto * 1.2)));
+	panelPersonal.setPreferredSize(new Dimension((int) (ancho * 0.7), (int) (alto * 1.2)));
 
 	JLabel l_datosPersonales = new JLabel("Datos Personales");
 	l_datosPersonales.setForeground(Color.BLACK);
@@ -1092,7 +1092,7 @@ public JPanel setPanelProfesional(int alto, int ancho) {
 	panelProfesional.add(l_contactoEmpresa);
 	panelProfesional.add(contactoEmpresa_conyuge);
 	panelProfesional.add(Box.createRigidArea(new Dimension(0, 10)));
-	
+	 panelProfesional.setPreferredSize(new Dimension((int) (ancho * 0.4), (int) (alto * 1.2)));
 	
 
 	return panelProfesional;
@@ -1103,7 +1103,7 @@ public JPanel setPanelEconomico(int alto, int ancho) {
 	JPanel panelEconomico = new JPanel();
 	panelEconomico.setBorder(BorderFactory.createLoweredBevelBorder()); // borde
 	// para diferenciar paneles
-	panelEconomico.setPreferredSize(new Dimension((int) (ancho * 0.9), (int) (alto * 1.2)));
+	panelEconomico.setPreferredSize(new Dimension((int) (ancho * 0.8), (int) (alto * 1.2)));
 
 	panelEconomico.setLayout(new BoxLayout(panelEconomico, BoxLayout.Y_AXIS));
 	JLabel l_datoseconomicos = new JLabel("Datos Economicos:");
@@ -1303,28 +1303,10 @@ public JPanel setPanelEconomico(int alto, int ancho) {
 
 public void imprimir() {
 
-		/*
-		 * chb_propiedad.setSelected(seleccionado.isPropiedad());
-		 * chb_escritura.setSelected(seleccionado.isEscritura());
-		 * chb_contratoPrivado.setSelected(seleccionado.isContratoPrivado());
-		 * chb_otrosGastos.setSelected(seleccionado.isOtrosGastos());
-		 * chb_padres.setSelected(seleccionado.isPadres());
-		 * chb_alquiler.setSelected(seleccionado.isAlquiler());
-		 * chb_fijo.setSelected(seleccionado.isFijo());
-		 * chb_temporal.setSelected(seleccionado.isTemporal());
-		 * chb_autonomo.setSelected(seleccionado.isAutonomo());
-		 * chb_otrosCosas.setSelected(seleccionado.isOtrasCosas());
-		 */
-
-		// tipo = new JComboBox<String>();
-		// nueva = new JComboBox<String>();
-		// estadoCivil = new JComboBox<String>();
-		// regimenBienes = new JComboBox<String>();
-
+	
 		File miTemplate = new File("src\\com\\crm\\auxiliares\\templates\\informe_hipoteca.dotm");
 		WordProcessing.createNewDocumentFromTemplate(miTemplate.getAbsolutePath());
 		WordProcessing.typeTextAtBookmark("fin", finalidad.getText());
-		// System.out.println(":"+finalidad.getText());
 		WordProcessing.typeTextAtBookmark("valad", valorAdquisicion.getText());
 		WordProcessing.typeTextAtBookmark("credito", valorImporte.getText());
 		WordProcessing.typeTextAtBookmark("plazotot", plazo.getText());
@@ -1362,46 +1344,43 @@ public void imprimir() {
 		WordProcessing.typeTextAtBookmark("temp", "" + chb_temporal.isSelected());
 		WordProcessing.typeTextAtBookmark("aut", "" + chb_autonomo.isSelected());
 		WordProcessing.typeTextAtBookmark("otrosmas", "" + chb_otrosCosas.isSelected());
-
+		WordProcessing.typeTextAtBookmark("dni_nie_conyu", dninie_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("ape1_conyu", apellido1_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("ape2_conyu", apellido2_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("nombrecli_conyu", nombre_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("fechan_conyu", fechaNacimiento_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("prof_conyu", profesion_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("dom_conyu", domicilio_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("pob_conyu", poblacion_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("cp_conyu", codigoPostal_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("nomemp_conyu", nombreEmpresa_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("activemp_conyu", actividad_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("antiguo_conyu", antiguedad_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("posicion_conyu", puesto_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("diremp_conyu", direccionEmpresa_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("telemp_conyu", contactoEmpresa_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("fijosmen_conyu", ingresosFijos_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("varmen_conyu", ingresosVariables_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("gastosalq_conyu", gastosAlquiler_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("gastoshipo_conyu", gastosHipoteca_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("otrospres_conyu", otros_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("valorvivi_conyu", valor_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("cargasvivi_conyu", cargasVivienda_conyuge.getText());
+		WordProcessing.typeTextAtBookmark("propiedad_conyu", "" + chb_propiedad_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("escritura_conyu", "" + chb_escritura_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("contratpriv_conyu", "" + chb_contratoPrivado_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("otros_conyu", "" + chb_otrosGastos_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("padres_conyu", "" + chb_padres_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("alquiler_conyu", "" + chb_alquiler_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("fijo_conyu", "" + chb_fijo_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("temp_conyu", "" + chb_temporal_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("aut_conyu", "" + chb_autonomo_conyuge.isSelected());
+		WordProcessing.typeTextAtBookmark("otrosmas_conyu", "" + chb_otrosCosas_conyuge.isSelected());
 		
-		WordProcessing.typeTextAtBookmark("dni_nie", dninie_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("ape1", apellido1_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("ape2", apellido2_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("nombrecli", nombre_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("fechan", fechaNacimiento_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("prof", profesion_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("dom", domicilio_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("pob", poblacion_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("cp", codigoPostal_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("nomemp", nombreEmpresa_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("activemp", actividad_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("antiguo", antiguedad_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("posicion", puesto_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("diremp", direccionEmpresa_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("telemp", contactoEmpresa_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("fijosmen", ingresosFijos_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("varmen", ingresosVariables_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("gastosalq", gastosAlquiler_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("gastoshipo", gastosHipoteca_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("otrospres", otros_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("valorvivi", valor_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("cargasvivi", cargasVivienda_conyuge.getText());
-		WordProcessing.typeTextAtBookmark("propiedad", "" + chb_propiedad_conyuge.isSelected());
-		WordProcessing.typeTextAtBookmark("escritura", "" + chb_escritura_conyuge.isSelected());
-		WordProcessing.typeTextAtBookmark("contratpriv", "" + chb_contratoPrivado_conyuge.isSelected());
-		WordProcessing.typeTextAtBookmark("otros", "" + chb_otrosGastos_conyuge.isSelected());
-		WordProcessing.typeTextAtBookmark("padres", "" + chb_padres_conyuge.isSelected());
-		WordProcessing.typeTextAtBookmark("alquiler", "" + chb_alquiler_conyuge.isSelected());
-		WordProcessing.typeTextAtBookmark("fijo", "" + chb_fijo_conyuge.isSelected());
-		WordProcessing.typeTextAtBookmark("temp", "" + chb_temporal_conyuge.isSelected());
-		WordProcessing.typeTextAtBookmark("aut", "" + chb_autonomo_conyuge.isSelected());
-		WordProcessing.typeTextAtBookmark("otrosmas", "" + chb_otrosCosas_conyuge.isSelected());
 		String nombreHipotecado = nombre.getText();
 		CreaCarpetaInformes(nombreHipotecado);
-
 		WordProcessing.changeDocumentDirectory(
 				System.getProperty("user.home") + "\\documents\\Informes_hipotecario\\" + nombreHipotecado);
-		// WordProcessing.saveDocumentAsAndClose("hipotecado");
 		WordProcessing.saveDocumentAs(nombreHipotecado);
 		WordProcessing.exec();
 
