@@ -1020,6 +1020,7 @@ public JPanel setPanelPersonal(int alto, int ancho) {
 	panelPersonal.add(poblacion_conyuge);
 	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
 	panelPersonal.add(l_codigopostal);
+	//panelPersonal.add(new JLabel("adsadasd")); 
 	panelPersonal.add(codigoPostal_conyuge);
 	panelPersonal.add(Box.createRigidArea(new Dimension(0, 10)));
 
@@ -1028,6 +1029,7 @@ public JPanel setPanelPersonal(int alto, int ancho) {
 }
 public JPanel setPanelProfesional(int alto, int ancho) {
 	JPanel panelProfesional = new JPanel();
+	panelProfesional.setLayout(new BoxLayout(panelProfesional, BoxLayout.Y_AXIS));
 	
 	JLabel l_datosProfesionales = new JLabel("Datos Profesionales");
 	l_datosProfesionales.setForeground(Color.BLACK);
@@ -1283,7 +1285,65 @@ public JPanel setPanelEconomico(int alto, int ancho) {
 				ps.setBoolean(40, chb_padres.isSelected());
 				ps.setBoolean(41, chb_alquiler.isSelected());
 				ps.setString(42, otrosBienes.getText());
+				
+				ps = c.getPS(ConfigDir.getInstance().getProperty("query11"));
+				
+				ps.setString(1,dninie_conyuge.getText());
+				ps.setString(2,apellido1_conyuge.getText());
+				ps.setString(3,apellido2_conyuge.getText());
+				ps.setString(4,nombre_conyuge.getText());
+				ps.setTimestamp(5, Timestamp.valueOf(fechaNacimiento_conyuge.getText()));
+				ps.setBoolean(6, chb_fijo_conyuge.isSelected());
+				ps.setBoolean(7, chb_temporal_conyuge.isSelected());
+				ps.setBoolean(8, chb_autonomo_conyuge.isSelected());
+				ps.setBoolean(9, chb_otrosCosas_conyuge.isSelected());
+				ps.setString(10,profesion_conyuge.getText());
+				ps.setString(11,domicilio_conyuge.getText());
+				ps.setString(12,poblacion_conyuge.getText());
+				ps.setString(13, codigoPostal_conyuge.getText());
+				
 
+
+				ps.setString(14, nombreEmpresa_conyuge.getText());
+				ps.setString(15, actividad_conyuge.getText());
+				ps.setString(16, antiguedad_conyuge.getText());
+				ps.setString(17, puesto_conyuge.getText());
+				ps.setString(18, direccionEmpresa_conyuge.getText());
+				ps.setString(19, contactoEmpresa_conyuge.getText());
+				
+				
+				
+				ps.setString(20, ingresosFijos_conyuge.getText());
+				ps.setString(21, ingresosVariables_conyuge.getText());
+				ps.setString(22, gastosAlquiler_conyuge.getText());
+				ps.setString(23, gastosHipoteca_conyuge.getText());
+				ps.setString(24, otros_conyuge.getText());
+				ps.setString(25, valor_conyuge.getText());
+				
+				
+
+				ps.setBoolean(26, chb_propiedad_conyuge.isSelected());
+				ps.setBoolean(27, chb_escritura_conyuge.isSelected());
+				ps.setBoolean(28, chb_contratoPrivado_conyuge.isSelected());
+				ps.setBoolean(29, chb_padres_conyuge.isSelected());
+				ps.setBoolean(30, chb_otrosGastos_conyuge.isSelected());
+				ps.setBoolean(31, chb_alquiler_conyuge.isSelected());
+				
+				ps.setString(32,otrosBienes_conyuge.getText());
+				
+				
+				
+				
+				
+				
+	 /*profesion_conyuge, domicilio_conyuge, poblacion_conyuge, poblacion_conyuge,
+				nombreEmpresa_conyuge, actividad_conyuge, antiguedad_conyuge, puesto_conyuge, direccionEmpresa_conyuge, contactoEmpresa_conyuge, ingresosFijos_conyuge,
+
+				ingresosVariables_conyuge, gastosAlquiler_conyuge, gastosHipoteca_conyuge, otros_conyuge, 
+				valor_conyuge, cargasVivienda_conyuge;
+
+	 chb_propiedad_conyuge, chb_escritura_conyuge, chb_contratoPrivado_conyuge, chb_otrosGastos_conyuge, chb_padres_conyuge, chb_alquiler_conyuge,
+		chb_fijo_conyuge, chb_temporal_conyuge, chb_autonomo_conyuge, chb_otrosCosas_conyuge;*/
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -1380,7 +1440,7 @@ public void imprimir() {
 		String nombreHipotecado = nombre.getText();
 		CreaCarpetaInformes(nombreHipotecado);
 		WordProcessing.changeDocumentDirectory(
-				System.getProperty("user.home") + "\\documents\\Informes_hipotecario\\" + nombreHipotecado);
+				System.getProperty("user.home") + "\\documents\\Informes_hipotecario\\" );
 		WordProcessing.saveDocumentAs(nombreHipotecado);
 		WordProcessing.exec();
 

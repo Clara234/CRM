@@ -1,9 +1,6 @@
 
 package com.crm.graficos;
 
-
-
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -12,14 +9,12 @@ import javax.swing.border.Border;
 import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableModel;
 
-
 import com.crm.persistencia.ConfigDir;
 import com.crm.persistencia.MisConexiones;
 import com.crm.pojos.Cliente;
 import com.crm.auxiliares.Auxiliar;
 import com.crm.auxiliares.BotonRedondeado;
 import com.crm.auxiliares.DameFecha;
-
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -60,8 +55,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	JButton botonVer, botonInsertar, botonBorrar, botonActualizar, botonMusica, botonAcceder;
 	JTextField tf_dninie, tf_correoe, tf_ciudad, tf_ubicacion, tf_telefono, tf_fecha_alta, tf_notas;
 	JCheckBox chb_autorizado, chb_cliente, chb_adjunto, chb_root;
-	JMenuItem miCalculadora, copiaBase,miNavegador;
-	
+	JMenuItem miCalculadora, copiaBase, miNavegador;
 
 	List<Cliente> listaClientes;
 
@@ -105,7 +99,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Accesos Rápidos");
 
-		 miCalculadora = new JMenuItem("Calculadora");
+		miCalculadora = new JMenuItem("Calculadora");
 		miCalculadora.setForeground(Color.darkGray);
 		miCalculadora.addActionListener(new ActionListener() {
 
@@ -119,7 +113,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			}
 
 		});
-		 miNavegador = new JMenuItem("Navegador");
+		miNavegador = new JMenuItem("Navegador");
 		miNavegador.setForeground(Color.darkGray);
 		miNavegador.addActionListener(new ActionListener() {
 
@@ -134,7 +128,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			}
 		});
 
-		 copiaBase = new JMenuItem("Backup");
+		copiaBase = new JMenuItem("Backup");
 		copiaBase.setForeground(Color.darkGray);
 		copiaBase.addActionListener(new ActionListener() {
 
@@ -151,7 +145,6 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			}
 		});
 
-		
 		menu.add(miCalculadora);
 		menu.add(miNavegador);
 		menu.add(copiaBase);
@@ -161,9 +154,6 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		return menuBar;
 	}
 
-	
-
-	
 	public JPanel setPanelEste(int alto, int ancho, JPanel p1, JPanel p2) {
 		JPanel panelEste = new JPanel();
 		panelEste.setLayout(new BorderLayout());
@@ -275,28 +265,28 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		chb_root.addActionListener(new gestorEdicion());
 		botonVer = new JButton("Ver");
 		botonVer.setForeground(Color.BLUE);
-		
-		botonVer.setMaximumSize(new Dimension(250,30));
+
+		botonVer.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonVer);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonInsertar = new JButton("Insertar");
 		botonInsertar.setForeground(Color.BLUE);
-		botonInsertar.setMaximumSize(new Dimension(250,30));
+		botonInsertar.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonInsertar);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonBorrar = new JButton(" Borrar");
 		botonBorrar.setForeground(Color.BLUE);
-		botonBorrar.setMaximumSize(new Dimension(250,30));
+		botonBorrar.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonBorrar);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonActualizar = new JButton("Actualizar");
 		botonActualizar.setForeground(Color.BLUE);
-		botonActualizar.setMaximumSize(new Dimension(250,30));
+		botonActualizar.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonActualizar);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonMusica = new JButton("Musica");
 		botonMusica.setForeground(Color.BLUE);
-		botonMusica.setMaximumSize(new Dimension(250,30));
+		botonMusica.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonMusica);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		panelEsteControl.add(chb_root);
@@ -326,52 +316,33 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-		try {
-			c = new MisConexiones();
-		} catch (InstantiationException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			ps = c.getPS(ConfigDir.getInstance().getProperty("query2"));
-			
-			 ps.setString(1, tf_dninie.getText());
-			 ps.setString(2, tf_correoe.getText());
-			 ps.setString(3, tf_ciudad.getText());
-			 ps.setString(4, tf_ubicacion.getText());
-			 ps.setTimestamp(5, Timestamp.valueOf(tf_fecha_alta.getText()));
-			 ps.setInt(6, Integer.valueOf(tf_telefono.getText()));
-			 ps.setBoolean(7,chb_autorizado.isSelected());
-			 ps.setBoolean(8,chb_cliente.isSelected());
-			 ps.setBoolean(9,chb_adjunto.isSelected());
-			 ps.setString(10,tf_notas.getText());
-			 
-			 ps.executeUpdate();
-			 
-					
-			 refresh();
-			 
-			 
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		
-		
-				
-			 
+
+			try {
+				c = new MisConexiones();
+
+				ps = c.getPS(ConfigDir.getInstance().getProperty("query2"));
+
+				ps.setString(1, tf_dninie.getText());
+				ps.setString(2, tf_correoe.getText());
+				ps.setString(3, tf_ciudad.getText());
+				ps.setString(4, tf_ubicacion.getText());
+				ps.setTimestamp(5, Timestamp.valueOf(tf_fecha_alta.getText()));
+				ps.setInt(6, Integer.valueOf(tf_telefono.getText()));
+				ps.setBoolean(7, chb_autorizado.isSelected());
+				ps.setBoolean(8, chb_cliente.isSelected());
+				ps.setBoolean(9, chb_adjunto.isSelected());
+				ps.setString(10, tf_notas.getText());
+
+				ps.executeUpdate();
+
+				refresh();
+
+			} catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e1) {
+				System.out.println("Error al insertar cliente");
+				e1.printStackTrace();
+			}
 
 		}
-
-	
 
 	}
 
@@ -599,23 +570,21 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		}
 	}
 
-	/*public String fechaIng(String fecha) {
-		// TODO Auto-generated method stub
-		String fechaIng = "", anno = "", mes = "", dia = "", tiempo = "00:00:00";
-		StringTokenizer st = new StringTokenizer(fecha.toString(), "-");
-		dia = st.nextToken();
-		mes = st.nextToken();
-		anno = st.nextToken();
-		// no modifico el orden del tiempo pero lo almaceno por si fuese necesario en el
-		// futuro
-		fechaIng = anno + "-" + mes + "-" + dia + " " + tiempo;
-
-		return fechaIng;
-
-	}*/
+	/*
+	 * public String fechaIng(String fecha) { // TODO Auto-generated method stub
+	 * String fechaIng = "", anno = "", mes = "", dia = "", tiempo = "00:00:00";
+	 * StringTokenizer st = new StringTokenizer(fecha.toString(), "-"); dia =
+	 * st.nextToken(); mes = st.nextToken(); anno = st.nextToken(); // no modifico
+	 * el orden del tiempo pero lo almaceno por si fuese necesario en el // futuro
+	 * fechaIng = anno + "-" + mes + "-" + dia + " " + tiempo;
+	 * 
+	 * return fechaIng;
+	 * 
+	 * }
+	 */
 
 	public String fechaEsp(String fechahora) {
-		String fechaEsp = "", fecha = "", tiempo = "", dia = "", mes = "",anno = "", hora = "", minuto = "",
+		String fechaEsp = "", fecha = "", tiempo = "", dia = "", mes = "", anno = "", hora = "", minuto = "",
 				segundo = "";
 		StringTokenizer st = new StringTokenizer(fechahora.toString(), " ");
 		fecha = st.nextToken();
@@ -769,9 +738,8 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 		}
 
-		
-
 	}
+
 	private Object dameObjeto(String item) {
 		// TODO Auto-generated method stub
 		return new Object() {
@@ -780,7 +748,6 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			}
 		};
 	}
-	
 
 	public void editHabCosas(int grado) {
 		switch (grado) {
@@ -817,7 +784,6 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			chb_cliente.setEnabled(true);
 			chb_adjunto.setEnabled(true);
 			chb_root.setEnabled(true);
-			
 
 			break;
 		case 2:
@@ -827,7 +793,6 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			System.out.println("Avanzado");
 			botonVer.setEnabled(true);
 			botonInsertar.setEnabled(true);
-			
 
 			break;
 		case 3:
@@ -857,20 +822,13 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			chb_cliente.setEnabled(false);
 			chb_adjunto.setEnabled(false);
 			chb_root.setEnabled(false);
-			
-			
+
 			break;
 
 		}
 
 	}
 
-
-	
-
-
-	
-	
 	@Override
 	public void addCliente(Cliente cli) throws SQLException, ClassNotFoundException {
 		try {
@@ -896,7 +854,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*
 	 * public void addCliente(Cliente cli) throws SQLException,
 	 * ClassNotFoundException try{ PreparedStatement ps = new
@@ -912,7 +870,8 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	 * 
 	 * } public class GestorAdd implements ActionListener{ public void
 	 * actionPerformed(ActionEvent e) { Cliente cli = new Cliente(); cli.setId(); }
-	 * }*/
+	 * }
+	 */
 
 	@Override
 	public List<Cliente> getAllClientes() throws SQLException {

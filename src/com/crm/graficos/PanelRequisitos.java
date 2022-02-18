@@ -4,6 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -14,7 +18,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
+
+import com.crm.persistencia.ConfigDir;
+import com.crm.persistencia.MisConexiones;
 
 public class PanelRequisitos extends JPanel {
 
@@ -31,10 +39,15 @@ public class PanelRequisitos extends JPanel {
 			dni_auto2, ultima_irpf_auto2, alta_iae_auto2, ultimos_movimientos_autonomo2, ultimos_recibos_auto2,
 			ultimo_recibo_auto2;
 
+	JTextField tf_busqueda;
+	MisConexiones c;
+	PreparedStatement ps;
+
 	public PanelRequisitos(int ancho, int alto) {
 		setLayout(new BorderLayout());
 		add(setPanelMayor(alto, ancho, setPanel1(alto, ancho), setPanel2(alto, ancho)), BorderLayout.NORTH);
-		add(setPanelSur(alto, ancho, setPanelEspacio1(alto, ancho), setPanelDatos(alto, ancho), setPanelEspacio2(alto, ancho)),BorderLayout.SOUTH);
+		add(setPanelSur(alto, ancho, setPanelEspacio1(alto, ancho), setPanelDatos(alto, ancho),
+				setPanelEspacio2(alto, ancho)), BorderLayout.SOUTH);
 
 	}
 
@@ -54,7 +67,7 @@ public class PanelRequisitos extends JPanel {
 		panel1.setLayout(new BorderLayout());
 		panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
 
-		 //panel1.setBorder(BorderFactory.createLoweredBevelBorder());
+		// panel1.setBorder(BorderFactory.createLoweredBevelBorder());
 		JLabel titulo = new JLabel("TRABAJADORES POR CUENTA AJENA(para nosotros)");
 		Font f = new Font("Italic", Font.ITALIC, 12);
 		titulo.setFont(f);
@@ -143,7 +156,7 @@ public class PanelRequisitos extends JPanel {
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new BorderLayout());
 		panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
-       //panel2.setBorder(BorderFactory.createLoweredBevelBorder());
+		// panel2.setBorder(BorderFactory.createLoweredBevelBorder());
 		JLabel titulo3 = new JLabel("TRABAJADORES AUTONOMOS(para nosotros)");
 		Font f = new Font("Italic", Font.ITALIC, 12);
 		titulo3.setFont(f);
@@ -224,7 +237,7 @@ public class PanelRequisitos extends JPanel {
 		return panel2;
 	}
 
-	public JPanel setPanelSur(int alto, int ancho, JPanel p1, JPanel p2,JPanel p3) {
+	public JPanel setPanelSur(int alto, int ancho, JPanel p1, JPanel p2, JPanel p3) {
 		JPanel panelSur = new JPanel();
 		panelSur.getBorder();
 		panelSur.setLayout(new BorderLayout());
@@ -233,17 +246,16 @@ public class PanelRequisitos extends JPanel {
 		panelSur.add(p2, BorderLayout.CENTER);
 		panelSur.add(p3, BorderLayout.WEST);
 		return panelSur;
-		
-		
+
 	}
-	
+
 	public JPanel setPanelEspacio1(int ancho, int alto) {
 		JPanel espacio1 = new JPanel();
-	
+
 		espacio1.setPreferredSize(new Dimension((int) (ancho * 0.6), (int) (alto * 0.8)));
 		return espacio1;
 	}
-	
+
 	public JPanel setPanelDatos(int ancho, int alto) {
 		JPanel panelDatos = new JPanel();
 		panelDatos.setBorder(BorderFactory.createLoweredBevelBorder());
@@ -251,44 +263,114 @@ public class PanelRequisitos extends JPanel {
 		panelDatos.setLayout(new BoxLayout(panelDatos, BoxLayout.X_AXIS));
 
 		JTextArea dx = new JTextArea("Comentarios");
-		Font f = new Font("Times New Roman",Font.ITALIC,12);
+		Font f = new Font("Times New Roman", Font.ITALIC, 12);
 		dx.setFont(f);
-		dx.setMaximumSize(new Dimension (250,20));
+		dx.setMaximumSize(new Dimension(250, 20));
 		JScrollPane hoka = new JScrollPane(dx);
 		hoka.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-          hoka.setMaximumSize(new Dimension(250,40));
-   
+		hoka.setMaximumSize(new Dimension(250, 40));
 
-		JButton ihj = new JButton("Registrar");
-		ihj.setForeground(Color.CYAN);
-        ihj.setMaximumSize(new Dimension(100,30));
-		JLabel busca = new JLabel("DNI NIE");
+		JButton b_registro = new JButton("Registrar");
+		b_registro.setForeground(Color.GREEN);
+		b_registro.setMaximumSize(new Dimension(100, 30));
+		b_registro.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				// insertar y veruficar dni
+
+				try {
+					c = new MisConexiones();
+					
+					
+                  
+
+					ps = c.getPS(ConfigDir.getInstance().getProperty("query7"));
+					ps.setString(1, tf_busqueda.getText());
+					ps.setBoolean(2, foto_dni.isSelected());
+					ps.setBoolean(3, foto_3nomina.isSelected());
+					ps.setBoolean(4, copia_contrato.isSelected());
+					ps.setBoolean(5, foto_movimientosbanco.isSelected());
+					ps.setBoolean(6, vidalaboral.isSelected());
+					ps.setBoolean(7, foto_recibosHipo.isSelected());
+					ps.setBoolean(8, foto_reciboContribucion.isSelected());
+					ps.setBoolean(9, foto_irpf.isSelected());
+			
+					ps.executeUpdate();
+					
+					ps = c.getPS(ConfigDir.getInstance().getProperty("query8"));
+					ps.setString(1, tf_busqueda.getText());
+					ps.setBoolean(2, dni2.isSelected());
+					ps.setBoolean(3, nomina2.isSelected());
+					ps.setBoolean(4, copia_contrato2.isSelected());
+					ps.setBoolean(5, movimiento_bancario2.isSelected());
+					ps.setBoolean(6, vidalaboral2.isSelected());
+					ps.setBoolean(7, ultimosrecibos2.isSelected());
+					ps.executeUpdate();
+			
+				
+					ps = c.getPS(ConfigDir.getInstance().getProperty("query9"));
+					ps.setString(1, tf_busqueda.getText());
+					ps.setBoolean(2, dni_auto.isSelected());
+					ps.setBoolean(3, ultima_irpf_auto.isSelected());
+					ps.setBoolean(4, alta_iae_auto.isSelected());
+					ps.setBoolean(5, ultimos_movimientos_autonomo.isSelected());
+					ps.setBoolean(6, ultimos_recibos_auto.isSelected());
+					ps.setBoolean(7, ultimo_recibo_auto.isSelected());
+					ps.setBoolean(8, foto_pagos_auto.isSelected());
+					ps.setBoolean(9, foto_ejercicio_auto.isSelected());
+					ps.executeUpdate();
+					
+					ps = c.getPS(ConfigDir.getInstance().getProperty("query10"));
+
+					ps.setString(1, tf_busqueda.getText());
+					ps.setBoolean(2, dni_auto2.isSelected());
+					ps.setBoolean(3, ultima_irpf_auto2.isSelected());
+					ps.setBoolean(4, alta_iae_auto2.isSelected());
+					ps.setBoolean(5, ultimos_movimientos_autonomo2.isSelected());
+					ps.setBoolean(6, ultimos_recibos_auto2.isSelected());
+					ps.setBoolean(7, ultimo_recibo_auto2.isSelected());
+
+					ps.executeUpdate();
+					
+
+
+				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+
+		});
+		JLabel busca = new JLabel("DNI_NIE: ");
 		busca.setSize(250, 20);
+		tf_busqueda = new JTextField();
+		tf_busqueda.setMaximumSize(new Dimension(250, 20));
 		JButton busqueda = new JButton("BUSCAR");
-		
-		busqueda.setMaximumSize(new Dimension(100,30));
+
+		busqueda.setMaximumSize(new Dimension(100, 30));
 		busqueda.setForeground(Color.CYAN);
 
-		
-		
-		panelDatos.add(ihj);
+		panelDatos.add(b_registro);
 		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDatos.add(hoka);
 		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDatos.add(busca);
+		panelDatos.add(tf_busqueda);
 		panelDatos.add(busqueda);
 		panelDatos.setLocation(700, 400);
 		panelDatos.setPreferredSize(new Dimension((int) (ancho * 0.7), (int) (alto * 0.4)));
 
 		return panelDatos;
 	}
-	
-	
+
 	public JPanel setPanelEspacio2(int ancho, int alto) {
 		JPanel espacio2 = new JPanel();
-		
+
 		espacio2.setPreferredSize(new Dimension((int) (ancho * 0.4), (int) (alto * 0.5)));
-	
+
 		return espacio2;
 	}
 
