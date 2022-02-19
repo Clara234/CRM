@@ -157,7 +157,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	public JPanel setPanelEste(int alto, int ancho, JPanel p1, JPanel p2) {
 		JPanel panelEste = new JPanel();
 		panelEste.setLayout(new BorderLayout());
-		panelEste.setPreferredSize(new Dimension((int) (ancho * 0.15), (int) (alto * 0.8)));
+		panelEste.setPreferredSize(new Dimension((int) (ancho * 0.25), (int) (alto * 0.8)));
 		panelEste.add(p1, BorderLayout.NORTH);
 		panelEste.add(p2, BorderLayout.CENTER);
 		return panelEste;

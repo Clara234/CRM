@@ -58,7 +58,7 @@ public class Lan {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image imagen = tk.getImage("hipoteca.png");
 		marco.setIconImage(imagen);
-		marco.setMinimumSize(new Dimension(1000, 950));
+		marco.setMinimumSize(new Dimension(800,600));
 
 		Toolkit.getDefaultToolkit().beep();
 		// almacenar las dimensiones de la pantalla del usuario
@@ -81,7 +81,6 @@ public class Lan {
 		System.out.println(dim.width + "px x " + dim.height + "px ");
 		// especificamos al programa que finalice cuando el marco se cierre
 		marco.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		marco.setMinimumSize(new Dimension(700, 600));
 
 		// Se pon visible al final
 		marco.setVisible(true);
