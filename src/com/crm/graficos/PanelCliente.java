@@ -48,13 +48,16 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	public JPasswordField clave;
 	public JTextField mialias;
 	public JLabel etiqueta;
+	JPanel subPanel;
 	DefaultTableModel dtm;
 	MisConexiones c;
 	PreparedStatement ps;
 	JTable tabla;
 	JButton botonVer, botonInsertar, botonBorrar, botonActualizar, botonMusica, botonAcceder;
-	JTextField tf_dninie, tf_correoe, tf_ciudad, tf_ubicacion, tf_telefono, tf_fecha_alta, tf_notas;
-	JCheckBox chb_autorizado, chb_cliente, chb_adjunto, chb_root;
+
+
+JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profesion, tf_domicilio, tf_poblacion, tf_codigoPostal;
+	JCheckBox chb_fijo, chb_temporal, chb_autonomo, chb_otros, chb_root;
 	JMenuItem miCalculadora, copiaBase, miNavegador;
 
 	List<Cliente> listaClientes;
@@ -72,17 +75,20 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		// objeto previo configurador
 		dtm = new DefaultTableModel();
 		// todos los datos que tendra
-
+		
 		dtm.addColumn("Dni_nie");
-		dtm.addColumn("Correoe");
-		dtm.addColumn("Ciudad");
-		dtm.addColumn("Ubicacion");
-		dtm.addColumn("Fecha_alta");
-		dtm.addColumn("Telefono");
-		dtm.addColumn("Autorizado");
-		dtm.addColumn("Cliente");
-		dtm.addColumn("Adjunto");
-		dtm.addColumn("Notas");
+		dtm.addColumn("Nombre");
+		dtm.addColumn("Apellido1");
+		dtm.addColumn("Apellido2");
+		dtm.addColumn("Fecha Nacimiento");
+		dtm.addColumn("Fijo");
+		dtm.addColumn("Temporal");
+		dtm.addColumn("Autonomo");
+		dtm.addColumn("Otros");
+		dtm.addColumn("Profesion");
+		dtm.addColumn("Domicilio");
+		dtm.addColumn("Poblacion");
+		dtm.addColumn("Codigo Postal");
 
 		// se crea una tabla con la configuracion dtm que hemos creado
 		tabla = new JTable(dtm);
@@ -166,89 +172,127 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	public JPanel setPanelEsteDatos(int alto, int ancho) {
 		JPanel panelEsteDatos = new JPanel();
 		panelEsteDatos.setLayout(new BoxLayout(panelEsteDatos, BoxLayout.Y_AXIS));
-
-		JLabel l_dninie = new JLabel("Dni_nie");
+		panelEsteDatos.setLayout(new BorderLayout());
+		
+		JScrollPane datos = new JScrollPane(subPanel);
+		 subPanel = new JPanel();
+		 subPanel.setLayout(new BorderLayout());
+		 subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
+		 
+		 datos.setViewportView(subPanel);
+        
+		datos.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		datos.setMinimumSize(new Dimension(250, 500));
+		datos.setVisible(true);
+		
+	
+	
 		tf_dninie = new JTextField();
 		tf_dninie.setForeground(Color.gray);
 		Font f = new Font("Italic", Font.ITALIC, 12);
 		tf_dninie.setFont(f);
 		tf_dninie.setMaximumSize(new Dimension(250, 20));
-		JLabel l_correoe = new JLabel("Correoe");
-		tf_correoe = new JTextField();
-		tf_correoe.setForeground(Color.gray);
+		
+
+		tf_nombre = new JTextField();
+		tf_nombre.setForeground(Color.gray);
+		tf_nombre.setFont(f);
+		tf_nombre.setMaximumSize(new Dimension(250, 20));
+		
+
+		tf_ape1 = new JTextField();
+		tf_ape1.setForeground(Color.gray);
 		Font f2 = new Font("Italic", Font.ITALIC, 12);
-		tf_correoe.setFont(f2);
-		tf_correoe.setMaximumSize(new Dimension(250, 20));
-		JLabel l_ciudad = new JLabel("Ciudad");
-		tf_ciudad = new JTextField();
-		tf_ciudad.setForeground(Color.gray);
+		tf_ape1.setFont(f2);
+		tf_ape1.setMaximumSize(new Dimension(250, 20));
+	
+		tf_ape2 = new JTextField();
+		tf_ape2.setForeground(Color.gray);
 		Font f3 = new Font("Italic", Font.ITALIC, 12);
-		tf_ciudad.setFont(f3);
-		tf_ciudad.setMaximumSize(new Dimension(250, 20));
-		JLabel l_ubicacion = new JLabel("Ubicacion");
-		tf_ubicacion = new JTextField();
-		tf_ubicacion.setForeground(Color.gray);
+		tf_ape2.setFont(f3);
+		tf_ape2.setMaximumSize(new Dimension(250, 20));
+	
+		tf_fechaNacimiento = new JTextField();
+		tf_fechaNacimiento.setForeground(Color.gray);
 		Font f4 = new Font("Italic", Font.ITALIC, 12);
-		tf_ubicacion.setFont(f4);
-		tf_ubicacion.setMaximumSize(new Dimension(250, 20));
-		JLabel l_fecha_alta = new JLabel("Fecha_alta");
-		tf_fecha_alta = new JTextField();
-		tf_fecha_alta.setForeground(Color.gray);
-		Font f5 = new Font("Italic", Font.ITALIC, 12);
-		tf_fecha_alta.setFont(f5);
-		tf_fecha_alta.setMaximumSize(new Dimension(250, 20));
-		JLabel l_telefono = new JLabel("Telefono");
-		tf_telefono = new JTextField();
-		tf_telefono.setForeground(Color.gray);
-		Font f6 = new Font("Italic", Font.ITALIC, 12);
-		tf_telefono.setFont(f6);
-		tf_telefono.setMaximumSize(new Dimension(250, 20));
-		JLabel l_notas = new JLabel("Notas");
-		tf_notas = new JTextField();
-		tf_notas.setForeground(Color.gray);
-		Font f7 = new Font("Italic", Font.ITALIC, 12);
-		tf_notas.setFont(f7);
-		tf_notas.setMaximumSize(new Dimension(250, 20));
+		tf_fechaNacimiento.setFont(f4);
+		tf_fechaNacimiento.setMaximumSize(new Dimension(250, 20));
 
-		JLabel l_autorizado = new JLabel("Autorizado");
-		l_autorizado.setForeground(Color.black);
-		chb_autorizado = new JCheckBox();
-		JLabel l_cliente = new JLabel("Cliente");
-		l_cliente.setForeground(Color.black);
-		chb_cliente = new JCheckBox();
-		JLabel l_adjunto = new JLabel("Adjunto");
-		l_adjunto.setForeground(Color.black);
-		chb_adjunto = new JCheckBox();
+		chb_fijo = new JCheckBox();
+		
 
-		panelEsteDatos.add(l_dninie);
-		panelEsteDatos.add(tf_dninie);
-		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos.add(l_correoe);
-		panelEsteDatos.add(tf_correoe);
-		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos.add(l_ciudad);
-		panelEsteDatos.add(tf_ciudad);
-		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos.add(l_ubicacion);
-		panelEsteDatos.add(tf_ubicacion);
-		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos.add(l_fecha_alta);
-		panelEsteDatos.add(tf_fecha_alta);
-		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos.add(l_telefono);
-		panelEsteDatos.add(tf_telefono);
-		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos.add(l_autorizado);
-		panelEsteDatos.add(chb_autorizado);
-		panelEsteDatos.add(l_cliente);
-		panelEsteDatos.add(chb_cliente);
-		panelEsteDatos.add(l_adjunto);
-		panelEsteDatos.add(chb_adjunto);
-		panelEsteDatos.add(l_notas);
-		panelEsteDatos.add(tf_notas);
-		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 1)));
+		chb_temporal = new JCheckBox();
+		
 
-		panelEsteDatos.setPreferredSize(new Dimension((int) (ancho * 0.01), (int) (alto * 1.2)));
+		chb_autonomo = new JCheckBox();
+		
+
+
+		chb_otros = new JCheckBox();
+		tf_profesion = new JTextField();
+		tf_profesion.setForeground(Color.gray);
+		tf_profesion.setFont(f2);
+		tf_profesion.setMaximumSize(new Dimension(250, 20));
+		tf_domicilio = new JTextField();
+		tf_domicilio.setForeground(Color.gray);
+		tf_domicilio.setFont(f2);
+		tf_domicilio.setMaximumSize(new Dimension(250, 20));
+		
+		
+		tf_poblacion = new JTextField();
+		tf_poblacion.setForeground(Color.gray);
+		tf_poblacion.setFont(f2);
+		tf_poblacion.setMaximumSize(new Dimension(250, 20));
+		
+		tf_codigoPostal = new JTextField();
+		tf_codigoPostal.setForeground(Color.gray);
+		tf_codigoPostal.setFont(f2);
+		tf_codigoPostal.setMaximumSize(new Dimension(250, 20));
+		
+		
+		subPanel.add(new JLabel("DniNie: "));
+		subPanel.add(tf_dninie);
+		subPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		subPanel.add(new JLabel("Nombre :"));
+		subPanel.add(tf_nombre);
+		subPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		subPanel.add(new JLabel("Apellido 1: "));
+		subPanel.add(tf_ape1);
+		subPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		subPanel.add(new JLabel("Apellido 2: "));
+		subPanel.add(tf_ape2);
+		subPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		subPanel.add(new JLabel("Fecha Nacimiento: "));
+		subPanel.add(tf_fechaNacimiento);
+		subPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		subPanel.add(new JLabel("Fijo: "));
+		subPanel.add(chb_fijo);
+		subPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		subPanel.add(new JLabel("Temporal: "));
+		subPanel.add(chb_temporal);
+		subPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		subPanel.add(new JLabel("Autonomo: "));
+		subPanel.add(chb_autonomo);
+		subPanel.add(new JLabel("Otros: "));
+		subPanel.add(chb_otros);
+		subPanel.add(new JLabel("Profesion: "));
+		subPanel.add(tf_profesion);
+		subPanel.add(new JLabel("Domicilio: "));
+		subPanel.add(tf_domicilio);
+		subPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		subPanel.add(new JLabel("Poblacion: "));
+		subPanel.add(tf_poblacion);
+		subPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		subPanel.add(new JLabel("Codigo Postal: "));
+		subPanel.add(tf_codigoPostal);
+
+
+	subPanel.setVisible(true);
+
+		
+		panelEsteDatos.add(datos);
+		
+		panelEsteDatos.setPreferredSize(new Dimension((int) (ancho * 0.01), (int) (alto * 0.9)));
 		// panelEsteDatos.setBackground(Color.red);
 		return panelEsteDatos;
 	}
@@ -322,16 +366,22 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 				ps = c.getPS(ConfigDir.getInstance().getProperty("query2"));
 
+				
+			
 				ps.setString(1, tf_dninie.getText());
-				ps.setString(2, tf_correoe.getText());
-				ps.setString(3, tf_ciudad.getText());
-				ps.setString(4, tf_ubicacion.getText());
-				ps.setTimestamp(5, Timestamp.valueOf(tf_fecha_alta.getText()));
-				ps.setInt(6, Integer.valueOf(tf_telefono.getText()));
-				ps.setBoolean(7, chb_autorizado.isSelected());
-				ps.setBoolean(8, chb_cliente.isSelected());
-				ps.setBoolean(9, chb_adjunto.isSelected());
-				ps.setString(10, tf_notas.getText());
+				ps.setString(2, tf_nombre.getText());
+				ps.setString(3, tf_ape1.getText());
+				ps.setString(4, tf_ape2.getText());
+				ps.setTimestamp(5, Timestamp.valueOf(tf_fechaNacimiento.getText()));
+				ps.setBoolean(6, chb_fijo.isSelected());
+				ps.setBoolean(7, chb_temporal.isSelected());
+				ps.setBoolean(8, chb_autonomo.isSelected());
+				ps.setString(9, chb_otros.getText());
+				ps.setString(10, tf_profesion.getText());
+				ps.setString(11, tf_domicilio.getText());
+				ps.setString(12, tf_poblacion.getText());
+				ps.setString(13, tf_codigoPostal.getText());
+				
 
 				ps.executeUpdate();
 
@@ -437,15 +487,19 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				}
 				try {
 					ps.setString(1, tf_dninie.getText());
-					ps.setString(2, tf_correoe.getText());
-					ps.setString(3, tf_ciudad.getText());
-					ps.setString(4, tf_ubicacion.getText());
-					ps.setTimestamp(5, Timestamp.valueOf(fechaEsp(tf_fecha_alta.getText())));
-					ps.setInt(6, Integer.valueOf(tf_telefono.getText()));
-					ps.setBoolean(7, chb_autorizado.isSelected());
-					ps.setBoolean(7, chb_cliente.isSelected());
-					ps.setBoolean(7, chb_adjunto.isSelected());
-					ps.setString(8, tf_notas.getText());
+					ps.setString(2, tf_nombre.getText());
+					ps.setString(3, tf_ape1.getText());
+					ps.setString(4, tf_ape2.getText());
+					ps.setTimestamp(5, Timestamp.valueOf(tf_fechaNacimiento.getText()));
+					ps.setBoolean(6, chb_fijo.isSelected());
+					ps.setBoolean(7, chb_temporal.isSelected());
+					ps.setBoolean(8, chb_autonomo.isSelected());
+					ps.setString(9, chb_otros.getText());
+					ps.setString(10, tf_profesion.getText());
+					ps.setString(11, tf_domicilio.getText());
+					ps.setString(12, tf_poblacion.getText());
+					ps.setString(13, tf_codigoPostal.getText());
+					
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -496,15 +550,18 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 			seleccionado = listaClientes.get(j);
 			tf_dninie.setText(seleccionado.getDni_nie());
-			tf_correoe.setText(seleccionado.getCorreoe());
-			tf_ciudad.setText(seleccionado.getCiudad());
-			tf_ubicacion.setText(seleccionado.getUbicacion());
-			tf_fecha_alta.setText(fechaEsp(seleccionado.getFecha_alta().toString()));
-			tf_telefono.setText("" + seleccionado.getTelefono());
-			chb_autorizado.setSelected(seleccionado.isAutorizado());
-			chb_cliente.setSelected(seleccionado.isCliente());
-			chb_adjunto.setSelected(seleccionado.isAdjunto());
-			tf_notas.setText(seleccionado.getNotas());
+			tf_nombre.setText(seleccionado.getNombre());
+			tf_ape1.setText(seleccionado.getApe1());
+			tf_ape2.setText(seleccionado.getApe2());
+			tf_fechaNacimiento.setText(""+seleccionado.getFechaNacimiento());
+			chb_fijo.setSelected(seleccionado.isFijo());
+			chb_temporal.setSelected(seleccionado.isTemporal());
+			chb_autonomo.setSelected(seleccionado.isAutonomo());
+			chb_otros.setSelected(seleccionado.isOtros());
+			tf_profesion.setText(seleccionado.getProfesion());
+			tf_domicilio.setText(seleccionado.getDomicilio());
+			tf_poblacion.setText(seleccionado.getPoblacion());
+			tf_codigoPostal.setText(seleccionado.getCodigoPostal());
 
 		}
 
@@ -545,21 +602,25 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			ResultSet rs = c.getRS(ConfigDir.getInstance().getProperty("query1"));
 			while (rs.next()) {
 
-				cliente = new Cliente(rs.getNString("Dni_nie"), rs.getNString("Correoe"), rs.getNString("Ciudad"),
-						rs.getNString("Ubicacion"), rs.getNString("notas"), rs.getInt("Telefono"),
-						rs.getTimestamp("Fecha_alta"), rs.getBoolean("Autorizado"), rs.getBoolean("Cliente"),
-						rs.getBoolean("Adjunto"));
+				cliente = new Cliente(rs.getNString("Dni Nie"), rs.getNString("Nombre"), rs.getNString("Apellido 1"),
+						rs.getNString("Apellido 2"), rs.getTimestamp("Fecha Nacimiento"), rs.getBoolean("fijo"),
+						rs.getBoolean("temporal"), rs.getBoolean("autonomo"), rs.getBoolean("otros"),
+						rs.getNString("profesion"), rs.getNString("Domicilio"), rs.getNString("Poblacion"), rs.getNString("CodigoPostal"));
 				v = new Vector();
 				v.addElement(cliente.getDni_nie());
-				v.addElement(cliente.getCorreoe());
-				v.addElement(cliente.getCiudad());
-				v.addElement(cliente.getUbicacion());
+				v.addElement(cliente.getNombre());
+				v.addElement(cliente.getApe1());
+				v.addElement(cliente.getApe2());
+				v.addElement(cliente.getFechaNacimiento());
 				// listaEmpleado.addElement(fechaEsp(empleado.getFecha_nacimiento()));
-				v.addElement(cliente.getFecha_alta());
-				v.addElement(cliente.getTelefono());
-				v.addElement(formateoBoolean(cliente.isAutorizado()));
-				v.addElement(formateoBoolean(cliente.isCliente()));
-				v.addElement(formateoBoolean(cliente.isAdjunto()));
+				v.addElement(formateoBoolean(cliente.isFijo()));
+				v.addElement(formateoBoolean(cliente.isTemporal()));
+				v.addElement(formateoBoolean(cliente.isAutonomo()));
+				v.addElement(formateoBoolean(cliente.isOtros()));
+				v.addElement(cliente.getProfesion());
+				v.addElement(cliente.getDomicilio());
+				v.addElement(cliente.getPoblacion());
+				v.addElement(cliente.getCodigoPostal());
 				dtm.addRow(v);
 				listaClientes.add(cliente);
 
@@ -583,23 +644,19 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	 * }
 	 */
 
-	public String fechaEsp(String fechahora) {
-		String fechaEsp = "", fecha = "", tiempo = "", dia = "", mes = "", anno = "", hora = "", minuto = "",
-				segundo = "";
-		StringTokenizer st = new StringTokenizer(fechahora.toString(), " ");
+	public String fechaEsp(String fechaE) {
+		String fechaEsp = "", fecha = "", dia = "", mes = "", anno = "";
+			
+		StringTokenizer st = new StringTokenizer(fechaE, " ");
 		fecha = st.nextToken();
-		tiempo = st.nextToken();
 		st = new StringTokenizer(fecha.toString(), "-");
 		anno = st.nextToken();
 		mes = st.nextToken();
 		dia = st.nextToken();
-		st = new StringTokenizer(tiempo.toString(), ":");
-		hora = st.nextToken();
-		minuto = st.nextToken();
-		segundo = st.nextToken();
+		
 		// no modifico el orden del tiempo pero lo almaceno por si fuese necesario en el
 		// futuro
-		fechaEsp = dia + "-" + mes + "-" + anno;
+		fechaEsp = dia + "/" + mes + "/" + anno;
 		return fechaEsp;
 	}
 
@@ -771,19 +828,23 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			botonActualizar.setEnabled(true);
 			botonMusica.setEnabled(true);
 			tf_dninie.setEditable(true);
-			tf_correoe.setEditable(true);
-			tf_ciudad.setEditable(true);
-			tf_ubicacion.setEditable(true);
-			tf_telefono.setEditable(true);
-			tf_fecha_alta.setEditable(true);
-			tf_notas.setEditable(true);
+			tf_ape1.setEditable(true);
+			tf_ape2.setEditable(true);
+			tf_nombre.setEditable(true);
+			tf_fechaNacimiento.setEditable(true);
+			tf_profesion.setEditable(true);
+			tf_poblacion.setEditable(true);
+			tf_domicilio.setEditable(true);
+tf_codigoPostal.setEditable(true);
 			miCalculadora.setEnabled(true);
 			copiaBase.setEnabled(true);
 			miNavegador.setEnabled(true);
-			chb_autorizado.setEnabled(true);
-			chb_cliente.setEnabled(true);
-			chb_adjunto.setEnabled(true);
+			chb_fijo.setEnabled(true);
+			chb_temporal.setEnabled(true);
+			chb_autonomo.setEnabled(true);
+			chb_otros.setEnabled(true);
 			chb_root.setEnabled(true);
+			
 
 			break;
 		case 2:
@@ -809,19 +870,23 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 			botonActualizar.setEnabled(false);
 			botonMusica.setEnabled(false);
 			tf_dninie.setEditable(false);
-			tf_correoe.setEditable(false);
-			tf_ciudad.setEditable(false);
-			tf_ubicacion.setEditable(false);
-			tf_telefono.setEditable(false);
-			tf_fecha_alta.setEditable(false);
-			tf_notas.setEditable(false);
+			tf_ape1.setEditable(false);
+			tf_ape2.setEditable(false);
+			tf_nombre.setEditable(false);
+			tf_fechaNacimiento.setEditable(false);
+			tf_profesion.setEditable(false);
+			tf_poblacion.setEditable(false);
+			tf_domicilio.setEditable(false);
+tf_codigoPostal.setEditable(false);
 			miCalculadora.setEnabled(false);
 			copiaBase.setEnabled(false);
 			miNavegador.setEnabled(false);
-			chb_autorizado.setEnabled(false);
-			chb_cliente.setEnabled(false);
-			chb_adjunto.setEnabled(false);
+			chb_fijo.setEnabled(true);
+			chb_temporal.setEnabled(true);
+			chb_autonomo.setEnabled(true);
+			chb_otros.setEnabled(true);
 			chb_root.setEnabled(false);
+			
 
 			break;
 
@@ -829,33 +894,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 
 	}
 
-	@Override
-	public void addCliente(Cliente cli) throws SQLException, ClassNotFoundException {
-		try {
-			PreparedStatement ps = new MisConexiones().getConexion()
-					.prepareStatement(ConfigDir.getInstance().getProperty("query2"));
-			ps.setString(1, cli.getDni_nie());
-			ps.setString(2, cli.getCorreoe());
-			ps.setString(3, cli.getCiudad());
-			ps.setString(4, cli.getUbicacion());
-			// ps.setTimestamp(5, new java.sql.Timestamp(new java.util.Date().getTime()));
-			ps.setTimestamp(5, new java.sql.Timestamp(new java.util.Date().getTime()));
-			ps.setInt(6, cli.getTelefono());
-			ps.setBoolean(7, cli.isAutorizado());
-			ps.setBoolean(8, cli.isCliente());
-			ps.setBoolean(9, cli.isAdjunto());
-			ps.setString(10, cli.getNotas());
-
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	/*
+		/*
 	 * public void addCliente(Cliente cli) throws SQLException,
 	 * ClassNotFoundException try{ PreparedStatement ps = new
 	 * MisConexiones().dameConexion().prepareStatement(ConfigDir.getInstance().
@@ -878,7 +917,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+/*
 	@Override
 	public Cliente getbyDni_nie(String dni_nie) throws SQLException {
 		// TODO Auto-generated method stub
@@ -896,5 +935,29 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		// TODO Auto-generated method stub
 
 	}
+*/
 
+		@Override
+		public void addCliente(Cliente cliente) throws SQLException, ClassNotFoundException {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Cliente getbyDni_nie(String dni_nie) throws SQLException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Cliente updateCliente(Cliente cliente) throws SQLException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void deleteCliente(String dni_nie) throws SQLException {
+			// TODO Auto-generated method stub
+			
+		}
 }

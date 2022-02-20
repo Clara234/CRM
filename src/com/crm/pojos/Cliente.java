@@ -2,35 +2,42 @@ package com.crm.pojos;
 
 import java.sql.Timestamp;
 public class Cliente {
-	
+
      private String dni_nie;
-     private String correoe;
-     private  String ciudad;
-     private String ubicacion;
-     private String notas;
-     private int telefono;
-     private Timestamp fecha_alta;
-     private boolean autorizado;
-     private boolean cliente;
-     private boolean adjunto;
+     private String nombre;
+     private String ape1;
+     private  String ape2;
+     private Timestamp fechaNacimiento;
+     private boolean fijo;
+     private boolean temporal;
+     private boolean autonomo;
+     private boolean otros;
+     private String profesion;
+     private String domicilio;
+     private String poblacion;
+     private String codigoPostal;
      
      
 	public void Cliente(Cliente cli) {}
 
 
-	public Cliente(String dni_nie, String correoe, String ciudad, String ubicacion, String notas, int telefono,
-			Timestamp fecha_alta, boolean autorizado, boolean cliente, boolean adjunto) {
-	
+	public Cliente(String dni_nie, String nombre, String ape1, String ape2, Timestamp fechaNacimiento, boolean fijo,
+			boolean temporal, boolean autonomo, boolean otros, String profesion, String domicilio, String poblacion,
+			String codigoPostal) {
+		super();
 		this.dni_nie = dni_nie;
-		this.correoe = correoe;
-		this.ciudad = ciudad;
-		this.ubicacion = ubicacion;
-		this.notas = notas;
-		this.telefono = telefono;
-		this.fecha_alta = fecha_alta;
-		this.autorizado = autorizado;
-		this.cliente = cliente;
-		this.adjunto = adjunto;
+		this.nombre = nombre;
+		this.ape1 = ape1;
+		this.ape2 = ape2;
+		this.fechaNacimiento = fechaNacimiento;
+		this.fijo = fijo;
+		this.temporal = temporal;
+		this.autonomo = autonomo;
+		this.otros = otros;
+		this.profesion = profesion;
+		this.domicilio = domicilio;
+		this.poblacion = poblacion;
+		this.codigoPostal = codigoPostal;
 	}
 
 
@@ -44,99 +51,134 @@ public class Cliente {
 	}
 
 
-	public String getCorreoe() {
-		return correoe;
+	public String getNombre() {
+		return nombre;
 	}
 
 
-	public void setCorreoe(String correoe) {
-		this.correoe = correoe;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 
-	public String getCiudad() {
-		return ciudad;
+	public String getApe1() {
+		return ape1;
 	}
 
 
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
+	public void setApe1(String ape1) {
+		this.ape1 = ape1;
 	}
 
 
-	public String getUbicacion() {
-		return ubicacion;
+	public String getApe2() {
+		return ape2;
 	}
 
 
-	public void setUbicacion(String ubicacion) {
-		this.ubicacion = ubicacion;
+	public void setApe2(String ape2) {
+		this.ape2 = ape2;
 	}
 
 
-	public String getNotas() {
-		return notas;
+	public Timestamp getFechaNacimiento() {
+		return fechaNacimiento;
 	}
 
 
-	public void setNotas(String notas) {
-		this.notas = notas;
+	public void setFechaNacimiento(Timestamp fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 
-	public int getTelefono() {
-		return telefono;
+	public boolean isFijo() {
+		return fijo;
 	}
 
 
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
+	public void setFijo(boolean fijo) {
+		this.fijo = fijo;
 	}
 
 
-	public Timestamp getFecha_alta() {
-		return fecha_alta;
+	public boolean isTemporal() {
+		return temporal;
 	}
 
 
-	public void setFecha_alta(Timestamp fecha_alta) {
-		this.fecha_alta = fecha_alta;
+	public void setTemporal(boolean temporal) {
+		this.temporal = temporal;
 	}
 
 
-	public boolean isAutorizado() {
-		return autorizado;
+	public boolean isAutonomo() {
+		return autonomo;
 	}
 
 
-	public void setAutorizado(boolean autorizado) {
-		this.autorizado = autorizado;
+	public void setAutonomo(boolean autonomo) {
+		this.autonomo = autonomo;
 	}
 
 
-	public boolean isCliente() {
-		return cliente;
+	public boolean isOtros() {
+		return otros;
 	}
 
 
-	public void setCliente(boolean cliente) {
-		this.cliente = cliente;
+	public void setOtros(boolean otros) {
+		this.otros = otros;
 	}
 
 
-	public boolean isAdjunto() {
-		return adjunto;
+	public String getProfesion() {
+		return profesion;
 	}
 
 
-	public void setAdjunto(boolean adjunto) {
-		this.adjunto = adjunto;
+	public void setProfesion(String profesion) {
+		this.profesion = profesion;
 	}
+
+
+	public String getDomicilio() {
+		return domicilio;
+	}
+
+
+	public void setDomicilio(String domicilio) {
+		this.domicilio = domicilio;
+	}
+
+
+	public String getPoblacion() {
+		return poblacion;
+	}
+
+
+	public void setPoblacion(String poblacion) {
+		this.poblacion = poblacion;
+	}
+
+
+	public String getCodigoPostal() {
+		return codigoPostal;
+	}
+
+
+	public void setCodigoPostal(String codigoPostal) {
+		this.codigoPostal = codigoPostal;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Cliente [dni_nie=" + dni_nie + ", nombre=" + nombre + ", ape1=" + ape1 + ", ape2=" + ape2
+				+ ", fechaNacimiento=" + fechaNacimiento + ", fijo=" + fijo + ", temporal=" + temporal + ", autonomo="
+				+ autonomo + ", otros=" + otros + ", profesion=" + profesion + ", domicilio=" + domicilio
+				+ ", poblacion=" + poblacion + ", codigoPostal=" + codigoPostal + "]";
+	}
+
+
 	
-	
-	
-	
-	
-     
-     
 }

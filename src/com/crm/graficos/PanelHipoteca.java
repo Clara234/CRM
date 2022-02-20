@@ -87,6 +87,7 @@ public class PanelHipoteca extends JPanel {
 	JCheckBox // datos hipotecado
 	chb_editar, chb_propiedad, chb_escritura, chb_contratoPrivado, chb_otrosGastos, chb_padres, chb_alquiler, chb_fijo,
 			chb_temporal, chb_autonomo, chb_otrosCosas,
+
 			// datos conyuge
 			chb_propiedad_conyuge, chb_escritura_conyuge, chb_contratoPrivado_conyuge, chb_otrosGastos_conyuge,
 			chb_padres_conyuge, chb_alquiler_conyuge, chb_fijo_conyuge, chb_temporal_conyuge, chb_autonomo_conyuge,
@@ -121,7 +122,7 @@ public class PanelHipoteca extends JPanel {
 		ventanitas.add(setPanelConyuge(setPanelPersonal(), setPanelProfesional(), setPanelEconomico()),
 				"Datos Conyuge");
 
-		ventanitas.getComponent(1).setEnabled(false);
+		ventanitas.setEnabledAt(1, false);
 
 		return ventanitas;
 
@@ -131,6 +132,7 @@ public class PanelHipoteca extends JPanel {
 
 		JPanel panelNorte = new JPanel();
 		panelNorte.setLayout(new BorderLayout());
+		//panelNorte.setLayout(new BoxLayout(panelNorte, BoxLayout.X_AXIS));
 		panelNorte.setPreferredSize(new Dimension((int) (ancho * 0.2), (int) (alto * 0.2))); // no cambiarr porfavor
 		panelNorte.add(jp1, BorderLayout.NORTH);
 		panelNorte.add(jp2, BorderLayout.CENTER);
@@ -304,11 +306,25 @@ public class PanelHipoteca extends JPanel {
 
 	public JPanel setPanelEste(int alto, int ancho, JPanel jp1, JPanel jp2, JPanel jp3) {
 		JPanel panelEste = new JPanel();
-		panelEste.setLayout(new BorderLayout());
-		panelEste.setPreferredSize(new Dimension((int) (ancho * 0.5), (int) (alto * 1.0)));
-		panelEste.add(jp1, BorderLayout.WEST);
-		panelEste.add(jp2, BorderLayout.CENTER);
-		panelEste.add(jp3, BorderLayout.EAST);
+		panelEste.setLayout(new BoxLayout(panelEste, BoxLayout.X_AXIS));
+		// panelConyuge.setPreferredSize(new Dimension((int) (ancho * 1.2), (int) (alto
+		// * 1.2)));
+		panelEste.setBackground(Color.red);
+		jp1.setPreferredSize(new Dimension(1, 1));
+		jp1.setMinimumSize(new Dimension(1, 1));
+		jp1.setMaximumSize(new Dimension(2000, 2000));
+		jp2.setPreferredSize(new Dimension(1, 1));
+		jp2.setMinimumSize(new Dimension(1, 1));
+		jp2.setMaximumSize(new Dimension(2000, 2000));
+		jp3.setPreferredSize(new Dimension(1, 1));
+		jp3.setMinimumSize(new Dimension(1, 1));
+		jp3.setMaximumSize(new Dimension(2000, 2000));
+		
+		panelEste.add(jp1);
+		panelEste.add(jp2);
+		panelEste.add(jp3);
+		
+
 		return panelEste;
 
 	}
@@ -316,12 +332,10 @@ public class PanelHipoteca extends JPanel {
 //correcto
 	public JPanel setPanelEsteDatos(int alto, int ancho) {
 
-		JPanel panelEsteDatos2 = new JPanel();
-		panelEsteDatos2.setBorder(BorderFactory.createLoweredBevelBorder()); // borde
-		// para diferenciar paneles
-		panelEsteDatos2.setPreferredSize(new Dimension((int) (ancho * 0.6), (int) (alto * 1.2)));
+		JPanel panelEsteDatos = new JPanel();
+		panelEsteDatos.setLayout(new BoxLayout(panelEsteDatos, BoxLayout.Y_AXIS));
+		panelEsteDatos.setAlignmentY(CENTER_ALIGNMENT);
 
-		panelEsteDatos2.setLayout(new BoxLayout(panelEsteDatos2, BoxLayout.Y_AXIS));
 		JLabel l_datoseconomicos = new JLabel("Datos Economicos:");
 		l_datoseconomicos.setSize(new Dimension(250, 20));
 		l_datoseconomicos.setForeground(Color.BLACK);
@@ -395,46 +409,55 @@ public class PanelHipoteca extends JPanel {
 		chb_alquiler = new JCheckBox("Alquiler");
 		chb_alquiler.setForeground(Color.BLACK);
 
-		panelEsteDatos2.add(l_datoseconomicos);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos2.add(l_ingresosFijos);
-		panelEsteDatos2.add(ingresosFijos);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos2.add(l_ingresosVariables);
-		panelEsteDatos2.add(ingresosVariables);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos2.add(l_gastosAlquiler);
-		panelEsteDatos2.add(gastosAlquiler);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos2.add(l_gastosHipoteca);
-		panelEsteDatos2.add(gastosHipoteca);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos2.add(l_otros);
-		panelEsteDatos2.add(otros);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos2.add(l_valor);
-		panelEsteDatos2.add(valor);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos2.add(l_cargasVivienda);
-		panelEsteDatos2.add(cargasVivienda);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelEsteDatos2.add(chb_propiedad);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
-		panelEsteDatos2.add(chb_escritura);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
-		panelEsteDatos2.add(chb_contratoPrivado);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
-		panelEsteDatos2.add(chb_otrosGastos);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
-		panelEsteDatos2.add(chb_padres);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
-		panelEsteDatos2.add(chb_alquiler);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 2)));
-		panelEsteDatos2.add(l_otrosBienes);
-		panelEsteDatos2.add(otrosBienes);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 1)));
+		panelEsteDatos.add(l_datoseconomicos);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelEsteDatos.add(l_ingresosFijos);
+		panelEsteDatos.add(ingresosFijos);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelEsteDatos.add(l_ingresosVariables);
+		panelEsteDatos.add(ingresosVariables);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelEsteDatos.add(l_gastosAlquiler);
+		panelEsteDatos.add(gastosAlquiler);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelEsteDatos.add(l_gastosHipoteca);
+		panelEsteDatos.add(gastosHipoteca);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelEsteDatos.add(l_otros);
+		panelEsteDatos.add(otros);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelEsteDatos.add(l_valor);
+		panelEsteDatos.add(valor);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelEsteDatos.add(l_cargasVivienda);
+		panelEsteDatos.add(cargasVivienda);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelEsteDatos.add(chb_propiedad);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 2)));
+		panelEsteDatos.add(chb_escritura);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 2)));
+		panelEsteDatos.add(chb_contratoPrivado);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 2)));
+		panelEsteDatos.add(chb_otrosGastos);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 2)));
+		panelEsteDatos.add(chb_padres);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 2)));
+		panelEsteDatos.add(chb_alquiler);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 2)));
+		panelEsteDatos.add(l_otrosBienes);
+		panelEsteDatos.add(otrosBienes);
+		panelEsteDatos.add(Box.createRigidArea(new Dimension(0, 1)));
+		
+		JPanel auxiliar = new JPanel();
+		auxiliar.setLayout(new BoxLayout(auxiliar, BoxLayout.X_AXIS));
+		auxiliar.add(new JPanel());
+		panelEsteDatos.setMaximumSize(new Dimension(255,2000));
+		auxiliar.add(panelEsteDatos, BorderLayout.CENTER);
+		auxiliar.add(new JPanel());
+		
+		return auxiliar;
 
-		return panelEsteDatos2;
+
 
 	}
 
@@ -442,8 +465,7 @@ public class PanelHipoteca extends JPanel {
 
 		JPanel panelControl = new JPanel();
 		panelControl.setLayout(new BoxLayout(panelControl, BoxLayout.Y_AXIS));
-		panelControl.setBorder(BorderFactory.createLoweredBevelBorder());
-		panelControl.setPreferredSize(new Dimension((int) (ancho * 0.6), (int) (alto * 1.2)));
+		panelControl.setAlignmentY(CENTER_ALIGNMENT);
 
 		JLabel l_datosProfesionales = new JLabel("Datos Profesionales");
 		l_datosProfesionales.setForeground(Color.BLACK);
@@ -554,7 +576,18 @@ public class PanelHipoteca extends JPanel {
 		panelControl.add(Box.createRigidArea(new Dimension(0, 1)));
 
 		panelControl.setVisible(true);
-		return panelControl;
+		
+		JPanel auxiliar = new JPanel();
+		auxiliar.setLayout(new BoxLayout(auxiliar, BoxLayout.X_AXIS));
+		auxiliar.add(new JPanel());
+		panelControl.setMaximumSize(new Dimension(255,2000));
+		auxiliar.add(panelControl, BorderLayout.CENTER);
+		auxiliar.add(new JPanel());
+		
+		return auxiliar;
+
+	
+		
 
 	}
 
@@ -593,6 +626,59 @@ public class PanelHipoteca extends JPanel {
 				// limpiar el jtextfield
 				finalidad.setText("");
 				valorAdquisicion.setText("");
+				valorImporte.setText("");
+				plazo.setText("");
+				direccion.setText("");
+				cargas.setText("");
+				vinculacion.setText("");
+				busquedacliente.setText("");
+				dninie.setText("");
+				apellido1.setText("");
+				apellido2.setText("");
+				nombre.setText("");
+				fechaNacimiento.setText("");
+				profesion.setText("");
+				domicilio.setText("");
+				poblacion.setText("");
+				codigoPostal.setText("");
+				nombreEmpresa.setText("");
+				actividad.setText("");
+				antiguedad.setText("");
+				puesto.setText("");
+				direccionEmpresa.setText("");
+				contactoEmpresa.setText("");
+				ingresosFijos.setText("");
+				ingresosVariables.setText("");
+				gastosAlquiler.setText("");
+				gastosHipoteca.setText("");
+				otros.setText("");
+				valor.setText(""); 
+				cargasVivienda.setText("");
+
+				dninie_conyuge.setText("");
+				apellido1_conyuge.setText("");
+				apellido2_conyuge.setText("");
+				nombre_conyuge.setText("");
+				fechaNacimiento_conyuge.setText("");
+				profesion_conyuge.setText("");
+				domicilio_conyuge.setText("");
+				poblacion_conyuge.setText("");
+				codigoPostal_conyuge.setText("");
+				nombreEmpresa_conyuge.setText("");
+				actividad_conyuge.setText("");
+				antiguedad_conyuge.setText("");
+				puesto_conyuge.setText("");
+				direccionEmpresa_conyuge.setText("");
+				contactoEmpresa_conyuge.setText("");
+				ingresosFijos_conyuge.setText("");
+				ingresosVariables_conyuge.setText("");
+				ingresosFijos_conyuge.setText("");
+				gastosHipoteca_conyuge.setText("");
+				otros_conyuge.setText("");
+				valor_conyuge.setText("");
+				cargasVivienda_conyuge.setText("");
+				
+
 
 				// limpiar el checkbbox
 				chb_editar.setSelected(false);
@@ -611,10 +697,23 @@ public class PanelHipoteca extends JPanel {
 				nueva.setSelectedIndex(0);
 				estadoCivil.setSelectedIndex(0);
 				regimenBienes.setSelectedIndex(0);
+				
+				chb_propiedad_conyuge.setSelected(false);
+				chb_escritura_conyuge.setSelected(false);
+				chb_contratoPrivado_conyuge.setSelected(false);
+				chb_otrosGastos_conyuge.setSelected(false);
+				chb_padres_conyuge.setSelected(false);
+				chb_alquiler_conyuge.setSelected(false);
+				chb_fijo_conyuge.setSelected(false);
+				chb_temporal_conyuge.setSelected(false);
+				chb_autonomo_conyuge.setSelected(false);
+				chb_otrosCosas_conyuge.setSelected(false);
+			
 
 				// limpiar el jtextAREA
 
-				clearotrosBienes();
+				otrosBienes.setText("");
+				otrosBienes_conyuge.setText("");
 			}
 			if (resp == JOptionPane.NO_OPTION) {
 				String box = "0";
@@ -638,9 +737,38 @@ public class PanelHipoteca extends JPanel {
 					new JOptionPane().showMessageDialog(null,
 							"El usuario con DNI: " + vinculacion.getText() + " no existe");
 				} else {
-					datosHipoteca.getComponent(1).setEnabled(true);
+					//consigue que despues de buscar el dni se va y activa el panel conyuge
+					datosHipoteca.setEnabledAt(1, true);
 					datosHipoteca.setSelectedIndex(1);
+					
+			
+					nombre.setText(rs.getString("nombre"));
+					apellido1.setText(rs.getString("apellido1"));
+					apellido2.setText(rs.getString("apellido2"));
+					fechaNacimiento.setText("" + rs.getTimestamp("fecha_nacimiento"));
+					chb_fijo.setSelected(rs.getBoolean("fijo"));
+					chb_temporal.setSelected(rs.getBoolean("temporal"));
+					chb_autonomo.setSelected(rs.getBoolean("autonomo"));
+					chb_otrosCosas.setSelected(rs.getBoolean("otros"));
+					profesion.setText(rs.getString("profesion"));
+					domicilio.setText(rs.getString("domicilio"));
+					poblacion.setText(rs.getString("poblacion"));
+					codigoPostal.setText(rs.getString("codigoPostal"));
+					
+					//fechaNacimiento.setText(rs.getTimestamp("fecha_alta"));
 					nombre_conyuge.setText(rs.getString("nombre"));
+					apellido1_conyuge.setText(rs.getString("apellido1"));
+					apellido2_conyuge.setText(rs.getString("apellido2"));
+					fechaNacimiento_conyuge.setText("" + rs.getTimestamp("fecha_nacimiento"));
+					chb_fijo_conyuge.setSelected(rs.getBoolean("fijo"));
+					chb_temporal_conyuge.setSelected(rs.getBoolean("temporal"));
+					chb_autonomo_conyuge.setSelected(rs.getBoolean("autonomo"));
+					chb_otrosCosas_conyuge.setSelected(rs.getBoolean("otros"));
+					profesion_conyuge.setText(rs.getString("profesion"));
+					domicilio_conyuge.setText(rs.getString("domicilio"));
+					poblacion_conyuge.setText(rs.getString("poblacion"));
+					codigoPostal_conyuge.setText(rs.getString("codigoPostal"));
+					
 					System.out.println(rs.getString("nombre"));
 				}
 
@@ -652,130 +780,12 @@ public class PanelHipoteca extends JPanel {
 
 	}
 
-	public void clearvalorImporte() {
-		valorImporte.setText("");
-	}
-
-	public void clearplazo() {
-		plazo.setText("");
-	}
-
-	public void cleardireccion() {
-		direccion.setText("");
-	}
-
-	public void clearcargas() {
-		cargas.setText("");
-	}
-
-	public void clearvinculacion() {
-		vinculacion.setText("");
-	}
-
-	public void clearbusquedacliente() {
-		busquedacliente.setText("");
-	}
-
-	public void cleardninie() {
-		dninie.setText("");
-	}
-
-	public void clearapellido1() {
-		apellido1.setText("");
-	}
-
-	public void clearapellido2() {
-		apellido2.setText("");
-	}
-
-	public void clearnombre() {
-		nombre.setText("");
-	}
-
-	public void clearfechaNacimiento() {
-		fechaNacimiento.setText("");
-	}
-
-	public void clearprofesion() {
-		profesion.setText("");
-	}
-
-	public void cleardomicilio() {
-		domicilio.setText("");
-	}
-
-	public void clearpoblacion() {
-		poblacion.setText("");
-	}
-
-	public void clearcodigoPostal() {
-		codigoPostal.setText("");
-	}
-
-	public void clearnombreEmpresa() {
-		nombreEmpresa.setText("");
-	}
-
-	public void clearactividad() {
-		actividad.setText("");
-	}
-
-	public void clearantiguedad() {
-		antiguedad.setText("");
-	}
-
-	public void clearpuesto() {
-		puesto.setText("");
-	}
-
-	public void cleardireccionEmpresa() {
-		direccionEmpresa.setText("");
-	}
-
-	public void clearcontactoEmpresa() {
-		contactoEmpresa.setText("");
-	}
-
-	public void clearingresosFijos() {
-		ingresosFijos.setText("");
-	}
-
-	public void clearingresosVariables() {
-		ingresosVariables.setText("");
-	}
-
-	public void cleargastosAlquiler() {
-		gastosAlquiler.setText("");
-	}
-
-	public void cleargastosHipoteca() {
-		gastosHipoteca.setText("");
-	}
-
-	public void clearotros() {
-		otros.setText("");
-	}
-
-	public void clearvalor() {
-		valor.setText("");
-	}
-
-	public void clearcargasVivienda() {
-		cargasVivienda.setText("");
-	}
-
-	public void clearotrosBienes() {
-		otrosBienes.setText("");
-	}
-
+	
 	public JPanel setPanelEsteDatos2(int alto, int ancho) {
 		JPanel panelEsteDatos2 = new JPanel();
-		panelEsteDatos2.setBorder(BorderFactory.createLoweredBevelBorder());
 		panelEsteDatos2.setLayout(new BoxLayout(panelEsteDatos2, BoxLayout.Y_AXIS));
-		panelEsteDatos2.setSize(250, 250);
-		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 1)));
-		panelEsteDatos2.setPreferredSize(new Dimension((int) (ancho * 0.8), (int) (alto * 0.8)));
-		panelEsteDatos2.setBorder(BorderFactory.createLoweredBevelBorder());
+		panelEsteDatos2.setAlignmentY(CENTER_ALIGNMENT);
+
 		JLabel l_datosPersonales = new JLabel("Datos Personales");
 		l_datosPersonales.setForeground(Color.BLACK);
 		Font f1 = new Font("Arial", Font.BOLD, 15);
@@ -887,8 +897,15 @@ public class PanelHipoteca extends JPanel {
 		panelEsteDatos2.add(l_codigopostal);
 		panelEsteDatos2.add(codigoPostal);
 		panelEsteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
-
-		return panelEsteDatos2;
+		JPanel auxiliar = new JPanel();
+		auxiliar.setLayout(new BoxLayout(auxiliar, BoxLayout.X_AXIS));
+		auxiliar.add(new JPanel());
+		panelEsteDatos2.setMaximumSize(new Dimension(255,2000));
+		auxiliar.add(panelEsteDatos2, BorderLayout.CENTER);
+		auxiliar.add(new JPanel());
+		
+		return auxiliar;
+		
 
 	}
 	/*
@@ -919,6 +936,7 @@ public class PanelHipoteca extends JPanel {
 		jp3.setPreferredSize(new Dimension(1, 1));
 		jp3.setMinimumSize(new Dimension(1, 1));
 		jp3.setMaximumSize(new Dimension(2000, 2000));
+
 
 		panelConyuge.add(jp1);
 		panelConyuge.add(jp2);
@@ -1479,7 +1497,7 @@ public class PanelHipoteca extends JPanel {
 
 		String nombreHipotecado = nombre.getText();
 		CreaCarpetaInformes(nombreHipotecado);
-		WordProcessing.changeDocumentDirectory(System.getProperty("user.home") + "\\documents\\Informes_hipotecario\\");
+		WordProcessing.changeDocumentDirectory(System.getProperty("user.home") + "\\documents\\Informes_hipotecario\\" +nombreHipotecado);
 		WordProcessing.saveDocumentAs(nombreHipotecado);
 		WordProcessing.exec();
 

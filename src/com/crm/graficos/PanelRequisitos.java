@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
@@ -15,6 +16,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -25,7 +27,7 @@ import com.crm.persistencia.ConfigDir;
 import com.crm.persistencia.MisConexiones;
 
 public class PanelRequisitos extends JPanel {
-
+    ResultSet rs;
 	JCheckBox
 	// checbox de trabajadores
 	foto_dni, foto_3nomina, copia_contrato, foto_movimientosbanco, vidalaboral, foto_recibosHipo,
@@ -52,6 +54,8 @@ public class PanelRequisitos extends JPanel {
 	}
 
 	public JPanel setPanelMayor(int alto, int ancho, JPanel p1, JPanel p2) {
+		
+	
 		JPanel panelMayor = new JPanel();
 		panelMayor.getBorder();
 		panelMayor.setLayout(new BorderLayout());
@@ -148,8 +152,11 @@ public class PanelRequisitos extends JPanel {
 		panel1.add(ultimosrecibos2);
 
 		panel1.setPreferredSize(new Dimension((int) (ancho * 0.7), (int) (alto * 2.2)));
-
-		return panel1;
+	
+	
+			
+			return panel1;
+		
 	}
 
 	public JPanel setPanel2(int alto, int ancho) {
@@ -234,7 +241,11 @@ public class PanelRequisitos extends JPanel {
 		panel2.add(Box.createRigidArea(new Dimension(0, 10)));
 		panel2.add(ultimo_recibo_auto2);
 		panel2.setPreferredSize(new Dimension((int) (ancho * 0.7), (int) (alto * 2.2)));
-		return panel2;
+		
+		
+			
+			return panel2;
+	
 	}
 
 	public JPanel setPanelSur(int alto, int ancho, JPanel p1, JPanel p2, JPanel p3) {
@@ -282,9 +293,14 @@ public class PanelRequisitos extends JPanel {
 
 				try {
 					c = new MisConexiones();
+					ps = c.getPS(ConfigDir.getInstance().getProperty("vinculado"));
+					ps.setString(1, tf_busqueda.getText());
+					rs = ps.executeQuery();
 					
-					
-                  
+					if (rs.next() == false) {
+						new JOptionPane().showMessageDialog(null,
+								"El usuario con DNI: " + tf_busqueda.getText() + " no existe");
+					} else {
 
 					ps = c.getPS(ConfigDir.getInstance().getProperty("query7"));
 					ps.setString(1, tf_busqueda.getText());
@@ -335,7 +351,7 @@ public class PanelRequisitos extends JPanel {
 					ps.executeUpdate();
 					
 
-
+					}
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -348,18 +364,16 @@ public class PanelRequisitos extends JPanel {
 		busca.setSize(250, 20);
 		tf_busqueda = new JTextField();
 		tf_busqueda.setMaximumSize(new Dimension(250, 20));
-		JButton busqueda = new JButton("BUSCAR");
+	
 
-		busqueda.setMaximumSize(new Dimension(100, 30));
-		busqueda.setForeground(Color.CYAN);
+	
 
 		panelDatos.add(b_registro);
-		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDatos.add(hoka);
-		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDatos.add(busca);
-		panelDatos.add(tf_busqueda);
-		panelDatos.add(busqueda);
+panelDatos.add(tf_busqueda);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+		
+	
 		panelDatos.setLocation(700, 400);
 		panelDatos.setPreferredSize(new Dimension((int) (ancho * 0.7), (int) (alto * 0.4)));
 

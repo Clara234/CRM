@@ -22,7 +22,7 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatSolarizedLight
 public class Lan {
 	// CRM DE SERVICIOS FINANCIEROS CON DIRECTORIO DE CLIENTES AL QUE LES DAS
 	// SERVICIOS
-	//private static Dimension dim;
+
 
 	public static void main(String[] args) {
 
@@ -58,7 +58,7 @@ public class Lan {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image imagen = tk.getImage("hipoteca.png");
 		marco.setIconImage(imagen);
-		marco.setMinimumSize(new Dimension(800,600));
+		marco.setMinimumSize(new Dimension(1200,700));
 
 		Toolkit.getDefaultToolkit().beep();
 		// almacenar las dimensiones de la pantalla del usuario
@@ -66,6 +66,7 @@ public class Lan {
 		int anchoM = (int) (dim.width /2), altoM = (int) (dim.height /2);
 		int anchoM1 = (int) (dim.width /2), altoM1 = (int) (dim.height /2);
 		int anchoM2 = (int) (dim.width /2), altoM2 = (int) (dim.height /2);
+		int anchoM3 = (int)(dim.width/2), altoM3 = (int)(dim.height/2);
 
 		// crear pestañas dentro del panel:
 		JTabbedPane pestanha = new JTabbedPane();
@@ -73,6 +74,8 @@ public class Lan {
 		pestanha.add("Directorio cliente", new PanelCliente(anchoM, altoM));
 		pestanha.add("Hipotecas", new PanelHipoteca(anchoM1, altoM1));
 		pestanha.add("Requisitos", new PanelRequisitos(anchoM2, altoM2));
+		//pestanha.add("", new PanelEncargos(anchoM3,altoM3));
+		
 
 		// Aqui es donde se visualiza, añadiendolo al marco
 
