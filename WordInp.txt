@@ -21,15 +21,15 @@ antiguo
 posicion                                
 diremp                                  
 telemp                                  
-fijosmen                                
-varmen                                  
+fijosmen                                87
+varmen                                  77
 gastosalq                               
 gastoshipo                              
 otrospres                               
 valorvivi                               
 cargasvivi                              
 propiedad                               false
-escritura                               false
+escritura                               true
 contratpriv                             false
 otros                                   false
 padres                                  false
@@ -47,9 +47,9 @@ prof_conyu                              Manager
 dom_conyu                               Madrid
 pob_conyu                               Madrid
 cp_conyu                                28012
-nomemp_conyu                            HJ
-activemp_conyu                          G
-antiguo_conyu                           G
+nomemp_conyu                            
+activemp_conyu                          
+antiguo_conyu                           
 posicion_conyu                          
 diremp_conyu                            
 telemp_conyu                            
@@ -57,7 +57,7 @@ fijosmen_conyu
 varmen_conyu                            
 gastosalq_conyu                         
 gastoshipo_conyu                        
-otrospres_conyu                         
+otrospres_conyu                         VG
 valorvivi_conyu                         
 cargasvivi_conyu                        
 propiedad_conyu                         false

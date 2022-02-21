@@ -74,7 +74,7 @@ public class Lan {
 		pestanha.add("Directorio cliente", new PanelCliente(anchoM, altoM));
 		pestanha.add("Hipotecas", new PanelHipoteca(anchoM1, altoM1));
 		pestanha.add("Requisitos", new PanelRequisitos(anchoM2, altoM2));
-		//pestanha.add("", new PanelEncargos(anchoM3,altoM3));
+		pestanha.add("Encargos", new PanelEncargos(anchoM3,altoM3));
 		
 
 		// Aqui es donde se visualiza, añadiendolo al marco
