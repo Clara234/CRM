@@ -58,7 +58,7 @@ public class Lan {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image imagen = tk.getImage("hipoteca.png");
 		marco.setIconImage(imagen);
-		marco.setMinimumSize(new Dimension(1200,700));
+		marco.setMinimumSize(new Dimension(1200,900));
 
 		Toolkit.getDefaultToolkit().beep();
 		// almacenar las dimensiones de la pantalla del usuario
@@ -67,6 +67,7 @@ public class Lan {
 		int anchoM1 = (int) (dim.width /2), altoM1 = (int) (dim.height /2);
 		int anchoM2 = (int) (dim.width /2), altoM2 = (int) (dim.height /2);
 		int anchoM3 = (int)(dim.width/2), altoM3 = (int)(dim.height/2);
+		int anchoM4 = (int)(dim.width/2), altoM4 = (int)(dim.height/2);
 
 		// crear pestañas dentro del panel:
 		JTabbedPane pestanha = new JTabbedPane();
@@ -75,6 +76,7 @@ public class Lan {
 		pestanha.add("Hipotecas", new PanelHipoteca(anchoM1, altoM1));
 		pestanha.add("Requisitos", new PanelRequisitos(anchoM2, altoM2));
 		pestanha.add("Encargos", new PanelEncargos(anchoM3,altoM3));
+		pestanha.add("Usuarios", new PanelUsuario(anchoM4,altoM4));
 		
 
 		// Aqui es donde se visualiza, añadiendolo al marco

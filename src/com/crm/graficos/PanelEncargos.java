@@ -2,12 +2,16 @@ package com.crm.graficos;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,10 +24,17 @@ import javax.swing.JTextField;
 import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableModel;
 
+import com.crm.pojos.Cliente;
+import com.crm.pojos.Encargo;
+import com.crm.auxiliares.WordProcessing;
+
 public class PanelEncargos extends JPanel{
 	DefaultTableModel dtm;
 	JTable tabla;
-	
+	Encargo seleccionado;
+	Encargo en;
+	Vector v;
+	List<Encargo> listaEncargos;
 	JTextField tf_asunto, tf_email, tf_receptor, tf_cliente, tf_dniNie, tf_cliente2, tf_dniNie2, tf_fecha,tf_domicilio;
 	JButton b_registrar, b_borrar, b_imprimir;
 	
@@ -68,14 +79,9 @@ public class PanelEncargos extends JPanel{
 
 		JPanel panelDatos = new JPanel();
 		panelDatos.setLayout(new BoxLayout(panelDatos, BoxLayout.Y_AXIS));
-		panelDatos.setPreferredSize(new Dimension((int) (ancho * 0.1), (int) (alto * 1.1)));
+		panelDatos.setPreferredSize(new Dimension((int) (ancho * 0.5), (int) (alto * 1.2)));
 		
-		/*tf_asunto, tf_email, tf_receptor, tf_cliente, tf_dniNie, tf_cliente2, tf_dniNie2, tf_fecha,tf_domicilio;
-	tf_nombre = new JTextField();
-		tf_nombre.setForeground(Color.gray);
-		Font f3 = new Font("Italic", Font.ITALIC, 12);
-		tf_nombre.setFont(f3);
-		tf_nombre.setMaximumSize(new Dimension(250, 20));*/
+	
 		
 		tf_asunto = new JTextField();
 		tf_asunto.setForeground(Color.gray);
@@ -118,20 +124,28 @@ public class PanelEncargos extends JPanel{
 		
 		panelDatos.add(new JLabel("Asunto"));
 		panelDatos.add(tf_asunto);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDatos.add(new JLabel("Email"));
 		panelDatos.add(tf_email);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDatos.add(new JLabel("Receptor"));
 		panelDatos.add(tf_receptor);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDatos.add(new JLabel("Cliente"));
 		panelDatos.add(tf_cliente);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDatos.add(new JLabel("DniNie"));
 		panelDatos.add(tf_dniNie);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDatos.add(new JLabel("Cliente2"));
 		panelDatos.add(tf_cliente2);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDatos.add(new JLabel("DniNie2"));
 		panelDatos.add(tf_dniNie2);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDatos.add(new JLabel("Fecha"));
 		panelDatos.add(tf_fecha);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDatos.add(new JLabel("Domicilio"));
 		panelDatos.add(tf_domicilio);
 		
@@ -142,23 +156,25 @@ public class PanelEncargos extends JPanel{
 	public JPanel setPanelBotones(int alto, int ancho) {
 		JPanel panelBotones = new JPanel();
 		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
-		panelBotones.add(Box.createRigidArea(new Dimension(0, 5)));
-		panelBotones.setPreferredSize(new Dimension((int) (alto * 0.01), (int) (ancho * 0.01)));
+		panelBotones.add(Box.createRigidArea(new Dimension(0, 1)));
+		panelBotones.setPreferredSize(new Dimension((int) (ancho * 0.8), (int) (alto * 0.4)));
 		
 		
 		b_registrar = new JButton("Registrar");
-		b_registrar.setForeground(Color.blue);
+		b_registrar.setForeground(Color.MAGENTA);
 		b_registrar.setMaximumSize(new Dimension(250, 30));
 		b_borrar = new JButton("Borrar");
-		b_borrar.setForeground(Color.blue);
+		b_borrar.setForeground(Color.MAGENTA);
 		b_borrar.setMaximumSize(new Dimension(250, 30));
 		b_imprimir = new JButton("Imprimir");
-		b_imprimir.setForeground(Color.blue);
+		b_imprimir.setForeground(Color.MAGENTA);
 		b_imprimir.setMaximumSize(new Dimension(250, 30));
 		
 		
 		panelBotones.add(b_registrar);
+		panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelBotones.add(b_borrar);
+		panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelBotones.add(b_imprimir);
 		
 		b_registrar.addActionListener(new gestorRegistrar());
@@ -204,6 +220,19 @@ public class PanelEncargos extends JPanel{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			int j = tabla.getSelectedRow();
+			
+			seleccionado = listaEncargos.get(j);
+			tf_asunto.setText(seleccionado.getAsunto());
+			tf_email.setText(seleccionado.getEmail());
+			tf_receptor.setText(seleccionado.getReceptor());
+			tf_cliente.setText(seleccionado.getCliente());
+			tf_dniNie.setText(seleccionado.getDniNie());
+			tf_cliente2.setText(seleccionado.getCliente2());
+			tf_dniNie2.setText(seleccionado.getDniNie2()); 
+			tf_fecha.setText(""+seleccionado.getFecha());
+			tf_domicilio.setText(seleccionado.getDomicilio());
+			
 			
 		}
 
@@ -245,6 +274,32 @@ public class PanelEncargos extends JPanel{
 		
 	}
 
+	
+	public void WordProcessing() {
+		
+		//tf_asunto.setText(""+seleccionado.getAsunto());
+		//tf_email.setText(""+seleccionado.getEmail());
+		// tf_receptor.setText(""+seleccionado.getReceptor()); 
+		 //tf_cliente.setText(""+seleccionado.getCliente()); 
+		 tf_dniNie.setText(""+seleccionado.getDniNie()); 
+		 //tf_cliente2.setText(""+seleccionado.getCliente2()); 
+		 tf_dniNie2.setText(""+seleccionado.getDniNie2()); 
+		 tf_fecha.setText(""+seleccionado.getFecha());
+		 tf_domicilio.setText(""+seleccionado.getDomicilio()); 
+		 
+		 if(seleccionado != null) {
+			 File miTemplate = new File("src/com/rrhh/auxiliares/templates/encargo.dotx");
+			WordProcessing.createNewDocumentFromTemplate(miTemplate.getAbsolutePath());
+
+			WordProcessing.typeTextAtBookmark("dninieuno", tf_dniNie.getText());
+		
+			WordProcessing.typeTextAtBookmark("dniniedos", tf_dniNie2.getText());
+			WordProcessing.typeTextAtBookmark("fecha", tf_fecha.getText());
+			WordProcessing.typeTextAtBookmark("domicilio", tf_domicilio.getText());
+			
+		 }
+		 
+	}
 	/*public void WordProcessing() {
 
 		

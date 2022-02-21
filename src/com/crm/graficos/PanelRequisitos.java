@@ -282,7 +282,7 @@ public class PanelRequisitos extends JPanel {
 		hoka.setMaximumSize(new Dimension(250, 40));
 
 		JButton b_registro = new JButton("Registrar");
-		b_registro.setForeground(Color.GREEN);
+		b_registro.setForeground(Color.MAGENTA);
 		b_registro.setMaximumSize(new Dimension(100, 30));
 		b_registro.addActionListener(new ActionListener() {
 

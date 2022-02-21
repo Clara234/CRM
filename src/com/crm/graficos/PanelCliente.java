@@ -2,6 +2,7 @@
 package com.crm.graficos;
 
 import javax.sound.sampled.AudioInputStream;
+
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -43,7 +44,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	Cliente cliente;
 	Cliente cli;
 	Vector v;
-	public JDialog dialogoinicial;
+	public JDialog dialogoinicial, dialogoUsuario;
 	public JComboBox<Object> combo;
 	public JPasswordField clave;
 	public JTextField mialias;
@@ -53,10 +54,10 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	MisConexiones c;
 	PreparedStatement ps;
 	JTable tabla;
-	JButton botonVer, botonInsertar, botonBorrar, botonActualizar, botonMusica, botonAcceder;
+	JButton botonVer, botonInsertar, botonBorrar, botonActualizar, botonMusica, botonAcceder, botonFuera, botonAlta;;
 
-
-JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profesion, tf_domicilio, tf_poblacion, tf_codigoPostal;
+	JTextField tf_dninie, tf_nombre, tf_ape1, tf_ape2, tf_fechaNacimiento, tf_profesion, tf_domicilio, tf_poblacion,
+			tf_codigoPostal;
 	JCheckBox chb_fijo, chb_temporal, chb_autonomo, chb_otros, chb_root;
 	JMenuItem miCalculadora, copiaBase, miNavegador;
 
@@ -75,7 +76,7 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 		// objeto previo configurador
 		dtm = new DefaultTableModel();
 		// todos los datos que tendra
-		
+
 		dtm.addColumn("Dni_nie");
 		dtm.addColumn("Nombre");
 		dtm.addColumn("Apellido1");
@@ -173,45 +174,41 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 		JPanel panelEsteDatos = new JPanel();
 		panelEsteDatos.setLayout(new BoxLayout(panelEsteDatos, BoxLayout.Y_AXIS));
 		panelEsteDatos.setLayout(new BorderLayout());
-		
+
 		JScrollPane datos = new JScrollPane(subPanel);
-		 subPanel = new JPanel();
-		 subPanel.setLayout(new BorderLayout());
-		 subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
-		 
-		 datos.setViewportView(subPanel);
-        
+		subPanel = new JPanel();
+		subPanel.setLayout(new BorderLayout());
+		subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
+
+		datos.setViewportView(subPanel);
+
 		datos.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		datos.setMinimumSize(new Dimension(250, 500));
 		datos.setVisible(true);
-		
-	
-	
+
 		tf_dninie = new JTextField();
 		tf_dninie.setForeground(Color.gray);
 		Font f = new Font("Italic", Font.ITALIC, 12);
 		tf_dninie.setFont(f);
 		tf_dninie.setMaximumSize(new Dimension(250, 20));
-		
 
 		tf_nombre = new JTextField();
 		tf_nombre.setForeground(Color.gray);
 		tf_nombre.setFont(f);
 		tf_nombre.setMaximumSize(new Dimension(250, 20));
-		
 
 		tf_ape1 = new JTextField();
 		tf_ape1.setForeground(Color.gray);
 		Font f2 = new Font("Italic", Font.ITALIC, 12);
 		tf_ape1.setFont(f2);
 		tf_ape1.setMaximumSize(new Dimension(250, 20));
-	
+
 		tf_ape2 = new JTextField();
 		tf_ape2.setForeground(Color.gray);
 		Font f3 = new Font("Italic", Font.ITALIC, 12);
 		tf_ape2.setFont(f3);
 		tf_ape2.setMaximumSize(new Dimension(250, 20));
-	
+
 		tf_fechaNacimiento = new JTextField();
 		tf_fechaNacimiento.setForeground(Color.gray);
 		Font f4 = new Font("Italic", Font.ITALIC, 12);
@@ -219,14 +216,10 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 		tf_fechaNacimiento.setMaximumSize(new Dimension(250, 20));
 
 		chb_fijo = new JCheckBox();
-		
 
 		chb_temporal = new JCheckBox();
-		
 
 		chb_autonomo = new JCheckBox();
-		
-
 
 		chb_otros = new JCheckBox();
 		tf_profesion = new JTextField();
@@ -237,19 +230,17 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 		tf_domicilio.setForeground(Color.gray);
 		tf_domicilio.setFont(f2);
 		tf_domicilio.setMaximumSize(new Dimension(250, 20));
-		
-		
+
 		tf_poblacion = new JTextField();
 		tf_poblacion.setForeground(Color.gray);
 		tf_poblacion.setFont(f2);
 		tf_poblacion.setMaximumSize(new Dimension(250, 20));
-		
+
 		tf_codigoPostal = new JTextField();
 		tf_codigoPostal.setForeground(Color.gray);
 		tf_codigoPostal.setFont(f2);
 		tf_codigoPostal.setMaximumSize(new Dimension(250, 20));
-		
-		
+
 		subPanel.add(new JLabel("DniNie: "));
 		subPanel.add(tf_dninie);
 		subPanel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -286,12 +277,10 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 		subPanel.add(new JLabel("Codigo Postal: "));
 		subPanel.add(tf_codigoPostal);
 
+		subPanel.setVisible(true);
 
-	subPanel.setVisible(true);
-
-		
 		panelEsteDatos.add(datos);
-		
+
 		panelEsteDatos.setPreferredSize(new Dimension((int) (ancho * 0.01), (int) (alto * 0.9)));
 		// panelEsteDatos.setBackground(Color.red);
 		return panelEsteDatos;
@@ -314,22 +303,22 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 		panelEsteControl.add(botonVer);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonInsertar = new JButton("Insertar");
-		botonInsertar.setForeground(Color.BLUE);
+		botonInsertar.setForeground(Color.MAGENTA);
 		botonInsertar.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonInsertar);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonBorrar = new JButton(" Borrar");
-		botonBorrar.setForeground(Color.BLUE);
+		botonBorrar.setForeground(Color.MAGENTA);
 		botonBorrar.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonBorrar);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonActualizar = new JButton("Actualizar");
-		botonActualizar.setForeground(Color.BLUE);
+		botonActualizar.setForeground(Color.MAGENTA);
 		botonActualizar.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonActualizar);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonMusica = new JButton("Musica");
-		botonMusica.setForeground(Color.BLUE);
+		botonMusica.setForeground(Color.MAGENTA);
 		botonMusica.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonMusica);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
@@ -366,8 +355,6 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 
 				ps = c.getPS(ConfigDir.getInstance().getProperty("query2"));
 
-				
-			
 				ps.setString(1, tf_dninie.getText());
 				ps.setString(2, tf_nombre.getText());
 				ps.setString(3, tf_ape1.getText());
@@ -381,7 +368,6 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 				ps.setString(11, tf_domicilio.getText());
 				ps.setString(12, tf_poblacion.getText());
 				ps.setString(13, tf_codigoPostal.getText());
-				
 
 				ps.executeUpdate();
 
@@ -499,7 +485,7 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 					ps.setString(11, tf_domicilio.getText());
 					ps.setString(12, tf_poblacion.getText());
 					ps.setString(13, tf_codigoPostal.getText());
-					
+
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -553,7 +539,7 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 			tf_nombre.setText(seleccionado.getNombre());
 			tf_ape1.setText(seleccionado.getApe1());
 			tf_ape2.setText(seleccionado.getApe2());
-			tf_fechaNacimiento.setText(""+seleccionado.getFechaNacimiento());
+			tf_fechaNacimiento.setText("" + seleccionado.getFechaNacimiento());
 			chb_fijo.setSelected(seleccionado.isFijo());
 			chb_temporal.setSelected(seleccionado.isTemporal());
 			chb_autonomo.setSelected(seleccionado.isAutonomo());
@@ -602,10 +588,11 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 			ResultSet rs = c.getRS(ConfigDir.getInstance().getProperty("query1"));
 			while (rs.next()) {
 
-				cliente = new Cliente(rs.getNString("Dni Nie"), rs.getNString("Nombre"), rs.getNString("Apellido 1"),
-						rs.getNString("Apellido 2"), rs.getTimestamp("Fecha Nacimiento"), rs.getBoolean("fijo"),
+				cliente = new Cliente(rs.getString("dni_nie"), rs.getString("nombre"), rs.getString("apellido1"),
+						rs.getString("apellido2"), rs.getTimestamp("fecha_nacimiento"), rs.getBoolean("fijo"),
 						rs.getBoolean("temporal"), rs.getBoolean("autonomo"), rs.getBoolean("otros"),
-						rs.getNString("profesion"), rs.getNString("Domicilio"), rs.getNString("Poblacion"), rs.getNString("CodigoPostal"));
+						rs.getString("profesion"), rs.getString("domicilio"), rs.getString("poblacion"),
+						rs.getString("codigoPostal"));
 				v = new Vector();
 				v.addElement(cliente.getDni_nie());
 				v.addElement(cliente.getNombre());
@@ -646,14 +633,14 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 
 	public String fechaEsp(String fechaE) {
 		String fechaEsp = "", fecha = "", dia = "", mes = "", anno = "";
-			
+
 		StringTokenizer st = new StringTokenizer(fechaE, " ");
 		fecha = st.nextToken();
 		st = new StringTokenizer(fecha.toString(), "-");
 		anno = st.nextToken();
 		mes = st.nextToken();
 		dia = st.nextToken();
-		
+
 		// no modifico el orden del tiempo pero lo almaceno por si fuese necesario en el
 		// futuro
 		fechaEsp = dia + "/" + mes + "/" + anno;
@@ -816,6 +803,7 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 			if (n == JOptionPane.YES_OPTION) {
 				// veamos = new MiPractica();
 				dialogoinicial.dispose();
+				altaUsuario();
 			}
 
 			else if (n == JOptionPane.NO_OPTION) {
@@ -835,7 +823,7 @@ JTextField  tf_dninie,  tf_nombre, tf_ape1, tf_ape2,tf_fechaNacimiento,tf_profes
 			tf_profesion.setEditable(true);
 			tf_poblacion.setEditable(true);
 			tf_domicilio.setEditable(true);
-tf_codigoPostal.setEditable(true);
+			tf_codigoPostal.setEditable(true);
 			miCalculadora.setEnabled(true);
 			copiaBase.setEnabled(true);
 			miNavegador.setEnabled(true);
@@ -844,7 +832,6 @@ tf_codigoPostal.setEditable(true);
 			chb_autonomo.setEnabled(true);
 			chb_otros.setEnabled(true);
 			chb_root.setEnabled(true);
-			
 
 			break;
 		case 2:
@@ -877,7 +864,7 @@ tf_codigoPostal.setEditable(true);
 			tf_profesion.setEditable(false);
 			tf_poblacion.setEditable(false);
 			tf_domicilio.setEditable(false);
-tf_codigoPostal.setEditable(false);
+			tf_codigoPostal.setEditable(false);
 			miCalculadora.setEnabled(false);
 			copiaBase.setEnabled(false);
 			miNavegador.setEnabled(false);
@@ -886,15 +873,95 @@ tf_codigoPostal.setEditable(false);
 			chb_autonomo.setEnabled(true);
 			chb_otros.setEnabled(true);
 			chb_root.setEnabled(false);
-			
 
 			break;
 
 		}
 
 	}
+	
+	 public void altaUsuario() {
+			// TODO Auto-generated method stub
+			
+			dialogoUsuario = new JDialog(new JFrame());
+			dialogoUsuario.setResizable(true);
+			dialogoUsuario.setBackground(Color.CYAN);
+			dialogoUsuario.setForeground(Color.PINK);
+			dialogoUsuario.setSize(250, 250);
+			dialogoUsuario.setMinimumSize(new Dimension(250, 250));
+			dialogoUsuario.setLocation(250, 250);
+			dialogoUsuario.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			mialias = new JTextField(16);
+			clave = new JPasswordField(16);
+			dialogoUsuario.setTitle("ALTA USUARIOS");
+			combo = new JComboBox<Object>();
+			combo.addItem(dameObjeto("1"));
+			combo.addItem(dameObjeto("2"));
+			combo.addItem(dameObjeto("3"));
+			botonAlta = new JButton("Dar de Alta");
+			botonFuera = new JButton("Salir");
+		    botonAlta.addActionListener(new ActionListener() {
 
-		/*
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					try {
+						c = new MisConexiones();
+						PreparedStatement ps = c.getPS(ConfigDir.getInstance().getProperty("altaUsu"));
+						ps.setString(1, mialias.getText());
+						ps.setString(2, Auxiliar.dameContrasenna(clave.getPassword()));
+						ps.setInt(3, combo.getSelectedIndex() + 1);
+						ps.execute();
+						
+						refresh();
+						 
+						
+					}catch(Exception e1) {e1.printStackTrace();}
+				}
+		    	
+		    });
+		    
+		    botonFuera.addActionListener(new ActionListener() {
+		    	@Override
+		    	public void actionPerformed(ActionEvent e) {
+		    		
+		    		dialogoUsuario.dispose();
+		    	}
+		    });
+		    
+		    
+		    dialogoUsuario.add(mialias);
+		    dialogoUsuario.add(clave);
+		    dialogoUsuario.add(combo);
+		    dialogoUsuario.add(botonAlta);
+		    dialogoUsuario.add(botonFuera);
+		    
+		    JPanel panel = new JPanel();
+		    panel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 10));
+
+		    panel.add(new JLabel("Introduzca su  alias"));
+		    panel.add(mialias);
+		    panel.add(new JLabel("Introduzca su contraseña"));
+			panel.add(clave);
+			panel.add(new JLabel(" GRUPOS"));
+			panel.add(combo);
+			panel.add(new JLabel("  copyright by Clara"));
+
+			panel.add(botonAlta);
+			panel.add(botonFuera);
+
+			panel.setSize(250, 250);
+			panel.setBackground(new Color(209, 222, 244));
+			dialogoUsuario.add(panel);
+			dialogoUsuario.setVisible(true);
+			panel.setVisible(true);
+		    
+		    
+		    
+		}
+
+	
+	/*
 	 * public void addCliente(Cliente cli) throws SQLException,
 	 * ClassNotFoundException try{ PreparedStatement ps = new
 	 * MisConexiones().dameConexion().prepareStatement(ConfigDir.getInstance().
@@ -917,7 +984,25 @@ tf_codigoPostal.setEditable(false);
 		// TODO Auto-generated method stub
 		return null;
 	}
-/*
+	/*
+	 * @Override public Cliente getbyDni_nie(String dni_nie) throws SQLException {
+	 * // TODO Auto-generated method stub return null; }
+	 * 
+	 * @Override public Cliente updateCliente(Cliente cliente) throws SQLException {
+	 * // TODO Auto-generated method stub return null; }
+	 * 
+	 * @Override public void deleteCliente(String dni_nie) throws SQLException { //
+	 * TODO Auto-generated method stub
+	 * 
+	 * }
+	 */
+
+	@Override
+	public void addCliente(Cliente cliente) throws SQLException, ClassNotFoundException {
+		// TODO Auto-generated method stub
+
+	}
+
 	@Override
 	public Cliente getbyDni_nie(String dni_nie) throws SQLException {
 		// TODO Auto-generated method stub
@@ -935,29 +1020,4 @@ tf_codigoPostal.setEditable(false);
 		// TODO Auto-generated method stub
 
 	}
-*/
-
-		@Override
-		public void addCliente(Cliente cliente) throws SQLException, ClassNotFoundException {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public Cliente getbyDni_nie(String dni_nie) throws SQLException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public Cliente updateCliente(Cliente cliente) throws SQLException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void deleteCliente(String dni_nie) throws SQLException {
-			// TODO Auto-generated method stub
-			
-		}
 }

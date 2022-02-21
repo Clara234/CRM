@@ -83,7 +83,7 @@ public class PanelHipoteca extends JPanel {
 			ingresosVariables_conyuge, gastosAlquiler_conyuge, gastosHipoteca_conyuge, otros_conyuge, valor_conyuge,
 			cargasVivienda_conyuge;
 
-	JButton imprimir, insertar, limpiar, b_dniConyuge;
+	JButton imprimir, insertar, limpiar, b_dniConyuge,b_buscarCliente;
 	JCheckBox // datos hipotecado
 	chb_editar, chb_propiedad, chb_escritura, chb_contratoPrivado, chb_otrosGastos, chb_padres, chb_alquiler, chb_fijo,
 			chb_temporal, chb_autonomo, chb_otrosCosas,
@@ -293,12 +293,16 @@ public class PanelHipoteca extends JPanel {
 		busquedacliente.setForeground(Color.gray);
 		busquedacliente.setFont(f);
 		busquedacliente.setMaximumSize(new Dimension(250, 20));
+		b_buscarCliente = new JButton("BUSCAR");
+		b_buscarCliente.setMaximumSize(new Dimension(250,20));
+		b_buscarCliente.addActionListener(new gestorBuscaCli());
 
 		panelNorteDatos3.add(l_vinculacion);
 		panelNorteDatos3.add(vinculacion);
 		panelNorteDatos3.add(b_dniConyuge);
 		panelNorteDatos3.add(l_busquedacliente);
 		panelNorteDatos3.add(busquedacliente);
+		panelNorteDatos3.add(b_buscarCliente);
 
 		return panelNorteDatos3;
 
@@ -518,11 +522,11 @@ public class PanelHipoteca extends JPanel {
 		control.setFont(f2);
 		control.setMaximumSize(new Dimension(300, 40));
 		imprimir = new JButton("IMPRIMIR PETICION");
-		imprimir.setForeground(Color.BLUE);
+		imprimir.setForeground(Color.MAGENTA);
 		insertar = new JButton("INSERTAR EN BBDD");
-		insertar.setForeground(Color.BLUE);
+		insertar.setForeground(Color.MAGENTA);
 		limpiar = new JButton("LIMPIAR");
-		limpiar.setForeground(Color.BLUE);
+		limpiar.setForeground(Color.MAGENTA);
 		chb_editar = new JCheckBox("Editar Campos");
 		chb_editar.setForeground(Color.BLACK);
 
@@ -731,6 +735,7 @@ public class PanelHipoteca extends JPanel {
 				c = new MisConexiones();
 				ps = c.getPS(ConfigDir.getInstance().getProperty("vinculado"));
 				ps.setString(1, vinculacion.getText());
+				
 				rs = ps.executeQuery();
 
 				if (rs.next() == false) {
@@ -742,18 +747,7 @@ public class PanelHipoteca extends JPanel {
 					datosHipoteca.setSelectedIndex(1);
 					
 			
-					nombre.setText(rs.getString("nombre"));
-					apellido1.setText(rs.getString("apellido1"));
-					apellido2.setText(rs.getString("apellido2"));
-					fechaNacimiento.setText("" + rs.getTimestamp("fecha_nacimiento"));
-					chb_fijo.setSelected(rs.getBoolean("fijo"));
-					chb_temporal.setSelected(rs.getBoolean("temporal"));
-					chb_autonomo.setSelected(rs.getBoolean("autonomo"));
-					chb_otrosCosas.setSelected(rs.getBoolean("otros"));
-					profesion.setText(rs.getString("profesion"));
-					domicilio.setText(rs.getString("domicilio"));
-					poblacion.setText(rs.getString("poblacion"));
-					codigoPostal.setText(rs.getString("codigoPostal"));
+					
 					
 					//fechaNacimiento.setText(rs.getTimestamp("fecha_alta"));
 					nombre_conyuge.setText(rs.getString("nombre"));
@@ -769,7 +763,7 @@ public class PanelHipoteca extends JPanel {
 					poblacion_conyuge.setText(rs.getString("poblacion"));
 					codigoPostal_conyuge.setText(rs.getString("codigoPostal"));
 					
-					System.out.println(rs.getString("nombre"));
+					//System.out.println(rs.getString("nombre"));
 				}
 
 			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e1) {
@@ -779,6 +773,56 @@ public class PanelHipoteca extends JPanel {
 		}
 
 	}
+	
+	public class gestorBuscaCli implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			try {
+				c = new MisConexiones();
+				ps = c.getPS(ConfigDir.getInstance().getProperty("vinculado"));
+				ps.setString(1, busquedacliente.getText());
+				
+				rs = ps.executeQuery();
+
+				if (rs.next() == false) {
+					new JOptionPane().showMessageDialog(null,
+							"El usuario con DNI: " + busquedacliente.getText() + " no existe");
+				} else {
+					//consigue que despues de buscar el dni se va y activa el panel conyuge
+					//datosHipoteca.setEnabledAt(1, true);
+					
+					
+			
+					
+					
+					//fechaNacimiento.setText(rs.getTimestamp("fecha_alta"));
+					nombre.setText(rs.getString("nombre"));
+					apellido1.setText(rs.getString("apellido1"));
+					apellido2.setText(rs.getString("apellido2"));
+					fechaNacimiento.setText("" + rs.getTimestamp("fecha_nacimiento"));
+					chb_fijo.setSelected(rs.getBoolean("fijo"));
+					chb_temporal.setSelected(rs.getBoolean("temporal"));
+					chb_autonomo.setSelected(rs.getBoolean("autonomo"));
+					chb_otrosCosas.setSelected(rs.getBoolean("otros"));
+					profesion.setText(rs.getString("profesion"));
+					domicilio.setText(rs.getString("domicilio"));
+					poblacion.setText(rs.getString("poblacion"));
+					codigoPostal.setText(rs.getString("codigoPostal"));
+					
+					//System.out.println(rs.getString("nombre"));
+				}
+
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e1) {
+				System.out.println("Error al vincular");
+				e1.printStackTrace();
+			}
+		}
+
+		}
+		
+	
 
 	
 	public JPanel setPanelEsteDatos2(int alto, int ancho) {

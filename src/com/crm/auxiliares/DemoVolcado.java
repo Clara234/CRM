@@ -14,22 +14,19 @@ public class DemoVolcado {
 		
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ejercicioregiones?useSSL=false&serverTimezone=UTC","root","root");
-		PreparedStatement ps = con.prepareStatement("SELECT idCliente from departamentos");
+		PreparedStatement ps = con.prepareStatement("SELECT * from cliente ");
 
 		
-		ResultSet rs = ps.executeQuery();
-		ArrayList<Integer> lista = new ArrayList<Integer>();
-		while(rs.next()) {
-			lista.add(rs.getInt("idCliente"));
-		}
 		
-		ps = con.prepareStatement("UPDATE empleados set cliente=true where id=?");
+		ArrayList<Integer> lista = new ArrayList<Integer>();
+		
+		ps = con.prepareStatement("UPDATE cliente set fijo=true where fijo is not null");
    		for(int j=0; j<lista.size();j++) {
    			ps.setInt(1, lista.get(j));
    			ps.executeUpdate();
 		
 	}
-   		ps = con.prepareStatement("UPDATE empleados set cliente=false where jefe is null");
+   		ps = con.prepareStatement("UPDATE cliente set fijo=false where fijo is null");
         ps.execute();
 
 }

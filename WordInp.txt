@@ -1,5 +1,5 @@
 @noteNotMatchingBookmarks               TRUE
-@createNewDocumentFromTemplate          C:\Users\hp\eclipse-workspace\CRM\src\com\crm\auxiliares\templates\informe_hipoteca.dotm
+@createNewDocumentFromTemplate          C:\Users\dam\eclipse-workspace\CRM\src\com\crm\auxiliares\templates\informe_hipoteca.dotm
 fin                                     
 valad                                   
 credito                                 
@@ -7,44 +7,44 @@ plazotot
 dom                                     
 cargas                                  
 dni_nie                                 
-ape1                                    Martinez
-ape2                                    Perez
-nombrecli                               Lara
-fechan                                  2002-11-02 01:00:00.0
-prof                                    Manager
-dom                                     Madrid
+ape1                                    Mora
+ape2                                    Sanchez
+nombrecli                               Lola
+fechan                                  2001-02-02 01:00:00.0
+prof                                    Becario
+dom                                     Calle Rersureccuib 5
 pob                                     Madrid
-cp                                      28012
+cp                                      28035
 nomemp                                  
 activemp                                
 antiguo                                 
 posicion                                
 diremp                                  
 telemp                                  
-fijosmen                                87
-varmen                                  77
+fijosmen                                
+varmen                                  
 gastosalq                               
 gastoshipo                              
 otrospres                               
 valorvivi                               
 cargasvivi                              
 propiedad                               false
-escritura                               true
+escritura                               false
 contratpriv                             false
 otros                                   false
 padres                                  false
 alquiler                                false
-fijo                                    false
+fijo                                    true
 temp                                    true
 aut                                     true
 otrosmas                                false
 dni_nie_conyu                           
 ape1_conyu                              Martinez
-ape2_conyu                              Perez
+ape2_conyu                              Martinez
 nombrecli_conyu                         Lara
-fechan_conyu                            2002-11-02 01:00:00.0
+fechan_conyu                            2002-12-02 01:00:00.0
 prof_conyu                              Manager
-dom_conyu                               Madrid
+dom_conyu                               Calle de la Esperanza 5
 pob_conyu                               Madrid
 cp_conyu                                28012
 nomemp_conyu                            
@@ -57,7 +57,7 @@ fijosmen_conyu
 varmen_conyu                            
 gastosalq_conyu                         
 gastoshipo_conyu                        
-otrospres_conyu                         VG
+otrospres_conyu                         
 valorvivi_conyu                         
 cargasvivi_conyu                        
 propiedad_conyu                         false
@@ -66,9 +66,9 @@ contratpriv_conyu                       false
 otros_conyu                             false
 padres_conyu                            false
 alquiler_conyu                          false
-fijo_conyu                              false
+fijo_conyu                              true
 temp_conyu                              true
-aut_conyu                               true
+aut_conyu                               false
 otrosmas_conyu                          false
-@changeDocumentDirectory                C:\Users\hp\documents\Informes_hipotecario\Lara
-@saveDocumentAs                         Lara
+@changeDocumentDirectory                C:\Users\dam\documents\Informes_hipotecario\Lola
+@saveDocumentAs                         Lola
