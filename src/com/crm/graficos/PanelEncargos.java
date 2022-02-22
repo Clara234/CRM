@@ -10,6 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -27,21 +32,25 @@ import javax.swing.table.DefaultTableModel;
 import com.crm.pojos.Cliente;
 import com.crm.pojos.Encargo;
 import com.crm.auxiliares.WordProcessing;
+import com.crm.persistencia.ConfigDir;
+import com.crm.persistencia.MisConexiones;
 
 public class PanelEncargos extends JPanel{
 	DefaultTableModel dtm;
 	JTable tabla;
 	Encargo seleccionado;
-	Encargo en;
+	Encargo encargo;
+	PreparedStatement ps;
 	Vector v;
 	List<Encargo> listaEncargos;
 	JTextField tf_asunto, tf_email, tf_receptor, tf_cliente, tf_dniNie, tf_cliente2, tf_dniNie2, tf_fecha,tf_domicilio;
-	JButton b_registrar, b_borrar, b_imprimir;
-	
+	JButton b_ver,b_registrar, b_borrar, b_imprimir;
+	MisConexiones c;
 	public PanelEncargos(int alto, int ancho) {
 		setLayout(new BorderLayout());
+		add(setPanelNorte(alto,ancho, setPanel1(alto,ancho), setPanel2(alto,ancho), setPanel3(alto,ancho)), BorderLayout.NORTH);
 		add(setTabla(alto,ancho), BorderLayout.CENTER);
-		add(setPanelEste(alto,ancho, setPanelDatos(alto,ancho), setPanelBotones(alto,ancho)), BorderLayout.EAST);
+		
 	}
 	
 	public JScrollPane setTabla(int alto, int ancho) {
@@ -65,21 +74,22 @@ public class PanelEncargos extends JPanel{
 	      return p;
 	}
 	
-	public JPanel setPanelEste(int alto, int ancho, JPanel jp1, JPanel jp2) {
-		JPanel panelEste = new JPanel();
-		panelEste.setLayout(new BoxLayout(panelEste, BoxLayout.Y_AXIS));
-		panelEste.setPreferredSize(new Dimension((int) (ancho * 0.25), (int) (alto * 0.8)));
-		panelEste.add(jp1, BorderLayout.NORTH);
-		panelEste.add(jp2, BorderLayout.CENTER);
+	public JPanel setPanelNorte(int alto, int ancho, JPanel jp1, JPanel jp2,JPanel jp3) {
+		JPanel panelNorte = new JPanel();
+		panelNorte.setLayout(new BoxLayout(panelNorte, BoxLayout.Y_AXIS));
+		panelNorte.setPreferredSize(new Dimension((int) (ancho * 0.1), (int) (alto * 0.2)));
+		panelNorte.add(jp1);
+		panelNorte.add(jp2);
+		panelNorte.add(jp3);
 
-		return panelEste;
+		return panelNorte;
 	}
 	
-	public JPanel setPanelDatos(int alto, int ancho) {
+	public JPanel setPanel1(int alto, int ancho) {
 
 		JPanel panelDatos = new JPanel();
-		panelDatos.setLayout(new BoxLayout(panelDatos, BoxLayout.Y_AXIS));
-		panelDatos.setPreferredSize(new Dimension((int) (ancho * 0.5), (int) (alto * 1.2)));
+		panelDatos.setLayout(new BoxLayout(panelDatos, BoxLayout.X_AXIS));
+		panelDatos.setPreferredSize(new Dimension((int) (ancho * 0.01), (int) (alto * 0.1)));
 		
 	
 		
@@ -97,8 +107,43 @@ public class PanelEncargos extends JPanel{
 	
 		tf_receptor.setFont(f);
 		tf_receptor.setMaximumSize(new Dimension(250,20));
+		
+		b_ver = new JButton("VER TABLA");
+		b_ver.setForeground(Color.MAGENTA);
+		b_ver.setMaximumSize(new Dimension(250, 30));
+		b_ver.addActionListener(new gestorVisual());
+		b_registrar = new JButton("Registrar");
+		b_registrar.setForeground(Color.MAGENTA);
+		b_registrar.setMaximumSize(new Dimension(250, 30));
+		b_registrar.addActionListener(new gestorRegistrar());
+
+		
+		panelDatos.add(new JLabel("Asunto: "));
+		panelDatos.add(tf_asunto);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDatos.add(new JLabel("Email: "));
+		panelDatos.add(tf_email);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDatos.add(new JLabel("Receptor: "));
+		panelDatos.add(tf_receptor);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+	    panelDatos.add(b_ver);
+		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
+	    panelDatos.add(b_registrar);
+		
+		return panelDatos;
+	}
+	
+	public JPanel setPanel2(int alto, int ancho) {
+		JPanel panel2 = new JPanel();
+
+		panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
+		panel2.add(Box.createRigidArea(new Dimension(0, 1)));
+		panel2.setPreferredSize(new Dimension((int) (ancho * 0.01), (int) (alto * 0.1)));
+		
 		tf_cliente = new JTextField();
 		tf_cliente.setForeground(Color.gray);
+		Font f = new Font("Italic", Font.ITALIC,12);
 		tf_cliente.setFont(f);
 		tf_cliente.setMaximumSize(new Dimension(250,20));
 		tf_dniNie = new JTextField();
@@ -113,80 +158,109 @@ public class PanelEncargos extends JPanel{
 		tf_dniNie2.setForeground(Color.gray);
 		tf_dniNie2.setFont(f);
 		tf_dniNie2.setMaximumSize(new Dimension(250,20));
+		
+		
+		panel2.add(new JLabel("Cliente: "));
+		panel2.add(tf_cliente);
+		panel2.add(Box.createRigidArea(new Dimension(0, 10)));
+		panel2.add(new JLabel("DniNie: "));
+		panel2.add(tf_dniNie);
+		panel2.add(Box.createRigidArea(new Dimension(0, 10)));
+		panel2.add(new JLabel("Cliente 2: "));
+		panel2.add(tf_cliente2);
+		panel2.add(Box.createRigidArea(new Dimension(0, 10)));
+		panel2.add(new JLabel("DniNie 2: "));
+		panel2.add(tf_dniNie2);
+
+	
+		return panel2;
+	}
+	
+	public JPanel setPanel3(int alto, int ancho) {
+		
+		JPanel panel3 = new JPanel();
+		panel3.setLayout(new BoxLayout(panel3, BoxLayout.X_AXIS));
+		panel3.add(Box.createRigidArea(new Dimension(0, 1)));
+		panel3.setPreferredSize(new Dimension((int) (ancho * 0.01), (int) (alto * 0.1)));
+		
 		tf_fecha = new JTextField();
 		tf_fecha.setForeground(Color.gray);
+		Font f = new Font("Italic", Font.ITALIC,12);
 		tf_fecha.setFont(f);
 		tf_fecha.setMaximumSize(new Dimension(250,20));
+		b_borrar = new JButton("BORRAR");
+		b_borrar.setForeground(Color.MAGENTA);
+		b_borrar.setMaximumSize(new Dimension(250, 30));
 		tf_domicilio = new JTextField();
 		tf_domicilio.setForeground(Color.gray);
 		tf_domicilio.setFont(f);
 		tf_domicilio.setMaximumSize(new Dimension(250,20));
-		
-		panelDatos.add(new JLabel("Asunto"));
-		panelDatos.add(tf_asunto);
-		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDatos.add(new JLabel("Email"));
-		panelDatos.add(tf_email);
-		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDatos.add(new JLabel("Receptor"));
-		panelDatos.add(tf_receptor);
-		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDatos.add(new JLabel("Cliente"));
-		panelDatos.add(tf_cliente);
-		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDatos.add(new JLabel("DniNie"));
-		panelDatos.add(tf_dniNie);
-		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDatos.add(new JLabel("Cliente2"));
-		panelDatos.add(tf_cliente2);
-		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDatos.add(new JLabel("DniNie2"));
-		panelDatos.add(tf_dniNie2);
-		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDatos.add(new JLabel("Fecha"));
-		panelDatos.add(tf_fecha);
-		panelDatos.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDatos.add(new JLabel("Domicilio"));
-		panelDatos.add(tf_domicilio);
-		
-		
-		return panelDatos;
-	}
-	
-	public JPanel setPanelBotones(int alto, int ancho) {
-		JPanel panelBotones = new JPanel();
-		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
-		panelBotones.add(Box.createRigidArea(new Dimension(0, 1)));
-		panelBotones.setPreferredSize(new Dimension((int) (ancho * 0.8), (int) (alto * 0.4)));
-		
-		
-		b_registrar = new JButton("Registrar");
-		b_registrar.setForeground(Color.MAGENTA);
-		b_registrar.setMaximumSize(new Dimension(250, 30));
-		b_borrar = new JButton("Borrar");
-		b_borrar.setForeground(Color.MAGENTA);
-		b_borrar.setMaximumSize(new Dimension(250, 30));
-		b_imprimir = new JButton("Imprimir");
+		b_imprimir = new JButton("IMPRIMIR");
 		b_imprimir.setForeground(Color.MAGENTA);
 		b_imprimir.setMaximumSize(new Dimension(250, 30));
 		
-		
-		panelBotones.add(b_registrar);
-		panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelBotones.add(b_borrar);
-		panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelBotones.add(b_imprimir);
-		
-		b_registrar.addActionListener(new gestorRegistrar());
 		b_borrar.addActionListener(new gestorBorrar());
 		b_imprimir.addActionListener(new gestorImprimir());
-		return panelBotones;
+		
+		panel3.add(new JLabel("Fecha: "));
+		panel3.add(tf_fecha);
+		panel3.add(Box.createRigidArea(new Dimension(0, 10)));
+		panel3.add(b_borrar);
+		panel3.add(Box.createRigidArea(new Dimension(0, 10)));
+		panel3.add(new JLabel("Domicilio: "));
+		panel3.add(tf_domicilio);
+		panel3.add(Box.createRigidArea(new Dimension(0, 10)));
+		panel3.add(b_imprimir);
+		
+		return panel3;
+		
 	}
+	
+	public class gestorVisual implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+		  Refresh();
+		}
+
+		}
+		
+	
 	public class gestorRegistrar implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			try {
+				c = new MisConexiones();
+				ps = c.getPS(ConfigDir.getInstance().getProperty("query18"));
+
+				ps.setString(1,tf_asunto.getText());
+				ps.setString(2,tf_email.getText());
+				ps.setString(3,tf_receptor.getText());
+				ps.setString(4,tf_cliente.getText());
+				ps.setString(5,tf_dniNie.getText());
+				ps.setString(6,tf_cliente2.getText());
+				ps.setString(7,tf_dniNie2.getText());
+				ps.setTimestamp(8,Timestamp.valueOf(tf_fecha.getText()));
+				ps.setString(9,tf_domicilio.getText());
+				
+				
+				ps.executeUpdate();
+			} catch (InstantiationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IllegalAccessException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 		}
 		
@@ -272,6 +346,43 @@ public class PanelEncargos extends JPanel{
 			
 		}
 		
+	}
+	
+	public void Refresh() {
+		
+		dtm.setRowCount(0);
+		Encargo encargo;
+		try {
+		
+			c = new MisConexiones();
+			listaEncargos= new ArrayList<Encargo>();
+			// listaClientes = new ArrayList<Cliente>();
+		ResultSet rs = c.getRS(ConfigDir.getInstance().getProperty("query17"));
+			//ResultSet rs = c.getRS(ConfigDir.getInstance().getProperty("query17"));
+			while (rs.next()) {
+
+				encargo = new Encargo(rs.getNString("asunto"), rs.getNString("email"), rs.getNString("receptor"), rs.getNString("cliente"), rs.getNString("dninNie"), rs.getNString("cliente2"), 
+				rs.getNString("dniNie2"), rs.getNString("domicilio"), rs.getTimestamp("fecha"));
+				
+				v = new Vector();
+				v.addElement(encargo.getAsunto());
+				v.addElement(encargo.getEmail());
+				v.addElement(encargo.getReceptor());
+				v.addElement(encargo.getCliente());
+				v.addElement(encargo.getDniNie());
+				v.addElement(encargo.getCliente2());
+				v.addElement(encargo.getDniNie2());
+				v.addElement(encargo.getDomicilio());
+				v.addElement(encargo.getFecha());
+			
+				dtm.addRow(v);
+				listaEncargos.add(encargo);
+
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			System.out.println(e1.getMessage());
+		}
 	}
 
 	

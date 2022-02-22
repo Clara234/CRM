@@ -53,6 +53,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 	DefaultTableModel dtm;
 	MisConexiones c;
 	PreparedStatement ps;
+	private JTabbedPane datosclientes;
 	JTable tabla;
 	JButton botonVer, botonInsertar, botonBorrar, botonActualizar, botonMusica, botonAcceder, botonFuera, botonAlta;;
 
@@ -722,6 +723,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				botonAcceder = new JButton("Acceder");
 
 				botonAcceder.addActionListener(new ActionListener() {
+
 					public void actionPerformed(ActionEvent e) {
 
 						try {
@@ -779,6 +781,7 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 				chb_root.setSelected(false);
 				editHabCosas(0);
 			}
+			
 
 		}
 

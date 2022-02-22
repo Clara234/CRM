@@ -71,12 +71,14 @@ public class Lan {
 
 		// crear pestañas dentro del panel:
 		JTabbedPane pestanha = new JTabbedPane();
+		
 		pestanha.setForeground(Color.gray);
 		pestanha.add("Directorio cliente", new PanelCliente(anchoM, altoM));
 		pestanha.add("Hipotecas", new PanelHipoteca(anchoM1, altoM1));
 		pestanha.add("Requisitos", new PanelRequisitos(anchoM2, altoM2));
 		pestanha.add("Encargos", new PanelEncargos(anchoM3,altoM3));
 		pestanha.add("Usuarios", new PanelUsuario(anchoM4,altoM4));
+		
 		
 
 		// Aqui es donde se visualiza, añadiendolo al marco

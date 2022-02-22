@@ -131,12 +131,12 @@ public class PanelHipoteca extends JPanel {
 	public JPanel setPanelNorte(int alto, int ancho, JPanel jp1, JPanel jp2, JPanel jp3) {
 
 		JPanel panelNorte = new JPanel();
-		panelNorte.setLayout(new BorderLayout());
+		panelNorte.setLayout(new BoxLayout(panelNorte, BoxLayout.Y_AXIS));
 		//panelNorte.setLayout(new BoxLayout(panelNorte, BoxLayout.X_AXIS));
-		panelNorte.setPreferredSize(new Dimension((int) (ancho * 0.2), (int) (alto * 0.2))); // no cambiarr porfavor
-		panelNorte.add(jp1, BorderLayout.NORTH);
-		panelNorte.add(jp2, BorderLayout.CENTER);
-		panelNorte.add(jp3, BorderLayout.SOUTH);
+		panelNorte.setPreferredSize(new Dimension((int) (ancho * 0.1), (int) (alto * 0.2))); // no cambiarr porfavor
+		panelNorte.add(jp1);
+		panelNorte.add(jp2);
+		panelNorte.add(jp3);
 
 		return panelNorte;
 
@@ -152,7 +152,7 @@ public class PanelHipoteca extends JPanel {
 		finalidad.setForeground(Color.gray);
 		Font f = new Font("Serif", Font.BOLD, 12);
 		finalidad.setFont(f);
-		finalidad.setMaximumSize(new Dimension(250, 15));
+		finalidad.setMaximumSize(new Dimension(250, 20));
 
 		JLabel l_creditoSolicitado = new JLabel("CREDITO SOLICITADO : ");
 		l_creditoSolicitado.setForeground(Color.gray);
@@ -163,19 +163,19 @@ public class PanelHipoteca extends JPanel {
 		valorAdquisicion = new JTextField();
 		valorAdquisicion.setForeground(Color.gray);
 		valorAdquisicion.setFont(f);
-		valorAdquisicion.setMaximumSize(new Dimension(250, 15));
+		valorAdquisicion.setMaximumSize(new Dimension(250, 20));
 
 		JLabel l_importe = new JLabel("Importe Credito");
 		valorImporte = new JTextField();
 		valorImporte.setForeground(Color.gray);
 		valorImporte.setFont(f);
-		valorImporte.setMaximumSize(new Dimension(250, 15));
+		valorImporte.setMaximumSize(new Dimension(250, 20));
 
 		JLabel l_plazo = new JLabel("Plazo Total(meses): ");
 		plazo = new JTextField();
 		plazo.setForeground(Color.gray);
 		plazo.setFont(f);
-		plazo.setMaximumSize(new Dimension(250, 15));
+		plazo.setMaximumSize(new Dimension(250, 20));
 
 		panelPrimero.add(l_finalidad);
 		panelPrimero.add(finalidad);
@@ -191,6 +191,7 @@ public class PanelHipoteca extends JPanel {
 		panelPrimero.add(plazo);
 		panelPrimero.add(Box.createRigidArea(new Dimension(0, 10)));
 
+		panelPrimero.setPreferredSize(new Dimension((int) (ancho * 0.01), (int) (alto * 0.1)));
 		return panelPrimero;
 
 	}
@@ -270,6 +271,7 @@ public class PanelHipoteca extends JPanel {
 		panelNorteDatos2.add(regimenBienes);
 		panelNorteDatos2.add(Box.createRigidArea(new Dimension(0, 10)));
 
+		panelNorteDatos2.setPreferredSize(new Dimension((int) (ancho * 0.5), (int) (alto * 0.1)));
 		return panelNorteDatos2;
 	}
 
@@ -303,6 +305,8 @@ public class PanelHipoteca extends JPanel {
 		panelNorteDatos3.add(l_busquedacliente);
 		panelNorteDatos3.add(busquedacliente);
 		panelNorteDatos3.add(b_buscarCliente);
+		
+		panelNorteDatos3.setPreferredSize(new Dimension((int) (ancho * 0.01), (int) (alto * 0.1)));
 
 		return panelNorteDatos3;
 
