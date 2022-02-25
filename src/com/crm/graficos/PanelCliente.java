@@ -10,6 +10,10 @@ import javax.swing.border.Border;
 import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableModel;
 
+import org.pushingpixels.substance.api.SubstanceConstants;
+import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import org.pushingpixels.substance.api.shaper.StandardButtonShaper;
+
 import com.crm.persistencia.ConfigDir;
 import com.crm.persistencia.MisConexiones;
 import com.crm.pojos.Cliente;
@@ -295,31 +299,31 @@ public class PanelCliente<Reproductor> extends JPanel implements Servicios {
 		panelEsteControl.setPreferredSize(new Dimension((int) (alto * 0.01), (int) (ancho * 0.01)));
 
 		chb_root = new JCheckBox("InicioSesion");
-		chb_root.setForeground(Color.BLUE);
+		chb_root.setForeground(Color.PINK);
 		chb_root.addActionListener(new gestorEdicion());
 		botonVer = new JButton("Ver");
-		botonVer.setForeground(Color.BLUE);
-
+		botonVer.setBackground(Color.PINK);
+		
 		botonVer.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonVer);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonInsertar = new JButton("Insertar");
-		botonInsertar.setForeground(Color.MAGENTA);
+		botonInsertar.setBackground(Color.PINK);
 		botonInsertar.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonInsertar);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonBorrar = new JButton(" Borrar");
-		botonBorrar.setForeground(Color.MAGENTA);
+		botonBorrar.setBackground(Color.PINK);
 		botonBorrar.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonBorrar);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonActualizar = new JButton("Actualizar");
-		botonActualizar.setForeground(Color.MAGENTA);
+		botonActualizar.setBackground(Color.PINK);
 		botonActualizar.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonActualizar);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));
 		botonMusica = new JButton("Musica");
-		botonMusica.setForeground(Color.MAGENTA);
+		botonMusica.setBackground(Color.PINK);
 		botonMusica.setMaximumSize(new Dimension(250, 30));
 		panelEsteControl.add(botonMusica);
 		panelEsteControl.add(Box.createRigidArea(new Dimension(0, 6)));

@@ -109,11 +109,11 @@ public class PanelEncargos extends JPanel{
 		tf_receptor.setMaximumSize(new Dimension(250,20));
 		
 		b_ver = new JButton("VER TABLA");
-		b_ver.setForeground(Color.MAGENTA);
+		b_ver.setBackground(Color.PINK);
 		b_ver.setMaximumSize(new Dimension(250, 30));
 		b_ver.addActionListener(new gestorVisual());
 		b_registrar = new JButton("Registrar");
-		b_registrar.setForeground(Color.MAGENTA);
+		b_registrar.setBackground(Color.PINK);
 		b_registrar.setMaximumSize(new Dimension(250, 30));
 		b_registrar.addActionListener(new gestorRegistrar());
 
@@ -189,14 +189,14 @@ public class PanelEncargos extends JPanel{
 		tf_fecha.setFont(f);
 		tf_fecha.setMaximumSize(new Dimension(250,20));
 		b_borrar = new JButton("BORRAR");
-		b_borrar.setForeground(Color.MAGENTA);
+		b_borrar.setBackground(Color.PINK);
 		b_borrar.setMaximumSize(new Dimension(250, 30));
 		tf_domicilio = new JTextField();
 		tf_domicilio.setForeground(Color.gray);
 		tf_domicilio.setFont(f);
 		tf_domicilio.setMaximumSize(new Dimension(250,20));
 		b_imprimir = new JButton("IMPRIMIR");
-		b_imprimir.setForeground(Color.MAGENTA);
+		b_imprimir.setBackground(Color.PINK);
 		b_imprimir.setMaximumSize(new Dimension(250, 30));
 		
 		b_borrar.addActionListener(new gestorBorrar());
@@ -226,7 +226,7 @@ public class PanelEncargos extends JPanel{
 
 		}
 		
-	
+	//si funciona
 	public class gestorRegistrar implements ActionListener{
 
 		@Override
@@ -271,7 +271,16 @@ public class PanelEncargos extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+			try {
+				c = new MisConexiones();
+				ps = c.getPS(ConfigDir.getInstance().getProperty("query19"));
+				ps.setString(1, seleccionado.getDniNie());
+				ps.executeUpdate();
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			Refresh();
 		}
 		
 	}
@@ -281,7 +290,7 @@ public class PanelEncargos extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-		//	WordProcessing();
+		WordProcessing();
 		}
 		
 	}
@@ -361,7 +370,7 @@ public class PanelEncargos extends JPanel{
 			//ResultSet rs = c.getRS(ConfigDir.getInstance().getProperty("query17"));
 			while (rs.next()) {
 
-				encargo = new Encargo(rs.getNString("asunto"), rs.getNString("email"), rs.getNString("receptor"), rs.getNString("cliente"), rs.getNString("dninNie"), rs.getNString("cliente2"), 
+				encargo = new Encargo(rs.getNString("asunto"), rs.getNString("email"), rs.getNString("receptor"), rs.getNString("cliente"), rs.getNString("dniNie"), rs.getNString("cliente2"), 
 				rs.getNString("dniNie2"), rs.getNString("domicilio"), rs.getTimestamp("fecha"));
 				
 				v = new Vector();

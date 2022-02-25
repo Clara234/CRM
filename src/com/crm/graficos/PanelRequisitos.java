@@ -282,7 +282,7 @@ public class PanelRequisitos extends JPanel {
 		hoka.setMaximumSize(new Dimension(250, 40));
 
 		JButton b_registro = new JButton("Registrar");
-		b_registro.setForeground(Color.MAGENTA);
+		b_registro.setBackground(Color.PINK);
 		b_registro.setMaximumSize(new Dimension(100, 30));
 		b_registro.addActionListener(new ActionListener() {
 
@@ -290,6 +290,13 @@ public class PanelRequisitos extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				// insertar y veruficar dni
+				
+				String box2;
+				
+				int resp = JOptionPane.showConfirmDialog(null, "Usted insertara lo seleccionado en la bbdd" + "¿Esta seguro?", 
+						"Alerta!", JOptionPane.YES_NO_OPTION,
+						JOptionPane.WARNING_MESSAGE);
+if(resp == JOptionPane.YES_OPTION) {
 
 				try {
 					c = new MisConexiones();
@@ -356,6 +363,13 @@ public class PanelRequisitos extends JPanel {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
+}
+
+if(resp == JOptionPane.NO_OPTION) {
+	box2="0";
+}
+				
 
 			}
 

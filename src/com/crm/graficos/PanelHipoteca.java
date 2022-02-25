@@ -526,11 +526,11 @@ public class PanelHipoteca extends JPanel {
 		control.setFont(f2);
 		control.setMaximumSize(new Dimension(300, 40));
 		imprimir = new JButton("IMPRIMIR PETICION");
-		imprimir.setForeground(Color.MAGENTA);
+		imprimir.setBackground(Color.PINK);
 		insertar = new JButton("INSERTAR EN BBDD");
-		insertar.setForeground(Color.MAGENTA);
+		insertar.setBackground(Color.PINK);
 		limpiar = new JButton("LIMPIAR");
-		limpiar.setForeground(Color.MAGENTA);
+		limpiar.setBackground(Color.PINK);
 		chb_editar = new JCheckBox("Editar Campos");
 		chb_editar.setForeground(Color.BLACK);
 
@@ -603,7 +603,19 @@ public class PanelHipoteca extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			String box2;
+			
+			int resp = JOptionPane.showConfirmDialog(null, "¿Desea imprimirlo?" + "¿Esta seguro?", 
+					"Alerta!", JOptionPane.YES_NO_OPTION,
+					JOptionPane.WARNING_MESSAGE);
+			
+			if(resp == JOptionPane.YES_OPTION) {
+
 			imprimir();
+			}
+			if(resp == JOptionPane.NO_OPTION) {
+				box2="0";
+			}
 
 		}
 	}
@@ -612,8 +624,19 @@ public class PanelHipoteca extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+         String box2;
+         
+         int resp = JOptionPane.showConfirmDialog(null, "Usted insertará los datos en la bbdd" + "¿Esta seguro?", 
+        			"Alerta!", JOptionPane.YES_NO_OPTION,
+        			JOptionPane.WARNING_MESSAGE);
 
+         if(resp == JOptionPane.YES_OPTION) {
 			insertarBBDD();
+         }
+         
+         if(resp ==JOptionPane.NO_OPTION) {
+        	 box2="0";
+         }
 		}
 
 	}
