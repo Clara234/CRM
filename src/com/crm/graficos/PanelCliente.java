@@ -3,6 +3,7 @@ package com.crm.graficos;
 
 import javax.sound.sampled.AudioInputStream;
 
+
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -10,9 +11,7 @@ import javax.swing.border.Border;
 import javax.swing.event.MouseInputListener;
 import javax.swing.table.DefaultTableModel;
 
-import org.pushingpixels.substance.api.SubstanceConstants;
-import org.pushingpixels.substance.api.SubstanceLookAndFeel;
-import org.pushingpixels.substance.api.shaper.StandardButtonShaper;
+
 
 import com.crm.persistencia.ConfigDir;
 import com.crm.persistencia.MisConexiones;
